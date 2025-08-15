@@ -1,9 +1,24 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/pages/HomePage';
+import ClusterPage from './components/pages/ClusterPage';
+import AnnouncementsPage from './components/pages/AnnouncementsPage';
+import IncubationPage from './components/pages/IncubationPage';
+import NewsEventsPage from './components/pages/NewsEventsPage';
+import CompaniesPage from './components/pages/CompaniesPage';
+import TechPatentsPage from './components/pages/TechPatentsPage';
 
 function App() {
   return (
-    <HomePage />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/cluster" element={<ClusterPage />} />
+      <Route path="/announcements" element={<AnnouncementsPage />} />
+      <Route path="/incubation" element={<IncubationPage />} />
+      <Route path="/news-events" element={<NewsEventsPage />} />
+      <Route path="/companies" element={<CompaniesPage />} />
+      <Route path="/tech-patents" element={<TechPatentsPage />} />
+    </Routes>
   );
 }
 
