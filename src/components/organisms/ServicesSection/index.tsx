@@ -45,11 +45,7 @@ const ServicesSection = () => {
       } as React.CSSProperties}>
         주요 서비스
       </h2>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: DESIGN_SYSTEM.spacing[6]
-      } as React.CSSProperties}>
+      <div className="responsive-grid-4-col">
         {services.map((item, index) => (
           <div
             key={index}

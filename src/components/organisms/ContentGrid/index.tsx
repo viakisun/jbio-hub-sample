@@ -93,12 +93,10 @@ const ContentGrid = () => {
   }, []);
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: DESIGN_SYSTEM.spacing[8],
-      marginBottom: DESIGN_SYSTEM.spacing[16]
-    } as React.CSSProperties}>
+    <div
+      className="responsive-grid-2-col"
+      style={{ marginBottom: DESIGN_SYSTEM.spacing[16] }}
+    >
       {/* 최신 공고 */}
       <section>
         <div style={{
