@@ -33,7 +33,7 @@ const HeroSection = () => {
           lineHeight: '1.1',
           letterSpacing: '-0.025em'
         } as React.CSSProperties}>
-          J BIO HUB Platform
+          JB SQUARE
         </h1>
         <p style={{
           fontSize: DESIGN_SYSTEM.typography.fontSize.xl[0],
@@ -44,7 +44,7 @@ const HeroSection = () => {
           marginRight: 'auto',
           lineHeight: '1.6'
         } as React.CSSProperties}>
-          전라북도 바이오산업 생태계의 모든 정보를<br />한곳에서 확인하고 관리하세요
+          전북의 미래를 함께 만드는 혁신 공간<br />모든 정보와 기회를 한 곳에서 만나보세요
         </p>
 
         {/* 중앙 정렬 검색창 */}

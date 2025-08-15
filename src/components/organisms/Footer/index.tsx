@@ -35,13 +35,13 @@ const Footer = () => {
                   fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold,
                   color: DESIGN_SYSTEM.colors.white
                 } as React.CSSProperties}>
-                  J BIO HUB
+                  JB SQUARE
                 </div>
                 <div style={{
                   fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
                   color: DESIGN_SYSTEM.colors.gray[400]
                 } as React.CSSProperties}>
-                  Jeonbuk Technopark
+                  Jeonbuk's Business QUARTER
                 </div>
               </div>
             </div>
@@ -52,8 +52,8 @@ const Footer = () => {
               color: DESIGN_SYSTEM.colors.gray[400],
               marginBottom: DESIGN_SYSTEM.spacing[6]
             } as React.CSSProperties}>
-              전라북도 바이오산업의 혁신과 성장을 이끄는<br />
-              대한민국 최고의 바이오 플랫폼입니다.
+              전북의 미래를 함께 만드는 혁신 공간.<br />
+              모든 정보와 기회를 한 곳에서 만나보세요.
             </div>
 
             {/* 연락처 정보 */}
