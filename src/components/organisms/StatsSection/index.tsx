@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
+import styled from 'styled-components';
 import StatCard from '../../molecules/StatCard';
+import Grid from '../../atoms/Grid';
+
+// --- STYLED COMPONENTS ---
+
+const Section = styled.section`
+  margin-bottom: 4rem;
+`;
+
+// --- DATA MODELS ---
 
 interface Stat {
   label: string;
@@ -10,12 +19,13 @@ interface Stat {
   color: string;
 }
 
+// --- COMPONENT ---
+
 const StatsSection = () => {
   const [stats, setStats] = useState<Stat[]>([]);
 
   useEffect(() => {
     const fetchStats = async () => {
-      console.log('Fetching stats...');
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/stats`);
         if (!response.ok) {
@@ -23,7 +33,6 @@ const StatsSection = () => {
         }
         const data = await response.json();
         setStats(data);
-        console.log('Successfully fetched stats:', data);
       } catch (error) {
         console.error('Failed to fetch stats:', error);
       }
@@ -33,15 +42,13 @@ const StatsSection = () => {
   }, []);
 
   return (
-    <section style={{
-      marginBottom: DESIGN_SYSTEM.spacing[16]
-    } as React.CSSProperties}>
-      <div className="responsive-grid-4-col">
+    <Section>
+      <Grid cols={4} tabletCols={2} mobileCols={2}>
         {stats.map((stat, index) => (
           <StatCard key={index} stat={stat} />
         ))}
-      </div>
-    </section>
+      </Grid>
+    </Section>
   );
 };
 
