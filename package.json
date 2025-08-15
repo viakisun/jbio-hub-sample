@@ -1,22 +1,35 @@
 {
-  "name": "jbio-hub-sample",
+  "name": "jbio-hub-monorepo",
   "version": "1.0.0",
-  "description": "Jeonbuk Bio Web Platform - Molecular Research Hub",
-  "main": "src/App.js",
-  "homepage": "https://viakisun.github.io/jbio-hub-sample",
+  "private": true,
+  "description": "Jeonbuk Bio Web Platform - Monorepo for Frontend and Backend",
+  "workspaces": [
+    "services/*",
+    "packages/*"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d build",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:announcements": "npm run dev -w @gonggo/announcement-service",
+    "dev:companies": "npm run dev -w @gonggo/company-service",
+    "dev:infra": "npm run dev -w @gonggo/infra-service",
+    "dev:content": "npm run dev -w @gonggo/content-service",
+    "dev:consultation": "npm run dev -w @gonggo/consultation-service",
+    "dev:user": "npm run dev -w @gonggo/user-service",
+    "dev:admin": "npm run dev -w @gonggo/admin-service",
+    "dev:gateway": "npm run dev -w @gonggo/gateway-service"
   },
   "keywords": [
     "biotechnology",
     "molecules",
     "research",
     "jeonbuk",
-    "atomic-design"
+    "atomic-design",
+    "monorepo"
   ],
   "author": "Jeonbuk Bio Team",
   "license": "MIT",
@@ -33,6 +46,7 @@
     "@types/react-dom": "^18.3.7",
     "@types/react-router-dom": "^5.3.3",
     "gh-pages": "^5.0.0",
+    "npm-run-all": "^4.1.5",
     "typescript": "~4.9.5"
   },
   "browserslist": {
