@@ -1,7 +1,8 @@
 import React from 'react';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
+import styled from 'styled-components';
 import Icon from '../../atoms/Icon';
 
+// --- DATA MODELS ---
 interface Announcement {
   id: number;
   title: string;
@@ -17,75 +18,91 @@ interface AnnouncementListItemProps {
   style?: React.CSSProperties;
 }
 
+// --- STYLED COMPONENTS ---
+
+const ItemWrapper = styled.div`
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    border-color: #d1d5db;
+  }
+`;
+
+const ItemHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+`;
+
+const StatusBadge = styled.span<{ status: 'active' | 'urgent' }>`
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background-color: ${props => props.status === 'active' ? '#10b981' : '#f59e0b'};
+  color: white;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+`;
+
+const DaysLeft = styled.div<{ days: number }>`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: ${props => props.days <= 7 ? '#f59e0b' : '#4f46e5'};
+  font-size: 0.875rem;
+  font-weight: 700;
+`;
+
+const ItemTitle = styled.h4`
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+`;
+
+const ItemFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+`;
+
+const Organization = styled.span``;
+const Budget = styled.span`
+  font-weight: 600;
+  color: #111827;
+`;
+
+
+// --- COMPONENT ---
+
 const AnnouncementListItem: React.FC<AnnouncementListItemProps> = ({ announcement, style }) => {
   return (
-    <div
-      style={{
-        padding: DESIGN_SYSTEM.spacing[5],
-        borderRadius: '12px',
-        border: `1px solid ${DESIGN_SYSTEM.colors.gray[200]}`,
-        cursor: 'pointer',
-        ...style
-      }}
-    >
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        marginBottom: DESIGN_SYSTEM.spacing[3]
-      } as React.CSSProperties}>
-        <span style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          padding: `${DESIGN_SYSTEM.spacing[1]} ${DESIGN_SYSTEM.spacing[3]}`,
-          backgroundColor: announcement.status === 'active' ? DESIGN_SYSTEM.colors.success[500] : DESIGN_SYSTEM.colors.orange[500],
-          color: 'white',
-          borderRadius: '20px',
-          fontSize: DESIGN_SYSTEM.typography.fontSize.xs[0],
-          fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold
-        } as React.CSSProperties}>
+    <ItemWrapper style={style}>
+      <ItemHeader>
+        <StatusBadge status={announcement.status}>
           {announcement.status === 'active' ? '진행중' : '마감임박'}
-        </span>
-
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: DESIGN_SYSTEM.spacing[1],
-          color: announcement.daysLeft <= 7 ? DESIGN_SYSTEM.colors.orange[500] : DESIGN_SYSTEM.colors.primary[600],
-          fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-          fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold
-        } as React.CSSProperties}>
+        </StatusBadge>
+        <DaysLeft days={announcement.daysLeft}>
           <Icon name="clock" size={14} />
           D-{announcement.daysLeft}
-        </div>
-      </div>
-
-      <h4 style={{
-        fontSize: DESIGN_SYSTEM.typography.fontSize.base[0],
-        fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold,
-        color: DESIGN_SYSTEM.colors.gray[900],
-        margin: `0 0 ${DESIGN_SYSTEM.spacing[3]} 0`,
-        lineHeight: '1.4'
-      } as React.CSSProperties}>
-        {announcement.title}
-      </h4>
-
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-        color: DESIGN_SYSTEM.colors.gray[600]
-      } as React.CSSProperties}>
-        <span>{announcement.organization}</span>
-        <span style={{
-          fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold,
-          color: DESIGN_SYSTEM.colors.gray[900]
-        } as React.CSSProperties}>
-          {announcement.budget}
-        </span>
-      </div>
-    </div>
+        </DaysLeft>
+      </ItemHeader>
+      <ItemTitle>{announcement.title}</ItemTitle>
+      <ItemFooter>
+        <Organization>{announcement.organization}</Organization>
+        <Budget>{announcement.budget}</Budget>
+      </ItemFooter>
+    </ItemWrapper>
   );
 };
 

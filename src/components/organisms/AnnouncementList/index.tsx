@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import AnnouncementListItem from '../../molecules/AnnouncementListItem';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
 
-// TODO: Define this interface in a shared types file
+// --- DATA MODELS ---
 interface Announcement {
   id: number;
   title: string;
@@ -18,17 +19,29 @@ interface AnnouncementListProps {
   style?: React.CSSProperties;
 }
 
+// --- STYLED COMPONENTS ---
+const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const ItemLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
+// --- COMPONENT ---
+
 const AnnouncementList: React.FC<AnnouncementListProps> = ({ announcements, style }) => {
   return (
-    <div style={style}>
-      {announcements.map((announcement, index) => (
-        <AnnouncementListItem
-          key={announcement.id}
-          announcement={announcement}
-          style={{ marginBottom: index < announcements.length - 1 ? DESIGN_SYSTEM.spacing[4] : 0 }}
-        />
+    <ListWrapper style={style}>
+      {announcements.map((announcement) => (
+        <ItemLink key={announcement.id} to={`/support/announcements/${announcement.id}`}>
+          <AnnouncementListItem announcement={announcement} />
+        </ItemLink>
       ))}
-    </div>
+    </ListWrapper>
   );
 };
 

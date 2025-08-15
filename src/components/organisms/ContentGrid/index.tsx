@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../../atoms/Button';
 import Icon from '../../atoms/Icon';
@@ -193,10 +194,12 @@ const ContentGrid = () => {
       <Section>
         <SectionHeader>
           <SectionTitle>최신 공고</SectionTitle>
-          <ViewAllButton>
-            전체보기
-            <Icon name="arrowRight" size={16} />
-          </ViewAllButton>
+          <Link to="/announcements" style={{ textDecoration: 'none' }}>
+            <ViewAllButton>
+              전체보기
+              <Icon name="arrowRight" size={16} />
+            </ViewAllButton>
+          </Link>
         </SectionHeader>
 
         <CardContainer>
@@ -208,10 +211,12 @@ const ContentGrid = () => {
       <Section>
         <SectionHeader>
           <SectionTitle>최신 뉴스</SectionTitle>
-          <ViewAllButton>
-            전체보기
-            <Icon name="arrowRight" size={16} />
-          </ViewAllButton>
+          <Link to="/news-events" style={{ textDecoration: 'none' }}>
+            <ViewAllButton>
+              전체보기
+              <Icon name="arrowRight" size={16} />
+            </ViewAllButton>
+          </Link>
         </SectionHeader>
 
         <CardContainer>
