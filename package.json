@@ -2,26 +2,43 @@
   "name": "jbio-hub-sample",
   "version": "1.0.0",
   "description": "Jeonbuk Bio Web Platform - Molecular Research Hub",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
+  "main": "src/App.js",
+  "homepage": "https://viakisun.github.io/jbio-hub-sample",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && gh-pages -d build"
   },
-  "keywords": "[\"biotechnology\", \"molecules\", \"research\", \"jeonbuk\", \"atomic-design\"]",
+  "keywords": [
+    "biotechnology",
+    "molecules",
+    "research",
+    "jeonbuk",
+    "atomic-design"
+  ],
   "author": "Jeonbuk Bio Team",
   "license": "MIT",
-  "type": "commonjs",
-  "homepage": "https://viakisun.github.io/jbio-hub-sample",
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.1",
-    "react-scripts": "^5.0.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
     "gh-pages": "^5.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
