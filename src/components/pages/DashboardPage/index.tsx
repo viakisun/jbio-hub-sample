@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
 import Button from '../../atoms/Button';
@@ -8,6 +8,49 @@ import Header from '../../organisms/Header';
 import Footer from '../../organisms/Footer';
 
 const DashboardPage = () => {
+  const [announcements, setAnnouncements] = useState<any[]>([]);
+  const [news, setNews] = useState<any[]>([]);
+  const [stats, setStats] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [announcementsRes, newsRes, companiesRes, techsRes] = await Promise.all([
+          fetch('http://localhost:8000/announcements'),
+          fetch('http://localhost:8000/news'),
+          fetch('http://localhost:8000/companies'),
+          fetch('http://localhost:8000/techs'),
+        ]);
+
+        const announcementsData = await announcementsRes.json();
+        const newsData = await newsRes.json();
+        const companiesData = await companiesRes.json();
+        const techsData = await techsRes.json();
+
+        setAnnouncements(announcementsData.slice(0, 3)); // Show first 3
+        setNews(newsData.slice(0, 3)); // Show first 3
+
+        // Update stats based on fetched data
+        setStats([
+          { label: '등록 기업수', value: companiesData.length, change: '+5.2%', icon: 'building', color: DESIGN_SYSTEM.colors.primary[500] },
+          { label: '진행중 공고', value: announcementsData.length, change: `+${announcementsData.length}`, icon: 'target', color: DESIGN_SYSTEM.colors.success[500] },
+          { label: '기술 보유수', value: techsData.length, change: '+8.1%', icon: 'flask', color: DESIGN_SYSTEM.colors.purple[500] },
+          { label: '이달 뉴스', value: newsData.length, change: `+${newsData.length}`, icon: 'trendingUp', color: DESIGN_SYSTEM.colors.orange[500] }
+        ]);
+
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+        // Handle error state if necessary
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -81,14 +124,15 @@ const DashboardPage = () => {
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: DESIGN_SYSTEM.spacing[6]
           } as React.CSSProperties}>
-            {[
-              { label: '등록 기업수', value: '1,247', change: '+5.2%', icon: 'building', color: DESIGN_SYSTEM.colors.primary[500] },
-              { label: '진행중 공고', value: '89', change: '+12', icon: 'target', color: DESIGN_SYSTEM.colors.success[500] },
-              { label: '기술 보유수', value: '3,456', change: '+8.1%', icon: 'flask', color: DESIGN_SYSTEM.colors.purple[500] },
-              { label: '이달 뉴스', value: '145', change: '+23', icon: 'trendingUp', color: DESIGN_SYSTEM.colors.orange[500] }
-            ].map((stat, index) => (
-              <StatCard key={index} stat={stat} />
-            ))}
+            {loading ? (
+              Array.from({ length: 4 }).map((_, index) => (
+                <div key={index} style={{ height: '120px', backgroundColor: DESIGN_SYSTEM.colors.gray[200], borderRadius: '20px' }}></div>
+              ))
+            ) : (
+              stats.map((stat, index) => (
+                <StatCard key={index} stat={stat} />
+              ))
+            )}
           </div>
         </section>
 
@@ -237,35 +281,7 @@ const DashboardPage = () => {
               boxShadow: DESIGN_SYSTEM.shadows.lg,
               border: `1px solid ${DESIGN_SYSTEM.colors.gray[100]}`
             } as React.CSSProperties}>
-              {[
-                {
-                  id: 1,
-                  title: '2024년 바이오헬스 R&D 지원사업',
-                  organization: '전라북도',
-                  deadline: '2024-12-31',
-                  budget: '최대 2억원',
-                  status: 'active',
-                  daysLeft: 45
-                },
-                {
-                  id: 2,
-                  title: '첨단의료기기 기술개발 지원',
-                  organization: 'KIAT',
-                  deadline: '2024-09-15',
-                  budget: '최대 10억원',
-                  status: 'urgent',
-                  daysLeft: 8
-                },
-                {
-                  id: 3,
-                  title: '바이오 창업기업 육성사업',
-                  organization: '중소벤처기업부',
-                  deadline: '2024-10-30',
-                  budget: '최대 3억원',
-                  status: 'active',
-                  daysLeft: 25
-                }
-              ].map((announcement, index) => (
+              {loading ? <p>Loading announcements...</p> : announcements.map((announcement, index) => (
                 <div
                   key={announcement.id}
                   style={{
@@ -286,26 +302,14 @@ const DashboardPage = () => {
                       display: 'inline-flex',
                       alignItems: 'center',
                       padding: `${DESIGN_SYSTEM.spacing[1]} ${DESIGN_SYSTEM.spacing[3]}`,
-                      backgroundColor: announcement.status === 'active' ? DESIGN_SYSTEM.colors.success[500] : DESIGN_SYSTEM.colors.orange[500],
+                      backgroundColor: DESIGN_SYSTEM.colors.success[500],
                       color: 'white',
                       borderRadius: '20px',
                       fontSize: DESIGN_SYSTEM.typography.fontSize.xs[0],
                       fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold
                     } as React.CSSProperties}>
-                      {announcement.status === 'active' ? '진행중' : '마감임박'}
+                      진행중
                     </span>
-
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: DESIGN_SYSTEM.spacing[1],
-                      color: announcement.daysLeft <= 7 ? DESIGN_SYSTEM.colors.orange[500] : DESIGN_SYSTEM.colors.primary[600],
-                      fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                      fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold
-                    } as React.CSSProperties}>
-                      <Icon name="clock" size={14} />
-                      D-{announcement.daysLeft}
-                    </div>
                   </div>
 
                   <h4 style={{
@@ -323,15 +327,10 @@ const DashboardPage = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                    color: DESIGN_SYSTEM.colors.gray[600]
+                    color: DESIGN_SYSTEM.colors.gray[600],
+                    marginTop: DESIGN_SYSTEM.spacing[4]
                   } as React.CSSProperties}>
-                    <span>{announcement.organization}</span>
-                    <span style={{
-                      fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold,
-                      color: DESIGN_SYSTEM.colors.gray[900]
-                    } as React.CSSProperties}>
-                      {announcement.budget}
-                    </span>
+                    <span>{announcement.author}</span>
                   </div>
                 </div>
               ))}
@@ -377,31 +376,9 @@ const DashboardPage = () => {
               boxShadow: DESIGN_SYSTEM.shadows.lg,
               border: `1px solid ${DESIGN_SYSTEM.colors.gray[100]}`
             } as React.CSSProperties}>
-              {[
-                {
-                  id: 1,
-                  title: '전북 바이오산업, 2024년 매출 1조원 돌파 전망',
-                  summary: '전라북도 바이오산업이 올해 사상 최대 실적 기록 예상',
-                  date: '2024-08-14',
-                  category: '산업뉴스'
-                },
-                {
-                  id: 2,
-                  title: '전주 바이오밸리, 글로벌 기업 유치 성과',
-                  summary: '해외 바이오 기업들의 전주 바이오밸리 투자 증가',
-                  date: '2024-08-13',
-                  category: '투자뉴스'
-                },
-                {
-                  id: 3,
-                  title: '바이오 인재양성 프로그램 확대 운영',
-                  summary: '전북대와 원광대 바이오 전문인력 양성과정 확대',
-                  date: '2024-08-12',
-                  category: '교육뉴스'
-                }
-              ].map((news, index) => (
+              {loading ? <p>Loading news...</p> : news.map((newsItem, index) => (
                 <div
-                  key={news.id}
+                  key={newsItem.id}
                   style={{
                     padding: DESIGN_SYSTEM.spacing[5],
                     borderRadius: '12px',
@@ -426,14 +403,14 @@ const DashboardPage = () => {
                       fontSize: DESIGN_SYSTEM.typography.fontSize.xs[0],
                       fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold
                     } as React.CSSProperties}>
-                      {news.category}
+                      {newsItem.category}
                     </span>
 
                     <div style={{
                       fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
                       color: DESIGN_SYSTEM.colors.gray[500]
                     } as React.CSSProperties}>
-                      {news.date}
+                      {new Date(newsItem.created_at).toLocaleDateString()}
                     </div>
                   </div>
 
@@ -444,16 +421,21 @@ const DashboardPage = () => {
                     margin: `0 0 ${DESIGN_SYSTEM.spacing[3]} 0`,
                     lineHeight: '1.4'
                   } as React.CSSProperties}>
-                    {news.title}
+                    {newsItem.title}
                   </h4>
 
                   <p style={{
                     fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
                     color: DESIGN_SYSTEM.colors.gray[600],
                     margin: 0,
-                    lineHeight: '1.5'
+                    lineHeight: '1.5',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical'
                   } as React.CSSProperties}>
-                    {news.summary}
+                    {newsItem.content}
                   </p>
                 </div>
               ))}
