@@ -6,6 +6,7 @@ from ..models.content import News, Tech
 from ..models.consultation import Consultation
 from ..models.user import UserInDB
 from ..models.service import Service
+from ..models.stat import Stat
 
 # SQL Schema comments from the original request
 """
@@ -274,5 +275,36 @@ services_db: list[Service] = [
         description='최신 바이오 기술 동향',
         icon='trendingUp',
         gradient='linear-gradient(135deg, #059669 0%, #0891b2 100%)'
+    )
+]
+
+stats_db: list[Stat] = [
+    Stat(
+        label='등록 기업수',
+        value='1,247',
+        change='+5.2%',
+        icon='building',
+        color='#4f46e5'
+    ),
+    Stat(
+        label='진행중 공고',
+        value='89',
+        change='+12',
+        icon='target',
+        color='#10b981'
+    ),
+    Stat(
+        label='기술 보유수',
+        value='3,456',
+        change='+8.1%',
+        icon='flask',
+        color='#8b5cf6'
+    ),
+    Stat(
+        label='이달 뉴스',
+        value='145',
+        change='+23',
+        icon='trendingUp',
+        color='#f97316'
     )
 ]
