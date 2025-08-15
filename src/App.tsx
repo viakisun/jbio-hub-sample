@@ -7,6 +7,7 @@ import IncubationPage from './components/pages/IncubationPage';
 import NewsEventsPage from './components/pages/NewsEventsPage';
 import CompaniesPage from './components/pages/CompaniesPage';
 import TechPatentsPage from './components/pages/TechPatentsPage';
+import AnnouncementDetailPage from './components/pages/AnnouncementDetailPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/cluster" element={<ClusterPage />} />
       <Route path="/announcements" element={<AnnouncementsPage />} />
+      <Route path="/support/:category/:announcementId" element={<AnnouncementDetailPage />} />
       <Route path="/incubation" element={<IncubationPage />} />
       <Route path="/news-events" element={<NewsEventsPage />} />
       <Route path="/companies" element={<CompaniesPage />} />
