@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
 import Button from '../../atoms/Button';
@@ -19,11 +19,17 @@ const Header = () => {
   const navigation = (
     <nav className="header-nav">
       {navItems.map((item) => (
-        <Link to={item.path} key={item.path} className="header-nav-item">
+        <NavLink
+          to={item.path}
+          key={item.path}
+          className={({ isActive }) =>
+            "header-nav-item" + (isActive ? " active" : "")
+          }
+        >
           <Button className="header-nav-button">
             {item.text}
           </Button>
-        </Link>
+        </NavLink>
       ))}
     </nav>
   );
