@@ -1,8 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
 
+interface Service {
+  title: string;
+  description: string;
+  icon: string;
+  gradient: string;
+}
+
 const ServicesSection = () => {
+  const [services, setServices] = useState<Service[]>([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/services');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setServices(data);
+      } catch (error) {
+        console.error('Failed to fetch services:', error);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
   return (
     <section style={{
       marginBottom: DESIGN_SYSTEM.spacing[16]
@@ -22,32 +48,7 @@ const ServicesSection = () => {
         gridTemplateColumns: 'repeat(4, 1fr)',
         gap: DESIGN_SYSTEM.spacing[6]
       } as React.CSSProperties}>
-        {[
-          {
-            title: 'R&D 지원사업',
-            description: '연구개발 지원사업 신청 및 관리',
-            icon: 'flask',
-            gradient: DESIGN_SYSTEM.gradients.primary
-          },
-          {
-            title: '창업보육센터',
-            description: '바이오 창업 지원 프로그램',
-            icon: 'target',
-            gradient: DESIGN_SYSTEM.gradients.accent
-          },
-          {
-            title: '기업 정보',
-            description: '전북 바이오 기업 현황',
-            icon: 'building',
-            gradient: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-          },
-          {
-            title: '기술 정보',
-            description: '최신 바이오 기술 동향',
-            icon: 'trendingUp',
-            gradient: 'linear-gradient(135deg, #059669 0%, #0891b2 100%)'
-          }
-        ].map((item, index) => (
+        {services.map((item, index) => (
           <div
             key={index}
             style={{
