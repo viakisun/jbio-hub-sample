@@ -6,11 +6,15 @@ from ..db.mock_data import news_db, techs_db
 
 router = APIRouter()
 
+from typing import Optional
+
 @router.get("/news", response_model=List[News], tags=["Content"])
-def get_news_list():
+def get_news_list(limit: Optional[int] = None):
     """
     UI-04-01: Get a list of all news and notices.
     """
+    if limit:
+        return news_db[:limit]
     return news_db
 
 @router.get("/news/{news_id}", response_model=News, tags=["Content"])

@@ -49,6 +49,51 @@ announcements_db: list[Announcement] = [
         created_at=datetime(2025, 7, 28, 9, 0, 0),
         files=[],
         related_links=[RelatedLink(title='포럼 신청 페이지', url='https://example.com/forum-signup')]
+    ),
+    Announcement(
+        id=4,
+        title='농생명 기술 사업화 지원 프로그램 안내',
+        content='농생명 분야의 유망 기술을 보유한 기업을 대상으로 사업화 자금을 지원합니다. 많은 관심 부탁드립니다.',
+        author='농림축산식품부',
+        created_at=datetime(2025, 8, 15, 11, 0, 0),
+        files=[],
+        related_links=[]
+    ),
+    Announcement(
+        id=5,
+        title='스마트팜 기술 도입 컨설팅 지원',
+        content='스마트팜 도입을 희망하는 농가를 대상으로 전문가 컨설팅을 제공합니다.',
+        author='전북농업기술원',
+        created_at=datetime(2025, 8, 14, 10, 0, 0),
+        files=[],
+        related_links=[]
+    ),
+    Announcement(
+        id=6,
+        title='바이오 인력양성사업 교육생 모집',
+        content='차세대 바이오 산업을 이끌어갈 전문 인력 양성을 위한 교육 프로그램을 시작합니다.',
+        author='전북대학교',
+        created_at=datetime(2025, 8, 12, 13, 0, 0),
+        files=[],
+        related_links=[]
+    ),
+    Announcement(
+        id=7,
+        title='해외 바이오 박람회 참가 지원',
+        content='해외 시장 진출을 희망하는 도내 바이오 기업의 박람회 참가를 지원합니다.',
+        author='전라북도경제통상진흥원',
+        created_at=datetime(2025, 8, 11, 9, 30, 0),
+        files=[],
+        related_links=[]
+    ),
+    Announcement(
+        id=8,
+        title='연구장비 공동활용 안내',
+        content='대학 및 연구기관이 보유한 고가의 연구장비를 공동으로 활용할 수 있도록 지원합니다.',
+        author='국가연구시설장비진흥센터',
+        created_at=datetime(2025, 8, 9, 16, 0, 0),
+        files=[],
+        related_links=[]
     )
 ]
 
@@ -178,6 +223,41 @@ news_db: list[News] = [
         content='더 나은 서비스 제공을 위해 시스템 정기 점검을 실시합니다. 점검 시간에는 서비스 이용이 일시 중단될 수 있습니다.',
         category='notice',
         created_at=datetime(2025, 8, 11, 17, 0, 0)
+    ),
+    News(
+        id=3,
+        title='익산 국가식품클러스터, K-푸드 전진기지로 발돋움',
+        content='익산 국가식품클러스터가 국내외 식품 시장에서 주목받으며 K-푸드의 중심으로 떠오르고 있습니다.',
+        category='news',
+        created_at=datetime(2025, 8, 15, 9, 0, 0)
+    ),
+    News(
+        id=4,
+        title='정읍 방사선융합기술원, 신약 개발 새 지평 열어',
+        content='정읍에 위치한 한국원자력연구원 방사선융합기술원이 방사선 기술을 이용한 혁신적인 신약 개발에 성공했습니다.',
+        category='news',
+        created_at=datetime(2025, 8, 14, 14, 0, 0)
+    ),
+    News(
+        id=5,
+        title='전주 농생명 혁신성장위원회 출범',
+        content='전주시가 농생명 산업의 혁신 성장을 이끌기 위한 민관 협력 위원회를 공식 출범시켰습니다.',
+        category='news',
+        created_at=datetime(2025, 8, 13, 10, 0, 0)
+    ),
+    News(
+        id=6,
+        title='플랫폼 이용약관 개정 안내',
+        content='2025년 9월 1일부터 새로운 이용약관이 적용됩니다. 변경된 내용을 확인해주시기 바랍니다.',
+        category='notice',
+        created_at=datetime(2025, 8, 10, 0, 0, 0)
+    ),
+    News(
+        id=7,
+        title='김제 민간육종연구단지, 글로벌 종자 강국 도약의 발판',
+        content='김제에 위치한 민간육종연구단지가 국내 종자 산업의 경쟁력을 세계적인 수준으로 끌어올리고 있습니다.',
+        category='news',
+        created_at=datetime(2025, 8, 9, 11, 20, 0)
     )
 ]
 

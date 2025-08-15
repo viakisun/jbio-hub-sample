@@ -9,11 +9,15 @@ router = APIRouter(
     tags=["Announcements"],
 )
 
+from typing import Optional
+
 @router.get("", response_model=List[Announcement])
-def get_announcements():
+def get_announcements(limit: Optional[int] = None):
     """
     UI-01-02: Get a list of all announcements.
     """
+    if limit:
+        return announcements_db[:limit]
     return announcements_db
 
 @router.get("/{announcement_id}", response_model=Announcement)
