@@ -4,8 +4,20 @@ import { Link } from 'react-router-dom';
 import MainLayout from '../../templates/MainLayout';
 import Icon from '../../atoms/Icon';
 
+// --- DATA MODELS ---
+interface Announcement {
+  id: number;
+  title: string;
+  organization: string;
+  deadline: string;
+  budget: string;
+  status: 'active' | 'urgent';
+  daysLeft: number;
+  category: string;
+}
+
 // --- MOCK DATA ---
-const mockAnnouncements = [
+const mockAnnouncements: Announcement[] = [
   {
     id: 1,
     title: '[JB-Bio] 2024년 바이오 스타트업 성장 지원 프로그램 참여기업 모집',
