@@ -45,6 +45,7 @@ const ContentGrid = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('Fetching content grid data (announcements and news)...');
       try {
         const [announcementsResponse, newsResponse] = await Promise.all([
           fetch(`${process.env.REACT_APP_API_URL}/announcements`),
@@ -57,6 +58,9 @@ const ContentGrid = () => {
 
         const announcementsData: AnnouncementFromAPI[] = await announcementsResponse.json();
         const newsData: NewsFromAPI[] = await newsResponse.json();
+
+        console.log('Successfully fetched announcements:', announcementsData);
+        console.log('Successfully fetched news:', newsData);
 
         // Transform data for frontend
         const transformedAnnouncements = announcementsData.map(item => ({

@@ -15,6 +15,7 @@ const StatsSection = () => {
 
   useEffect(() => {
     const fetchStats = async () => {
+      console.log('Fetching stats...');
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/stats`);
         if (!response.ok) {
@@ -22,6 +23,7 @@ const StatsSection = () => {
         }
         const data = await response.json();
         setStats(data);
+        console.log('Successfully fetched stats:', data);
       } catch (error) {
         console.error('Failed to fetch stats:', error);
       }
