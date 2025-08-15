@@ -5,6 +5,7 @@ from ..models.infra import Infra
 from ..models.content import News, Tech
 from ..models.consultation import Consultation
 from ..models.user import UserInDB
+from ..models.service import Service
 
 # SQL Schema comments from the original request
 """
@@ -246,5 +247,32 @@ users_db: list[UserInDB] = [
         full_name='관리자',
         role='admin',
         interests=[]
+    )
+]
+
+services_db: list[Service] = [
+    Service(
+        title='R&D 지원사업',
+        description='연구개발 지원사업 신청 및 관리',
+        icon='flask',
+        gradient='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    ),
+    Service(
+        title='창업보육센터',
+        description='바이오 창업 지원 프로그램',
+        icon='target',
+        gradient='linear-gradient(135deg, #f6d365 0%, #fda085 100%)'
+    ),
+    Service(
+        title='기업 정보',
+        description='전북 바이오 기업 현황',
+        icon='building',
+        gradient='linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
+    ),
+    Service(
+        title='기술 정보',
+        description='최신 바이오 기술 동향',
+        icon='trendingUp',
+        gradient='linear-gradient(135deg, #059669 0%, #0891b2 100%)'
     )
 ]

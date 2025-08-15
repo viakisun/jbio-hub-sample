@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="JBio Hub API",
@@ -6,9 +7,18 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# CORS Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 # --- API Routers ---
 # Routers for each domain will be included here to modularize the application.
-from .routers import announcement, company, infra, content, consultation, user, admin
+from .routers import announcement, company, infra, content, consultation, user, admin, service
 
 app.include_router(announcement.router)
 app.include_router(company.router)
@@ -17,6 +27,7 @@ app.include_router(content.router)
 app.include_router(consultation.router)
 app.include_router(user.router)
 app.include_router(admin.router)
+app.include_router(service.router)
 # ...
 
 
