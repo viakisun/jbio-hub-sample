@@ -14,6 +14,7 @@ const ServicesSection = () => {
 
   useEffect(() => {
     const fetchServices = async () => {
+      console.log('Fetching services...');
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/services`);
         if (!response.ok) {
@@ -21,6 +22,7 @@ const ServicesSection = () => {
         }
         const data = await response.json();
         setServices(data);
+        console.log('Successfully fetched services:', data);
       } catch (error) {
         console.error('Failed to fetch services:', error);
       }
