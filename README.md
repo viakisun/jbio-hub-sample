@@ -1,101 +1,78 @@
-# JBio Hub Sample - Jeonbuk Bio Web Platform
+# JBio Hub - Backend Monorepo
 
-This project is a sample implementation of a web platform for the Jeonbuk Bio industry, named "JBio Hub". It showcases a modern, clean dashboard interface built with React. This project was created to demonstrate a high-quality, production-level frontend structure, including a design system and component-based architecture, all within a single file for simplicity.
+This repository contains the backend microservices for the JBio Hub platform. It is structured as a monorepo using npm workspaces, and it lives alongside the React frontend application.
 
-![JBio Hub Screenshot](public/screenshot.png)
+## Project Structure
 
-*(Note: The screenshot is a placeholder. You can generate one by running the application and taking a screenshot of the main page.)*
-
-## About The Project
-
-JBio Hub is envisioned as a central platform for the Jeonbuk bio-industry ecosystem. It provides a comprehensive dashboard for users to access information about announcements, business incubation centers, company information, technology trends, and news.
-
-The interface is designed to be intuitive and user-friendly, with a focus on data visualization and quick access to key services.
-
-### Key Features
-
-*   **Modern Dashboard UI:** A clean and professional user interface.
-*   **Design System:** A built-in design system for colors, typography, spacing, and shadows.
-*   **SVG Icon Library:** A set of custom, high-quality SVG icons for UI elements.
-*   **Responsive Header:** Includes navigation and user profile sections.
-*   **Hero Section:** A prominent search bar for easy access to information.
-*   **Statistics Overview:** Key metrics are displayed in an easy-to-digest format.
-*   **Main Services Section:** Highlights the core services of the platform.
-*   **Content Grids:** Sections for the latest announcements and news.
-*   **Professional Footer:** Comprehensive footer with contact information, site links, and legal notices.
-
-## Built With
-
-*   [React](https://reactjs.org/)
-*   [React Router](https://reactrouter.com/)
-*   [React Scripts](https://create-react-app.dev/)
-*   [GitHub Pages](https://pages.github.com/)
+-   `package.json`: The root package file, configured for npm workspaces. Manages all services and shared dependencies.
+-   `src/`, `public/`: The React frontend application.
+-   `packages/`: Contains shared code used by multiple services.
+    -   `common/`: A placeholder for common utilities.
+-   `services/`: Contains all the individual microservices.
+    -   `gateway-service/`: The single entry point (API Gateway) for the frontend.
+    -   `announcement-service/`: Manages announcements.
+    -   `company-service/`: Manages company and institution data.
+    -   `infra-service/`: Manages infrastructure data for the map.
+    -   `content-service/`: Manages news, notices, and tech achievements.
+    -   `consultation-service/`: Manages consultation requests.
+    -   `user-service/`: Manages user authentication and data.
+    -   `admin-service/`: Manages administrative tasks.
 
 ## Getting Started
 
-To get a local copy up and running, follow these simple steps.
-
 ### Prerequisites
 
-You need to have Node.js and npm installed on your machine.
-*   npm
-    ```sh
-    npm install npm@latest -g
-    ```
+-   Node.js (v16 or higher)
+-   npm (v7 or higher, for workspace support)
 
 ### Installation
 
-1.  Clone the repo
-    ```sh
-    git clone https://github.com/your_username/jbio-hub-sample.git
-    ```
-2.  Install NPM packages
-    ```sh
+1.  Clone the repository.
+2.  Install all dependencies for the frontend and all backend services from the root directory:
+    ```bash
     npm install
     ```
 
-## Usage
+### Running the Services
 
-To run the app in development mode, use the following command. This will open the app in your default browser at `http://localhost:3000`.
+#### Run All Backend Services
 
-```sh
+To run all backend microservices and the API gateway concurrently, use the following command from the root directory:
+
+```bash
+npm run dev
+```
+
+This will start all services on their respective ports. The API Gateway will be available at `http://localhost:3000`.
+
+#### Run a Single Service
+
+To run a specific microservice for development, you can use the npm workspace command. For example, to run only the `announcement-service`:
+
+```bash
+npm run dev -w @gonggo/announcement-service
+```
+
+#### Run the Frontend
+
+To run the React frontend application, use the standard start script:
+
+```bash
 npm start
 ```
 
-## Available Scripts
+This will start the React development server, usually on `http://localhost:3001` (or the next available port if 3000 is taken by the gateway).
 
-In the project directory, you can run:
+## API Endpoints
 
-### `npm start`
+All backend APIs are accessed through the API Gateway at `http://localhost:3000/api`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-### `npm run deploy`
-
-This command builds the application and deploys it to GitHub Pages.
-
-## License
-
-Distributed under the MIT License.
+-   **Announcements**: `GET /api/announcements`, `GET /api/announcements/:id`
+-   **Companies**: `GET /api/companies`, `GET /api/companies/:id`
+-   **Infrastructure**: `GET /api/infra/map`
+-   **Content**:
+    -   `GET /api/news`, `GET /api/news/:id`
+    -   `GET /api/techs`, `GET /api/techs/:id`
+-   **Consultations**: `POST /api/consultations`
+-   **Users**: `POST /api/auth/login`, `GET /api/me` (requires Bearer token)
+-   **Admin**: `GET, POST, PUT, DELETE /api/admin/*` (requires `X-User-Role: admin` header)
