@@ -1,78 +1,53 @@
-# JBio Hub - Backend Monorepo
+# JBio Hub - Monorepo (React Frontend + FastAPI Backend)
 
-This repository contains the backend microservices for the JBio Hub platform. It is structured as a monorepo using npm workspaces, and it lives alongside the React frontend application.
+This repository contains the JBio Hub platform, structured as a monorepo. It includes the React frontend and a Python-based backend powered by FastAPI.
 
 ## Project Structure
 
--   `package.json`: The root package file, configured for npm workspaces. Manages all services and shared dependencies.
+-   `package.json`: The root package file for managing the frontend workspace.
 -   `src/`, `public/`: The React frontend application.
--   `packages/`: Contains shared code used by multiple services.
-    -   `common/`: A placeholder for common utilities.
--   `services/`: Contains all the individual microservices.
-    -   `gateway-service/`: The single entry point (API Gateway) for the frontend.
-    -   `announcement-service/`: Manages announcements.
-    -   `company-service/`: Manages company and institution data.
-    -   `infra-service/`: Manages infrastructure data for the map.
-    -   `content-service/`: Manages news, notices, and tech achievements.
-    -   `consultation-service/`: Manages consultation requests.
-    -   `user-service/`: Manages user authentication and data.
-    -   `admin-service/`: Manages administrative tasks.
+-   `backend/`: The Python FastAPI backend.
+    -   `main.py`: The main entry point for the FastAPI application.
+    -   `requirements.txt`: Python dependencies.
+    -   `routers/`: Contains the API routers for each domain (e.g., announcements, companies).
+    -   `models/`: Contains the Pydantic data models.
+    -   `db/`: Contains the mock database.
 
 ## Getting Started
 
 ### Prerequisites
 
--   Node.js (v16 or higher)
--   npm (v7 or higher, for workspace support)
+-   Node.js (v16 or higher) & npm (for the frontend)
+-   Python (v3.8 or higher) & pip
 
 ### Installation
 
-1.  Clone the repository.
-2.  Install all dependencies for the frontend and all backend services from the root directory:
+1.  **Frontend:**
+    From the root directory, install the Node.js dependencies for the React app:
     ```bash
     npm install
     ```
 
-### Running the Services
+2.  **Backend:**
+    Install the required Python packages:
+    ```bash
+    pip install -r backend/requirements.txt
+    ```
 
-#### Run All Backend Services
+### Running the Application
 
-To run all backend microservices and the API gateway concurrently, use the following command from the root directory:
+You will need to run the frontend and backend in separate terminal sessions.
 
-```bash
-npm run dev
-```
+1.  **Run the Backend:**
+    From the root directory, start the FastAPI server using uvicorn:
+    ```bash
+    uvicorn backend.main:app --reload --port 8000
+    ```
+    The backend API will be running at `http://localhost:8000`. You can access the interactive API documentation at `http://localhost:8000/docs`.
 
-This will start all services on their respective ports. The API Gateway will be available at `http://localhost:3000`.
-
-#### Run a Single Service
-
-To run a specific microservice for development, you can use the npm workspace command. For example, to run only the `announcement-service`:
-
-```bash
-npm run dev -w @gonggo/announcement-service
-```
-
-#### Run the Frontend
-
-To run the React frontend application, use the standard start script:
-
-```bash
-npm start
-```
-
-This will start the React development server, usually on `http://localhost:3001` (or the next available port if 3000 is taken by the gateway).
-
-## API Endpoints
-
-All backend APIs are accessed through the API Gateway at `http://localhost:3000/api`.
-
--   **Announcements**: `GET /api/announcements`, `GET /api/announcements/:id`
--   **Companies**: `GET /api/companies`, `GET /api/companies/:id`
--   **Infrastructure**: `GET /api/infra/map`
--   **Content**:
-    -   `GET /api/news`, `GET /api/news/:id`
-    -   `GET /api/techs`, `GET /api/techs/:id`
--   **Consultations**: `POST /api/consultations`
--   **Users**: `POST /api/auth/login`, `GET /api/me` (requires Bearer token)
--   **Admin**: `GET, POST, PUT, DELETE /api/admin/*` (requires `X-User-Role: admin` header)
+2.  **Run the Frontend:**
+    In a new terminal, start the React development server from the root directory:
+    ```bash
+    npm start
+    ```
+    The frontend will typically run on `http://localhost:3000`.
