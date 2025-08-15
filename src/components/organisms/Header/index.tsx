@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
 import Button from '../../atoms/Button';
@@ -6,27 +7,35 @@ import Button from '../../atoms/Button';
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = ['공고/사업', '창업보육센터', '기업정보', 'JB기술', '소식/뉴스'];
+  const navItems = [
+    { text: 'JB BIO 클러스터', path: '/cluster' },
+    { text: 'JB 지원사업공고', path: '/announcements' },
+    { text: 'JB 창업보육센터', path: '/incubation' },
+    { text: '바이오 뉴스/행사', path: '/news-events' },
+    { text: 'JB 기업정보', path: '/companies' },
+    { text: 'JB 기술/특허', path: '/tech-patents' },
+  ];
 
   const navigation = (
-    <nav className="header-nav" style={{ gap: DESIGN_SYSTEM.spacing[8] }}>
-      {navItems.map((item, index) => (
-        <Button
-          key={index}
-          style={{
-            background: 'none',
-            border: 'none',
-            fontSize: DESIGN_SYSTEM.typography.fontSize.base[0],
-            fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium,
-            color: DESIGN_SYSTEM.colors.gray[700],
-            cursor: 'pointer',
-            padding: `${DESIGN_SYSTEM.spacing[2]} ${DESIGN_SYSTEM.spacing[4]}`,
-            borderRadius: '8px',
-            transition: 'none'
-          }}
-        >
-          {item}
-        </Button>
+    <nav className="header-nav" style={{ gap: DESIGN_SYSTEM.spacing[6] }}>
+      {navItems.map((item) => (
+        <Link to={item.path} key={item.path} style={{ textDecoration: 'none' }}>
+          <Button
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: DESIGN_SYSTEM.typography.fontSize.base[0],
+              fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium,
+              color: DESIGN_SYSTEM.colors.gray[700],
+              cursor: 'pointer',
+              padding: `${DESIGN_SYSTEM.spacing[2]} ${DESIGN_SYSTEM.spacing[3]}`,
+              borderRadius: '8px',
+              transition: 'none'
+            }}
+          >
+            {item.text}
+          </Button>
+        </Link>
       ))}
     </nav>
   );
@@ -94,30 +103,32 @@ const Header = () => {
         height: '80px'
       }}>
         {/* 로고 */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: DESIGN_SYSTEM.spacing[3]
-        }}>
-          <Icon name="logo" size={40} />
-          <div>
-            <div style={{
-              fontSize: DESIGN_SYSTEM.typography.fontSize.xl[0],
-              fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold,
-              color: DESIGN_SYSTEM.colors.gray[900],
-              lineHeight: DESIGN_SYSTEM.typography.fontSize.xl[1]
-            }}>
-              JB SQUARE
-            </div>
-            <div style={{
-              fontSize: DESIGN_SYSTEM.typography.fontSize.xs[0],
-              color: DESIGN_SYSTEM.colors.gray[500],
-              fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium
-            }}>
-              Jeonbuk's Business QUARTER
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: DESIGN_SYSTEM.spacing[3]
+          }}>
+            <Icon name="logo" size={40} />
+            <div>
+              <div style={{
+                fontSize: DESIGN_SYSTEM.typography.fontSize.xl[0],
+                fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold,
+                color: DESIGN_SYSTEM.colors.gray[900],
+                lineHeight: DESIGN_SYSTEM.typography.fontSize.xl[1]
+              }}>
+                JB SQUARE
+              </div>
+              <div style={{
+                fontSize: DESIGN_SYSTEM.typography.fontSize.xs[0],
+                color: DESIGN_SYSTEM.colors.gray[500],
+                fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium
+              }}>
+                Jeonbuk's Business QUARTER
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
 
         {/* 데스크탑 네비게이션 & 액션 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: DESIGN_SYSTEM.spacing[8] }}>
