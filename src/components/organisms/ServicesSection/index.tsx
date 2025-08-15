@@ -15,7 +15,7 @@ const ServicesSection = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/services');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/services`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

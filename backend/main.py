@@ -18,7 +18,7 @@ app.add_middleware(
 
 # --- API Routers ---
 # Routers for each domain will be included here to modularize the application.
-from .routers import announcement, company, infra, content, consultation, user, admin, service
+from .routers import announcement, company, infra, content, consultation, user, admin, service, stat
 
 app.include_router(announcement.router)
 app.include_router(company.router)
@@ -28,6 +28,7 @@ app.include_router(consultation.router)
 app.include_router(user.router)
 app.include_router(admin.router)
 app.include_router(service.router)
+app.include_router(stat.router)
 # ...
 
 
