@@ -107,14 +107,14 @@ const Header = () => {
               color: DESIGN_SYSTEM.colors.gray[900],
               lineHeight: DESIGN_SYSTEM.typography.fontSize.xl[1]
             }}>
-              J BIO HUB
+              JB SQUARE
             </div>
             <div style={{
               fontSize: DESIGN_SYSTEM.typography.fontSize.xs[0],
               color: DESIGN_SYSTEM.colors.gray[500],
               fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium
             }}>
-              Jeonbuk Bio Platform
+              Jeonbuk's Business QUARTER
             </div>
           </div>
         </div>
