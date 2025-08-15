@@ -93,148 +93,41 @@ const ContentGrid = () => {
   }, []);
 
   return (
-    <div
-      className="responsive-grid-2-col"
-      style={{ marginBottom: DESIGN_SYSTEM.spacing[16] }}
-    >
+    <div className="content-grid responsive-grid-2-col">
       {/* 최신 공고 */}
-      <section>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: DESIGN_SYSTEM.spacing[6]
-        } as React.CSSProperties}>
-          <h2 style={{
-            fontSize: DESIGN_SYSTEM.typography.fontSize['2xl'][0],
-            fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold,
-            color: DESIGN_SYSTEM.colors.gray[900],
-            margin: 0
-          } as React.CSSProperties}>
-            최신 공고
-          </h2>
-          <Button style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: DESIGN_SYSTEM.spacing[2],
-            background: 'none',
-            border: 'none',
-            color: DESIGN_SYSTEM.colors.primary[600],
-            fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-            fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium,
-            cursor: 'pointer'
-          } as React.CSSProperties}>
+      <section className="content-section">
+        <div className="section-header">
+          <h2 className="section-title">최신 공고</h2>
+          <Button className="section-view-all-button">
             전체보기
             <Icon name="arrowRight" size={16} />
           </Button>
         </div>
 
-        <div style={{
-          backgroundColor: DESIGN_SYSTEM.colors.white,
-          borderRadius: '20px',
-          padding: DESIGN_SYSTEM.spacing[6],
-          boxShadow: DESIGN_SYSTEM.shadows.lg,
-          border: `1px solid ${DESIGN_SYSTEM.colors.gray[100]}`
-        } as React.CSSProperties}>
+        <div className="card-container">
           <AnnouncementList announcements={announcements} />
         </div>
       </section>
 
       {/* 최신 뉴스 */}
-      <section>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: DESIGN_SYSTEM.spacing[6]
-        } as React.CSSProperties}>
-          <h2 style={{
-            fontSize: DESIGN_SYSTEM.typography.fontSize['2xl'][0],
-            fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold,
-            color: DESIGN_SYSTEM.colors.gray[900],
-            margin: 0
-          } as React.CSSProperties}>
-            최신 뉴스
-          </h2>
-          <Button style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: DESIGN_SYSTEM.spacing[2],
-            background: 'none',
-            border: 'none',
-            color: DESIGN_SYSTEM.colors.primary[600],
-            fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-            fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium,
-            cursor: 'pointer'
-          } as React.CSSProperties}>
+      <section className="content-section">
+        <div className="section-header">
+          <h2 className="section-title">최신 뉴스</h2>
+          <Button className="section-view-all-button">
             전체보기
             <Icon name="arrowRight" size={16} />
           </Button>
         </div>
 
-        <div style={{
-          backgroundColor: DESIGN_SYSTEM.colors.white,
-          borderRadius: '20px',
-          padding: DESIGN_SYSTEM.spacing[6],
-          boxShadow: DESIGN_SYSTEM.shadows.lg,
-          border: `1px solid ${DESIGN_SYSTEM.colors.gray[100]}`
-        } as React.CSSProperties}>
-          {news.map((item, index) => (
-            <div
-              key={item.id}
-              style={{
-                padding: DESIGN_SYSTEM.spacing[5],
-                borderRadius: '12px',
-                border: `1px solid ${DESIGN_SYSTEM.colors.gray[200]}`,
-                marginBottom: index < news.length - 1 ? DESIGN_SYSTEM.spacing[4] : 0,
-                cursor: 'pointer'
-              } as React.CSSProperties}
-            >
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                marginBottom: DESIGN_SYSTEM.spacing[3]
-              } as React.CSSProperties}>
-                <span style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  padding: `${DESIGN_SYSTEM.spacing[1]} ${DESIGN_SYSTEM.spacing[3]}`,
-                  backgroundColor: DESIGN_SYSTEM.colors.primary[500],
-                  color: 'white',
-                  borderRadius: '20px',
-                  fontSize: DESIGN_SYSTEM.typography.fontSize.xs[0],
-                  fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold
-                } as React.CSSProperties}>
-                  {item.category}
-                </span>
-
-                <div style={{
-                  fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                  color: DESIGN_SYSTEM.colors.gray[500]
-                } as React.CSSProperties}>
-                  {item.date}
-                </div>
+        <div className="card-container">
+          {news.map((item) => (
+            <div key={item.id} className="news-card">
+              <div className="news-card-header">
+                <span className="news-card-category">{item.category}</span>
+                <div className="news-card-date">{item.date}</div>
               </div>
-
-              <h4 style={{
-                fontSize: DESIGN_SYSTEM.typography.fontSize.base[0],
-                fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold,
-                color: DESIGN_SYSTEM.colors.gray[900],
-                margin: `0 0 ${DESIGN_SYSTEM.spacing[3]} 0`,
-                lineHeight: '1.4'
-              } as React.CSSProperties}>
-                {item.title}
-              </h4>
-
-              <p style={{
-                fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                color: DESIGN_SYSTEM.colors.gray[600],
-                margin: 0,
-                lineHeight: '1.5'
-              } as React.CSSProperties}>
-                {item.summary}
-              </p>
+              <h4 className="news-card-title">{item.title}</h4>
+              <p className="news-card-summary">{item.summary}</p>
             </div>
           ))}
         </div>

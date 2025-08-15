@@ -17,22 +17,10 @@ const Header = () => {
   ];
 
   const navigation = (
-    <nav className="header-nav" style={{ gap: DESIGN_SYSTEM.spacing[6] }}>
+    <nav className="header-nav">
       {navItems.map((item) => (
-        <Link to={item.path} key={item.path} style={{ textDecoration: 'none' }}>
-          <Button
-            style={{
-              background: 'none',
-              border: 'none',
-              fontSize: DESIGN_SYSTEM.typography.fontSize.base[0],
-              fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium,
-              color: DESIGN_SYSTEM.colors.gray[700],
-              cursor: 'pointer',
-              padding: `${DESIGN_SYSTEM.spacing[2]} ${DESIGN_SYSTEM.spacing[3]}`,
-              borderRadius: '8px',
-              transition: 'none'
-            }}
-          >
+        <Link to={item.path} key={item.path} className="header-nav-item">
+          <Button className="header-nav-button">
             {item.text}
           </Button>
         </Link>
@@ -41,42 +29,15 @@ const Header = () => {
   );
 
   const actions = (
-    <div className="header-actions" style={{ alignItems: 'center', gap: DESIGN_SYSTEM.spacing[4] }}>
-      <Button style={{
-        position: 'relative',
-        background: 'none',
-        border: 'none',
-        padding: DESIGN_SYSTEM.spacing[2],
-        borderRadius: '8px',
-        cursor: 'pointer'
-      }}>
+    <div className="header-actions">
+      <Button className="notification-button">
         <Icon name="notification" size={20} color={DESIGN_SYSTEM.colors.gray[600]} />
-        <div style={{
-          position: 'absolute',
-          top: '6px',
-          right: '6px',
-          width: '8px',
-          height: '8px',
-          backgroundColor: DESIGN_SYSTEM.colors.orange[500],
-          borderRadius: '50%'
-        }} />
+        <div className="notification-dot" />
       </Button>
 
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: DESIGN_SYSTEM.spacing[3],
-        padding: `${DESIGN_SYSTEM.spacing[2]} ${DESIGN_SYSTEM.spacing[4]}`,
-        backgroundColor: DESIGN_SYSTEM.colors.gray[100],
-        borderRadius: '12px',
-        cursor: 'pointer'
-      }}>
+      <div className="user-menu">
         <Icon name="user" size={18} color={DESIGN_SYSTEM.colors.gray[600]} />
-        <span style={{
-          fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-          fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium,
-          color: DESIGN_SYSTEM.colors.gray[700]
-        }}>
+        <span className="user-name">
           김바이오
         </span>
         <Icon name="chevronDown" size={16} color={DESIGN_SYSTEM.colors.gray[500]} />
@@ -85,45 +46,17 @@ const Header = () => {
   );
 
   return (
-    <header style={{
-      backgroundColor: DESIGN_SYSTEM.colors.white,
-      borderBottom: `1px solid ${DESIGN_SYSTEM.colors.gray[200]}`,
-      boxShadow: DESIGN_SYSTEM.shadows.sm,
-      position: 'sticky',
-      top: 0,
-      zIndex: 50
-    }}>
-      <div style={{
-        maxWidth: '1440px',
-        margin: '0 auto',
-        padding: `0 ${DESIGN_SYSTEM.spacing[6]}`,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: '80px'
-      }}>
+    <header className="main-header">
+      <div className="header-container">
         {/* 로고 */}
-        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: DESIGN_SYSTEM.spacing[3]
-          }}>
+        <Link to="/" className="logo-link">
+          <div className="logo">
             <Icon name="logo" size={40} />
-            <div>
-              <div style={{
-                fontSize: DESIGN_SYSTEM.typography.fontSize.xl[0],
-                fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold,
-                color: DESIGN_SYSTEM.colors.gray[900],
-                lineHeight: DESIGN_SYSTEM.typography.fontSize.xl[1]
-              }}>
+            <div className="logo-text">
+              <div className="logo-title">
                 JB SQUARE
               </div>
-              <div style={{
-                fontSize: DESIGN_SYSTEM.typography.fontSize.xs[0],
-                color: DESIGN_SYSTEM.colors.gray[500],
-                fontWeight: DESIGN_SYSTEM.typography.fontWeight.medium
-              }}>
+              <div className="logo-subtitle">
                 Jeonbuk's Business QUARTER
               </div>
             </div>
@@ -131,7 +64,7 @@ const Header = () => {
         </Link>
 
         {/* 데스크탑 네비게이션 & 액션 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: DESIGN_SYSTEM.spacing[8] }}>
+        <div className="desktop-nav-actions">
           {navigation}
           {actions}
         </div>
