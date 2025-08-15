@@ -36,11 +36,7 @@ const StatsSection = () => {
     <section style={{
       marginBottom: DESIGN_SYSTEM.spacing[16]
     } as React.CSSProperties}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: DESIGN_SYSTEM.spacing[6]
-      } as React.CSSProperties}>
+      <div className="responsive-grid-4-col">
         {stats.map((stat, index) => (
           <StatCard key={index} stat={stat} />
         ))}
