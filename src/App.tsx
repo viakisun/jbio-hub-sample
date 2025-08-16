@@ -4,7 +4,6 @@ import HomePage from './components/pages/HomePage';
 import ClusterPage from './components/pages/ClusterPage';
 import AnnouncementsPage from './components/pages/AnnouncementsPage';
 import IncubationPage from './components/pages/IncubationPage';
-import NewsEventsPage from './components/pages/NewsEventsPage';
 import CompaniesPage from './components/pages/CompaniesPage';
 import TechPatentsPage from './components/pages/TechPatentsPage';
 import AnnouncementDetailPage from './components/pages/AnnouncementDetailPage';
@@ -27,11 +26,8 @@ function App() {
       <Route path="/news" element={<NewsDashboardPage />} />
       <Route path="/news/latest" element={<NewsListPage />} />
       <Route path="/news/latest/:newsId" element={<NewsDetailPage />} />
-      <Route path="/news/events" element={<EventsListPage />} />
-      <Route path="/news/events/:eventId" element={<EventsDetailPage />} />
-
-      {/* TODO: This route seems redundant now, consider removing or redirecting */}
-      <Route path="/news-events" element={<NewsEventsPage />} />
+      <Route path="/events" element={<EventsListPage />} />
+      <Route path="/events/:eventId" element={<EventsDetailPage />} />
 
       <Route path="/companies" element={<CompaniesPage />} />
       <Route path="/tech-patents" element={<TechPatentsPage />} />
