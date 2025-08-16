@@ -9,6 +9,7 @@ interface GridProps {
 
 const Grid = styled.div<GridProps>`
   display: grid;
+  align-items: stretch;
   grid-template-columns: repeat(${props => props.cols || 4}, 1fr);
   gap: ${props => props.gap || '2rem'};
 
