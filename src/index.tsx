@@ -17,12 +17,12 @@ async function enableMocking() {
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
-// enableMocking().then(() => {
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
-// });
+enableMocking().then(() => {
+  root.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+});
