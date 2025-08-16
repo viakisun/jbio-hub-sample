@@ -211,7 +211,7 @@ const ContentGrid = () => {
       <Section>
         <SectionHeader>
           <SectionTitle>최신 뉴스</SectionTitle>
-          <Link to="/news-events" style={{ textDecoration: 'none' }}>
+          <Link to="/news/latest" style={{ textDecoration: 'none' }}>
             <ViewAllButton>
               전체보기
               <Icon name="arrowRight" size={16} />
@@ -221,14 +221,16 @@ const ContentGrid = () => {
 
         <CardContainer>
           {news.map((item) => (
-            <NewsCard key={item.id}>
-              <NewsCardHeader>
-                <NewsCardCategory>{item.category}</NewsCardCategory>
-                <NewsCardDate>{item.date}</NewsCardDate>
-              </NewsCardHeader>
-              <NewsCardTitle>{item.title}</NewsCardTitle>
-              <NewsCardSummary>{item.summary}</NewsCardSummary>
-            </NewsCard>
+            <Link key={item.id} to={`/news/latest/${item.id}`} style={{ textDecoration: 'none' }}>
+              <NewsCard>
+                <NewsCardHeader>
+                  <NewsCardCategory>{item.category}</NewsCardCategory>
+                  <NewsCardDate>{item.date}</NewsCardDate>
+                </NewsCardHeader>
+                <NewsCardTitle>{item.title}</NewsCardTitle>
+                <NewsCardSummary>{item.summary}</NewsCardSummary>
+              </NewsCard>
+            </Link>
           ))}
         </CardContainer>
       </Section>
