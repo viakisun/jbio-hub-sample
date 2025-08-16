@@ -12,6 +12,7 @@ import NewsListPage from './components/pages/NewsListPage';
 import NewsDetailPage from './components/pages/NewsDetailPage';
 import EventsListPage from './components/pages/EventsListPage';
 import EventsDetailPage from './components/pages/EventsDetailPage';
+import TenantDetailPage from './components/pages/TenantDetailPage';
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
       <Route path="/cluster" element={<ClusterPage />} />
       <Route path="/announcements" element={<AnnouncementsPage />} />
       <Route path="/support/:category/:announcementId" element={<AnnouncementDetailPage />} />
+
+      {/* Incubation Routes */}
       <Route path="/incubation" element={<IncubationPage />} />
+      <Route path="/incubation/tenants/:orgId" element={<TenantDetailPage />} />
 
       {/* News & Events Routes */}
       <Route path="/news" element={<NewsDashboardPage />} />
