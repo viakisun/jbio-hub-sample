@@ -1,31 +1,5 @@
 import { http, HttpResponse } from 'msw';
 
-const dashboardHandler = http.get('/api/cluster/dashboard', () => {
-  return HttpResponse.json({
-    kpis: [
-      { title: '클러스터 내 기관', value: '132', change: '+2' },
-      { title: '보유 인프라', value: '45', change: '+5' },
-      { title: '활성 지원정책', value: '28', change: '-1' },
-      { title: '이번 달 신규 기관', value: '6', change: '' },
-    ],
-    latestOrgs: [
-      { id: 'org-1', name: '메디퓨처', date: '2024-08-15', status: 'NEW' },
-      { id: 'org-2', name: '그린사이언스', date: '2024-08-14', status: 'NEW' },
-      { id: 'org-3', name: '한국화학연구원', date: '2024-08-12', status: 'UPDATED' },
-      { id: 'org-4', name: '바이오톡스텍', date: '2024-08-11', status: 'NEW' },
-      { id: 'org-5', name: '셀트리온', date: '2024-08-10', status: 'UPDATED' },
-      { id: 'org-6', name: '삼성바이오로직스', date: '2024-08-09', status: 'NEW' },
-    ],
-    latestPolicies: [
-      { id: 'pol-1', name: '2024년 바이오 스타트업 지원사업', date: '2024-08-10', status: 'NEW' },
-      { id: 'pol-2', name: '연구장비 공동활용 지원', date: '2024-08-09', status: 'UPDATED' },
-      { id: 'pol-3', name: '기술이전 R&BD 사업화 지원', date: '2024-08-05', status: 'UPDATED' },
-      { id: 'pol-4', name: '바이오 분야 전문인력 양성사업', date: '2024-08-02', status: 'NEW' },
-      { id: 'pol-5', name: '임상시험 연계 지원 프로그램', date: '2024-07-28', status: 'UPDATED' },
-      { id: 'pol-6', name: '해외 바이오 클러스터 교류 지원', date: '2024-07-25', status: 'NEW' },
-    ],
-  });
-});
 
 // --- MOCK DATA ---
 
@@ -88,7 +62,6 @@ const organizationDetailHandler = http.get('/api/cluster/organizations/:id', ({ 
 });
 
 export const handlers = [
-  dashboardHandler,
   organizationsHandler,
   organizationDetailHandler,
 ];
