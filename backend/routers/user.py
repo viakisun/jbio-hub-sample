@@ -5,10 +5,7 @@ from typing import Annotated
 from ..models.user import User, Token
 from ..db.mock_data import users_db
 
-router = APIRouter(
-    prefix="/api",
-    tags=["Users"]
-)
+router = APIRouter(tags=["Users"])
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
