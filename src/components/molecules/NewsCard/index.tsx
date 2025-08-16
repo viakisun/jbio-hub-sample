@@ -37,6 +37,7 @@ const Thumbnail = styled.img`
 `;
 
 const ContentWrapper = styled.div`
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
