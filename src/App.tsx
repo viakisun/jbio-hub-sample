@@ -13,6 +13,11 @@ import NewsDetailPage from './components/pages/NewsDetailPage';
 import EventsListPage from './components/pages/EventsListPage';
 import EventsDetailPage from './components/pages/EventsDetailPage';
 import TenantDetailPage from './components/pages/TenantDetailPage';
+import TechDashboardPage from './components/pages/TechDashboardPage';
+import TechOutcomesPage from './components/pages/TechOutcomesPage';
+import TechTransferPage from './components/pages/TechTransferPage';
+import TechCollaborationPage from './components/pages/TechCollaborationPage';
+import TechDetailPage from './components/pages/TechDetailPage';
 
 function App() {
   return (
@@ -33,8 +38,15 @@ function App() {
       <Route path="/events" element={<EventsListPage />} />
       <Route path="/events/:eventId" element={<EventsDetailPage />} />
 
+      {/* Tech & Patents Routes */}
+      <Route path="/tech" element={<TechDashboardPage />} />
+      <Route path="/tech/outcomes" element={<TechOutcomesPage />} />
+      <Route path="/tech/transfer" element={<TechTransferPage />} />
+      <Route path="/tech/patents" element={<TechPatentsPage />} />
+      <Route path="/tech/collaboration" element={<TechCollaborationPage />} />
+      <Route path="/tech/:type/:id" element={<TechDetailPage />} />
+
       <Route path="/companies" element={<CompaniesPage />} />
-      <Route path="/tech-patents" element={<TechPatentsPage />} />
     </Routes>
   );
 }
