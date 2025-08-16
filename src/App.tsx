@@ -42,7 +42,7 @@ function App() {
       <Route path="/tech" element={<TechDashboardPage />} />
       <Route path="/tech/outcomes" element={<TechOutcomesPage />} />
       <Route path="/tech/transfer" element={<TechTransferPage />} />
-      <Route path="/tech/patents" element={<TechPatentsPage />} />
+      <Route path="/tech-patents" element={<TechPatentsPage />} />
       <Route path="/tech/collaboration" element={<TechCollaborationPage />} />
       <Route path="/tech/:type/:id" element={<TechDetailPage />} />
 
