@@ -14,19 +14,20 @@ const TabList = styled.div`
 `;
 
 const TabButton = styled.button<{ isActive: boolean }>`
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0.25rem;
+  margin: 0 0.75rem;
   font-size: 1rem;
   font-weight: 600;
   border: none;
   background: none;
   cursor: pointer;
-  color: ${props => (props.isActive ? '#4f46e5' : '#6b7280')};
-  border-bottom: 2px solid ${props => (props.isActive ? '#4f46e5' : 'transparent')};
-  margin-bottom: -1px; /* To align with the wrapper's border */
-  transition: color 0.2s, border-color 0.2s;
+  color: ${props => (props.isActive ? '#111827' : '#6b7280')};
+  border-bottom: 3px solid ${props => (props.isActive ? '#4f46e5' : 'transparent')};
+  margin-bottom: -2px;
+  transition: color 0.3s ease, border-color 0.3s ease;
 
   &:hover {
-    color: #4f46e5;
+    color: #111827;
   }
 `;
 
