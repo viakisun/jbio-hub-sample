@@ -20,9 +20,9 @@ const mockNotices: NoticeCardData[] = [
 ];
 
 const mockVacancyPreview = [
-    { centerId: 'center-1', centerName: '전북바이오융합원 본원', vacancyUnits: 3 },
-    { centerId: 'center-2', centerName: '익산 BI 센터', vacancyUnits: 1 },
-    { centerId: 'center-3', centerName: '정읍 BI 센터', vacancyUnits: 1 },
+    { centerId: 'center-1', centerName: '전북바이오융합원 본원', vacancyUnits: 3, types: ['랩', '사무실'] },
+    { centerId: 'center-2', centerName: '익산 BI 센터', vacancyUnits: 1, types: ['사무실'] },
+    { centerId: 'center-3', centerName: '정읍 BI 센터', vacancyUnits: 1, types: ['랩'] },
 ];
 
 const mockTenants: TenantCardData[] = [
@@ -42,6 +42,7 @@ const Section = styled.section`
   border-radius: 16px;
   display: flex;
   flex-direction: column;
+  border: 1px solid #e5e7eb;
 `;
 
 const SectionHeader = styled.div`
@@ -70,16 +71,35 @@ const List = styled.div`
   gap: 1rem;
 `;
 
-const VacancyItem = styled(Link)`
-    display: flex;
-    justify-content: space-between;
+const VacancyCard = styled(Link)`
+    display: block;
     padding: 1rem;
     border-radius: 8px;
     text-decoration: none;
     color: inherit;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    transition: box-shadow 0.2s, border-color 0.2s;
     &:hover {
-        background-color: #eef2ff;
+        border-color: #d1d5db;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     }
+`;
+
+const VacancyHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+`;
+
+const VacancyTypes = styled.div`
+    font-size: 0.875rem;
+    color: #6b7280;
+`;
+
+const FullWidthSection = styled(Section)`
+  grid-column: 1 / -1;
 `;
 
 // --- COMPONENT ---
@@ -89,18 +109,21 @@ const DashboardView = () => {
     <Grid cols={1} gap="3rem">
       <KPIGroup kpis={kpiData} />
 
-      <Grid cols={3} tabletCols={1} mobileCols={1} gap="2rem">
+      <Grid cols={2} tabletCols={1} mobileCols={1} gap="2rem">
         <Section>
           <SectionHeader>
             <SectionTitle>공실 현황</SectionTitle>
-            <ViewAllLink to="/incubation?tab=vacancy">자세히 보기</ViewAllLink>
+            <ViewAllLink to="/incubation?tab=vacancy">전체 보기</ViewAllLink>
           </SectionHeader>
           <List>
             {mockVacancyPreview.map(item => (
-                <VacancyItem key={item.centerId} to={`/incubation?tab=vacancy&centerId=${item.centerId}`}>
-                    <span>{item.centerName}</span>
-                    <strong>{item.vacancyUnits}개</strong>
-                </VacancyItem>
+                <VacancyCard key={item.centerId} to={`/incubation?tab=vacancy&centerId=${item.centerId}`}>
+                    <VacancyHeader>
+                        <span>{item.centerName}</span>
+                        <strong>{item.vacancyUnits}개</strong>
+                    </VacancyHeader>
+                    <VacancyTypes>{item.types.join(', ')}</VacancyTypes>
+                </VacancyCard>
             ))}
           </List>
         </Section>
@@ -113,16 +136,17 @@ const DashboardView = () => {
             {mockNotices.map(notice => <NoticeCard key={notice.id} notice={notice} />)}
           </List>
         </Section>
-        <Section>
-          <SectionHeader>
+      </Grid>
+
+      <FullWidthSection>
+        <SectionHeader>
             <SectionTitle>입주기관</SectionTitle>
             <ViewAllLink to="/incubation?tab=tenants">전체 보기</ViewAllLink>
-          </SectionHeader>
-          <Grid cols={2} gap="1rem">
+        </SectionHeader>
+        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
             {mockTenants.slice(0, 6).map(tenant => <TenantCard key={tenant.id} tenant={tenant} />)}
-          </Grid>
-        </Section>
-      </Grid>
+        </Grid>
+      </FullWidthSection>
     </Grid>
   );
 };
