@@ -5,7 +5,7 @@ type ButtonVariant = 'primary' | 'secondary';
 
 interface StyledButtonProps {
   variant: ButtonVariant;
-  fullWidth?: boolean;
+  $fullWidth?: boolean;
 }
 
 const variants = {
@@ -36,7 +36,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s;
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
+  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
 
   &:disabled {
     opacity: 0.6;
@@ -50,7 +50,7 @@ interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   variant?: ButtonVariant;
-  fullWidth?: boolean;
+  $fullWidth?: boolean;
   style?: React.CSSProperties;
   className?: string;
   disabled?: boolean;
@@ -60,7 +60,7 @@ const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   variant = 'primary',
-  fullWidth = false,
+  $fullWidth = false,
   style,
   className,
   disabled,
@@ -69,7 +69,7 @@ const Button: React.FC<ButtonProps> = ({
     <StyledButton
       onClick={onClick}
       variant={variant}
-      fullWidth={fullWidth}
+      $fullWidth={$fullWidth}
       style={style}
       className={className}
       disabled={disabled}
