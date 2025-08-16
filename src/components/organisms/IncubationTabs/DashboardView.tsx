@@ -106,10 +106,10 @@ const FullWidthSection = styled(Section)`
 
 const DashboardView = () => {
   return (
-    <Grid cols={1} gap="3rem">
+    <Grid $cols={1} $gap="3rem">
       <KPIGroup kpis={kpiData} />
 
-      <Grid cols={2} tabletCols={1} mobileCols={1} gap="2rem">
+      <Grid $cols={2} $tabletCols={1} $mobileCols={1} $gap="2rem">
         <Section>
           <SectionHeader>
             <SectionTitle>공실 현황</SectionTitle>
@@ -143,7 +143,7 @@ const DashboardView = () => {
             <SectionTitle>입주기관</SectionTitle>
             <ViewAllLink to="/incubation?tab=tenants">전체 보기</ViewAllLink>
         </SectionHeader>
-        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
+        <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
             {mockTenants.slice(0, 6).map(tenant => <TenantCard key={tenant.id} tenant={tenant} />)}
         </Grid>
       </FullWidthSection>

@@ -77,7 +77,7 @@ const VacancyView = () => {
       {mockVacancyData.map(center => (
         <CenterSection key={center.centerId}>
           <CenterTitle>{center.centerName}</CenterTitle>
-          <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
+          <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
             {center.vacancies.map(vacancy => (
               <VacancyCard key={vacancy.id} vacancy={vacancy} />
             ))}

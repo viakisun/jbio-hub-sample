@@ -90,7 +90,7 @@ const EventsListPage = () => {
           <SearchBar />
         </ControlsWrapper>
 
-        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
+        <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
           {mockEventsList.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}

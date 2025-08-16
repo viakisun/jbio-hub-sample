@@ -101,7 +101,7 @@ const ServicesSection = () => {
   return (
     <Section>
       <SectionTitle>주요 서비스</SectionTitle>
-      <Grid cols={4} tabletCols={2} mobileCols={1}>
+      <Grid $cols={4} $tabletCols={2} $mobileCols={1}>
         {services.map((item, index) => (
           <ServiceCard key={index} gradient={item.gradient}>
             <IconContainer>

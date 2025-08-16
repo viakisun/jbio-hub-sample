@@ -85,7 +85,7 @@ const NewsDashboardPage = () => {
           <PageTitle>뉴스 & 행사</PageTitle>
         </PageHeader>
 
-        <Grid cols={2} tabletCols={1} mobileCols={1} gap="2rem">
+        <Grid $cols={2} $tabletCols={1} $mobileCols={1} $gap="2rem">
           <Section>
             <SectionHeader>
               <SectionTitle>최신 뉴스</SectionTitle>

@@ -124,7 +124,7 @@ const ClusterDashboardPage = () => {
         {data?.kpis && <KPIGroup kpis={data.kpis.map(kpi => ({ label: kpi.title, value: kpi.value }))} />}
 
         <Section>
-          <Grid cols={3} tabletCols={1} mobileCols={1} gap="2rem">
+          <Grid $cols={3} $tabletCols={1} $mobileCols={1} $gap="2rem">
             {explorationCards.map(card => (
               <ExplorationCard key={card.title} {...card} />
             ))}
@@ -138,7 +138,7 @@ const ClusterDashboardPage = () => {
         {data?.latestOrgs && data?.latestPolicies && (
           <Section>
               <SectionTitle>최근 업데이트</SectionTitle>
-              <Grid cols={2} tabletCols={1} mobileCols={1} gap="3rem">
+              <Grid $cols={2} $tabletCols={1} $mobileCols={1} $gap="3rem">
                   <div>
                       <h3>신규 기관</h3>
                       <UpdateList>

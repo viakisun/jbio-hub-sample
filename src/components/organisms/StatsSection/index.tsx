@@ -43,7 +43,7 @@ const StatsSection = () => {
 
   return (
     <Section>
-      <Grid cols={4} tabletCols={2} mobileCols={2}>
+      <Grid $cols={4} $tabletCols={2} $mobileCols={2}>
         {stats.map((stat, index) => (
           <StatCard key={index} stat={stat} />
         ))}

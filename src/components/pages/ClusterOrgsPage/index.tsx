@@ -60,7 +60,7 @@ const ClusterOrgsPage = () => {
         {error && <p>에러: {error.message}</p>}
         {data && (
           view === 'card' ? (
-            <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
+            <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
               {data.organizations.map(org => (
                 <OrganizationCard key={org.id} organization={org} onClick={() => { /* TODO: implement navigation to organization detail page */ }} />
               ))}
