@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create, StateCreator } from 'zustand';
 
 interface ClusterFiltersState {
   region: string | null;
@@ -12,7 +12,7 @@ interface ClusterFiltersState {
   resetFilters: () => void;
 }
 
-const useClusterFiltersStore = create<ClusterFiltersState>()((set) => ({
+const storeCreator: StateCreator<ClusterFiltersState> = (set) => ({
   region: null,
   field: null,
   orgType: null,
@@ -27,6 +27,8 @@ const useClusterFiltersStore = create<ClusterFiltersState>()((set) => ({
     orgType: null,
     keyword: '',
   }),
-}));
+});
+
+const useClusterFiltersStore = create(storeCreator);
 
 export default useClusterFiltersStore;
