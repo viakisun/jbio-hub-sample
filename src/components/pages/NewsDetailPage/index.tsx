@@ -16,7 +16,7 @@ const mockNewsDetail = {
   descriptionHTML: `
     <p>CAR-T(Chimeric Antigen Receptor T-cell) 세포 치료가 혈액암을 넘어 고형암 정복에 나서고 있어 귀추가 주목된다. CAR-T는 환자의 T세포를 체외에서 조작하여 암세포를 보다 효과적으로 공격하도록 만드는 혁신적인 개인 맞춤형 치료법이다.</p>
     <br/>
-    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop" alt="CAR-T 세포 치료 이미지" style="max-width: 100%; border-radius: 8px; margin-bottom: 1rem;" />
+    <img src="https://picsum.photos/seed/newsdetail/800/450" alt="CAR-T 세포 치료 이미지" style="max-width: 100%; border-radius: 8px; margin-bottom: 1rem;" />
     <h2>글로벌 연구 동향</h2>
     <p>최근 미국 FDA는 두 번째 고형암 대상 CAR-T 치료제를 승인하며 시장의 기대를 한 몸에 받고 있다. 국내에서도 다수의 바이오 기업들이 CAR-T 기술 개발에 박차를 가하고 있으며, 일부는 임상 1상에 진입하는 등 가시적인 성과를 내고 있다.</p>
     <br/>
