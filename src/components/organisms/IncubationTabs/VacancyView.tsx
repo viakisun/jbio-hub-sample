@@ -6,8 +6,15 @@ import FilterBar from '../../molecules/FilterBar';
 import Pagination from '../../molecules/Pagination';
 import VacancyCard, { VacancyCardData } from '../../molecules/VacancyCard';
 
+// --- DATA MODELS ---
+interface CenterVacancyData {
+  centerId: string;
+  centerName: string;
+  vacancies: VacancyCardData[];
+}
+
 // --- MOCK DATA ---
-const mockVacancyData = [
+const mockVacancyData: CenterVacancyData[] = [
   {
     centerId: 'center-1',
     centerName: '전북바이오융합원 본원',
