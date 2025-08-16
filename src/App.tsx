@@ -10,6 +10,8 @@ import ClusterDashboardPage from './components/pages/ClusterDashboardPage';
 import ClusterHubPage from './components/pages/ClusterHubPage';
 import ClusterOrgsPage from './components/pages/ClusterOrgsPage';
 import ClusterPolicyPage from './components/pages/ClusterPolicyPage';
+import OrganizationDetailPage from './components/pages/OrganizationDetailPage';
+import PolicyDetailPage from './components/pages/PolicyDetailPage';
 import NewsDashboardPage from './components/pages/NewsDashboardPage';
 import NewsListPage from './components/pages/NewsListPage';
 import NewsDetailPage from './components/pages/NewsDetailPage';
@@ -29,7 +31,9 @@ function App() {
       <Route path="/cluster" element={<ClusterDashboardPage />} />
       <Route path="/cluster/hub" element={<ClusterHubPage />} />
       <Route path="/cluster/organizations" element={<ClusterOrgsPage />} />
+      <Route path="/cluster/organizations/:orgId" element={<OrganizationDetailPage />} />
       <Route path="/cluster/policy" element={<ClusterPolicyPage />} />
+      <Route path="/cluster/policy/:policyId" element={<PolicyDetailPage />} />
       <Route path="/announcements" element={<AnnouncementsPage />} />
       <Route path="/support/:category/:announcementId" element={<AnnouncementDetailPage />} />
 
