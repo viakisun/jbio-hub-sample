@@ -61,7 +61,29 @@ const organizationDetailHandler = http.get('/api/cluster/organizations/:id', ({ 
   }
 });
 
+const dashboardHandler = http.get('/api/cluster/dashboard', () => {
+  return HttpResponse.json({
+    kpis: [
+      { title: '총 기관 수', value: '128', change: '+5' },
+      { title: '진행중인 지원사업', value: '34', change: '-2' },
+      { title: '신규 등록 기술', value: '76', change: '+12' },
+      { title: '진행중인 기술이전', value: '21', change: '+3' },
+    ],
+    latestOrgs: [
+      { id: 'org-new-1', name: '바이오퀘스트', date: '2024-08-15', status: 'NEW' },
+      { id: 'org-update-1', name: '메디퓨처', date: '2024-08-14', status: 'UPDATED' },
+      { id: 'org-new-2', name: '셀트리온 전북지사', date: '2024-08-12', status: 'NEW' },
+    ],
+    latestPolicies: [
+        { id: 'pol-new-1', name: '2024년 바이오 R&D 지원사업', date: '2024-08-10', status: 'NEW' },
+        { id: 'pol-update-1', name: '혁신성장 지원 프로그램', date: '2024-08-09', status: 'UPDATED' },
+        { id: 'pol-new-2', name: '청년 바이오 창업 지원', date: '2024-08-05', status: 'NEW' },
+    ]
+  });
+});
+
 export const handlers = [
+  dashboardHandler,
   organizationsHandler,
   organizationDetailHandler,
 ];

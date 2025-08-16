@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 type ButtonVariant = 'primary' | 'secondary';
 
 interface StyledButtonProps {
-  variant: ButtonVariant;
+  $variant: ButtonVariant;
   $fullWidth?: boolean;
 }
 
@@ -43,13 +43,13 @@ const StyledButton = styled.button<StyledButtonProps>`
     cursor: not-allowed;
   }
 
-  ${({ variant }) => variants[variant]}
+  ${({ $variant }) => variants[$variant]}
 `;
 
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
-  variant?: ButtonVariant;
+  $variant?: ButtonVariant;
   $fullWidth?: boolean;
   style?: React.CSSProperties;
   className?: string;
@@ -59,7 +59,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
-  variant = 'primary',
+  $variant = 'primary',
   $fullWidth = false,
   style,
   className,
@@ -68,7 +68,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <StyledButton
       onClick={onClick}
-      variant={variant}
+      $variant={$variant}
       $fullWidth={$fullWidth}
       style={style}
       className={className}
