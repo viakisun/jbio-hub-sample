@@ -1,12 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/pages/HomePage';
-import ClusterPage from './components/pages/ClusterPage';
 import AnnouncementsPage from './components/pages/AnnouncementsPage';
 import IncubationPage from './components/pages/IncubationPage';
 import CompaniesPage from './components/pages/CompaniesPage';
 import TechPatentsPage from './components/pages/TechPatentsPage';
 import AnnouncementDetailPage from './components/pages/AnnouncementDetailPage';
+import ClusterDashboardPage from './components/pages/ClusterDashboardPage';
+import ClusterHubPage from './components/pages/ClusterHubPage';
+import ClusterOrgsPage from './components/pages/ClusterOrgsPage';
+import ClusterPolicyPage from './components/pages/ClusterPolicyPage';
 import NewsDashboardPage from './components/pages/NewsDashboardPage';
 import NewsListPage from './components/pages/NewsListPage';
 import NewsDetailPage from './components/pages/NewsDetailPage';
@@ -23,7 +26,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/cluster" element={<ClusterPage />} />
+      <Route path="/cluster" element={<ClusterDashboardPage />} />
+      <Route path="/cluster/hub" element={<ClusterHubPage />} />
+      <Route path="/cluster/organizations" element={<ClusterOrgsPage />} />
+      <Route path="/cluster/policy" element={<ClusterPolicyPage />} />
       <Route path="/announcements" element={<AnnouncementsPage />} />
       <Route path="/support/:category/:announcementId" element={<AnnouncementDetailPage />} />
 
