@@ -50,21 +50,38 @@ const PageButton = styled(Button)<{ isActive?: boolean }>`
 
 // --- COMPONENT ---
 
-const Pagination = () => {
-  // This is a placeholder implementation.
-  // In a real app, this would take props like `currentPage`, `totalPages`, `onPageChange`.
-  const currentPage = 3;
-  const totalPages = 10;
+interface PaginationProps {
+  currentPage?: number;
+  totalPages?: number;
+  onPageChange?: (page: number) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage = 1,
+  totalPages = 1,
+  onPageChange = () => {},
+}) => {
+  if (totalPages <= 1) {
+    return null;
+  }
 
   return (
     <PaginationWrapper>
-      <PageButton disabled={currentPage === 1}>이전</PageButton>
+      <PageButton onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+        이전
+      </PageButton>
       {[...Array(totalPages)].map((_, i) => (
-        <PageButton key={i} isActive={i + 1 === currentPage}>
+        <PageButton
+          key={i}
+          isActive={i + 1 === currentPage}
+          onClick={() => onPageChange(i + 1)}
+        >
           {i + 1}
         </PageButton>
       ))}
-      <PageButton disabled={currentPage === totalPages}>다음</PageButton>
+      <PageButton onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+        다음
+      </PageButton>
     </PaginationWrapper>
   );
 };
