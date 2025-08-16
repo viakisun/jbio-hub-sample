@@ -40,9 +40,7 @@ const useOrganizations = () => {
         if (orgType) params.append('type', orgType);
         if (keyword) params.append('query', keyword);
 
-        const baseUrl = process.env.REACT_APP_API_BASE_URL || '';
-        const apiPrefix = process.env.REACT_APP_API_PREFIX || '/api';
-        const response = await fetch(`${baseUrl}${apiPrefix}/cluster/organizations?${params.toString()}`);
+        const response = await fetch(`/api/cluster/organizations?${params.toString()}`);
         if (!response.ok) {
           throw new Error('네트워크 응답이 올바르지 않습니다.');
         }

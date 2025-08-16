@@ -4,7 +4,10 @@ from typing import List
 from ..models.content import News, Tech
 from ..db.mock_data import news_db, techs_db
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api",
+    tags=["Content"],
+)
 
 from typing import Optional
 

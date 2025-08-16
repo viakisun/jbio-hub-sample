@@ -29,9 +29,7 @@ const useDashboardData = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const baseUrl = process.env.REACT_APP_API_BASE_URL || '';
-        const apiPrefix = process.env.REACT_APP_API_PREFIX || '/api';
-        const response = await fetch(`${baseUrl}${apiPrefix}/cluster/dashboard`);
+        const response = await fetch('/api/cluster/dashboard');
         if (!response.ok) {
           throw new Error('네트워크 응답이 올바르지 않습니다.');
         }
