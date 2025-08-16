@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import MainLayout from '../../templates/MainLayout';
 import Tabs from '../../molecules/Tabs';
 import DashboardView from '../../organisms/IncubationTabs/DashboardView';
@@ -10,14 +10,27 @@ import ApplyView from '../../organisms/IncubationTabs/ApplyView';
 
 // --- STYLED COMPONENTS ---
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const PageWrapper = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  animation: ${fadeIn} 0.5s ease-out;
+  background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 300px);
 `;
 
 const PageHeader = styled.header`
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 `;
 
 const PageTitle = styled.h1`
