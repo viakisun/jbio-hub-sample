@@ -23,7 +23,7 @@ type BadgeVariant = keyof typeof variants;
 // --- STYLED COMPONENTS ---
 
 const BadgeWrapper = styled.span<{
-  variant: BadgeVariant;
+  $variant: BadgeVariant;
   backgroundColor?: string;
   color?: string;
 }>`
@@ -33,7 +33,7 @@ const BadgeWrapper = styled.span<{
   font-weight: 500;
   border-radius: 9999px;
   text-transform: uppercase;
-  ${({ variant }) => variants[variant]};
+  ${({ $variant }) => variants[$variant]};
   ${({ backgroundColor, color }) =>
     backgroundColor &&
     color &&
@@ -47,7 +47,7 @@ const BadgeWrapper = styled.span<{
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: BadgeVariant;
+  $variant?: BadgeVariant;
   className?: string;
   backgroundColor?: string;
   color?: string;
@@ -55,14 +55,14 @@ interface BadgeProps {
 
 const Badge: React.FC<BadgeProps> = ({
   children,
-  variant = 'default',
+  $variant = 'default',
   className,
   backgroundColor,
   color,
 }) => {
   return (
     <BadgeWrapper
-      variant={variant}
+      $variant={$variant}
       className={className}
       backgroundColor={backgroundColor}
       color={color}
