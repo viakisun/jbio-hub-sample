@@ -16,7 +16,7 @@ const organizations = [
   { id: 'org-10', name: '군산대학교', type: '대학', region: '군산', fields: ['푸드', '해양바이오'], services: ['산학협력', '인력 양성'], summary: '해양 바이오 특화 연구' },
 ];
 
-const organizationsHandler = http.get('/api/cluster/organizations', ({ request }) => {
+const organizationsHandler = http.get('/api/cluster/organizations', ({ request }: { request: Request }) => {
   const url = new URL(request.url);
   const region = url.searchParams.get('region');
   const field = url.searchParams.get('field');
@@ -49,7 +49,7 @@ const organizationsHandler = http.get('/api/cluster/organizations', ({ request }
 });
 
 
-const organizationDetailHandler = http.get('/api/cluster/organizations/:id', ({ params }) => {
+const organizationDetailHandler = http.get('/api/cluster/organizations/:id', ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const organization = organizations.find(org => org.id === id);
 

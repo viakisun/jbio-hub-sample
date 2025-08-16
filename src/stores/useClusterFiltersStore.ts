@@ -12,15 +12,15 @@ interface ClusterFiltersState {
   resetFilters: () => void;
 }
 
-const useClusterFiltersStore = create<ClusterFiltersState>((set) => ({
+const useClusterFiltersStore = create<ClusterFiltersState>()((set) => ({
   region: null,
   field: null,
   orgType: null,
   keyword: '',
-  setRegion: (region) => set({ region }),
-  setField: (field) => set({ field }),
-  setOrgType: (orgType) => set({ orgType }),
-  setKeyword: (keyword) => set({ keyword }),
+  setRegion: (region: string | null) => set({ region }),
+  setField: (field: string | null) => set({ field }),
+  setOrgType: (orgType: string | null) => set({ orgType }),
+  setKeyword: (keyword: string) => set({ keyword }),
   resetFilters: () => set({
     region: null,
     field: null,
