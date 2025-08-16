@@ -55,7 +55,7 @@ const ExplorationCard: React.FC<ExplorationCardProps> = ({ title, description, b
           <Title>{title}</Title>
           <Description>{description}</Description>
         </div>
-        <Button variant="primary" fullWidth>{buttonText}</Button>
+        <Button variant="primary" $fullWidth>{buttonText}</Button>
       </CardWrapper>
     </CardLink>
   );
