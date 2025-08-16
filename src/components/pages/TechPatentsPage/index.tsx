@@ -25,17 +25,6 @@ const getStatusBadge = (status: 'granted' | 'published' | 'filed') => {
     }
 };
 
-const patentRows = mockPatents.map(p => [
-    getStatusBadge(p.status as any),
-    p.title,
-    p.number,
-    p.filedAt,
-    p.grantedAt || '-',
-    p.applicant,
-    p.isInternational ? 'Y' : 'N'
-]);
-
-
 // --- STYLED COMPONENTS ---
 
 const PageWrapper = styled.div`
@@ -67,6 +56,16 @@ const ControlsWrapper = styled.div`
 
 const TechPatentsPage = () => {
   const navigate = useNavigate();
+
+  const patentRows = mockPatents.map(p => [
+      getStatusBadge(p.status as any),
+      p.title,
+      p.number,
+      p.filedAt,
+      p.grantedAt || '-',
+      p.applicant,
+      p.isInternational ? 'Y' : 'N'
+  ]);
 
   const handleRowClick = (rowIndex: number) => {
     const patentId = mockPatents[rowIndex].id;
