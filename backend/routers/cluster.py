@@ -4,7 +4,7 @@ from ..db.mock_data import stats_db, companies_db, announcements_db
 from datetime import datetime
 
 router = APIRouter(
-    prefix="/api/cluster",
+    prefix="/cluster",
     tags=["Cluster"],
 )
 

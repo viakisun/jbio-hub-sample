@@ -5,7 +5,7 @@ from ..models.infra import Infra
 from ..db.mock_data import infra_db
 
 router = APIRouter(
-    prefix="/api/infra",
+    prefix="/infra",
     tags=["Infrastructure"],
 )
 
