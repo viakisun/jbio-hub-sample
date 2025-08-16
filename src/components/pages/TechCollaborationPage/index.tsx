@@ -77,7 +77,7 @@ const TechCollaborationPage = () => {
           <SearchBar />
         </ControlsWrapper>
 
-        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
+        <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
           {mockCollaborations.map((collab) => (
             <CollaborationCard key={collab.id} collaboration={collab} />
           ))}

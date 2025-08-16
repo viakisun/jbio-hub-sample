@@ -189,7 +189,7 @@ const ContentGrid = () => {
   }, []);
 
   return (
-    <Grid cols={2} tabletCols={2} mobileCols={1} style={{ marginBottom: '4rem' }}>
+    <Grid $cols={2} $tabletCols={2} $mobileCols={1} style={{ marginBottom: '4rem' }}>
       {/* 최신 공고 */}
       <Section>
         <SectionHeader>

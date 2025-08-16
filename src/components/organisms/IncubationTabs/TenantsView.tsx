@@ -36,7 +36,7 @@ const TenantsView = () => {
         <FilterBar />
         <SearchBar />
       </ControlsWrapper>
-      <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
+      <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
         {mockTenants.map(tenant => (
           <TenantCard key={tenant.id} tenant={tenant} />
         ))}

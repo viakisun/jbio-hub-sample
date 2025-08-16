@@ -54,9 +54,9 @@ const TechDashboardPage = () => {
         <PageHeader>
           <PageTitle>기술 및 특허</PageTitle>
         </PageHeader>
-        <Grid cols={1} gap="3rem">
+        <Grid $cols={1} $gap="3rem">
           <KPIGroup kpis={kpiData} />
-          <Grid cols={4} tabletCols={2} mobileCols={1} gap="2rem">
+          <Grid $cols={4} $tabletCols={2} $mobileCols={1} $gap="2rem">
             <Section>
               <SectionHeader><SectionTitle>최신 연구성과</SectionTitle><ViewAllLink to="/tech/outcomes">전체보기</ViewAllLink></SectionHeader>
               <List>{mockOutcomes.map(item => <OutcomeCard key={item.id} outcome={item} />)}</List>

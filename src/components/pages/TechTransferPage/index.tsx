@@ -78,7 +78,7 @@ const TechTransferPage = () => {
           <SearchBar />
         </ControlsWrapper>
 
-        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
+        <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
           {mockTransfers.map((transfer) => (
             <TransferCard key={transfer.id} transfer={transfer} />
           ))}

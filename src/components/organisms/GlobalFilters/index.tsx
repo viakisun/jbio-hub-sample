@@ -53,7 +53,7 @@ const GlobalFilters = () => {
 
   return (
     <FiltersWrapper>
-      <Grid cols={4} tabletCols={2} mobileCols={1} gap="1.5rem">
+      <Grid $cols={4} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
         <FilterGroup>
           <FilterLabel htmlFor="region-filter">지역</FilterLabel>
           <Select id="region-filter" value={region || '전체'} onChange={(e) => setRegion(e.target.value === '전체' ? null : e.target.value)}>

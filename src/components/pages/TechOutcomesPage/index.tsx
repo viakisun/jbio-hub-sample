@@ -71,7 +71,7 @@ const TechOutcomesPage = () => {
           <SearchBar />
         </ControlsWrapper>
 
-        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
+        <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
           {mockOutcomes.map((outcome) => (
             <OutcomeCard key={outcome.id} outcome={outcome} />
           ))}
