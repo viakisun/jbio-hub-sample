@@ -8,6 +8,11 @@ import NewsEventsPage from './components/pages/NewsEventsPage';
 import CompaniesPage from './components/pages/CompaniesPage';
 import TechPatentsPage from './components/pages/TechPatentsPage';
 import AnnouncementDetailPage from './components/pages/AnnouncementDetailPage';
+import NewsDashboardPage from './components/pages/NewsDashboardPage';
+import NewsListPage from './components/pages/NewsListPage';
+import NewsDetailPage from './components/pages/NewsDetailPage';
+import EventsListPage from './components/pages/EventsListPage';
+import EventsDetailPage from './components/pages/EventsDetailPage';
 
 function App() {
   return (
@@ -17,7 +22,17 @@ function App() {
       <Route path="/announcements" element={<AnnouncementsPage />} />
       <Route path="/support/:category/:announcementId" element={<AnnouncementDetailPage />} />
       <Route path="/incubation" element={<IncubationPage />} />
+
+      {/* News & Events Routes */}
+      <Route path="/news" element={<NewsDashboardPage />} />
+      <Route path="/news/latest" element={<NewsListPage />} />
+      <Route path="/news/latest/:newsId" element={<NewsDetailPage />} />
+      <Route path="/news/events" element={<EventsListPage />} />
+      <Route path="/news/events/:eventId" element={<EventsDetailPage />} />
+
+      {/* TODO: This route seems redundant now, consider removing or redirecting */}
       <Route path="/news-events" element={<NewsEventsPage />} />
+
       <Route path="/companies" element={<CompaniesPage />} />
       <Route path="/tech-patents" element={<TechPatentsPage />} />
     </Routes>
