@@ -11,7 +11,7 @@ const mockNewsDetail = {
   publishedAt: '2024-08-14',
   sourceName: '바이오타임즈',
   sourceUrl: '#',
-  viewCount: 1,234,
+  viewCount: 1234,
   tags: ['CAR-T', '세포치료', '항암치료', '면역항암제'],
   descriptionHTML: `
     <p>CAR-T(Chimeric Antigen Receptor T-cell) 세포 치료가 혈액암을 넘어 고형암 정복에 나서고 있어 귀추가 주목된다. CAR-T는 환자의 T세포를 체외에서 조작하여 암세포를 보다 효과적으로 공격하도록 만드는 혁신적인 개인 맞춤형 치료법이다.</p>
