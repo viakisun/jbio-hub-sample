@@ -62,7 +62,7 @@ const ClusterOrgsPage = () => {
           view === 'card' ? (
             <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
               {data.organizations.map(org => (
-                <OrganizationCard key={org.id} organization={org} />
+                <OrganizationCard key={org.id} organization={org} onClick={() => { /* TODO: implement navigation to organization detail page */ }} />
               ))}
             </Grid>
           ) : (
