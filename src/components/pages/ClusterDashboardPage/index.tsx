@@ -5,6 +5,8 @@ import KPIGroup from '../../organisms/KPIGroup';
 import GlobalFilters from '../../organisms/GlobalFilters';
 import ExplorationCard from '../../molecules/ExplorationCard';
 import Grid from '../../atoms/Grid';
+import Badge from '../../atoms/Badge';
+import useDashboardData from '../../../hooks/useDashboardData';
 
 // --- MOCK DATA & CONFIG ---
 const explorationCards = [
@@ -27,19 +29,6 @@ const explorationCards = [
     to: '/cluster/policy',
   },
 ];
-
-const recentUpdates = {
-  orgs: [
-    { id: 'org-1', name: '메디퓨처', date: '2024-08-15', new: true },
-    { id: 'org-2', name: '그린사이언스', date: '2024-08-14', new: true },
-    { id: 'org-3', name: '한국화학연구원', date: '2024-08-12', new: false },
-  ],
-  policies: [
-    { id: 'pol-1', name: '2024년 바이오 스타트업 지원사업', date: '2024-08-10', new: true },
-    { id: 'pol-2', name: '연구장비 공동활용 지원', date: '2024-08-09', new: false },
-    { id: 'pol-3', name: '기술이전 R&BD 사업화 지원', date: '2024-08-05', new: false },
-  ]
-}
 
 // --- STYLED COMPONENTS ---
 
@@ -88,11 +77,40 @@ const UpdateListItem = styled.li`
     border-bottom: 1px solid #e5e7eb;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `;
+
+const UpdateInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const UpdateName = styled.span`
+  font-weight: 500;
+`;
+
+const UpdateDate = styled.span`
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+`;
+
 
 // --- COMPONENT ---
 
 const ClusterDashboardPage = () => {
+  const { data, loading, error } = useDashboardData();
+
+  if (loading) {
+    // TODO: Replace with a proper LoadingSkeleton component
+    return <MainLayout><div>로딩 중...</div></MainLayout>;
+  }
+
+  if (error) {
+    // TODO: Replace with a proper ErrorState component
+    return <MainLayout><div>에러 발생: {error.message}</div></MainLayout>;
+  }
+
   return (
     <MainLayout>
       <PageWrapper>
@@ -103,7 +121,7 @@ const ClusterDashboardPage = () => {
           </Subtitle>
         </Header>
 
-        <KPIGroup />
+        {data && <KPIGroup kpis={data.kpis.map(kpi => ({ label: kpi.title, value: kpi.value }))} />}
 
         <Section>
           <Grid cols={3} tabletCols={1} mobileCols={1} gap="2rem">
@@ -117,23 +135,41 @@ const ClusterDashboardPage = () => {
             <GlobalFilters />
         </Section>
 
-        <Section>
-            <SectionTitle>최근 업데이트</SectionTitle>
-            <Grid cols={2} tabletCols={1} mobileCols={1} gap="3rem">
-                <div>
-                    <h3>신규 기관</h3>
-                    <UpdateList>
-                        {recentUpdates.orgs.map(org => <UpdateListItem key={org.id}><span>{org.name}</span><span>{org.date}</span></UpdateListItem>)}
-                    </UpdateList>
-                </div>
-                <div>
-                    <h3>신규 정책</h3>
-                    <UpdateList>
-                        {recentUpdates.policies.map(pol => <UpdateListItem key={pol.id}><span>{pol.name}</span><span>{pol.date}</span></UpdateListItem>)}
-                    </UpdateList>
-                </div>
-            </Grid>
-        </Section>
+        {data && (
+          <Section>
+              <SectionTitle>최근 업데이트</SectionTitle>
+              <Grid cols={2} tabletCols={1} mobileCols={1} gap="3rem">
+                  <div>
+                      <h3>신규 기관</h3>
+                      <UpdateList>
+                          {data.latestOrgs.map(org => (
+                            <UpdateListItem key={org.id}>
+                              <UpdateInfo>
+                                <UpdateName>{org.name}</UpdateName>
+                                <UpdateDate>{org.date}</UpdateDate>
+                              </UpdateInfo>
+                              <Badge variant={org.status === 'NEW' ? 'new' : 'updated'}>{org.status}</Badge>
+                            </UpdateListItem>
+                          ))}
+                      </UpdateList>
+                  </div>
+                  <div>
+                      <h3>신규 정책</h3>
+                      <UpdateList>
+                          {data.latestPolicies.map(pol => (
+                            <UpdateListItem key={pol.id}>
+                              <UpdateInfo>
+                                <UpdateName>{pol.name}</UpdateName>
+                                <UpdateDate>{pol.date}</UpdateDate>
+                              </UpdateInfo>
+                              <Badge variant={pol.status === 'NEW' ? 'new' : 'updated'}>{pol.status}</Badge>
+                            </UpdateListItem>
+                          ))}
+                      </UpdateList>
+                  </div>
+              </Grid>
+          </Section>
+        )}
       </PageWrapper>
     </MainLayout>
   );
