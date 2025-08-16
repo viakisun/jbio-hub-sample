@@ -198,7 +198,7 @@ const Header = () => {
     { text: 'JB BIO 클러스터', path: '/cluster' },
     { text: 'JB 지원사업공고', path: '/announcements' },
     { text: 'JB 창업보육센터', path: '/incubation' },
-    { text: '바이오 뉴스/행사', path: '/news-events' },
+    { text: '바이오 뉴스/행사', path: '/news' },
     { text: 'JB 기업정보', path: '/companies' },
     { text: 'JB 기술/특허', path: '/tech-patents' },
   ];
