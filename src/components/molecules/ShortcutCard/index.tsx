@@ -64,7 +64,7 @@ const ShortcutCard: React.FC<ShortcutCardProps> = ({ icon, title, description, t
     <CardLink to={to}>
       <CardWrapper>
         <IconWrapper>
-          <Icon name={icon as any} size={24} />
+          <Icon name={icon} size={24} />
         </IconWrapper>
         <Title>{title}</Title>
         <Description>{description}</Description>
