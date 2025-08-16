@@ -22,7 +22,7 @@ const mockEventDetail = {
   fields: ["산업일반", "의료"],
   registerUrl: '#',
   fee: '유료(사전등록 10만원)',
-  posterUrl: 'https://via.placeholder.com/800x1131.png?text=GBC+2024+Poster',
+  posterUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop',
   descriptionHTML: `
     <h2>행사 소개</h2>
     <p>글로벌 바이오 컨퍼런스(GBC)는 바이오의약품 분야의 규제기관, 제약업계, 학계 등 전문가들이 모여 최신 개발 동향과 규제 조화 등을 논의하는 국제 행사입니다.</p>
@@ -49,9 +49,11 @@ const PageWrapper = styled.div`
 `;
 
 const ArticleHeader = styled.header`
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: #f9fafb;
+  text-align: center;
 `;
 
 const Title = styled.h1`
