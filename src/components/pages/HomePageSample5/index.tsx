@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
 const HomePageSample5 = () => {
-  // For JS-based animations if CSS scroll-timeline is not supported
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -14,7 +13,7 @@ const HomePageSample5 = () => {
         });
       },
       {
-        threshold: 0.2, // Trigger when 20% of the element is visible
+        threshold: 0.2,
       }
     );
 
@@ -118,6 +117,9 @@ const HomePageSample5 = () => {
           grid-template-columns: 1fr;
           gap: 2rem;
           align-items: center;
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
         .s5-grid-text h2 {
@@ -136,9 +138,15 @@ const HomePageSample5 = () => {
         .s5-grid-visual {
           background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(255, 0, 193, 0.1));
           border-radius: 24px;
-          padding: 2rem;
           border: 1px solid rgba(255, 255, 255, 0.2);
-          min-height: 300px;
+          min-height: 400px;
+          overflow: hidden;
+        }
+
+        .s5-grid-visual img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
         .s5-showcase-section {
@@ -155,6 +163,9 @@ const HomePageSample5 = () => {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: 2rem;
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
         .s5-card {
@@ -186,10 +197,11 @@ const HomePageSample5 = () => {
 
         @media (min-width: 768px) {
           .s5-hero h1 {
-            font-size: 6rem;
+            font-size: 5rem;
           }
           .s5-grid {
             grid-template-columns: 1fr 1fr;
+            gap: 4rem;
           }
           .s5-grid.s5-reverse {
             grid-template-columns: 1fr 1fr;
@@ -202,10 +214,10 @@ const HomePageSample5 = () => {
       <div className="s5-container">
         <section className="s5-section s5-hero">
           <div className="s5-anim s5-visible">
-            <h1>The Future, Redesigned.</h1>
+            <h1>JB SQUARE: The Future of Bio-Innovation.</h1>
             <p>
-              This is an immersive, scroll-driven journey into the future of web design.
-              Built for 2025, optimized for mobile, and powered by modern concepts.
+              We are an innovation hub dedicated to creating the future of Jeonbuk's bio-industry.
+              Discover all information and opportunities in one place.
             </p>
           </div>
           <div className="s5-scroll-down">Scroll Down</div>
@@ -214,46 +226,48 @@ const HomePageSample5 = () => {
         <section className="s5-section">
           <div className="s5-grid">
             <div className="s5-grid-text s5-anim" ref={addToRefs}>
-              <h2>Dynamic Storytelling</h2>
+              <h2>Data-Driven Ecosystem</h2>
               <p>
-                Forget static pages. We create narratives that unfold as you explore.
-                Every scroll, every interaction, reveals a new piece of the story,
-                keeping users engaged and captivated.
+                We provide a data-driven ecosystem that empowers researchers, startups, and companies to connect, collaborate, and grow.
+                Leverage our insights to make your mark.
               </p>
             </div>
-            <div className="s5-grid-visual s5-anim" ref={addToRefs} style={{transitionDelay: '0.2s'}}></div>
+            <div className="s5-grid-visual s5-anim" ref={addToRefs} style={{transitionDelay: '0.2s'}}>
+              <img src="https://picsum.photos/seed/jbsquare1/800/600?grayscale&blur=2" alt="Abstract technology" />
+            </div>
           </div>
         </section>
 
         <section className="s5-section">
           <div className="s5-grid s5-reverse">
              <div className="s5-grid-text s5-anim" ref={addToRefs}>
-              <h2>Mobile-First Fluidity</h2>
+              <h2>Seamless Collaboration</h2>
               <p>
-                In 2025, mobile isn't just an option; it's the foundation.
-                Our designs are born on mobile, ensuring a flawless, intuitive experience
-                on any device, any screen size.
+                From shared labs to joint R&D projects, our platform facilitates seamless collaboration
+                between industry pioneers and emerging talent.
               </p>
             </div>
-            <div className="s5-grid-visual s5-anim" ref={addToRefs} style={{transitionDelay: '0.2s'}}></div>
+            <div className="s5-grid-visual s5-anim" ref={addToRefs} style={{transitionDelay: '0.2s'}}>
+              <img src="https://picsum.photos/seed/jbsquare2/800/600?grayscale&blur=2" alt="Collaborative workspace" />
+            </div>
           </div>
         </section>
 
         <section className="s5-section s5-showcase-section">
           <div style={{width: '100%'}}>
-            <h2 className="s5-anim" ref={addToRefs}>Core Principles</h2>
+            <h2 className="s5-anim" ref={addToRefs}>Our Core Services</h2>
             <div className="s5-card-grid">
               <div className="s5-card s5-anim" ref={addToRefs} style={{transitionDelay: '0.1s'}}>
-                <h3>Bold Typography</h3>
-                <p>Content that makes a statement. Fonts are not just for reading; they are a key design element.</p>
+                <h3>R&D Support</h3>
+                <p>Access to state-of-the-art facilities and expert consultation to accelerate your research.</p>
               </div>
               <div className="s5-card s5-anim" ref={addToRefs} style={{transitionDelay: '0.2s'}}>
-                <h3>Asymmetric Layouts</h3>
-                <p>Breaking the grid to create dynamic, visually interesting compositions that guide the user's eye.</p>
+                <h3>Tech Networking</h3>
+                <p>Connect with a vibrant community of innovators, investors, and industry leaders.</p>
               </div>
               <div className="s5-card s5-anim" ref={addToRefs} style={{transitionDelay: '0.3s'}}>
-                <h3>Microinteractions</h3>
-                <p>Small animations and feedback loops that make the user experience delightful and intuitive.</p>
+                <h3>Startup Incubation</h3>
+                <p>Comprehensive support for bio-startups, from funding opportunities to mentorship.</p>
               </div>
             </div>
           </div>
