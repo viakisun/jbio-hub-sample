@@ -52,10 +52,15 @@ const HeroWrapper = styled.section`
   transition: background 0.8s ease;
 
   @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    height: 400px;
+    min-height: 520px;
   }
   @media (min-width: 769px) {
-    height: 350px;
+    min-height: 480px;
+  }
+
+  margin-bottom: ${DESIGN_SYSTEM.spacing['3xl']};
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    margin-bottom: ${DESIGN_SYSTEM.spacing.xl};
   }
 `;
 
@@ -91,9 +96,13 @@ const ContentWrapper = styled.div`
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 0 ${DESIGN_SYSTEM.spacing.lg};
+  padding: 0 ${DESIGN_SYSTEM.spacing.lg} ${DESIGN_SYSTEM.spacing.xl};
   max-width: 1200px;
   width: 100%;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding-bottom: ${DESIGN_SYSTEM.spacing.lg};
+  }
 `;
 
 const Title = styled.h1`
