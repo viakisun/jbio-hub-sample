@@ -4,9 +4,7 @@ from typing import List
 from ..models.service import Service
 from ..db.mock_data import services_db
 
-router = APIRouter(
-    prefix="/api"
-)
+router = APIRouter()
 
 @router.get("/services", response_model=List[Service], tags=["Services"])
 def get_services_list():

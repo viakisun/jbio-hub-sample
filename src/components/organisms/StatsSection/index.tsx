@@ -27,7 +27,7 @@ const StatsSection = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/stats`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/stats`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

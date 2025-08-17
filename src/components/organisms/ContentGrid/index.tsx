@@ -148,8 +148,8 @@ const ContentGrid = () => {
     const fetchData = async () => {
       try {
         const [announcementsResponse, newsResponse] = await Promise.all([
-          fetch(`${process.env.REACT_APP_API_URL}/announcements?limit=3`),
-          fetch(`${process.env.REACT_APP_API_URL}/news?limit=3`)
+          fetch(`${process.env.REACT_APP_API_URL}/api/announcements?limit=3`),
+          fetch(`${process.env.REACT_APP_API_URL}/api/news?limit=3`)
         ]);
 
         if (!announcementsResponse.ok || !newsResponse.ok) {

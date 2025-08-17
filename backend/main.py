@@ -20,16 +20,16 @@ app.add_middleware(
 # Routers for each domain will be included here to modularize the application.
 from .routers import announcement, company, infra, content, consultation, user, admin, service, stat, cluster
 
-app.include_router(announcement.router)
-app.include_router(company.router)
-app.include_router(infra.router)
-app.include_router(content.router)
-app.include_router(consultation.router)
-app.include_router(user.router)
-app.include_router(admin.router)
-app.include_router(service.router)
-app.include_router(stat.router)
-app.include_router(cluster.router)
+app.include_router(announcement.router, prefix="/api")
+app.include_router(company.router, prefix="/api")
+app.include_router(infra.router, prefix="/api")
+app.include_router(content.router, prefix="/api")
+app.include_router(consultation.router, prefix="/api")
+app.include_router(user.router, prefix="/api")
+app.include_router(admin.router, prefix="/api")
+app.include_router(service.router, prefix="/api")
+app.include_router(stat.router, prefix="/api")
+app.include_router(cluster.router, prefix="/api")
 # ...
 
 

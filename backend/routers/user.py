@@ -6,7 +6,6 @@ from ..models.user import User, Token
 from ..db.mock_data import users_db
 
 router = APIRouter(
-    prefix="/api",
     tags=["Users"]
 )
 
