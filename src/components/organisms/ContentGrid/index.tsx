@@ -4,7 +4,7 @@ import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import NewsCard from '../../molecules/NewsCard';
 import EventCard from '../../molecules/EventCard';
 import Tabs from '../../molecules/Tabs';
-import { useNewsAndEvents } from '../../../hooks/useNewsAndEvents';
+// import { useNewsAndEvents } from '../../../hooks/useNewsAndEvents';
 import { ContentItem, News, Event } from '../../../types/api';
 import Button from '../../atoms/Button';
 
@@ -82,7 +82,22 @@ const ContentGrid: React.FC<ContentGridProps> = ({
   showLoadMore = true,
 }) => {
   const [activeTab, setActiveTab] = useState('all');
-  const { data, isLoading, isError } = useNewsAndEvents({ limit });
+  // const { data, isLoading, isError } = useNewsAndEvents({ limit });
+
+  const mockData: ContentItem[] = [
+    { id: 1, title: '전북 바이오 특화단지 유치 성공', summary: '정부가 전북을 바이오 특화단지로 최종 선정했습니다.', content: '상세 내용...', category: 'news', created_at: '2025-08-12T11:00:00Z', sourceName: '전북도청', thumbnailUrl: 'https://picsum.photos/seed/news1/400/225' },
+    { id: 1, title: '제12회 국제 바이오산업 컨퍼런스', summary: '글로벌 바이오 산업의 최신 동향과 미래 전망을 논의합니다.', thumbnailUrl: 'https://picsum.photos/seed/event1/400/225', eventStartAt: '2025-09-05T09:00:00Z', eventEndAt: '2025-09-06T18:00:00Z', locationType: 'offline', locationName: '전주 컨벤션센터', host: '전북바이오융합산업진흥원', registerDeadline: '2025-08-31T23:59:59Z', status: '예정', category: 'event' },
+    { id: 2, title: '시스템 점검 안내 (09/01 02:00 ~ 04:00)', summary: '더 나은 서비스 제공을 위해 시스템 정기 점검을 실시합니다.', content: '상세 내용...', category: 'notice', created_at: '2025-08-11T17:00:00Z', sourceName: '관리팀', thumbnailUrl: 'https://picsum.photos/seed/notice1/400/225' },
+    { id: 2, title: 'AI 기반 신약 개발 온라인 세미나', summary: '인공지능을 활용한 신약 개발의 최신 사례와 기술을 소개합니다.', thumbnailUrl: 'https://picsum.photos/seed/event2/400/225', eventStartAt: '2025-08-25T14:00:00Z', eventEndAt: '2025-08-25T16:00:00Z', locationType: 'online', host: '한국생명공학연구원', registerDeadline: '2025-08-24T18:00:00Z', status: '진행중', category: 'event' },
+    { id: 3, title: '익산 국가식품클러스터, K-푸드 전진기지로 발돋움', summary: '익산 국가식품클러스터가 국내외 식품 시장에서 주목받고 있습니다.', content: '상세 내용...', category: 'news', created_at: '2025-08-15T09:00:00Z', sourceName: '농림축산식품부', thumbnailUrl: 'https://picsum.photos/seed/news2/400/225' },
+    { id: 3, title: '농생명 기술 투자유치 설명회(IR)', summary: '유망 농생명 기술을 보유한 스타트업 및 중소기업을 위한 투자유치 설명회입니다.', thumbnailUrl: 'https://picsum.photos/seed/event3/400/225', eventStartAt: '2025-08-01T10:00:00Z', eventEndAt: '2025-08-01T17:00:00Z', locationType: 'hybrid', locationName: '전북창조경제혁신센터', host: '농업기술실용화재단', registerDeadline: '2025-07-25T18:00:00Z', status: '마감', category: 'event' },
+    { id: 4, title: '정읍 방사선융합기술원, 신약 개발 새 지평 열어', summary: '방사선 기술을 이용한 혁신적인 신약 개발에 성공했습니다.', content: '상세 내용...', category: 'news', created_at: '2025-08-14T14:00:00Z', sourceName: '한국원자력연구원', thumbnailUrl: 'https://picsum.photos/seed/news3/400/225' },
+    { id: 4, title: '제약바이오 채용박람회 2024', summary: '국내 최대 규모의 제약바이오 분야 채용 박람회.', thumbnailUrl: 'https://picsum.photos/seed/event4/400/225', eventStartAt: '2025-09-20T10:00:00Z', eventEndAt: '2025-09-21T17:00:00Z', locationType: 'offline', locationName: '코엑스, 서울', host: '한국제약바이오협회', registerDeadline: '2025-09-15T18:00:00Z', status: '예정', category: 'event' },
+  ];
+
+  const data = limit ? mockData.slice(0, limit) : mockData;
+  const isLoading = false;
+  const isError = false;
 
   const TABS = [
     { id: 'all', label: '전체' },
