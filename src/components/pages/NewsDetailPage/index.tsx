@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import MainLayout from '../../templates/MainLayout';
 import Icon from '../../atoms/Icon';
 
@@ -38,6 +39,10 @@ const PageWrapper = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const ArticleHeader = styled.header`
@@ -46,6 +51,10 @@ const ArticleHeader = styled.header`
   border-bottom: 1px solid #e5e7eb;
   background-color: #f9fafb;
   border-radius: 16px;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding: 1.5rem;
+  }
 `;
 
 const Title = styled.h1`
@@ -53,12 +62,16 @@ const Title = styled.h1`
   font-weight: 700;
   line-height: 1.3;
   margin-bottom: 1.5rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 1.75rem;
+  }
 `;
 
 const Metadata = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem 2rem;
+  gap: 0.5rem 1.5rem;
   font-size: 0.875rem;
   color: #6b7280;
 `;
@@ -68,10 +81,27 @@ const ArticleBody = styled.div`
   font-size: 1rem;
   color: #374151;
 
-  h2 { font-size: 1.75rem; font-weight: 600; margin: 2rem 0 1rem; }
-  h3 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 1rem; }
-  p { margin-bottom: 1rem; }
-  a { color: #4f46e5; }
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+  a {
+    color: #4f46e5;
+  }
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.125rem; }
+  }
 `;
 
 const TagContainer = styled.div`
