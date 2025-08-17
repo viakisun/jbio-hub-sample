@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
 from typing import List
 
-from ..models.content import News, Tech
-from ..db.mock_data import news_db, techs_db
+from ..models.content import News, Event, Tech
+from ..db.mock_data import news_db, events_db, techs_db
 
 router = APIRouter(
     tags=["Content"]
@@ -25,6 +25,25 @@ def get_news_item(news_id: int):
     UI-04-02: Get a single news or notice item by ID.
     """
     item = next((n for n in news_db if n.id == news_id), None)
+    if item is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+    return item
+
+@router.get("/events", response_model=List[Event], tags=["Content"])
+def get_events_list(limit: Optional[int] = None):
+    """
+    Get a list of all events.
+    """
+    if limit:
+        return events_db[:limit]
+    return events_db
+
+@router.get("/events/{event_id}", response_model=Event, tags=["Content"])
+def get_event_item(event_id: int):
+    """
+    Get a single event item by ID.
+    """
+    item = next((e for e in events_db if e.id == event_id), None)
     if item is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
     return item

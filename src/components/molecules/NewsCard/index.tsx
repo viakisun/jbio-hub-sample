@@ -102,32 +102,27 @@ const Footer = styled.div`
 
 // --- COMPONENT ---
 
-export interface NewsCardData {
-  id: string;
-  title: string;
-  summary: string;
-  thumbnailUrl?: string;
-  sourceName: string;
-  publishedAt: string;
-  category: {
-    name: string;
-    color: string;
-    bgColor: string;
-  };
-}
+import { News } from '../../../../types/api';
+
+const CATEGORY_STYLES = {
+  news: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] },
+  notice: { name: '공지', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.gray[600] },
+};
 
 interface NewsCardProps {
-  news: NewsCardData;
+  news: News;
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
+  const categoryStyle = CATEGORY_STYLES[news.category] || CATEGORY_STYLES.news;
+
   return (
     <CardLink to={`/news/latest/${news.id}`}>
       <CardWrapper>
         <ThumbnailWrapper>
           {news.thumbnailUrl && <Thumbnail src={news.thumbnailUrl} alt={news.title} loading="lazy" />}
-          <CategoryBadge color={news.category.color} bgColor={news.category.bgColor}>
-            {news.category.name}
+          <CategoryBadge color={categoryStyle.color} bgColor={categoryStyle.bgColor}>
+            {categoryStyle.name}
           </CategoryBadge>
         </ThumbnailWrapper>
         <ContentWrapper>
@@ -135,7 +130,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
           <Summary>{news.summary}</Summary>
           <Footer>
             <span>{news.sourceName}</span>
-            <span>{new Date(news.publishedAt).toLocaleDateString()}</span>
+            <span>{new Date(news.created_at).toLocaleDateString()}</span>
           </Footer>
         </ContentWrapper>
       </CardWrapper>
