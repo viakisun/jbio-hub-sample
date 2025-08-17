@@ -16,6 +16,7 @@ const mockNewsList: NewsCardData[] = [
     thumbnailUrl: 'https://picsum.photos/seed/news1/400/225',
     sourceName: '바이오타임즈',
     publishedAt: '2024-08-14',
+    category: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] },
   },
   {
     id: 'news-2',
@@ -24,6 +25,7 @@ const mockNewsList: NewsCardData[] = [
     thumbnailUrl: 'https://picsum.photos/seed/news2/400/225',
     sourceName: '메디컬 투데이',
     publishedAt: '2024-08-13',
+    category: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] },
   },
   {
     id: 'news-3',
@@ -32,10 +34,11 @@ const mockNewsList: NewsCardData[] = [
     thumbnailUrl: 'https://picsum.photos/seed/news3/400/225',
     sourceName: '사이언스 포커스',
     publishedAt: '2024-08-12',
+    category: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] },
   },
-  { id: 'news-4', title: '마이크로바이옴, 제2의 게놈 프로젝트로 부상', summary: '장내 미생물 생태계, 마이크로바이옴이 난치병 치료의 새로운 해법으로 떠오르고 있다. 관련 시장 동향 분석.', thumbnailUrl: 'https://picsum.photos/seed/news4/400/225', sourceName: '헬스조선', publishedAt: '2024-08-11' },
-  { id: 'news-5', title: '디지털 치료제(DTx), 미래 의료의 핵심으로', summary: '소프트웨어를 이용해 질병을 치료하는 디지털 치료제(DTx) 시장이 본격 개화하고 있다. 국내 규제 현황과 전망은?', thumbnailUrl: 'https://picsum.photos/seed/news5/400/225', sourceName: '약업신문', publishedAt: '2024-08-10' },
-  { id: 'news-6', title: '뇌-컴퓨터 인터페이스(BCI), 상용화 어디까지 왔나', summary: '일론 머스크의 뉴럴링크를 비롯한 BCI 기술의 발전 현황과 윤리적 과제를 짚어본다.', thumbnailUrl: 'https://picsum.photos/seed/news6/400/225', sourceName: '테크월드', publishedAt: '2024-08-09' },
+  { id: 'news-4', title: '마이크로바이옴, 제2의 게놈 프로젝트로 부상', summary: '장내 미생물 생태계, 마이크로바이옴이 난치병 치료의 새로운 해법으로 떠오르고 있다. 관련 시장 동향 분석.', thumbnailUrl: 'https://picsum.photos/seed/news4/400/225', sourceName: '헬스조선', publishedAt: '2024-08-11', category: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] } },
+  { id: 'news-5', title: '디지털 치료제(DTx), 미래 의료의 핵심으로', summary: '소프트웨어를 이용해 질병을 치료하는 디지털 치료제(DTx) 시장이 본격 개화하고 있다. 국내 규제 현황과 전망은?', thumbnailUrl: 'https://picsum.photos/seed/news5/400/225', sourceName: '약업신문', publishedAt: '2024-08-10', category: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] } },
+  { id: 'news-6', title: '뇌-컴퓨터 인터페이스(BCI), 상용화 어디까지 왔나', summary: '일론 머스크의 뉴럴링크를 비롯한 BCI 기술의 발전 현황과 윤리적 과제를 짚어본다.', thumbnailUrl: 'https://picsum.photos/seed/news6/400/225', sourceName: '테크월드', publishedAt: '2024-08-09', category: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] } },
 ];
 
 
