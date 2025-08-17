@@ -118,7 +118,7 @@ const ContentGrid = () => {
             {filteredData.map(renderCard)}
           </Grid>
           <LoadMoreContainer>
-            <Button variant="secondary" size="lg">더보기</Button>
+            <Button $variant="secondary">더보기</Button>
           </LoadMoreContainer>
         </>
       )}
