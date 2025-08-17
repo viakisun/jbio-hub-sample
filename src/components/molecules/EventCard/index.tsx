@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
+import { Event } from '../../../../types/api';
 
-// --- STYLED COMPONENTS ---
+// --- STYLED COMPONENTS (Shared with NewsCard) ---
 
 const CardLink = styled(Link)`
   text-decoration: none;
@@ -13,49 +15,60 @@ const CardLink = styled(Link)`
 
 const CardWrapper = styled.div`
   background-color: white;
-  border-radius: 16px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+  border-radius: 12px;
+  border: 1px solid ${DESIGN_SYSTEM.colors.gray[200]};
+  box-shadow: ${DESIGN_SYSTEM.shadows.sm};
+  transition: all 0.3s ease;
+  min-width: 280px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: ${DESIGN_SYSTEM.shadows.lg};
   }
+`;
+
+const ThumbnailWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: ${DESIGN_SYSTEM.colors.gray[100]};
 `;
 
 const Thumbnail = styled.img`
   width: 100%;
-  height: 180px;
+  height: 100%;
   object-fit: cover;
 `;
 
+const CategoryBadge = styled.span<{ color: string, bgColor: string }>`
+  position: absolute;
+  top: ${DESIGN_SYSTEM.spacing.md};
+  left: ${DESIGN_SYSTEM.spacing.md};
+  padding: ${DESIGN_SYSTEM.spacing.xs} ${DESIGN_SYSTEM.spacing.sm};
+  background-color: ${props => props.bgColor};
+  color: ${props => props.color};
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+`;
+
 const ContentWrapper = styled.div`
-  padding: 1rem;
+  padding: ${DESIGN_SYSTEM.spacing.md};
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 `;
 
 const Title = styled.h3`
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const Summary = styled.p`
-  font-size: 0.875rem;
-  color: #4b5563;
-  line-height: 1.5;
-  margin: 0 0 1rem 0;
-  flex-grow: 1;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 ${DESIGN_SYSTEM.spacing.sm} 0;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -63,76 +76,71 @@ const Summary = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-const InfoRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-bottom: 0.5rem;
+const Summary = styled.p`
+  font-size: 14px;
+  color: ${DESIGN_SYSTEM.colors.gray[600]};
+  line-height: 1.6;
+  margin: 0 0 ${DESIGN_SYSTEM.spacing.md} 0;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.75rem;
-  color: #6b7280;
-  padding-top: 1rem;
-  border-top: 1px solid #f3f4f6;
+  font-size: 12px;
+  color: ${DESIGN_SYSTEM.colors.gray[500]};
+  padding-top: ${DESIGN_SYSTEM.spacing.sm};
+  border-top: 1px solid ${DESIGN_SYSTEM.colors.gray[100]};
 `;
 
-const Badge = styled.span<{ type: 'online' | 'offline' | 'hybrid' }>`
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-weight: 500;
-  background-color: ${props => props.type === 'online' ? '#dbeafe' : '#fee2e2'};
-  color: ${props => props.type === 'online' ? '#1e40af' : '#991b1b'};
+const StatusBadge = styled.span<{ status: string }>`
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
+  background-color: ${({ status, theme }) => {
+    if (status === '예정') return DESIGN_SYSTEM.colors.primary[100];
+    if (status === '진행중') return DESIGN_SYSTEM.colors.success[100];
+    return DESIGN_SYSTEM.colors.gray[200];
+  }};
+  color: ${({ status, theme }) => {
+    if (status === '예정') return DESIGN_SYSTEM.colors.primary[700];
+    if (status === '진행중') return DESIGN_SYSTEM.colors.success[700];
+    return DESIGN_SYSTEM.colors.gray[600];
+  }};
 `;
+
 
 // --- COMPONENT ---
 
-export interface EventCardData {
-  id: string;
-  title: string;
-  summary?: string;
-  thumbnailUrl?: string;
-  eventStartAt: string;
-  eventEndAt: string;
-  locationType: 'online' | 'offline' | 'hybrid';
-  locationName?: string;
-  host: string;
-  registerDeadline?: string;
-}
-
 interface EventCardProps {
-  event: EventCardData;
+  event: Event;
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const formatDate = (dateStr: string) => new Date(dateStr).toLocaleDateString();
 
-  const dDay = event.registerDeadline ? Math.ceil((new Date(event.registerDeadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) : null;
-
   return (
     <CardLink to={`/events/${event.id}`}>
       <CardWrapper>
-        {event.thumbnailUrl && <Thumbnail src={event.thumbnailUrl} alt={event.title} />}
+        <ThumbnailWrapper>
+          {event.thumbnailUrl && <Thumbnail src={event.thumbnailUrl} alt={event.title} loading="lazy" />}
+          <CategoryBadge color="#FFFFFF" bgColor={DESIGN_SYSTEM.colors.success[600]}>
+            행사
+          </CategoryBadge>
+        </ThumbnailWrapper>
         <ContentWrapper>
           <Title>{event.title}</Title>
-          <InfoRow>
-            <span>🗓️</span>
-            <span>{formatDate(event.eventStartAt)} ~ {formatDate(event.eventEndAt)}</span>
-          </InfoRow>
-          <InfoRow>
-            <span>📍</span>
-            <span>{event.locationType === 'online' ? '온라인' : event.locationName}</span>
-          </InfoRow>
           {event.summary && <Summary>{event.summary}</Summary>}
           <Footer>
             <span>{event.host}</span>
-            {dDay !== null && dDay >= 0 && <Badge type={event.locationType}>D-{dDay}</Badge>}
-            {dDay !== null && dDay < 0 && <Badge type='offline'>마감</Badge>}
+            <StatusBadge status={event.status}>{event.status}</StatusBadge>
           </Footer>
         </ContentWrapper>
       </CardWrapper>
