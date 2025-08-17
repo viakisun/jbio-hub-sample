@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
@@ -25,6 +25,11 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 70px;
+`;
+
+const LogoLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
 
 const LogoContainer = styled.div`
@@ -238,15 +243,17 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <LogoContainer>
-          <Icon name="logo" size={40} />
-          {!isMobile && (
-            <div>
-              <LogoTitle>JB SQUARE</LogoTitle>
-              <LogoSubtitle>Jeonbuk's Business QUARTER</LogoSubtitle>
-            </div>
-          )}
-        </LogoContainer>
+        <LogoLink to="/">
+          <LogoContainer>
+            <Icon name="logo" size={40} />
+            {!isMobile && (
+              <div>
+                <LogoTitle>JB SQUARE</LogoTitle>
+                <LogoSubtitle>Jeonbuk's Business QUARTER</LogoSubtitle>
+              </div>
+            )}
+          </LogoContainer>
+        </LogoLink>
 
         {!isMobile && (
           <SearchContainer>
@@ -286,7 +293,7 @@ const Header = () => {
               </NotificationButton>
               <UserMenu>
                 <Icon name="user" size={18} color={DESIGN_SYSTEM.colors.gray[600]} />
-                <UserName>김바이오</UserName>
+                <UserName>TP</UserName>
               </UserMenu>
             </>
           )}
