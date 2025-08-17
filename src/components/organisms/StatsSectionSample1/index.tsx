@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StatCard from '../../molecules/StatCard';
 import Grid from '../../atoms/Grid';
+import { ApiStat } from '../../../types/api';
 
 interface Stat {
   label: string;
@@ -20,9 +21,9 @@ const StatsSectionSample1 = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const data = await response.json();
+        const data: ApiStat[] = await response.json();
         // For the minimalist design, we can simplify the data or presentation
-        const simplifiedData = data.map(stat => ({
+        const simplifiedData = data.map((stat: ApiStat) => ({
           ...stat,
           color: '#495057', // Use a neutral color
         }));
