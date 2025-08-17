@@ -18,7 +18,10 @@ import ContentGridSample4 from '../../organisms/ContentGridSample4';
  */
 const HomePageSample4 = () => {
   const pageStyle: React.CSSProperties = {
-    background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+    backgroundImage: 'url("https://picsum.photos/seed/biofuture/1920/1080")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed', // This creates a nice parallax effect
     minHeight: '100vh',
     paddingTop: '2rem',
     paddingBottom: '4rem',
