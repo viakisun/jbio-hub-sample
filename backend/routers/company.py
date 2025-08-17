@@ -5,7 +5,7 @@ from ..models.company import Company
 from ..db.mock_data import companies_db
 
 router = APIRouter(
-    prefix="/api/companies",
+    prefix="/companies",
     tags=["Companies & Institutions"],
 )
 
