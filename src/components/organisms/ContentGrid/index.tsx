@@ -1,260 +1,132 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from '../../atoms/Button';
-import Icon from '../../atoms/Icon';
-import Grid from '../../atoms/Grid';
-import AnnouncementList from '../AnnouncementList';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
+import NewsCard, { NewsCardData } from '../../molecules/NewsCard';
+import Tabs from '../../molecules/Tabs';
+
+// --- MOCK DATA ---
+const mockNewsData: NewsCardData[] = [
+  {
+    id: 'news-1',
+    title: '혁신적인 암 치료법, CAR-T 세포 치료의 최신 동향',
+    summary: 'CAR-T 세포 치료가 혈액암을 넘어 고형암 정복에 나섰다. 국내외 연구진들의 최신 연구 결과와 임상 현황을 집중 조명한다.',
+    thumbnailUrl: 'https://picsum.photos/seed/news1/400/225',
+    sourceName: '바이오타임즈',
+    publishedAt: '2024-08-14',
+    category: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] },
+  },
+  {
+    id: 'news-2',
+    title: 'AI 신약 개발, 딥마인드의 알파폴드2가 가져온 혁명',
+    summary: '단백질 구조 예측 AI 알파폴드2가 신약 개발 패러다임을 바꾸고 있다. 개발 기간 단축과 비용 절감 효과는?',
+    thumbnailUrl: 'https://picsum.photos/seed/news2/400/225',
+    sourceName: '메디컬 투데이',
+    publishedAt: '2024-08-13',
+    category: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] },
+  },
+  {
+    id: 'news-3',
+    title: '유전자 가위 기술, 크리스퍼-카스9의 안전성 논란과 미래',
+    summary: '3세대 유전자 가위 기술 크리스퍼-카스9의 오프타겟(off-target) 문제를 해결하기 위한 국내 연구진의 쾌거.',
+    thumbnailUrl: 'https://picsum.photos/seed/news3/400/225',
+    sourceName: '사이언스 포커스',
+    publishedAt: '2024-08-12',
+    category: { name: '행사', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.success[600] },
+  },
+];
 
 // --- STYLED COMPONENTS ---
 
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
+const SectionWrapper = styled.section`
+  margin-bottom: ${DESIGN_SYSTEM.spacing['3xl']};
 `;
 
 const SectionHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  text-align: center;
+  margin-bottom: ${DESIGN_SYSTEM.spacing['2xl']};
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #111827;
-  margin: 0;
+  font-weight: 900;
+  background: ${DESIGN_SYSTEM.gradients.primary};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 ${DESIGN_SYSTEM.spacing.lg} 0;
 
-  @media (max-width: 768px) {
-    font-size: 1.25rem;
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 32px;
+  }
+  @media (min-width: 769px) {
+    font-size: 48px;
   }
 `;
 
-const ViewAllButton = styled(Button)`
+const SectionSubtitle = styled.p`
+  color: ${DESIGN_SYSTEM.colors.gray[600]};
+  max-width: 600px;
+  margin: 0 auto;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 16px;
+  }
+  @media (min-width: 769px) {
+    font-size: 20px;
+  }
+`;
+
+const TabContainer = styled.div`
+  margin-bottom: ${DESIGN_SYSTEM.spacing.xl};
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: none;
-  color: #4f46e5;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
+  justify-content: center;
 `;
 
-const CardContainer = styled.div`
-  background-color: white;
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #f3f4f6;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${DESIGN_SYSTEM.spacing.lg};
 
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
-`;
-
-const NewsCard = styled.div`
-  padding: 1.25rem;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-    border-color: #d1d5db;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${DESIGN_SYSTEM.spacing.xl};
   }
 
-  @media (max-width: 768px) {
-    padding: 1rem;
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
-
-const NewsCardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 0.75rem;
-`;
-
-const NewsCardCategory = styled.span`
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.75rem;
-  background-color: #6366f1;
-  color: white;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-`;
-
-const NewsCardDate = styled.div`
-  font-size: 0.875rem;
-  color: #6b7280;
-`;
-
-const NewsCardTitle = styled.h4`
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-  margin: 0 0 0.75rem 0;
-  line-height: 1.4;
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-  }
-`;
-
-const NewsCardSummary = styled.p`
-  font-size: 0.875rem;
-  color: #4b5563;
-  margin: 0;
-  line-height: 1.5;
-
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-  }
-`;
-
-
-// --- DATA MODELS ---
-
-interface AnnouncementFromAPI {
-  id: number;
-  title: string;
-  author: string;
-  created_at: string;
-}
-
-interface NewsFromAPI {
-  id: number;
-  title: string;
-  content: string;
-  category: string;
-  created_at: string;
-}
-
-interface AnnouncementForList {
-  id: number;
-  title: string;
-  organization: string;
-  deadline: string;
-  budget: string;
-  status: 'active' | 'urgent';
-  daysLeft: number;
-}
-
-interface NewsForList {
-  id: number;
-  title: string;
-  summary: string;
-  date: string;
-  category: string;
-}
 
 // --- COMPONENT ---
 
 const ContentGrid = () => {
-  const [announcements, setAnnouncements] = useState<AnnouncementForList[]>([]);
-  const [news, setNews] = useState<NewsForList[]>([]);
+  const [activeTab, setActiveTab] = useState('all');
+  const TABS = [
+    { id: 'all', label: '전체' },
+    { id: 'news', label: '뉴스' },
+    { id: 'event', label: '행사' },
+    { id: 'announcement', label: '공지' },
+  ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [announcementsResponse, newsResponse] = await Promise.all([
-          fetch(`${process.env.REACT_APP_API_URL}/api/announcements?limit=3`),
-          fetch(`${process.env.REACT_APP_API_URL}/api/news?limit=3`)
-        ]);
-
-        if (!announcementsResponse.ok || !newsResponse.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const announcementsData: AnnouncementFromAPI[] = await announcementsResponse.json();
-        const newsData: NewsFromAPI[] = await newsResponse.json();
-
-        const transformedAnnouncements = announcementsData.map(item => ({
-          id: item.id,
-          title: item.title,
-          organization: item.author,
-          deadline: new Date(new Date(item.created_at).getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString(),
-          budget: 'N/A',
-          status: 'active' as 'active',
-          daysLeft: 30,
-        }));
-
-        const transformedNews = newsData.map(item => ({
-          id: item.id,
-          title: item.title,
-          summary: item.content.substring(0, 100) + '...',
-          date: new Date(item.created_at).toLocaleDateString(),
-          category: item.category === 'news' ? '산업뉴스' : '공지',
-        }));
-
-        setAnnouncements(transformedAnnouncements);
-        setNews(transformedNews);
-
-      } catch (error) {
-        console.error('Failed to fetch content grid data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  // In a real app, this would filter the data based on the activeTab
+  const filteredData = mockNewsData;
 
   return (
-    <Grid $cols={2} $tabletCols={2} $mobileCols={1} style={{ marginBottom: '4rem' }}>
-      {/* 최신 공고 */}
-      <Section>
-        <SectionHeader>
-          <SectionTitle>최신 공고</SectionTitle>
-          <Link to="/announcements" style={{ textDecoration: 'none' }}>
-            <ViewAllButton>
-              전체보기
-              <Icon name="arrowRight" size={16} />
-            </ViewAllButton>
-          </Link>
-        </SectionHeader>
+    <SectionWrapper>
+      <SectionHeader>
+        <SectionTitle>News & Events</SectionTitle>
+        <SectionSubtitle>
+          전북 바이오 산업의 최신 소식과 동향을 한눈에 확인하세요.
+        </SectionSubtitle>
+      </SectionHeader>
+      <TabContainer>
+        <Tabs tabs={TABS} activeTab={activeTab} onTabClick={setActiveTab} />
+      </TabContainer>
 
-        <CardContainer>
-          <AnnouncementList announcements={announcements} />
-        </CardContainer>
-      </Section>
-
-      {/* 최신 뉴스 */}
-      <Section>
-        <SectionHeader>
-          <SectionTitle>최신 뉴스</SectionTitle>
-          <Link to="/news/latest" style={{ textDecoration: 'none' }}>
-            <ViewAllButton>
-              전체보기
-              <Icon name="arrowRight" size={16} />
-            </ViewAllButton>
-          </Link>
-        </SectionHeader>
-
-        <CardContainer>
-          {news.map((item) => (
-            <Link key={item.id} to={`/news/latest/${item.id}`} style={{ textDecoration: 'none' }}>
-              <NewsCard>
-                <NewsCardHeader>
-                  <NewsCardCategory>{item.category}</NewsCardCategory>
-                  <NewsCardDate>{item.date}</NewsCardDate>
-                </NewsCardHeader>
-                <NewsCardTitle>{item.title}</NewsCardTitle>
-                <NewsCardSummary>{item.summary}</NewsCardSummary>
-              </NewsCard>
-            </Link>
-          ))}
-        </CardContainer>
-      </Section>
-    </Grid>
+      <Grid>
+        {filteredData.map(item => (
+          <NewsCard key={item.id} news={item} />
+        ))}
+      </Grid>
+    </SectionWrapper>
   );
 };
 
