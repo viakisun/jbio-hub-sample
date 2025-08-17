@@ -22,7 +22,7 @@ const HomePage = () => {
       <HeroSection />
       <StatsSection />
       <ServicesSection />
-      <ContentGrid />
+      <ContentGrid limit={6} showTabs={false} showLoadMore={false} />
     </MainLayout>
   );
 };
