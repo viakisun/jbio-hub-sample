@@ -1,53 +1,72 @@
-# JBio Hub - Monorepo (React Frontend + FastAPI Backend)
+# JB SQUARE Prototype - v0.1.0
 
-This repository contains the JBio Hub platform, structured as a monorepo. It includes the React frontend and a Python-based backend powered by FastAPI.
+## Overview
 
-## Project Structure
+This repository contains the source code for the JB SQUARE Prototype, a web platform designed to serve as a central hub for industry and research professionals. The project is built using a modern technology stack, featuring a React frontend and a Python FastAPI backend, structured within a monorepo.
 
--   `package.json`: The root package file for managing the frontend workspace.
--   `src/`, `public/`: The React frontend application.
--   `backend/`: The Python FastAPI backend.
-    -   `main.py`: The main entry point for the FastAPI application.
-    -   `requirements.txt`: Python dependencies.
-    -   `routers/`: Contains the API routers for each domain (e.g., announcements, companies).
-    -   `models/`: Contains the Pydantic data models.
-    -   `db/`: Contains the mock database.
+This document provides essential information for developers to set up and run the project in a local development environment.
 
-## Getting Started
+## Development Environment Setup
+
+This project utilizes **Mock Service Worker (MSW)** to simulate backend API responses, enabling robust, independent frontend development.
 
 ### Prerequisites
 
--   Node.js (v16 or higher) & npm (for the frontend)
--   Python (v3.8 or higher) & pip
+-   **Node.js**: Version 18.x or higher
+-   **npm**: Version 9.x or higher (or a compatible package manager like yarn or pnpm)
+-   **Python**: Version 3.9 or higher (required only for backend development)
 
 ### Installation
 
-1.  **Frontend:**
-    From the root directory, install the Node.js dependencies for the React app:
-    ```bash
-    npm install
-    ```
+Clone the repository and install the required Node.js dependencies from the root directory:
 
-2.  **Backend:**
-    Install the required Python packages:
-    ```bash
-    pip install -r backend/requirements.txt
-    ```
+```bash
+git clone https://github.com/your-repo/jb-square-prototype.git
+cd jb-square-prototype
+npm install
+```
 
 ### Running the Application
 
-You will need to run the frontend and backend in separate terminal sessions.
+For most frontend development tasks, running the UI with the mock API is sufficient and recommended.
 
-1.  **Run the Backend:**
-    From the root directory, start the FastAPI server using uvicorn:
-    ```bash
-    uvicorn backend.main:app --reload --port 8000
-    ```
-    The backend API will be running at `http://localhost:8000`. You can access the interactive API documentation at `http://localhost:8000/docs`.
+#### Option 1: Frontend with Mock API (Recommended)
 
-2.  **Run the Frontend:**
-    In a new terminal, start the React development server from the root directory:
+This method allows you to work on the UI without running the Python backend.
+
+1.  **Start the React Development Server:**
     ```bash
     npm start
     ```
-    The frontend will typically run on `http://localhost:3000`.
+2.  **Access the Application:**
+    Open your browser and navigate to `http://localhost:3000`. The application will be running with mock data provided by MSW.
+
+#### Option 2: Full-Stack Development (Frontend + Backend)
+
+Use this method when you need to make changes to both the frontend and the backend API.
+
+1.  **Install Backend Dependencies:**
+    ```bash
+    pip install -r backend/requirements.txt
+    ```
+2.  **Run the Backend Server:**
+    In a new terminal, start the FastAPI server:
+    ```bash
+    uvicorn backend.main:app --reload --port 8000
+    ```
+    The API will be available at `http://localhost:8000`, with interactive documentation at `http://localhost:8000/docs`.
+
+3.  **Disable the Mock Service Worker:**
+    To allow the frontend to communicate with the live backend, you must disable the mock worker. Open `src/index.tsx` and comment out the `worker.start()` line:
+    ```typescript
+    // import { worker } from './mocks/browser'
+    // ...
+    // worker.start()
+    ```
+
+4.  **Start the Frontend Server:**
+    In another terminal, run the React application:
+    ```bash
+    npm start
+    ```
+    The application at `http://localhost:3000` will now make live requests to the backend server at `http://localhost:8000`.

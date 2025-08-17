@@ -94,7 +94,7 @@ const BottomBar = styled.div`
 
 const Footer = () => {
   const platformLinks = ['AI R&D Hub', 'Smart Incubator', 'Bio Intelligence', 'Innovation Lab', 'Global Connect', 'Tech Transfer'];
-  const fieldLinks = ['AI 신약개발', '정밀의학', 'K-뷰티', '스마트팜', '재생의학', '바이오에너지'];
+  const fieldLinks = ['AI Drug Discovery', 'Precision Medicine', 'K-Beauty', 'Smart Farm', 'Regenerative Medicine', 'Bioenergy'];
 
   return (
     <FooterWrapper>
@@ -104,29 +104,29 @@ const Footer = () => {
             <LogoContainer>
               <Icon name="logo" size={48} />
               <div>
-                <LogoTitle>J BIO HUB</LogoTitle>
-                <div style={{ fontSize: '12px', color: DESIGN_SYSTEM.colors.gray[400] }}>Next-Generation Bio Platform</div>
+                <LogoTitle>JB SQUARE</LogoTitle>
+                <div style={{ fontSize: '12px', color: DESIGN_SYSTEM.colors.gray[400] }}>The Industry & Research Hub</div>
               </div>
             </LogoContainer>
             <p style={{ lineHeight: '1.6', maxWidth: '400px' }}>
-              AI와 빅데이터 기술로 전북 바이오산업의 미래를 설계하는 대한민국 대표 바이오 혁신 플랫폼입니다.
+              A premier innovation platform, designing the future of industry with AI and Big Data technology.
             </p>
             <div style={{ color: DESIGN_SYSTEM.colors.gray[400], lineHeight: '1.5' }}>
-              📞 063-219-3000<br />
-              ✉️ contact@jbiohub.kr<br />
-              📍 전북 전주시 덕진구 첨단로 255
+              📞 +82-63-219-3000<br />
+              ✉️ contact@jbsquare.io<br />
+              📍 255, Cheomdan-ro, Deokjin-gu, Jeonju-si, Jeollabuk-do, Korea
             </div>
           </InfoSection>
 
           <LinksSection>
-            <SectionTitle>플랫폼 서비스</SectionTitle>
+            <SectionTitle>Platform Services</SectionTitle>
             <LinkList>
               {platformLinks.map((item) => <li key={item}><LinkItem href="#">{item}</LinkItem></li>)}
             </LinkList>
           </LinksSection>
 
           <LinksSection>
-            <SectionTitle>바이오 분야</SectionTitle>
+            <SectionTitle>Industry Fields</SectionTitle>
             <LinkList>
               {fieldLinks.map((item) => <li key={item}><LinkItem href="#">{item}</LinkItem></li>)}
             </LinkList>
@@ -134,7 +134,7 @@ const Footer = () => {
         </Grid>
         <BottomBar>
           <div style={{ color: DESIGN_SYSTEM.colors.gray[500] }}>
-            © 2024 전라북도테크노파크. All rights reserved.
+            © 2024 JBTP. All rights reserved.
           </div>
           <div style={{ display: 'flex', gap: DESIGN_SYSTEM.spacing.lg }}>
             {['Privacy Policy', 'Terms of Service', 'Contact'].map((item) => (

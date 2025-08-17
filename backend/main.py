@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
-    title="JBio Hub API",
-    description="Backend API for the Jeonbuk Bio Hub Platform.",
-    version="1.0.0",
+    title="JB SQUARE API",
+    description="API for the JB SQUARE Platform Prototype",
+    version="0.1.0"
 )
 
 # CORS Middleware
