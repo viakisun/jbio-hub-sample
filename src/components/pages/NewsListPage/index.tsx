@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import MainLayout from '../../templates/MainLayout';
 import SearchBar from '../../molecules/SearchBar';
 import Pagination from '../../molecules/Pagination';
@@ -44,6 +45,10 @@ const PageWrapper = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const PageHeader = styled.header`
@@ -53,11 +58,20 @@ const PageHeader = styled.header`
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
   gap: 1rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const PageTitle = styled.h1`
   font-size: 2rem;
   font-weight: 700;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 1.75rem;
+  }
 `;
 
 // --- COMPONENT ---
