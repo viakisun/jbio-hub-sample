@@ -1,258 +1,239 @@
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
-import Button from '../../atoms/Button';
 
-// Styled Components
+// --- STYLED COMPONENTS ---
+
 const HeaderWrapper = styled.header`
-  background-color: white;
-  border-bottom: 1px solid #e5e7eb; /* gray-200 */
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); /* shadow-sm */
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid ${DESIGN_SYSTEM.colors.gray[200]};
 `;
 
 const HeaderContainer = styled.div`
-  max-width: 1440px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1.5rem; /* spacing-6 */
+  padding: 0 ${DESIGN_SYSTEM.spacing.lg};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 70px;
 `;
 
-const LogoLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
+const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem; /* spacing-3 */
+  gap: ${DESIGN_SYSTEM.spacing.md};
 `;
 
-const LogoTextContainer = styled.div``;
-
 const LogoTitle = styled.div`
-  font-size: 1.25rem; /* text-xl */
-  font-weight: 700; /* bold */
-  color: #111827; /* gray-900 */
-  line-height: 1.75rem;
+  font-size: 20px;
+  font-weight: 800;
+  background: ${DESIGN_SYSTEM.gradients.primary};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const LogoSubtitle = styled.div`
-  font-size: 0.75rem; /* text-xs */
-  color: #6b7280; /* gray-500 */
-  font-weight: 500; /* medium */
+  font-size: 10px;
+  color: ${DESIGN_SYSTEM.colors.gray[500]};
+  font-weight: 500;
 `;
 
-const DesktopNavActions = styled.div`
-  display: none;
-  align-items: center;
-  gap: 2rem; /* spacing-8 */
-
-  @media (min-width: 1024px) {
-    display: flex;
-  }
+const SearchContainer = styled.div`
+  flex: 1;
+  max-width: 500px;
+  margin: 0 ${DESIGN_SYSTEM.spacing.xl};
 `;
 
-const Nav = styled.nav`
+const SearchInputWrapper = styled.div`
   display: flex;
-  gap: 1.5rem; /* spacing-6 */
-`;
-
-const NavItemLink = styled(NavLink)`
-  text-decoration: none;
-  position: relative;
-  padding: 0.5rem 0;
-
-  &.active {
-    .header-nav-button {
-      font-weight: 600; /* semibold */
-      color: #4f46e5; /* primary-600 */
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0.75rem;
-      right: 0.75rem;
-      height: 2px;
-      background-color: #4f46e5; /* primary-600 */
-      border-radius: 2px;
-    }
-  }
-
-  &:hover .header-nav-button {
-    color: #4f46e5; /* primary-600 */
-    background-color: #eef2ff; /* primary-50 */
+  align-items: center;
+  background: ${DESIGN_SYSTEM.colors.gray[50]};
+  border-radius: 12px;
+  border: 2px solid ${DESIGN_SYSTEM.colors.gray[200]};
+  transition: all 0.3s ease;
+  &:focus-within {
+    border-color: ${DESIGN_SYSTEM.colors.primary[300]};
   }
 `;
 
-const NavButton = styled(Button)`
-  background: none;
+const SearchInput = styled.input`
+  flex: 1;
+  padding: ${DESIGN_SYSTEM.spacing.md} 0;
   border: none;
-  font-size: 1rem; /* text-base */
-  font-weight: 500; /* medium */
-  color: #374151; /* gray-700 */
-  cursor: pointer;
-  padding: 0.5rem 0.75rem;
+  outline: none;
+  font-size: 14px;
+  background-color: transparent;
+  color: ${DESIGN_SYSTEM.colors.gray[900]};
+  font-weight: 500;
+`;
+
+const SearchButton = styled.button`
+  background: ${DESIGN_SYSTEM.gradients.primary};
+  color: white;
+  border: none;
+  padding: ${DESIGN_SYSTEM.spacing.sm} ${DESIGN_SYSTEM.spacing.md};
+  margin: 4px;
   border-radius: 8px;
-  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: ${DESIGN_SYSTEM.spacing.xs};
 `;
 
 const ActionsContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem; /* spacing-4 */
+  gap: ${DESIGN_SYSTEM.spacing.sm};
 `;
 
-const NotificationButton = styled(Button)`
-  position: relative;
+const NavContainer = styled.div`
+  border-top: 1px solid ${DESIGN_SYSTEM.colors.gray[100]};
+  background: rgba(255, 255, 255, 0.98);
+`;
+
+const NavInnerContainer = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 ${DESIGN_SYSTEM.spacing.lg};
+  display: flex;
+  align-items: center;
+  height: 50px;
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  gap: ${DESIGN_SYSTEM.spacing.xl};
+`;
+
+const NavButton = styled.button`
   background: none;
   border: none;
-  padding: 0.5rem; /* spacing-2 */
+  font-size: 14px;
+  font-weight: 600;
+  color: ${DESIGN_SYSTEM.colors.gray[700]};
+  cursor: pointer;
+  padding: ${DESIGN_SYSTEM.spacing.sm} ${DESIGN_SYSTEM.spacing.md};
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  &:hover {
+    background: ${DESIGN_SYSTEM.colors.gray[100]};
+    color: ${DESIGN_SYSTEM.colors.gray[900]};
+  }
+`;
+
+const MobileMenuButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: ${DESIGN_SYSTEM.colors.gray[100]};
+  border: none;
   border-radius: 8px;
   cursor: pointer;
 `;
 
-const NotificationDot = styled.div`
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 8px;
-  height: 8px;
-  background-color: #f97316; /* orange-500 */
-  border-radius: 50%;
-`;
-
-const UserMenu = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem; /* spacing-3 */
-  padding: 0.5rem 1rem; /* spacing-2 spacing-4 */
-  background-color: #f3f4f6; /* gray-100 */
-  border-radius: 12px;
-  cursor: pointer;
-`;
-
-const UserName = styled.span`
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500; /* medium */
-  color: #374151; /* gray-700 */
-`;
-
-const HamburgerMenu = styled.button`
-  display: block;
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  @media (min-width: 1024px) {
-    display: none;
-  }
-`;
-
 const MobileMenu = styled.div`
-  position: absolute;
-  top: 80px; /* height of the header */
-  left: 0;
-  right: 0;
-  background-color: white;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border-top: 1px solid #e2e8f0;
-
-  ${Nav} {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  ${ActionsContainer} {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 1rem;
-    margin-top: 1rem;
-  }
-
-  ${UserMenu} {
-    width: 100%;
-  }
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid ${DESIGN_SYSTEM.colors.gray[200]};
+  padding: ${DESIGN_SYSTEM.spacing.lg};
 `;
 
+// --- COMPONENT ---
 
-// Header Component
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const navItems = [
-    { text: 'JB BIO 클러스터', path: '/cluster' },
-    { text: 'JB 지원사업공고', path: '/announcements' },
-    { text: 'JB 창업보육센터', path: '/incubation' },
-    { text: '바이오 뉴스/행사', path: '/news' },
-    { text: 'JB 기업정보', path: '/companies' },
-    { text: 'JB 기술/특허', path: '/tech-patents' },
-  ];
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-  const navigation = (
-    <Nav>
-      {navItems.map((item) => (
-        <NavItemLink to={item.path} key={item.path}>
-          <NavButton className="header-nav-button">{item.text}</NavButton>
-        </NavItemLink>
-      ))}
-    </Nav>
-  );
-
-  const actions = (
-    <ActionsContainer>
-      <NotificationButton>
-        <Icon name="notification" size={20} color={DESIGN_SYSTEM.colors.gray[600]} />
-        <NotificationDot />
-      </NotificationButton>
-
-      <UserMenu>
-        <Icon name="user" size={18} color={DESIGN_SYSTEM.colors.gray[600]} />
-        <UserName>김바이오</UserName>
-        <Icon name="chevronDown" size={16} color={DESIGN_SYSTEM.colors.gray[500]} />
-      </UserMenu>
-    </ActionsContainer>
-  );
+  const navItems = ['플랫폼', '연구개발', '창업지원', '기업정보', '뉴스'];
+  const trendingTags = ['AI신약', 'K뷰티', '스마트팜'];
 
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <LogoLink to="/">
+        <LogoContainer>
           <Icon name="logo" size={40} />
-          <LogoTextContainer>
-            <LogoTitle>JB SQUARE</LogoTitle>
-            <LogoSubtitle>Jeonbuk's Business QUARTER</LogoSubtitle>
-          </LogoTextContainer>
-        </LogoLink>
+          {!isMobile && (
+            <div>
+              <LogoTitle>J BIO HUB</LogoTitle>
+              <LogoSubtitle>NEXT-GEN BIOTECH</LogoSubtitle>
+            </div>
+          )}
+        </LogoContainer>
 
-        <DesktopNavActions>
-          {navigation}
-          {actions}
-        </DesktopNavActions>
+        {!isMobile && (
+          <SearchContainer>
+            <SearchInputWrapper>
+              <div style={{ padding: `0 ${DESIGN_SYSTEM.spacing.md}` }}>
+                <Icon name="search" size={18} color={DESIGN_SYSTEM.colors.gray[400]} />
+              </div>
+              <SearchInput
+                type="text"
+                placeholder="기업, 기술, 공고를 AI 검색..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+              <SearchButton>
+                <Icon name="zap" size={14} color="white" />
+                검색
+              </SearchButton>
+            </SearchInputWrapper>
+          </SearchContainer>
+        )}
 
-        <HamburgerMenu onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          <Icon name={isMobileMenuOpen ? 'close' : 'menu'} size={24} color={DESIGN_SYSTEM.colors.gray[800]} />
-        </HamburgerMenu>
+        <ActionsContainer>
+          {isMobile ? (
+            <>
+              <MobileMenuButton>
+                <Icon name="search" size={20} color={DESIGN_SYSTEM.colors.gray[700]} />
+              </MobileMenuButton>
+              <MobileMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <Icon name="menu" size={20} color={DESIGN_SYSTEM.colors.gray[700]} />
+              </MobileMenuButton>
+            </>
+          ) : (
+            <>
+              {/* Desktop actions here */}
+            </>
+          )}
+        </ActionsContainer>
       </HeaderContainer>
 
-      {isMobileMenuOpen && (
+      {!isMobile && (
+        <NavContainer>
+          <NavInnerContainer>
+            <Nav>
+              {navItems.map((item) => <NavButton key={item}>{item}</NavButton>)}
+            </Nav>
+            {/* Trending tags can be added here */}
+          </NavInnerContainer>
+        </NavContainer>
+      )}
+
+      {isMobile && isMenuOpen && (
         <MobileMenu>
-          {navigation}
-          {actions}
+          <Nav style={{ flexDirection: 'column', gap: DESIGN_SYSTEM.spacing.md }}>
+            {navItems.map((item) => <NavButton key={item} style={{ textAlign: 'left', padding: DESIGN_SYSTEM.spacing.md }} onClick={() => setIsMenuOpen(false)}>{item}</NavButton>)}
+          </Nav>
         </MobileMenu>
       )}
     </HeaderWrapper>

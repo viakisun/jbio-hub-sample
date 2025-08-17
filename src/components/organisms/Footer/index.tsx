@@ -1,298 +1,149 @@
 import React from 'react';
+import styled from 'styled-components';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
 
+// --- STYLED COMPONENTS ---
+
+const FooterWrapper = styled.footer`
+  background: ${DESIGN_SYSTEM.gradients.dark};
+  color: ${DESIGN_SYSTEM.colors.gray[300]};
+  padding: ${DESIGN_SYSTEM.spacing['3xl']} ${DESIGN_SYSTEM.spacing.lg} ${DESIGN_SYSTEM.spacing.xl};
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding: ${DESIGN_SYSTEM.spacing['2xl']} ${DESIGN_SYSTEM.spacing.lg} ${DESIGN_SYSTEM.spacing.xl};
+  }
+`;
+
+const FooterContainer = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  gap: ${DESIGN_SYSTEM.spacing.xl};
+  margin-bottom: ${DESIGN_SYSTEM.spacing.xl};
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+`;
+
+const InfoSection = styled.div``;
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${DESIGN_SYSTEM.spacing.md};
+  margin-bottom: ${DESIGN_SYSTEM.spacing.lg};
+`;
+
+const LogoTitle = styled.div`
+  font-size: 24px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
+const LinksSection = styled.div`
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    display: none;
+  }
+`;
+
+const SectionTitle = styled.h4`
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: ${DESIGN_SYSTEM.spacing.lg};
+`;
+
+const LinkList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 2;
+`;
+
+const LinkItem = styled.a`
+  color: ${DESIGN_SYSTEM.colors.gray[400]};
+  text-decoration: none;
+  &:hover {
+    color: white;
+  }
+`;
+
+const BottomBar = styled.div`
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: ${DESIGN_SYSTEM.spacing.lg};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    flex-direction: column;
+    gap: ${DESIGN_SYSTEM.spacing.md};
+  }
+`;
+
+// --- COMPONENT ---
+
 const Footer = () => {
+  const platformLinks = ['AI R&D Hub', 'Smart Incubator', 'Bio Intelligence', 'Innovation Lab', 'Global Connect', 'Tech Transfer'];
+  const fieldLinks = ['AI 신약개발', '정밀의학', 'K-뷰티', '스마트팜', '재생의학', '바이오에너지'];
+
   return (
-    <footer style={{
-      backgroundColor: DESIGN_SYSTEM.colors.gray[900],
-      color: DESIGN_SYSTEM.colors.gray[300]
-    } as React.CSSProperties}>
-      <div style={{
-        maxWidth: '1440px',
-        margin: '0 auto',
-        padding: `${DESIGN_SYSTEM.spacing[16]} ${DESIGN_SYSTEM.spacing[6]} ${DESIGN_SYSTEM.spacing[8]}`
-      } as React.CSSProperties}>
-        {/* 메인 푸터 콘텐츠 */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr',
-          gap: DESIGN_SYSTEM.spacing[12],
-          marginBottom: DESIGN_SYSTEM.spacing[12]
-        } as React.CSSProperties}>
-          {/* 기관 정보 */}
-          <div>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: DESIGN_SYSTEM.spacing[3],
-              marginBottom: DESIGN_SYSTEM.spacing[6]
-            } as React.CSSProperties}>
+    <FooterWrapper>
+      <FooterContainer>
+        <Grid>
+          <InfoSection>
+            <LogoContainer>
               <Icon name="logo" size={48} />
               <div>
-                <div style={{
-                  fontSize: DESIGN_SYSTEM.typography.fontSize['2xl'][0],
-                  fontWeight: DESIGN_SYSTEM.typography.fontWeight.bold,
-                  color: DESIGN_SYSTEM.colors.white
-                } as React.CSSProperties}>
-                  JB SQUARE
-                </div>
-                <div style={{
-                  fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                  color: DESIGN_SYSTEM.colors.gray[400]
-                } as React.CSSProperties}>
-                  Jeonbuk's Business QUARTER
-                </div>
+                <LogoTitle>J BIO HUB</LogoTitle>
+                <div style={{ fontSize: '12px', color: DESIGN_SYSTEM.colors.gray[400] }}>Next-Generation Bio Platform</div>
               </div>
+            </LogoContainer>
+            <p style={{ lineHeight: '1.6', maxWidth: '400px' }}>
+              AI와 빅데이터 기술로 전북 바이오산업의 미래를 설계하는 대한민국 대표 바이오 혁신 플랫폼입니다.
+            </p>
+            <div style={{ color: DESIGN_SYSTEM.colors.gray[400], lineHeight: '1.5' }}>
+              📞 063-219-3000<br />
+              ✉️ contact@jbiohub.kr<br />
+              📍 전북 전주시 덕진구 첨단로 255
             </div>
+          </InfoSection>
 
-            <div style={{
-              fontSize: DESIGN_SYSTEM.typography.fontSize.base[0],
-              lineHeight: '1.6',
-              color: DESIGN_SYSTEM.colors.gray[400],
-              marginBottom: DESIGN_SYSTEM.spacing[6]
-            } as React.CSSProperties}>
-              전북의 미래를 함께 만드는 혁신 공간.<br />
-              모든 정보와 기회를 한 곳에서 만나보세요.
-            </div>
+          <LinksSection>
+            <SectionTitle>플랫폼 서비스</SectionTitle>
+            <LinkList>
+              {platformLinks.map((item) => <li key={item}><LinkItem href="#">{item}</LinkItem></li>)}
+            </LinkList>
+          </LinksSection>
 
-            {/* 연락처 정보 */}
-            <div style={{ marginBottom: DESIGN_SYSTEM.spacing[6] } as React.CSSProperties}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: DESIGN_SYSTEM.spacing[3],
-                marginBottom: DESIGN_SYSTEM.spacing[3]
-              } as React.CSSProperties}>
-                <Icon name="phone" size={18} color={DESIGN_SYSTEM.colors.gray[400]} />
-                <span style={{ fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0] } as React.CSSProperties}>
-                  063-219-3000
-                </span>
-              </div>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: DESIGN_SYSTEM.spacing[3],
-                marginBottom: DESIGN_SYSTEM.spacing[3]
-              } as React.CSSProperties}>
-                <Icon name="mail" size={18} color={DESIGN_SYSTEM.colors.gray[400]} />
-                <span style={{ fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0] } as React.CSSProperties}>
-                  info@jbtp.or.kr
-                </span>
-              </div>
-              <div style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: DESIGN_SYSTEM.spacing[3]
-              } as React.CSSProperties}>
-                <Icon name="mapPin" size={18} color={DESIGN_SYSTEM.colors.gray[400]} />
-                <span style={{
-                  fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                  lineHeight: '1.5'
-                } as React.CSSProperties}>
-                  전북 전주시 덕진구 첨단로 255<br />
-                  전북테크노파크 바이오융합센터
-                </span>
-              </div>
-            </div>
+          <LinksSection>
+            <SectionTitle>바이오 분야</SectionTitle>
+            <LinkList>
+              {fieldLinks.map((item) => <li key={item}><LinkItem href="#">{item}</LinkItem></li>)}
+            </LinkList>
+          </LinksSection>
+        </Grid>
+        <BottomBar>
+          <div style={{ color: DESIGN_SYSTEM.colors.gray[500] }}>
+            © 2024 전라북도테크노파크. All rights reserved.
           </div>
-
-          {/* 플랫폼 서비스 */}
-          <div>
-            <h4 style={{
-              fontSize: DESIGN_SYSTEM.typography.fontSize.lg[0],
-              fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold,
-              color: DESIGN_SYSTEM.colors.white,
-              margin: `0 0 ${DESIGN_SYSTEM.spacing[4]} 0`
-            } as React.CSSProperties}>
-              플랫폼 서비스
-            </h4>
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none' } as React.CSSProperties}>
-              {[
-                '연구개발 지원사업',
-                '창업보육센터',
-                '기업정보 데이터베이스',
-                '기술정보 플랫폼',
-                '투자유치 지원',
-                '글로벌 진출 지원'
-              ].map((item, index) => (
-                <li key={index} style={{ marginBottom: DESIGN_SYSTEM.spacing[2] } as React.CSSProperties}>
-                  <a
-                    href="#"
-                    style={{
-                      color: DESIGN_SYSTEM.colors.gray[400],
-                      textDecoration: 'none',
-                      fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: DESIGN_SYSTEM.spacing[2]
-                    } as React.CSSProperties}
-                  >
-                    <Icon name="arrowRight" size={12} />
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div style={{ display: 'flex', gap: DESIGN_SYSTEM.spacing.lg }}>
+            {['Privacy Policy', 'Terms of Service', 'Contact'].map((item) => (
+              <LinkItem key={item} href="#">{item}</LinkItem>
+            ))}
           </div>
-
-          {/* 산업 분야 */}
-          <div>
-            <h4 style={{
-              fontSize: DESIGN_SYSTEM.typography.fontSize.lg[0],
-              fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold,
-              color: DESIGN_SYSTEM.colors.white,
-              margin: `0 0 ${DESIGN_SYSTEM.spacing[4]} 0`
-            } as React.CSSProperties}>
-              바이오 산업분야
-            </h4>
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none' } as React.CSSProperties}>
-              {[
-                '바이오의약품',
-                '의료기기',
-                '바이오소재',
-                '기능성 화장품',
-                '바이오에너지',
-                '농생명과학'
-              ].map((item, index) => (
-                <li key={index} style={{ marginBottom: DESIGN_SYSTEM.spacing[2] } as React.CSSProperties}>
-                  <a
-                    href="#"
-                    style={{
-                      color: DESIGN_SYSTEM.colors.gray[400],
-                      textDecoration: 'none',
-                      fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: DESIGN_SYSTEM.spacing[2]
-                    } as React.CSSProperties}
-                  >
-                    <Icon name="arrowRight" size={12} />
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 기관 안내 */}
-          <div>
-            <h4 style={{
-              fontSize: DESIGN_SYSTEM.typography.fontSize.lg[0],
-              fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold,
-              color: DESIGN_SYSTEM.colors.white,
-              margin: `0 0 ${DESIGN_SYSTEM.spacing[4]} 0`
-            } as React.CSSProperties}>
-              기관 안내
-            </h4>
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none' } as React.CSSProperties}>
-              {[
-                '테크노파크 소개',
-                '조직도',
-                '찾아오시는 길',
-                '채용정보',
-                '입찰공고',
-                '보도자료'
-              ].map((item, index) => (
-                <li key={index} style={{ marginBottom: DESIGN_SYSTEM.spacing[2] } as React.CSSProperties}>
-                  <a
-                    href="#"
-                    style={{
-                      color: DESIGN_SYSTEM.colors.gray[400],
-                      textDecoration: 'none',
-                      fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: DESIGN_SYSTEM.spacing[2]
-                    } as React.CSSProperties}
-                  >
-                    <Icon name="arrowRight" size={12} />
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 고객지원 */}
-          <div>
-            <h4 style={{
-              fontSize: DESIGN_SYSTEM.typography.fontSize.lg[0],
-              fontWeight: DESIGN_SYSTEM.typography.fontWeight.semibold,
-              color: DESIGN_SYSTEM.colors.white,
-              margin: `0 0 ${DESIGN_SYSTEM.spacing[4]} 0`
-            } as React.CSSProperties}>
-              고객지원
-            </h4>
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none' } as React.CSSProperties}>
-              {[
-                '공지사항',
-                '자주묻는질문',
-                '온라인 문의',
-                '기술지원',
-                '사용자 가이드',
-                '시스템 점검'
-              ].map((item, index) => (
-                <li key={index} style={{ marginBottom: DESIGN_SYSTEM.spacing[2] } as React.CSSProperties}>
-                  <a
-                    href="#"
-                    style={{
-                      color: DESIGN_SYSTEM.colors.gray[400],
-                      textDecoration: 'none',
-                      fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: DESIGN_SYSTEM.spacing[2]
-                    } as React.CSSProperties}
-                  >
-                    <Icon name="arrowRight" size={12} />
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* 하단 구분선 */}
-        <div style={{
-          borderTop: `1px solid ${DESIGN_SYSTEM.colors.gray[700]}`,
-          paddingTop: DESIGN_SYSTEM.spacing[8],
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: DESIGN_SYSTEM.spacing[4]
-        } as React.CSSProperties}>
-          <div style={{
-            fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0],
-            color: DESIGN_SYSTEM.colors.gray[500]
-          } as React.CSSProperties}>
-            © 2024 전라북도테크노파크. All rights reserved. |
-            사업자등록번호: 403-82-11948 |
-            대표자: 김철수
-          </div>
-          <div style={{
-            display: 'flex',
-            gap: DESIGN_SYSTEM.spacing[6],
-            fontSize: DESIGN_SYSTEM.typography.fontSize.sm[0]
-          } as React.CSSProperties}>
-            <a href="#" style={{ color: DESIGN_SYSTEM.colors.gray[400], textDecoration: 'none' } as React.CSSProperties}>
-              이용약관
-            </a>
-            <a href="#" style={{ color: DESIGN_SYSTEM.colors.gray[400], textDecoration: 'none' } as React.CSSProperties}>
-              개인정보처리방침
-            </a>
-            <a href="#" style={{ color: DESIGN_SYSTEM.colors.gray[400], textDecoration: 'none' } as React.CSSProperties}>
-              이메일무단수집거부
-            </a>
-            <a href="#" style={{ color: DESIGN_SYSTEM.colors.gray[400], textDecoration: 'none' } as React.CSSProperties}>
-              법적고지
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
+        </BottomBar>
+      </FooterContainer>
+    </FooterWrapper>
   );
 };
 

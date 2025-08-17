@@ -64,8 +64,13 @@ export const DESIGN_SYSTEM = {
     black: '#000000'
   },
   gradients: {
-    primary: 'linear-gradient(135deg, #0ea5e9 0%, #22c55e 100%)',
+    primary: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     hero: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)',
+    hero1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    hero2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    hero3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    hero4: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+    dark: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
     card: 'linear-gradient(145deg, #ffffff 0%, #f8fafc 100%)',
     accent: 'linear-gradient(135deg, #a855f7 0%, #f97316 100%)'
   },
@@ -101,7 +106,14 @@ export const DESIGN_SYSTEM = {
     20: '80px',
     24: '96px',
     28: '112px',
-    32: '128px'
+    32: '128px',
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    '2xl': '48px',
+    '3xl': '64px'
   },
   typography: {
     fontFamily: {
