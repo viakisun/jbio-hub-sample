@@ -25,6 +25,10 @@ const SectionTitle = styled.h2`
   font-weight: 700;
   color: #111827;
   margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const ViewAllButton = styled(Button)`
@@ -49,6 +53,10 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const NewsCard = styled.div`
@@ -61,6 +69,10 @@ const NewsCard = styled.div`
   &:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     border-color: #d1d5db;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
   }
 `;
 
@@ -93,6 +105,10 @@ const NewsCardTitle = styled.h4`
   color: #111827;
   margin: 0 0 0.75rem 0;
   line-height: 1.4;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const NewsCardSummary = styled.p`
@@ -100,6 +116,10 @@ const NewsCardSummary = styled.p`
   color: #4b5563;
   margin: 0;
   line-height: 1.5;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 

@@ -8,11 +8,15 @@ import Icon from '../../atoms/Icon';
 const CardWrapper = styled.div`
   background: ${DESIGN_SYSTEM.gradients.card};
   border-radius: 20px;
-  padding: 2rem;
+  padding: ${DESIGN_SYSTEM.spacing[8]}; /* 2rem */
   box-shadow: ${DESIGN_SYSTEM.shadows.lg};
   border: 1px solid ${DESIGN_SYSTEM.colors.gray[100]};
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: ${DESIGN_SYSTEM.spacing[6]}; /* 1.5rem */
+  }
 `;
 
 const BackgroundAccent = styled.div<{ color: string }>`
@@ -54,6 +58,10 @@ const ChangeIndicator = styled.div`
   font-size: ${DESIGN_SYSTEM.typography.fontSize.sm[0]};
   font-weight: ${DESIGN_SYSTEM.typography.fontWeight.semibold};
   color: ${DESIGN_SYSTEM.colors.success[600]};
+
+  @media (max-width: 768px) {
+    font-size: ${DESIGN_SYSTEM.typography.fontSize.xs[0]};
+  }
 `;
 
 const ValueText = styled.div`
@@ -63,12 +71,20 @@ const ValueText = styled.div`
   margin-bottom: 0.5rem;
   font-family: ${DESIGN_SYSTEM.typography.fontFamily.mono};
   line-height: 1;
+
+  @media (max-width: 768px) {
+    font-size: ${DESIGN_SYSTEM.typography.fontSize['3xl'][0]};
+  }
 `;
 
 const LabelText = styled.div`
   font-size: ${DESIGN_SYSTEM.typography.fontSize.sm[0]};
   color: ${DESIGN_SYSTEM.colors.gray[600]};
   font-weight: ${DESIGN_SYSTEM.typography.fontWeight.medium};
+
+  @media (max-width: 768px) {
+    font-size: ${DESIGN_SYSTEM.typography.fontSize.xs[0]};
+  }
 `;
 
 // --- DATA MODELS ---
