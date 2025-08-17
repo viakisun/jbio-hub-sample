@@ -35,7 +35,7 @@ const HeroSectionSample3 = () => {
         <br />
         정확한 정보와 통계로 최적의 비즈니스 결정을 내리세요.
       </p>
-      <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <SearchBar />
       </div>
     </section>

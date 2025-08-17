@@ -48,7 +48,9 @@ const HeroSection = () => {
         </p>
 
         {/* 중앙 정렬 검색창 */}
-        <SearchBar />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <SearchBar />
+        </div>
       </div>
     </section>
   );
