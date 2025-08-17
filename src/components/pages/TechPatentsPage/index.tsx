@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import MainLayout from '../../templates/MainLayout';
 import SearchBar from '../../molecules/SearchBar';
 import FilterBar from '../../molecules/FilterBar';
@@ -31,6 +32,10 @@ const PageWrapper = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const PageHeader = styled.header`
@@ -41,6 +46,10 @@ const PageHeader = styled.header`
 const PageTitle = styled.h1`
   font-size: 2.5rem;
   font-weight: 700;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 2rem;
+  }
 `;
 
 const ControlsWrapper = styled.div`
@@ -50,6 +59,11 @@ const ControlsWrapper = styled.div`
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 // --- COMPONENT ---
