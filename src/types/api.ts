@@ -1,3 +1,29 @@
+// Types for legacy components that were using the old API structure
+export interface ApiAnnouncement {
+  id: number;
+  title: string;
+  author: string;
+  [key: string]: any;
+}
+
+export interface ApiNews {
+  id: number;
+  title: string;
+  category: string;
+  created_at: string;
+  [key: string]: any;
+}
+
+export interface ApiStat {
+  label: string;
+  value: string;
+  change: string;
+  icon: string;
+  [key: string]: any;
+}
+
+// --- New, strongly-typed models for the News & Events page ---
+
 export interface News {
   id: number;
   title: string;

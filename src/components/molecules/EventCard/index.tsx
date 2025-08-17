@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
-import { Event } from '../../../../types/api';
+import { Event } from '../../../types/api';
 
 // --- STYLED COMPONENTS (Shared with NewsCard) ---
 
@@ -118,6 +118,20 @@ const StatusBadge = styled.span<{ status: string }>`
 
 
 // --- COMPONENT ---
+
+// For backwards compatibility with other pages
+export interface EventCardData {
+  id: string;
+  title: string;
+  summary?: string;
+  thumbnailUrl?: string;
+  eventStartAt: string;
+  eventEndAt: string;
+  locationType: 'online' | 'offline' | 'hybrid';
+  locationName?: string;
+  host: string;
+  registerDeadline?: string;
+}
 
 interface EventCardProps {
   event: Event;

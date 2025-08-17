@@ -102,9 +102,24 @@ const Footer = styled.div`
 
 // --- COMPONENT ---
 
-import { News } from '../../../../types/api';
+import { News } from '../../../types/api';
 
-const CATEGORY_STYLES = {
+// For backwards compatibility with other pages
+export interface NewsCardData {
+  id: string;
+  title: string;
+  summary: string;
+  thumbnailUrl?: string;
+  sourceName: string;
+  publishedAt: string;
+  category: {
+    name: string;
+    color: string;
+    bgColor: string;
+  };
+}
+
+const CATEGORY_STYLES: { [key in 'news' | 'notice']: { name: string; color: string; bgColor: string } } = {
   news: { name: '뉴스', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.primary[600] },
   notice: { name: '공지', color: '#FFFFFF', bgColor: DESIGN_SYSTEM.colors.gray[600] },
 };
