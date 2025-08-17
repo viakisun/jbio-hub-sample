@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 
 // --- STYLED COMPONENTS ---
 
@@ -22,6 +23,10 @@ const StatsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1.5rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const StatCard = styled.div`

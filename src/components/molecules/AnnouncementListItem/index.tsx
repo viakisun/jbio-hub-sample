@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Icon from '../../atoms/Icon';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 
 // --- DATA MODELS ---
 interface Announcement {
@@ -74,6 +75,12 @@ const ItemFooter = styled.div`
   align-items: center;
   font-size: 0.875rem;
   color: #6b7280;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 `;
 
 const Organization = styled.span``;
