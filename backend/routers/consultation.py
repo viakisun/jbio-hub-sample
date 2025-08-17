@@ -6,7 +6,7 @@ from ..models.consultation import Consultation, ConsultationCreate
 from ..db.mock_data import consultations_db
 
 router = APIRouter(
-    prefix="/consultations",
+    prefix="/api/consultations",
     tags=["Consultations"],
 )
 

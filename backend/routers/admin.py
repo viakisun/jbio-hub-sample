@@ -6,7 +6,7 @@ from ..db.mock_data import announcements_db
 from .user import get_current_user, User
 
 router = APIRouter(
-    prefix="/admin",
+    prefix="/api/admin",
     tags=["Admin"],
     dependencies=[Depends(get_current_user)] # Protect all admin routes
 )

@@ -5,7 +5,7 @@ from ..models.announcement import Announcement
 from ..db.mock_data import announcements_db
 
 router = APIRouter(
-    prefix="/announcements",
+    prefix="/api/announcements",
     tags=["Announcements"],
 )
 

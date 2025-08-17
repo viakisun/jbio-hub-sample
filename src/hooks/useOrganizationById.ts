@@ -15,9 +15,7 @@ const useOrganizationById = (id: string | null) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const apiUrl = process.env.REACT_APP_API_URL || '';
-        const apiPrefix = process.env.REACT_APP_API_PREFIX || '';
-        const response = await fetch(`${apiUrl}${apiPrefix}/cluster/organizations/${id}`);
+        const response = await fetch(`/api/cluster/organizations/${id}`);
         if (!response.ok) {
           throw new Error('네트워크 응답이 올바르지 않습니다.');
         }
