@@ -169,6 +169,48 @@ const MobileMenu = styled.div`
   padding: ${DESIGN_SYSTEM.spacing.lg};
 `;
 
+const NotificationButton = styled.button`
+  position: relative;
+  background: none;
+  border: none;
+  padding: ${DESIGN_SYSTEM.spacing.sm};
+  border-radius: 8px;
+  cursor: pointer;
+  &:hover {
+    background: ${DESIGN_SYSTEM.colors.gray[100]};
+  }
+`;
+
+const NotificationDot = styled.div`
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: ${DESIGN_SYSTEM.colors.orange[500]};
+  border-radius: 50%;
+`;
+
+const UserMenu = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${DESIGN_SYSTEM.spacing.sm};
+  padding: ${DESIGN_SYSTEM.spacing.sm} ${DESIGN_SYSTEM.spacing.md};
+  background: ${DESIGN_SYSTEM.colors.gray[100]};
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  &:hover {
+    background: ${DESIGN_SYSTEM.colors.gray[200]};
+  }
+`;
+
+const UserName = styled.span`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${DESIGN_SYSTEM.colors.gray[700]};
+`;
+
 // --- COMPONENT ---
 
 const Header = () => {
@@ -200,8 +242,8 @@ const Header = () => {
           <Icon name="logo" size={40} />
           {!isMobile && (
             <div>
-              <LogoTitle>J BIO HUB</LogoTitle>
-              <LogoSubtitle>NEXT-GEN BIOTECH</LogoSubtitle>
+              <LogoTitle>JB SQUARE</LogoTitle>
+              <LogoSubtitle>Jeonbuk's Business QUARTER</LogoSubtitle>
             </div>
           )}
         </LogoContainer>
@@ -238,7 +280,14 @@ const Header = () => {
             </>
           ) : (
             <>
-              {/* Desktop actions here */}
+              <NotificationButton>
+                <Icon name="notification" size={20} color={DESIGN_SYSTEM.colors.gray[600]} />
+                <NotificationDot />
+              </NotificationButton>
+              <UserMenu>
+                <Icon name="user" size={18} color={DESIGN_SYSTEM.colors.gray[600]} />
+                <UserName>김바이오</UserName>
+              </UserMenu>
             </>
           )}
         </ActionsContainer>
