@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../../atoms/Icon';
 import Grid from '../../atoms/Grid';
+import { ApiAnnouncement, ApiNews } from '../../../types/api';
 
 interface Announcement {
   id: number;
@@ -33,16 +34,16 @@ const ContentGridSample3 = () => {
           throw new Error('Network response was not ok');
         }
 
-        const announcementsData = await announcementsResponse.json();
-        const newsData = await newsResponse.json();
+        const announcementsData: ApiAnnouncement[] = await announcementsResponse.json();
+        const newsData: ApiNews[] = await newsResponse.json();
 
-        setAnnouncements(announcementsData.map(item => ({
+        setAnnouncements(announcementsData.map((item: ApiAnnouncement) => ({
           id: item.id,
           title: item.title,
           organization: item.author,
           deadline: new Date(new Date(item.created_at).getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString(),
         })));
-        setNews(newsData.map(item => ({
+        setNews(newsData.map((item: ApiNews) => ({
           id: item.id,
           title: item.title,
           category: item.category === 'news' ? '산업뉴스' : '공지',

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Icon from '../../atoms/Icon';
 import Grid from '../../atoms/Grid';
 import Button from '../../atoms/Button';
+import { ApiAnnouncement, ApiNews } from '../../../types/api';
 
 interface Announcement {
   id: number;
@@ -34,16 +35,16 @@ const ContentGridSample2 = () => {
           throw new Error('Network response was not ok');
         }
 
-        const announcementsData = await announcementsResponse.json();
-        const newsData = await newsResponse.json();
+        const announcementsData: ApiAnnouncement[] = await announcementsResponse.json();
+        const newsData: ApiNews[] = await newsResponse.json();
 
-        setAnnouncements(announcementsData.map((item, index) => ({
+        setAnnouncements(announcementsData.map((item: ApiAnnouncement, index: number) => ({
           id: item.id,
           title: item.title,
           organization: item.author,
           status: index === 0 ? 'urgent' : 'active', // Mock status
         })));
-        setNews(newsData.map(item => ({
+        setNews(newsData.map((item: ApiNews) => ({
           id: item.id,
           title: item.title,
           category: item.category === 'news' ? '산업뉴스' : '공지',
@@ -101,7 +102,7 @@ const ContentGridSample2 = () => {
             <div style={headerStyle}>
               <h2 style={titleStyle}>최신 공고</h2>
               <Link to="/announcements">
-                <Button $variant="primary" $size="sm">전체보기</Button>
+                <Button $variant="primary">전체보기</Button>
               </Link>
             </div>
             <div style={{flexGrow: 1}}>
@@ -122,7 +123,7 @@ const ContentGridSample2 = () => {
             <div style={headerStyle}>
               <h2 style={titleStyle}>최신 뉴스</h2>
               <Link to="/news/latest">
-                <Button $variant="primary" $size="sm">전체보기</Button>
+                <Button $variant="primary">전체보기</Button>
               </Link>
             </div>
             <div style={{flexGrow: 1}}>
