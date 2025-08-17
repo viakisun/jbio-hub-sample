@@ -82,8 +82,47 @@ const dashboardHandler = http.get('/api/cluster/dashboard', () => {
   });
 });
 
+// --- NEWS & EVENTS MOCK DATA ---
+
+const newsDb = [
+    { id: 1, title: '전북 바이오 특화단지 유치 성공', summary: '정부가 전북을 바이오 특화단지로 최종 선정했습니다.', content: '상세 내용...', category: 'news', created_at: '2025-08-12T11:00:00Z', sourceName: '전북도청', thumbnailUrl: 'https://picsum.photos/seed/news1/400/225' },
+    { id: 2, title: '시스템 점검 안내 (09/01 02:00 ~ 04:00)', summary: '더 나은 서비스 제공을 위해 시스템 정기 점검을 실시합니다.', content: '상세 내용...', category: 'notice', created_at: '2025-08-11T17:00:00Z', sourceName: '관리팀', thumbnailUrl: 'https://picsum.photos/seed/notice1/400/225' },
+    { id: 3, title: '익산 국가식품클러스터, K-푸드 전진기지로 발돋움', summary: '익산 국가식품클러스터가 국내외 식품 시장에서 주목받고 있습니다.', content: '상세 내용...', category: 'news', created_at: '2025-08-15T09:00:00Z', sourceName: '농림축산식품부', thumbnailUrl: 'https://picsum.photos/seed/news2/400/225' },
+    { id: 4, title: '정읍 방사선융합기술원, 신약 개발 새 지평 열어', summary: '방사선 기술을 이용한 혁신적인 신약 개발에 성공했습니다.', content: '상세 내용...', category: 'news', created_at: '2025-08-14T14:00:00Z', sourceName: '한국원자력연구원', thumbnailUrl: 'https://picsum.photos/seed/news3/400/225' },
+    { id: 5, title: '전주 농생명 혁신성장위원회 출범', summary: '전주시가 농생명 산업의 혁신 성장을 이끌기 위한 민관 협력 위원회를 공식 출범시켰습니다.', content: '상세 내용...', category: 'news', created_at: '2025-08-13T10:00:00Z', sourceName: '전주시청', thumbnailUrl: 'https://picsum.photos/seed/news4/400/225' },
+    { id: 6, title: '플랫폼 이용약관 개정 안내', summary: '2025년 9월 1일부터 새로운 이용약관이 적용됩니다.', content: '상세 내용...', category: 'notice', created_at: '2025-08-10T00:00:00Z', sourceName: '법무팀', thumbnailUrl: 'https://picsum.photos/seed/notice2/400/225' },
+    { id: 7, title: '김제 민간육종연구단지, 글로벌 종자 강국 도약의 발판', summary: '국내 종자 산업의 경쟁력을 세계적인 수준으로 끌어올리고 있습니다.', content: '상세 내용...', category: 'news', created_at: '2025-08-09T11:20:00Z', sourceName: '민간육종연구단지', thumbnailUrl: 'https://picsum.photos/seed/news5/400/225' },
+    { id: 8, title: '개인정보처리방침 변경 고지', summary: '개인정보보호법 개정에 따라 개인정보처리방침이 변경됩니다.', content: '상세 내용...', category: 'notice', created_at: '2025-08-08T10:00:00Z', sourceName: '정보보호팀', thumbnailUrl: 'https://picsum.photos/seed/notice3/400/225' },
+];
+
+const eventsDb = [
+    { id: 1, title: '제12회 국제 바이오산업 컨퍼런스', summary: '글로벌 바이오 산업의 최신 동향과 미래 전망을 논의합니다.', thumbnailUrl: 'https://picsum.photos/seed/event1/400/225', eventStartAt: '2025-09-05T09:00:00Z', eventEndAt: '2025-09-06T18:00:00Z', locationType: 'offline', locationName: '전주 컨벤션센터', host: '전북바이오융합산업진흥원', registerDeadline: '2025-08-31T23:59:59Z', status: '예정', category: 'event' },
+    { id: 2, title: 'AI 기반 신약 개발 온라인 세미나', summary: '인공지능을 활용한 신약 개발의 최신 사례와 기술을 소개합니다.', thumbnailUrl: 'https://picsum.photos/seed/event2/400/225', eventStartAt: '2025-08-25T14:00:00Z', eventEndAt: '2025-08-25T16:00:00Z', locationType: 'online', host: '한국생명공학연구원', registerDeadline: '2025-08-24T18:00:00Z', status: '진행중', category: 'event' },
+    { id: 3, title: '농생명 기술 투자유치 설명회(IR)', summary: '유망 농생명 기술을 보유한 스타트업 및 중소기업을 위한 투자유치 설명회입니다.', thumbnailUrl: 'https://picsum.photos/seed/event3/400/225', eventStartAt: '2025-08-01T10:00:00Z', eventEndAt: '2025-08-01T17:00:00Z', locationType: 'hybrid', locationName: '전북창조경제혁신센터', host: '농업기술실용화재단', registerDeadline: '2025-07-25T18:00:00Z', status: '마감', category: 'event' },
+    { id: 4, title: '제약바이오 채용박람회 2024', summary: '국내 최대 규모의 제약바이오 분야 채용 박람회.', thumbnailUrl: 'https://picsum.photos/seed/event4/400/225', eventStartAt: '2025-09-20T10:00:00Z', eventEndAt: '2025-09-21T17:00:00Z', locationType: 'offline', locationName: '코엑스, 서울', host: '한국제약바이오협회', registerDeadline: '2025-09-15T18:00:00Z', status: '예정', category: 'event' },
+    { id: 5, title: '스마트팜 기술 워크숍', summary: '최신 스마트팜 기술 동향 및 적용 사례 공유.', thumbnailUrl: 'https://picsum.photos/seed/event5/400/225', eventStartAt: '2025-10-05T13:00:00Z', eventEndAt: '2025-10-05T18:00:00Z', locationType: 'offline', locationName: '전북농업기술원', host: '전북농업기술원', registerDeadline: '2025-10-01T18:00:00Z', status: '예정', category: 'event' },
+];
+
+
+const newsHandler = http.get('/api/news', ({ request }) => {
+  const url = new URL(request.url);
+  const limit = url.searchParams.get('limit');
+  const data = limit ? newsDb.slice(0, Number(limit)) : newsDb;
+  return HttpResponse.json(data);
+});
+
+const eventsHandler = http.get('/api/events', ({ request }) => {
+  const url = new URL(request.url);
+  const limit = url.searchParams.get('limit');
+  const data = limit ? eventsDb.slice(0, Number(limit)) : eventsDb;
+  return HttpResponse.json(data);
+});
+
+
 export const handlers = [
   dashboardHandler,
   organizationsHandler,
   organizationDetailHandler,
+  newsHandler,
+  eventsHandler,
 ];
