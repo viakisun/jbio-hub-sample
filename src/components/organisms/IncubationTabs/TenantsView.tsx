@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Grid from '../../atoms/Grid';
 import SearchBar from '../../molecules/SearchBar';
 import FilterBar from '../../molecules/FilterBar';
@@ -25,6 +26,11 @@ const ControlsWrapper = styled.div`
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 // --- COMPONENT ---

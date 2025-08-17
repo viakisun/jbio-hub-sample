@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import MainLayout from '../../templates/MainLayout';
 import Tabs from '../../molecules/Tabs';
 import DashboardView from '../../organisms/IncubationTabs/DashboardView';
@@ -27,6 +28,10 @@ const PageWrapper = styled.div`
   padding: 2rem;
   animation: ${fadeIn} 0.5s ease-out;
   background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 300px);
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const PageHeader = styled.header`
@@ -36,6 +41,10 @@ const PageHeader = styled.header`
 const PageTitle = styled.h1`
   font-size: 2.5rem;
   font-weight: 700;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 2rem;
+  }
 `;
 
 // --- COMPONENT ---

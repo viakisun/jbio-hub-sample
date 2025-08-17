@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Grid from '../../atoms/Grid';
 import SearchBar from '../../molecules/SearchBar';
 import FilterBar from '../../molecules/FilterBar';
@@ -50,6 +51,11 @@ const ControlsWrapper = styled.div`
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const CenterSection = styled.section`
@@ -62,6 +68,10 @@ const CenterTitle = styled.h2`
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #e5e7eb;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 1.25rem;
+  }
 `;
 
 // --- COMPONENT ---

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Grid from '../../atoms/Grid';
 import KPIGroup from '../KPIGroup';
 import TenantCard, { TenantCardData } from '../../molecules/TenantCard';
@@ -43,6 +44,10 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   border: 1px solid #e5e7eb;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding: 1.5rem;
+  }
 `;
 
 const SectionHeader = styled.div`
@@ -55,6 +60,10 @@ const SectionHeader = styled.div`
 const SectionTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: 600;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 1.25rem;
+  }
 `;
 
 const ViewAllLink = styled(Link)`
