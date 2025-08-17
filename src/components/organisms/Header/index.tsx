@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
@@ -115,7 +116,8 @@ const Nav = styled.nav`
   gap: ${DESIGN_SYSTEM.spacing.xl};
 `;
 
-const NavButton = styled.button`
+const NavButton = styled(NavLink)`
+  text-decoration: none;
   background: none;
   border: none;
   font-size: 14px;
@@ -125,9 +127,26 @@ const NavButton = styled.button`
   padding: ${DESIGN_SYSTEM.spacing.sm} ${DESIGN_SYSTEM.spacing.md};
   border-radius: 8px;
   transition: all 0.3s ease;
+  position: relative;
+
   &:hover {
     background: ${DESIGN_SYSTEM.colors.gray[100]};
     color: ${DESIGN_SYSTEM.colors.gray[900]};
+  }
+
+  &.active {
+    font-weight: 700;
+    color: ${DESIGN_SYSTEM.colors.purple[600]};
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: ${DESIGN_SYSTEM.spacing.md};
+      right: ${DESIGN_SYSTEM.spacing.md};
+      height: 2px;
+      background-color: ${DESIGN_SYSTEM.colors.purple[600]};
+      border-radius: 2px;
+    }
   }
 `;
 
@@ -164,7 +183,14 @@ const Header = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const navItems = ['플랫폼', '연구개발', '창업지원', '기업정보', '뉴스'];
+  const navItems = [
+    { text: 'JB BIO 클러스터', path: '/cluster' },
+    { text: 'JB 지원사업공고', path: '/announcements' },
+    { text: 'JB 창업보육센터', path: '/incubation' },
+    { text: '바이오 뉴스/행사', path: '/news' },
+    { text: 'JB 기업정보', path: '/companies' },
+    { text: 'JB 기술/특허', path: '/tech-patents' },
+  ];
   const trendingTags = ['AI신약', 'K뷰티', '스마트팜'];
 
   return (
@@ -222,7 +248,7 @@ const Header = () => {
         <NavContainer>
           <NavInnerContainer>
             <Nav>
-              {navItems.map((item) => <NavButton key={item}>{item}</NavButton>)}
+              {navItems.map((item) => <NavButton key={item.path} to={item.path}>{item.text}</NavButton>)}
             </Nav>
             {/* Trending tags can be added here */}
           </NavInnerContainer>
@@ -232,7 +258,7 @@ const Header = () => {
       {isMobile && isMenuOpen && (
         <MobileMenu>
           <Nav style={{ flexDirection: 'column', gap: DESIGN_SYSTEM.spacing.md }}>
-            {navItems.map((item) => <NavButton key={item} style={{ textAlign: 'left', padding: DESIGN_SYSTEM.spacing.md }} onClick={() => setIsMenuOpen(false)}>{item}</NavButton>)}
+            {navItems.map((item) => <NavButton key={item.path} to={item.path} style={{ textAlign: 'left', padding: DESIGN_SYSTEM.spacing.md }} onClick={() => setIsMenuOpen(false)}>{item.text}</NavButton>)}
           </Nav>
         </MobileMenu>
       )}
