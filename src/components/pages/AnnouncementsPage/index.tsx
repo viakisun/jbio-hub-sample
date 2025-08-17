@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import MainLayout from '../../templates/MainLayout';
 import AnnouncementList from '../../organisms/AnnouncementList';
 import AnnouncementsDashboard from '../../organisms/AnnouncementsDashboard';
@@ -76,6 +77,10 @@ const PageWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const PageHeader = styled.header`
@@ -88,6 +93,10 @@ const PageTitle = styled.h1`
   font-weight: 700;
   color: #111827;
   margin-bottom: 0.5rem;
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    font-size: 2rem;
+  }
 `;
 
 const PageSubtitle = styled.p`

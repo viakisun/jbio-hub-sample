@@ -134,5 +134,13 @@ export const DESIGN_SYSTEM = {
       extrabold: '800',
       black: '900'
     }
+  },
+  breakpoints: {
+    mobile: '768px',
+    tablet: '1024px',
+  },
+  mediaQueries: {
+    mobile: '(max-width: 768px)',
+    tablet: '(max-width: 1024px)',
   }
 };
