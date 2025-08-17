@@ -16,6 +16,10 @@ const SectionTitle = styled.h2`
   margin: 0 0 2.5rem 0;
   text-align: center;
   letter-spacing: -0.025em;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const ServiceCard = styled.div<{ gradient: string }>`
@@ -36,6 +40,11 @@ const ServiceCard = styled.div<{ gradient: string }>`
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    min-height: 180px;
   }
 `;
 
@@ -58,6 +67,10 @@ const CardTitle = styled.h3`
   color: white;
   margin: 0 0 0.75rem 0;
   line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const CardDescription = styled.p`
@@ -65,6 +78,10 @@ const CardDescription = styled.p`
   color: rgba(255, 255, 255, 0.9);
   margin: 0;
   line-height: 1.5;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 // --- DATA MODELS ---
