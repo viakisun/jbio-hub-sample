@@ -4,7 +4,9 @@ from typing import List
 from ..models.stat import Stat
 from ..db.mock_data import stats_db
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api"
+)
 
 @router.get("/stats", response_model=List[Stat], tags=["Stats"])
 def get_stats_list():
