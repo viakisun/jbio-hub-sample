@@ -3,9 +3,16 @@ import { ContentItem, News, Event } from '../types/api';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export function useNewsAndEvents() {
-  const { data: newsData, error: newsError } = useSWR<News[]>('/api/news', fetcher);
-  const { data: eventsData, error: eventsError } = useSWR<Event[]>('/api/events', fetcher);
+interface UseNewsAndEventsOptions {
+  limit?: number;
+}
+
+export function useNewsAndEvents({ limit }: UseNewsAndEventsOptions = {}) {
+  const newsUrl = limit ? `/api/news?limit=${limit}` : '/api/news';
+  const eventsUrl = limit ? `/api/events?limit=${limit}` : '/api/events';
+
+  const { data: newsData, error: newsError } = useSWR<News[]>(newsUrl, fetcher);
+  const { data: eventsData, error: eventsError } = useSWR<Event[]>(eventsUrl, fetcher);
 
   const data = newsData && eventsData ? [...newsData, ...eventsData] : undefined;
   const error = newsError || eventsError;

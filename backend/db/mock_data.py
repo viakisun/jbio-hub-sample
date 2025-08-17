@@ -210,77 +210,22 @@ CREATE TABLE techs (
 """
 
 news_db: list[News] = [
-    News(
-        id=1,
-        title='전북 바이오 특화단지 유치 성공',
-        summary='정부가 전북을 바이오 특화단지로 최종 선정했습니다. 이로써 지역 내 바이오 산업의 성장이 기대됩니다.',
-        content='정부가 전북을 바이오 특화단지로 최종 선정했습니다. 이로써 지역 내 바이오 산업의 성장이 기대됩니다. 상세 내용은...',
-        category='news',
-        created_at=datetime(2025, 8, 12, 11, 0, 0),
-        sourceName='전북도청',
-        thumbnailUrl='https://picsum.photos/seed/news1/400/225'
-    ),
-    News(
-        id=2,
-        title='시스템 점검 안내 (09/01 02:00 ~ 04:00)',
-        summary='더 나은 서비스 제공을 위해 시스템 정기 점검을 실시합니다.',
-        content='더 나은 서비스 제공을 위해 시스템 정기 점검을 실시합니다. 점검 시간에는 서비스 이용이 일시 중단될 수 있습니다.',
-        category='notice',
-        created_at=datetime(2025, 8, 11, 17, 0, 0),
-        sourceName='관리팀',
-        thumbnailUrl='https://picsum.photos/seed/notice1/400/225'
-    ),
-    News(
-        id=3,
-        title='익산 국가식품클러스터, K-푸드 전진기지로 발돋움',
-        summary='익산 국가식품클러스터가 국내외 식품 시장에서 주목받으며 K-푸드의 중심으로 떠오르고 있습니다.',
-        content='익산 국가식품클러스터가 국내외 식품 시장에서 주목받으며 K-푸드의 중심으로 떠오르고 있습니다. 상세 내용은...',
-        category='news',
-        created_at=datetime(2025, 8, 15, 9, 0, 0),
-        sourceName='농림축산식품부',
-        thumbnailUrl='https://picsum.photos/seed/news2/400/225'
-    ),
+    News(id=1, title='전북 바이오 특화단지 유치 성공', summary='정부가 전북을 바이오 특화단지로 최종 선정했습니다.', content='상세 내용...', category='news', created_at=datetime(2025, 8, 12, 11, 0, 0), sourceName='전북도청', thumbnailUrl='https://picsum.photos/seed/news1/400/225'),
+    News(id=2, title='시스템 점검 안내 (09/01 02:00 ~ 04:00)', summary='더 나은 서비스 제공을 위해 시스템 정기 점검을 실시합니다.', content='상세 내용...', category='notice', created_at=datetime(2025, 8, 11, 17, 0, 0), sourceName='관리팀', thumbnailUrl='https://picsum.photos/seed/notice1/400/225'),
+    News(id=3, title='익산 국가식품클러스터, K-푸드 전진기지로 발돋움', summary='익산 국가식품클러스터가 국내외 식품 시장에서 주목받고 있습니다.', content='상세 내용...', category='news', created_at=datetime(2025, 8, 15, 9, 0, 0), sourceName='농림축산식품부', thumbnailUrl='https://picsum.photos/seed/news2/400/225'),
+    News(id=4, title='정읍 방사선융합기술원, 신약 개발 새 지평 열어', summary='방사선 기술을 이용한 혁신적인 신약 개발에 성공했습니다.', content='상세 내용...', category='news', created_at=datetime(2025, 8, 14, 14, 0, 0), sourceName='한국원자력연구원', thumbnailUrl='https://picsum.photos/seed/news3/400/225'),
+    News(id=5, title='전주 농생명 혁신성장위원회 출범', summary='전주시가 농생명 산업의 혁신 성장을 이끌기 위한 민관 협력 위원회를 공식 출범시켰습니다.', content='상세 내용...', category='news', created_at=datetime(2025, 8, 13, 10, 0, 0), sourceName='전주시청', thumbnailUrl='https://picsum.photos/seed/news4/400/225'),
+    News(id=6, title='플랫폼 이용약관 개정 안내', summary='2025년 9월 1일부터 새로운 이용약관이 적용됩니다.', content='상세 내용...', category='notice', created_at=datetime(2025, 8, 10, 0, 0, 0), sourceName='법무팀', thumbnailUrl='https://picsum.photos/seed/notice2/400/225'),
+    News(id=7, title='김제 민간육종연구단지, 글로벌 종자 강국 도약의 발판', summary='국내 종자 산업의 경쟁력을 세계적인 수준으로 끌어올리고 있습니다.', content='상세 내용...', category='news', created_at=datetime(2025, 8, 9, 11, 20, 0), sourceName='민간육종연구단지', thumbnailUrl='https://picsum.photos/seed/news5/400/225'),
+    News(id=8, title='개인정보처리방침 변경 고지', summary='개인정보보호법 개정에 따라 개인정보처리방침이 변경됩니다.', content='상세 내용...', category='notice', created_at=datetime(2025, 8, 8, 10, 0, 0), sourceName='정보보호팀', thumbnailUrl='https://picsum.photos/seed/notice3/400/225'),
 ]
 
 events_db: list[Event] = [
-    Event(
-        id=1,
-        title='제12회 국제 바이오산업 컨퍼런스',
-        summary='글로벌 바이오 산업의 최신 동향과 미래 전망을 논의하는 국제 컨퍼런스입니다. 사전 등록 시 할인 혜택이 제공됩니다.',
-        thumbnailUrl='https://picsum.photos/seed/event1/400/225',
-        eventStartAt=datetime(2025, 9, 5, 9, 0, 0),
-        eventEndAt=datetime(2025, 9, 6, 18, 0, 0),
-        locationType='offline',
-        locationName='전주 컨벤션센터',
-        host='전북바이오융합산업진흥원',
-        registerDeadline=datetime(2025, 8, 31, 23, 59, 59),
-        status='예정'
-    ),
-    Event(
-        id=2,
-        title='AI 기반 신약 개발 온라인 세미나',
-        summary='인공지능을 활용한 신약 개발의 최신 사례와 기술을 소개하는 웨비나입니다. 누구나 무료로 참여할 수 있습니다.',
-        thumbnailUrl='https://picsum.photos/seed/event2/400/225',
-        eventStartAt=datetime(2025, 8, 25, 14, 0, 0),
-        eventEndAt=datetime(2025, 8, 25, 16, 0, 0),
-        locationType='online',
-        host='한국생명공학연구원',
-        registerDeadline=datetime(2025, 8, 24, 18, 0, 0),
-        status='진행중'
-    ),
-    Event(
-        id=3,
-        title='농생명 기술 투자유치 설명회(IR)',
-        summary='유망 농생명 기술을 보유한 스타트업 및 중소기업을 위한 투자유치 설명회입니다.',
-        thumbnailUrl='https://picsum.photos/seed/event3/400/225',
-        eventStartAt=datetime(2025, 8, 1, 10, 0, 0),
-        eventEndAt=datetime(2025, 8, 1, 17, 0, 0),
-        locationType='hybrid',
-        locationName='전북창조경제혁신센터',
-        host='농업기술실용화재단',
-        registerDeadline=datetime(2025, 7, 25, 18, 0, 0),
-        status='마감'
-    )
+    Event(id=1, title='제12회 국제 바이오산업 컨퍼런스', summary='글로벌 바이오 산업의 최신 동향과 미래 전망을 논의합니다.', thumbnailUrl='https://picsum.photos/seed/event1/400/225', eventStartAt=datetime(2025, 9, 5, 9, 0, 0), eventEndAt=datetime(2025, 9, 6, 18, 0, 0), locationType='offline', locationName='전주 컨벤션센터', host='전북바이오융합산업진흥원', registerDeadline=datetime(2025, 8, 31, 23, 59, 59), status='예정'),
+    Event(id=2, title='AI 기반 신약 개발 온라인 세미나', summary='인공지능을 활용한 신약 개발의 최신 사례와 기술을 소개합니다.', thumbnailUrl='https://picsum.photos/seed/event2/400/225', eventStartAt=datetime(2025, 8, 25, 14, 0, 0), eventEndAt=datetime(2025, 8, 25, 16, 0, 0), locationType='online', host='한국생명공학연구원', registerDeadline=datetime(2025, 8, 24, 18, 0, 0), status='진행중'),
+    Event(id=3, title='농생명 기술 투자유치 설명회(IR)', summary='유망 농생명 기술을 보유한 스타트업 및 중소기업을 위한 투자유치 설명회입니다.', thumbnailUrl='https://picsum.photos/seed/event3/400/225', eventStartAt=datetime(2025, 8, 1, 10, 0, 0), eventEndAt=datetime(2025, 8, 1, 17, 0, 0), locationType='hybrid', locationName='전북창조경제혁신센터', host='농업기술실용화재단', registerDeadline=datetime(2025, 7, 25, 18, 0, 0), status='마감'),
+    Event(id=4, title='제약바이오 채용박람회 2024', summary='국내 최대 규모의 제약바이오 분야 채용 박람회.', thumbnailUrl='https://picsum.photos/seed/event4/400/225', eventStartAt=datetime(2025, 9, 20, 10, 0, 0), eventEndAt=datetime(2025, 9, 21, 17, 0, 0), locationType='offline', locationName='코엑스, 서울', host='한국제약바이오협회', registerDeadline=datetime(2025, 9, 15, 18, 0, 0), status='예정'),
+    Event(id=5, title='스마트팜 기술 워크숍', summary='최신 스마트팜 기술 동향 및 적용 사례 공유.', thumbnailUrl='https://picsum.photos/seed/event5/400/225', eventStartAt=datetime(2025, 10, 5, 13, 0, 0), eventEndAt=datetime(2025, 10, 5, 18, 0, 0), locationType='offline', locationName='전북농업기술원', host='전북농업기술원', registerDeadline=datetime(2025, 10, 1, 18, 0, 0), status='예정'),
 ]
 
 techs_db: list[Tech] = [

@@ -70,9 +70,19 @@ const EmptyStateContainer = styled.div`
 
 // --- COMPONENT ---
 
-const ContentGrid = () => {
+interface ContentGridProps {
+  limit?: number;
+  showTabs?: boolean;
+  showLoadMore?: boolean;
+}
+
+const ContentGrid: React.FC<ContentGridProps> = ({
+  limit,
+  showTabs = true,
+  showLoadMore = true,
+}) => {
   const [activeTab, setActiveTab] = useState('all');
-  const { data, isLoading, isError } = useNewsAndEvents();
+  const { data, isLoading, isError } = useNewsAndEvents({ limit });
 
   const TABS = [
     { id: 'all', label: '전체' },
@@ -105,9 +115,11 @@ const ContentGrid = () => {
           전북 바이오 산업의 최신 소식과 동향을 한눈에 확인하세요.
         </SectionSubtitle>
       </SectionHeader>
-      <TabContainer>
-        <Tabs tabs={TABS} activeTab={activeTab} onTabClick={setActiveTab} />
-      </TabContainer>
+      {showTabs && (
+        <TabContainer>
+          <Tabs tabs={TABS} activeTab={activeTab} onTabClick={setActiveTab} />
+        </TabContainer>
+      )}
 
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error loading data.</p>}
@@ -117,9 +129,11 @@ const ContentGrid = () => {
           <Grid>
             {filteredData.map(renderCard)}
           </Grid>
-          <LoadMoreContainer>
-            <Button $variant="secondary">더보기</Button>
-          </LoadMoreContainer>
+          {showLoadMore && (
+            <LoadMoreContainer>
+              <Button $variant="secondary">더보기</Button>
+            </LoadMoreContainer>
+          )}
         </>
       )}
 
