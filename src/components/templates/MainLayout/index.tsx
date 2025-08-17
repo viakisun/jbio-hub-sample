@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import Header from '../../organisms/Header';
 import Footer from '../../organisms/Footer';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
@@ -18,23 +19,37 @@ interface MainLayoutProps {
   children: React.ReactNode;
 }
 
+const LayoutWrapper = styled.div`
+  min-height: 100vh;
+  background-color: ${DESIGN_SYSTEM.colors.gray[50]};
+  font-family: ${DESIGN_SYSTEM.typography.fontFamily.sans};
+`;
+
+const MainContent = styled.main`
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: ${DESIGN_SYSTEM.spacing.xl} ${DESIGN_SYSTEM.spacing.lg};
+
+  @media (min-width: 769px) {
+    padding-top: 120px;
+  }
+
+  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
+    padding-top: 70px;
+    padding-left: ${DESIGN_SYSTEM.spacing.md};
+    padding-right: ${DESIGN_SYSTEM.spacing.md};
+  }
+`;
+
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: DESIGN_SYSTEM.colors.gray[50],
-      fontFamily: DESIGN_SYSTEM.typography.fontFamily.sans
-    } as React.CSSProperties}>
+    <LayoutWrapper>
       <Header />
-      <main style={{
-        maxWidth: '1440px',
-        margin: '0 auto',
-        padding: `${DESIGN_SYSTEM.spacing[12]} ${DESIGN_SYSTEM.spacing[6]}`
-      } as React.CSSProperties}>
+      <MainContent>
         {children}
-      </main>
+      </MainContent>
       <Footer />
-    </div>
+    </LayoutWrapper>
   );
 };
 
