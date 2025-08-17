@@ -34,7 +34,9 @@ const HeroSectionSample1 = () => {
         <br />
         핵심 정보와 기회를 간결하게 전달합니다.
       </p>
-      <SearchBar />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <SearchBar />
+      </div>
     </section>
   );
 };

@@ -48,7 +48,9 @@ const HeroSectionSample2 = () => {
           전북의 미래를 여는 혁신 허브, JB SQUARE에서<br/>
           당신의 가능성을 폭발시키세요.
         </p>
-        <SearchBar />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <SearchBar />
+        </div>
       </div>
     </section>
   );
