@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
-import { version } from '../../../../package.json'; // Import version
+import packageJson from '../../../../package.json'; // Import version
 
 // --- STYLED COMPONENTS ---
 
@@ -152,7 +152,7 @@ const Footer = () => {
         <BottomBar>
           <Copyright>
             <span>© 2024 JBTP. All rights reserved.</span>
-            <Version>v{version}</Version>
+            <Version>v{packageJson.version}</Version>
           </Copyright>
           <div style={{ display: 'flex', gap: DESIGN_SYSTEM.spacing.lg }}>
             {['Privacy Policy', 'Terms of Service', 'Contact'].map((item) => (
