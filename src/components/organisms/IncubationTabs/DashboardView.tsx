@@ -141,7 +141,7 @@ const DashboardView = () => {
           <List>
             {mockNotices.map(notice => <NoticeCard key={notice.id} notice={notice} />)}
           </List>
-        </section>
+        </Section>
       </Grid>
 
       <FullWidthSection>

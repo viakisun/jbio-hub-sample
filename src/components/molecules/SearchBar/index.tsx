@@ -48,7 +48,7 @@ const SearchButton = styled(Button)`
 // --- COMPONENT ---
 
 interface SearchBarProps {
-  onSearch: (query: string) => void;
+  onSearch?: (query: string) => void;
   initialValue?: string;
   placeholder?: string;
 }
@@ -61,12 +61,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [query, setQuery] = useState(initialValue);
 
   const handleSearchClick = () => {
-    onSearch(query);
+    onSearch?.(query);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      onSearch(query);
+      onSearch?.(query);
     }
   };
 
