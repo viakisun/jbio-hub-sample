@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Icon from '../../atoms/Icon';
+import { version } from '../../../../package.json'; // Import version
 
 // --- STYLED COMPONENTS ---
 
@@ -90,6 +91,22 @@ const BottomBar = styled.div`
   }
 `;
 
+const Copyright = styled.div`
+  color: ${DESIGN_SYSTEM.colors.gray[500]};
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const Version = styled.span`
+  background-color: rgba(255, 255, 255, 0.1);
+  color: ${DESIGN_SYSTEM.colors.gray[400]};
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+`;
+
 // --- COMPONENT ---
 
 const Footer = () => {
@@ -133,9 +150,10 @@ const Footer = () => {
           </LinksSection>
         </Grid>
         <BottomBar>
-          <div style={{ color: DESIGN_SYSTEM.colors.gray[500] }}>
-            © 2024 JBTP. All rights reserved.
-          </div>
+          <Copyright>
+            <span>© 2024 JBTP. All rights reserved.</span>
+            <Version>v{version}</Version>
+          </Copyright>
           <div style={{ display: 'flex', gap: DESIGN_SYSTEM.spacing.lg }}>
             {['Privacy Policy', 'Terms of Service', 'Contact'].map((item) => (
               <LinkItem key={item} href="#">{item}</LinkItem>
