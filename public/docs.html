@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
 
-    <!--
-    Redoc doesn't change outer page styles
-    -->
     <style>
       body {
         margin: 0;
@@ -18,7 +15,23 @@
     </style>
   </head>
   <body>
-    <redoc spec-url='openapi.yml'></redoc>
-    <script src="https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js"> </script>
+    <div id="redoc-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@3.13.1/dist/js-yaml.min.js"></script>
+    <script>
+      // Fetch the YAML file
+      fetch('openapi.yml')
+        .then(response => response.text())
+        .then(text => {
+          // Parse the YAML text into a JavaScript object
+          const spec = jsyaml.load(text);
+          // Render the spec using Redoc
+          Redoc.init(spec, {}, document.getElementById('redoc-container'));
+        })
+        .catch(err => {
+          console.error("Error fetching or parsing OpenAPI spec:", err);
+          document.getElementById('redoc-container').innerText = 'Error loading API documentation. See console for details.';
+        });
+    </script>
   </body>
 </html>
