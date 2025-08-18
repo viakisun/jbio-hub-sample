@@ -2,20 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AnnouncementListItem from '../../molecules/AnnouncementListItem';
+import { SupportProgram } from '../../../hooks/useSupportPrograms'; // Import the correct type
 
 // --- DATA MODELS ---
-interface Announcement {
-  id: number;
-  title: string;
-  organization: string;
-  deadline: string;
-  budget: string;
-  status: 'active' | 'urgent';
-  daysLeft: number;
-}
-
 interface AnnouncementListProps {
-  announcements: Announcement[];
+  programs: SupportProgram[]; // Use the new type and name
   style?: React.CSSProperties;
 }
 
@@ -33,12 +24,16 @@ const ItemLink = styled(Link)`
 
 // --- COMPONENT ---
 
-const AnnouncementList: React.FC<AnnouncementListProps> = ({ announcements, style }) => {
+const AnnouncementList: React.FC<AnnouncementListProps> = ({ programs, style }) => {
+  if (!programs || programs.length === 0) {
+    return <p>표시할 지원사업 공고가 없습니다.</p>;
+  }
+
   return (
     <ListWrapper style={style}>
-      {announcements.map((announcement) => (
-        <ItemLink key={announcement.id} to={`/support/announcements/${announcement.id}`}>
-          <AnnouncementListItem announcement={announcement} />
+      {programs.map((program) => (
+        <ItemLink key={program.id} to={`/support-programs/${program.id}`}>
+          <AnnouncementListItem program={program} />
         </ItemLink>
       ))}
     </ListWrapper>

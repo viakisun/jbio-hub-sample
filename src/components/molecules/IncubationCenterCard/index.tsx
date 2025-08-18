@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { IncubationCenter } from '../../../hooks/useIncubationCenters';
 
 // --- STYLED COMPONENTS ---
 
@@ -40,6 +41,7 @@ const Logo = styled.img`
   border-radius: 8px;
   object-fit: cover;
   border: 1px solid #f3f4f6;
+  background-color: #f0f0f0;
 `;
 
 const Title = styled.h3`
@@ -73,35 +75,29 @@ const Tag = styled.span`
 
 // --- COMPONENT ---
 
-export interface TenantCardData {
-  id: string;
-  name: string;
-  logoUrl?: string;
-  centerName: string;
-  fieldTags: string[];
+interface IncubationCenterCardProps {
+  center: IncubationCenter;
 }
 
-interface TenantCardProps {
-  tenant: TenantCardData;
-}
-
-const TenantCard: React.FC<TenantCardProps> = ({ tenant }) => {
+const IncubationCenterCard: React.FC<IncubationCenterCardProps> = ({ center }) => {
   return (
-    <CardLink to={`/incubation/tenants/${tenant.id}`}>
+    <CardLink to={`/incubation-centers/${center.id}`}>
       <CardWrapper>
         <Header>
-          <Logo src={tenant.logoUrl || 'https://via.placeholder.com/48'} alt={`${tenant.name} Logo`} />
+          {/* Using a placeholder as API doesn't provide a logo */}
+          <Logo src={`https://picsum.photos/seed/${center.id}/48`} alt={`${center.name} Logo`} />
           <div>
-            <Title>{tenant.name}</Title>
-            <Info>{tenant.centerName}</Info>
+            <Title>{center.name}</Title>
+            <Info>{center.address}</Info>
           </div>
         </Header>
         <TagContainer>
-          {tenant.fieldTags.map(tag => <Tag key={tag}>{tag}</Tag>)}
+          <Tag>공실: {center.vacantRooms}개</Tag>
+          <Tag>입주율: {Math.round(center.occupancyRate * 100)}%</Tag>
         </TagContainer>
       </CardWrapper>
     </CardLink>
   );
 };
 
-export default TenantCard;
+export default IncubationCenterCard;

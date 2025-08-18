@@ -5,69 +5,18 @@ import MainLayout from '../../templates/MainLayout';
 import AnnouncementList from '../../organisms/AnnouncementList';
 import AnnouncementsDashboard from '../../organisms/AnnouncementsDashboard';
 import Tabs from '../../molecules/Tabs';
+import useSupportPrograms from '../../../hooks/useSupportPrograms'; // Import the CORRECT hook
 
 // --- DATA MODELS ---
-interface Announcement {
-  id: number;
-  title: string;
-  organization: string;
-  deadline: string;
-  budget: string;
-  status: 'active' | 'urgent';
-  daysLeft: number;
-  category: string;
-}
+// Mock data and old interfaces are removed.
 
-// --- MOCK DATA ---
-const mockAnnouncements: Announcement[] = [
-  {
-    id: 1,
-    title: '[JB-Bio] 2024년 바이오 스타트업 성장 지원 프로그램 참여기업 모집',
-    organization: '전북바이오융합산업진흥원',
-    deadline: '2024-08-20',
-    budget: '5,000만원',
-    status: 'urgent',
-    daysLeft: 5,
-    category: 'startup-support',
-  },
-  {
-    id: 2,
-    title: '글로벌 바이오 기술 이전 설명회 개최 안내',
-    organization: '한국생명공학연구원',
-    deadline: '2024-08-25',
-    budget: 'N/A',
-    status: 'active',
-    daysLeft: 10,
-    category: 'tech-transfer',
-  },
-  {
-    id: 3,
-    title: '2024년 3분기 연구장비 공동활용 지원사업 공고',
-    organization: '과학기술정보통신부',
-    deadline: '2024-09-10',
-    budget: '1억원',
-    status: 'active',
-    daysLeft: 26,
-    category: 'rnd',
-  },
-  {
-    id: 4,
-    title: '정부 R&D 특허전략 지원사업 참여기업 모집',
-    organization: '특허청',
-    deadline: '2024-09-15',
-    budget: '3,000만원',
-    status: 'active',
-    daysLeft: 31,
-    category: 'government',
-  },
-];
-
+// Note: These categories should align with backend mock data for filtering to work.
 const TABS = [
   { id: 'all', label: '전체' },
-  { id: 'government', label: '정부/지자체' },
-  { id: 'customized', label: '기업 맞춤형 지원사업' },
-  { id: 'rnd', label: '연구개발(R&D)' },
-  { id: 'startup-support', label: '창업 및 기술이전' },
+  { id: 'R&D', label: 'R&D' },
+  { id: '창업지원', label: '창업지원' },
+  { id: '수출지원', label: '수출지원' },
+  { id: '제조혁신', label: '제조혁신' },
 ];
 
 
@@ -104,15 +53,29 @@ const PageSubtitle = styled.p`
   color: #4b5563;
 `;
 
+const LoadingMessage = styled.p`
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.125rem;
+  color: #4b5563;
+`;
+
+const ErrorMessage = styled(LoadingMessage)`
+  color: #ef4444;
+`;
+
 // --- COMPONENT ---
 
 const AnnouncementsPage = () => {
   const [activeTab, setActiveTab] = useState('all');
 
-  const filteredAnnouncements =
-    activeTab === 'all'
-      ? mockAnnouncements
-      : mockAnnouncements.filter((announcement) => announcement.category === activeTab);
+  // Use the correct hook to fetch data based on the active tab
+  const { data, loading, error } = useSupportPrograms({
+    category: activeTab === 'all' ? undefined : activeTab,
+    limit: 100, // Fetch a large number for now
+  });
+
+  const programs = data ? data.data : [];
 
   return (
     <MainLayout>
@@ -121,9 +84,16 @@ const AnnouncementsPage = () => {
           <PageTitle>JB 지원사업공고</PageTitle>
           <PageSubtitle>전북 바이오산업의 성장을 위한 다양한 지원사업을 확인하세요.</PageSubtitle>
         </PageHeader>
+
+        {/* This component might need its own data hook later */}
         <AnnouncementsDashboard />
+
         <Tabs tabs={TABS} activeTab={activeTab} onTabClick={setActiveTab} />
-        <AnnouncementList announcements={filteredAnnouncements} />
+
+        {loading && <LoadingMessage>지원사업 공고를 불러오는 중입니다...</LoadingMessage>}
+        {error && <ErrorMessage>오류가 발생했습니다: {error.message}</ErrorMessage>}
+        {!loading && !error && <AnnouncementList programs={programs} />}
+
       </PageWrapper>
     </MainLayout>
   );
