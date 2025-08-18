@@ -24,6 +24,7 @@ interface UseIncubationCentersParams {
     hasVacancy?: boolean;
     region?: string;
     keyword?: string;
+    limit?: number;
 }
 
 const useIncubationCenters = (params: UseIncubationCentersParams = {}) => {
@@ -41,6 +42,7 @@ const useIncubationCenters = (params: UseIncubationCentersParams = {}) => {
         if (params.hasVacancy !== undefined) queryParams.append('hasVacancy', String(params.hasVacancy));
         if (params.region) queryParams.append('region', params.region);
         if (params.keyword) queryParams.append('keyword', params.keyword);
+        if (params.limit) queryParams.append('limit', String(params.limit));
 
         const queryString = queryParams.toString();
         const response = await fetch(`/api/incubation-centers?${queryString}`);
