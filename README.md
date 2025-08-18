@@ -1,4 +1,4 @@
-# JB SQUARE Prototype - v0.1.0
+# JB SQUARE - v0.2.0
 
 ## Overview
 
