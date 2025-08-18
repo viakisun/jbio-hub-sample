@@ -41,17 +41,10 @@ const TenantsView = () => {
     setFilters(prev => ({ ...prev, keyword: query }));
   };
 
-  // This is a placeholder for the FilterBar functionality
-  const handleFilterChange = (newFilters: any) => {
-    // In a real app, the FilterBar would provide structured filter data
-    // For now, we'll just log it.
-    console.log('Filters changed:', newFilters);
-  };
-
   return (
     <div>
       <ControlsWrapper>
-        <FilterBar onFilterChange={handleFilterChange} />
+        <FilterBar />
         <SearchBar onSearch={handleSearch} />
       </ControlsWrapper>
 

@@ -2,52 +2,30 @@ import React from 'react';
 import MainLayout from '../../templates/MainLayout';
 import FilterBar from '../../organisms/FilterBar';
 import AnnouncementList from '../../organisms/AnnouncementList';
+import useSupportPrograms from '../../../hooks/useSupportPrograms';
+import { LoadingMessage, ErrorMessage } from '../../organisms/IncubationTabs/shared/StateMessages';
 
 /**
  * ## UI-01-02: Announcement List Page
- * ### Atomic Structure
- * - Template: MainLayout
- * - Organism: FilterBar
- * - Organism: AnnouncementList
+ * This page displays a list of all support programs.
  *
  * @returns {JSX.Element}
  */
 const AnnouncementListPage = () => {
-  const announcements = [
-    {
-      id: 1,
-      title: '2024년 바이오헬스 R&D 지원사업',
-      organization: '전라북도',
-      deadline: '2024-12-31',
-      budget: '최대 2억원',
-      status: 'active' as 'active' | 'urgent',
-      daysLeft: 45
-    },
-    {
-      id: 2,
-      title: '첨단의료기기 기술개발 지원',
-      organization: 'KIAT',
-      deadline: '2024-09-15',
-      budget: '최대 10억원',
-      status: 'urgent' as 'active' | 'urgent',
-      daysLeft: 8
-    },
-    {
-      id: 3,
-      title: '바이오 창업기업 육성사업',
-      organization: '중소벤처기업부',
-      deadline: '2024-10-30',
-      budget: '최대 3억원',
-      status: 'active' as 'active' | 'urgent',
-      daysLeft: 25
-    }
-  ];
+  const { data, loading, error } = useSupportPrograms();
+
+  const programs = data ? data.data : [];
 
   return (
     <MainLayout>
-      <h1 style={{ marginBottom: '2rem' }}>공고 목록</h1>
-      <FilterBar />
-      <AnnouncementList announcements={announcements} />
+      <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+        <h1 style={{ marginBottom: '2rem' }}>전체 지원사업 공고</h1>
+        <FilterBar />
+
+        {loading && <LoadingMessage>공고를 불러오는 중입니다...</LoadingMessage>}
+        {error && <ErrorMessage>오류가 발생했습니다: {error.message}</ErrorMessage>}
+        {!loading && !error && <AnnouncementList programs={programs} />}
+      </div>
     </MainLayout>
   );
 };

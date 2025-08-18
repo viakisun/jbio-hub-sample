@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Icon from '../../atoms/Icon';
 import Button from '../../atoms/Button';
@@ -47,11 +47,38 @@ const SearchButton = styled(Button)`
 
 // --- COMPONENT ---
 
-const SearchBar = () => {
+interface SearchBarProps {
+  onSearch: (query: string) => void;
+  initialValue?: string;
+  placeholder?: string;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({
+  onSearch,
+  initialValue = '',
+  placeholder = '키워드를 입력하세요'
+}) => {
+  const [query, setQuery] = useState(initialValue);
+
+  const handleSearchClick = () => {
+    onSearch(query);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onSearch(query);
+    }
+  };
+
   return (
     <SearchWrapper>
-      <SearchInput placeholder="키워드를 입력하세요" />
-      <SearchButton>
+      <SearchInput
+        placeholder={placeholder}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyPress}
+      />
+      <SearchButton onClick={handleSearchClick}>
         <Icon name="search" size={20} color="white" />
       </SearchButton>
     </SearchWrapper>
