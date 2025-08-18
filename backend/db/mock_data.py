@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from ..models.announcement import Announcement, FileLink, RelatedLink
 from ..models.company import Company
 from ..models.infra import Infra
