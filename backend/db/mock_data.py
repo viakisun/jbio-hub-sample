@@ -7,6 +7,14 @@ from ..models.consultation import Consultation
 from ..models.user import UserInDB
 from ..models.service import Service
 from ..models.stat import Stat
+from ..models.support_program import SupportProgram, SupportProgramStatus
+from ..models.incubation_center import IncubationCenter, Location
+from ..models.technology import Technology
+from ..models.education import EducationProgram, EducationContent, EducationProgramStatus, EducationContentType
+from ..models.mentor import Mentor
+from ..models.search import SitemapNode
+from ..models.application import Application, ApplicationStatus
+from ..models.auth import RegistrationRequest
 
 # SQL Schema comments from the original request
 """
@@ -353,5 +361,441 @@ stats_db: list[Stat] = [
         change='+23',
         icon='trendingUp',
         color='#f97316'
+    )
+]
+
+# SQL Schema for Support Programs
+"""
+CREATE TABLE support_programs (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    organization VARCHAR(255),
+    description TEXT,
+    start_date DATE,
+    end_date DATE,
+    status VARCHAR(50),
+    category VARCHAR(100),
+    support_type TEXT[],
+    target_company TEXT,
+    external_url VARCHAR(255),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+"""
+
+support_programs_db: list[SupportProgram] = [
+    SupportProgram(
+        id="sp_001",
+        title="2025년 중소기업 기술혁신 개발사업",
+        organization="중소벤처기업부",
+        description="중소기업의 기술 경쟁력 강화를 위한 R&D 자금 지원.",
+        startDate=date(2025, 3, 1),
+        endDate=date(2025, 9, 30),
+        status=SupportProgramStatus.ONGOING,
+        category="R&D",
+        supportType=["자금지원", "기술개발"],
+        targetCompany="창업 7년 이하, 매출 20억 미만 중소기업",
+        externalUrl="https://example.com/support/program1",
+        createdAt=datetime(2025, 2, 1, 9, 0, 0)
+    ),
+    SupportProgram(
+        id="sp_002",
+        title="바이오 분야 창업기업 육성 프로그램",
+        organization="한국생명공학연구원",
+        description="예비 창업자 및 초기 창업기업 대상 맞춤형 보육 및 멘토링 제공.",
+        startDate=date(2025, 4, 15),
+        endDate=date(2025, 10, 15),
+        status=SupportProgramStatus.ONGOING,
+        category="창업지원",
+        supportType=["멘토링", "공간지원", "네트워킹"],
+        targetCompany="예비 창업자 또는 3년 미만 창업기업",
+        externalUrl="https://example.com/support/program2",
+        createdAt=datetime(2025, 3, 10, 10, 0, 0)
+    ),
+    SupportProgram(
+        id="sp_003",
+        title="해외시장 진출 지원사업",
+        organization="KOTRA",
+        description="해외 바이어 매칭, 수출 상담회, 해외 전시회 참가 지원.",
+        startDate=date(2025, 1, 1),
+        endDate=date(2025, 12, 31),
+        status=SupportProgramStatus.UPCOMING,
+        category="수출지원",
+        supportType=["마케팅", "수출상담"],
+        targetCompany="수출 실적 500만불 미만 중소/중견기업",
+        externalUrl="https://example.com/support/program3",
+        createdAt=datetime(2024, 12, 15, 14, 0, 0)
+    ),
+    SupportProgram(
+        id="sp_004",
+        title="2024년 스마트공장 보급확산사업",
+        organization="스마트제조혁신추진단",
+        description="스마트공장 구축 및 고도화를 위한 비용 지원.",
+        startDate=date(2024, 5, 1),
+        endDate=date(2024, 11, 30),
+        status=SupportProgramStatus.CLOSED,
+        category="제조혁신",
+        supportType=["자금지원", "컨설팅"],
+        targetCompany="국내 중소/중견 제조기업",
+        externalUrl="https://example.com/support/program4",
+        createdAt=datetime(2024, 4, 5, 9, 0, 0)
+    ),
+]
+
+# SQL Schema for Incubation Centers
+"""
+CREATE TABLE incubation_centers (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    total_rooms INT,
+    vacant_rooms INT,
+    occupancy_rate FLOAT,
+    address VARCHAR(255),
+    contact VARCHAR(255),
+    manager VARCHAR(255),
+    latitude DECIMAL(9, 6),
+    longitude DECIMAL(9, 6)
+);
+"""
+
+incubation_centers_db: list[IncubationCenter] = [
+    IncubationCenter(
+        id="ic_001",
+        name="전북대학교 창업보육센터",
+        totalRooms=50,
+        vacantRooms=5,
+        occupancyRate=0.90,
+        address="전라북도 전주시 덕진구 백제대로 567",
+        contact="063-270-1234",
+        manager="김철수 센터장",
+        location=Location(latitude=35.8464, longitude=127.1293)
+    ),
+    IncubationCenter(
+        id="ic_002",
+        name="원광대학교 창업보육센터",
+        totalRooms=40,
+        vacantRooms=0,
+        occupancyRate=1.0,
+        address="전라북도 익산시 익산대로 460",
+        contact="063-850-5678",
+        manager="박영희 매니저",
+        location=Location(latitude=35.9687, longitude=126.9575)
+    ),
+    IncubationCenter(
+        id="ic_003",
+        name="전주정보문화산업진흥원 (JICA)",
+        totalRooms=30,
+        vacantRooms=8,
+        occupancyRate=0.73,
+        address="전라북도 전주시 완산구 아중로 225",
+        contact="063-281-4114",
+        manager="이진아 팀장",
+        location=Location(latitude=35.8227, longitude=127.1643)
+    ),
+]
+
+# SQL Schema for Technologies
+"""
+CREATE TABLE technologies (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    summary TEXT,
+    organization VARCHAR(255),
+    patent_number VARCHAR(100),
+    application_date DATE,
+    category VARCHAR(100),
+    transferable BOOLEAN,
+    thumbnail_url VARCHAR(255),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+"""
+
+technologies_db: list[Technology] = [
+    Technology(
+        id="tech_001",
+        title="고효율 미생물 연료전지 개발",
+        summary="폐수를 활용하여 전기를 생산하는 친환경 고효율 미생물 연료전지 기술. 기존 기술 대비 전력 생산 효율 30% 향상.",
+        organization="전북대학교 신재생에너지연구소",
+        patentNumber="10-2024-0123456",
+        applicationDate=date(2024, 8, 1),
+        category="환경/에너지",
+        transferable=True,
+        thumbnail="https://picsum.photos/seed/tech1/400/300",
+        createdAt=datetime(2024, 9, 15, 10, 0, 0)
+    ),
+    Technology(
+        id="tech_002",
+        title="AI 기반 암 진단 보조 소프트웨어",
+        summary="의료 영상을 AI로 분석하여 초기 단계의 암을 95% 정확도로 판별하는 진단 보조 소프트웨어.",
+        organization="(주)메디컬AI",
+        patentNumber="10-2025-0011223",
+        applicationDate=date(2025, 1, 20),
+        category="의료/헬스케어",
+        transferable=True,
+        thumbnail="https://picsum.photos/seed/tech2/400/300",
+        createdAt=datetime(2025, 2, 28, 14, 30, 0)
+    ),
+    Technology(
+        id="tech_003",
+        title="스마트팜용 복합 환경제어 시스템",
+        summary="온도, 습도, CO2 농도, 광량 등을 통합 제어하여 작물 생산성을 극대화하는 IoT 기반 스마트팜 솔루션.",
+        organization="농업기술실용화재단",
+        patentNumber=None,
+        applicationDate=None,
+        category="농생명",
+        transferable=False,
+        thumbnail="https://picsum.photos/seed/tech3/400/300",
+        createdAt=datetime(2025, 5, 10, 11, 0, 0)
+    ),
+    Technology(
+        id="tech_004",
+        title="식물성 대체육 제조 기술",
+        summary="콩 단백질을 이용하여 실제 고기의 식감과 풍미를 재현한 식물성 대체육 제조 기술.",
+        organization="익산 국가식품클러스터",
+        patentNumber="10-2023-0987654",
+        applicationDate=date(2023, 11, 5),
+        category="식품/바이오",
+        transferable=True,
+        thumbnail="https://picsum.photos/seed/tech4/400/300",
+        createdAt=datetime(2024, 1, 15, 9, 0, 0)
+    ),
+]
+
+# SQL Schema for Education Programs
+"""
+CREATE TABLE education_programs (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    organization VARCHAR(255),
+    category VARCHAR(100),
+    start_date DATE,
+    end_date DATE,
+    location VARCHAR(255),
+    cost FLOAT,
+    status VARCHAR(50),
+    target_audience VARCHAR(255),
+    application_url VARCHAR(255)
+);
+
+CREATE TABLE education_contents (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    category VARCHAR(100),
+    type VARCHAR(50),
+    url VARCHAR(255),
+    thumbnail_url VARCHAR(255),
+    view_count INT DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+"""
+
+education_programs_db: list[EducationProgram] = [
+    EducationProgram(
+        id="edu_p_001",
+        title="바이오 전문인력 양성과정",
+        organization="전북바이오융합산업진흥원",
+        category="전문인력양성",
+        startDate=date(2025, 9, 1),
+        endDate=date(2025, 11, 30),
+        location="전북바이오융합산업진흥원 교육장",
+        cost=0.0,
+        status=EducationProgramStatus.UPCOMING,
+        targetAudience="바이오 분야 취업 희망자 및 재직자",
+        applicationUrl="https://example.com/edu/program1"
+    ),
+    EducationProgram(
+        id="edu_p_002",
+        title="GMP(우수 의약품 제조 및 품질관리 기준) 실무 과정",
+        organization="한국제약바이오협회",
+        category="품질관리",
+        startDate=date(2025, 7, 15),
+        endDate=date(2025, 7, 17),
+        location="온라인 (Zoom)",
+        cost=300000.0,
+        status=EducationProgramStatus.ONGOING,
+        targetAudience="제약/바이오 기업 품질관리/보증 담당자",
+        applicationUrl="https://example.com/edu/program2"
+    ),
+]
+
+education_contents_db: list[EducationContent] = [
+    EducationContent(
+        id="edu_c_001",
+        title="[영상] CRISPR-Cas9 유전자 가위 기술의 원리",
+        description="노벨상을 수상한 3세대 유전자 가위 기술, CRISPR-Cas9의 작동 원리를 쉽게 설명합니다.",
+        category="유전공학",
+        type=EducationContentType.VIDEO,
+        url="https://youtube.com/watch?v=example1",
+        thumbnail="https://picsum.photos/seed/content1/400/225",
+        viewCount=12048,
+        createdAt=datetime(2024, 10, 5, 10, 0, 0)
+    ),
+    EducationContent(
+        id="edu_c_002",
+        title="[PDF] 국내 바이오산업 특허 출원 동향 보고서",
+        description="2024년 상반기 국내 바이오산업의 특허 출원 동향 및 기술 트렌드 분석 자료입니다.",
+        category="기술동향",
+        type=EducationContentType.PDF,
+        url="https://example.com/report.pdf",
+        thumbnail="https://picsum.photos/seed/content2/400/225",
+        viewCount=5890,
+        createdAt=datetime(2024, 7, 28, 15, 30, 0)
+    ),
+]
+
+# SQL Schema for Mentors
+"""
+CREATE TABLE mentors (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    organization VARCHAR(255),
+    field TEXT[],
+    expertise TEXT,
+    experience TEXT,
+    available BOOLEAN,
+    contact_email VARCHAR(255),
+    external_url VARCHAR(255)
+);
+"""
+
+mentors_db: list[Mentor] = [
+    Mentor(
+        id="mentor_001",
+        name="김민준",
+        organization="전북창조경제혁신센터",
+        field=["사업화", "투자유치"],
+        expertise="초기 스타트업 비즈니스 모델 수립 및 IR 피칭 전문가. 다수의 스타트업을 성공적으로 엑셀러레이팅한 경험 보유.",
+        experience="창업기획자(액셀러레이터) 경력 10년, 50개 이상 기업 멘토링",
+        available=True,
+        contactEmail="minjun.kim@ccei.or.kr",
+        externalUrl="https://ccei.creativekorea.or.kr/jeonbuk/"
+    ),
+    Mentor(
+        id="mentor_002",
+        name="이서연",
+        organization="특허법인 A&P",
+        field=["특허", "법률"],
+        expertise="바이오 분야 기술 특허 출원 및 분쟁 해결 전문 변리사. 국내외 특허 전략 수립 컨설팅 제공.",
+        experience="변리사 경력 8년, 바이오 분야 특허 200건 이상 출원",
+        available=True,
+        contactEmail="seoyeon.lee@ap-patent.com",
+        externalUrl=None
+    ),
+    Mentor(
+        id="mentor_003",
+        name="박지훈",
+        organization="한국생명공학연구원",
+        field=["기술개발", "R&D"],
+        expertise="유전자 편집 기술 및 세포 치료제 연구 개발 전문가. 국가 R&D 과제 다수 수행.",
+        experience="선임연구원 경력 15년, SCI급 논문 30편 이상",
+        available=False,
+        contactEmail="jihun.park@kribb.re.kr",
+        externalUrl=None
+    ),
+]
+
+# SQL Schema for Sitemap (usually generated dynamically, but here for structure)
+"""
+CREATE TABLE sitemap_nodes (
+    id SERIAL PRIMARY KEY,
+    parent_id INTEGER REFERENCES sitemap_nodes(id),
+    title VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    "order" INT
+);
+"""
+
+sitemap_db: list[SitemapNode] = [
+    SitemapNode(title="홈", url="/", children=[]),
+    SitemapNode(
+        title="기업지원",
+        url="/support",
+        children=[
+            SitemapNode(title="지원사업", url="/support-programs", children=[]),
+            SitemapNode(title="창업보육센터", url="/incubation-centers", children=[]),
+        ]
+    ),
+    SitemapNode(
+        title="기술정보",
+        url="/tech",
+        children=[
+            SitemapNode(title="기술 및 특허", url="/tech-summary/list", children=[]),
+        ]
+    ),
+    SitemapNode(
+        title="교육 및 인력",
+        url="/education",
+        children=[
+            SitemapNode(title="교육 프로그램", url="/programs", children=[]),
+            SitemapNode(title="교육 콘텐츠", url="/education/contents", children=[]),
+            SitemapNode(title="전문가 멘토링", url="/mentors", children=[]),
+        ]
+    ),
+    SitemapNode(title="기업DB", url="/companies", children=[]),
+    SitemapNode(title="알림마당", url="/notices", children=[]),
+]
+
+# SQL Schema for Applications
+"""
+CREATE TABLE applications (
+    id VARCHAR(255) PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    program_id VARCHAR(255) REFERENCES support_programs(id),
+    program_title VARCHAR(255),
+    status VARCHAR(50),
+    applied_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    reviewed_at TIMESTAMP WITH TIME ZONE,
+    review_comment TEXT
+);
+"""
+
+applications_db: list[Application] = [
+    Application(
+        id="app_001",
+        programId="sp_001",
+        programTitle="2025년 중소기업 기술혁신 개발사업",
+        status=ApplicationStatus.PENDING,
+        appliedAt=datetime(2025, 3, 5, 10, 30, 0),
+    ),
+    Application(
+        id="app_002",
+        programId="sp_002",
+        programTitle="바이오 분야 창업기업 육성 프로그램",
+        status=ApplicationStatus.APPROVED,
+        appliedAt=datetime(2025, 4, 20, 15, 0, 0),
+        reviewedAt=datetime(2025, 4, 22, 11, 0, 0),
+        reviewComment="서류 심사 통과. 대면 심사 예정."
+    ),
+]
+
+# SQL Schema for Registration Requests
+"""
+CREATE TABLE registration_requests (
+    id SERIAL PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    organization VARCHAR(255),
+    requested_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50) DEFAULT 'pending'
+);
+"""
+
+registration_requests_db: list[RegistrationRequest] = [
+    RegistrationRequest(
+        userId="user_req_1",
+        name="김신청",
+        email="newuser1@example.com",
+        organization="미래 바이오",
+        requestedAt=datetime(2025, 8, 17, 11, 0, 0),
+        status="pending"
+    ),
+    RegistrationRequest(
+        userId="user_req_2",
+        name="박대기",
+        email="newuser2@example.com",
+        organization="헬스케어 스타트업",
+        requestedAt=datetime(2025, 8, 16, 18, 30, 0),
+        status="pending"
     )
 ]
