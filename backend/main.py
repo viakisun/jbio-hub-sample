@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(
     title="JB SQUARE API",
     description="API for the JB SQUARE Platform Prototype",
-    version="0.1.0"
+    version="0.2.0"
 )
 
 # CORS Middleware

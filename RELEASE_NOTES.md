@@ -1,3 +1,42 @@
+# Release v0.2.0: Full-Stack API Implementation
+
+## Overview
+
+This major release transforms the JB SQUARE platform from a prototype with limited scope to a comprehensive, full-stack application with a nearly complete API backend and integrated frontend components. Based on a detailed OpenAPI specification, this version introduces a complete mock backend for all major domains and connects several key frontend pages to this new API, replacing previous mock data implementations.
+
+The primary goal of this release is to establish the full data architecture of the application and provide a feature-rich, data-driven user experience for core functionalities.
+
+---
+
+### Key Features & Enhancements
+
+#### Backend (FastAPI)
+*   **Full API Implementation**: Implemented a complete mock backend for the API defined in the `openapi.yml` specification.
+*   **Modular Routers**: Created new, modular routers for all major API domains: Support Programs, Incubation Centers, Technologies, Education, Mentors, and Search.
+*   **Robust Data Modeling**: Developed Pydantic models for all API schemas, ensuring data validation and consistency.
+*   **Auth & User Management**: Refactored the `auth` and `users` routers and implemented a full suite of endpoints for registration, login, password reset, and user profile management.
+*   **Admin Functionality**: Added a comprehensive set of admin endpoints for user management and registration approval.
+*   **Mock Data & SQL**: Provided mock data and sample SQL `CREATE TABLE` schemas for all new models.
+
+#### Frontend (React)
+*   **Live Data Integration**: Refactored several key pages to fetch data from the new live backend API, replacing all previous mock data.
+    *   **Support Programs Page**: Now displays live data from `/api/support-programs`.
+    *   **Incubation Centers Page**: Now displays live data from `/api/incubation-centers`.
+    *   **Technologies & Patents Page**: Now displays live data from `/api/tech-summary/list`.
+*   **Consistent Data Fetching**: Established a unified data-fetching pattern by creating and using custom React hooks (`useSupportPrograms`, `useIncubationCenters`, etc.).
+*   **Component Refactoring**: Updated and refactored numerous UI components (`AnnouncementListItem`, `TenantCard`, etc.) to align with the new, consistent data models provided by the backend API.
+*   **Build Error Resolution**: Systematically identified and fixed numerous TypeScript and JSX build errors, significantly improving code quality and stability.
+
+#### API Documentation
+*   **Redoc Viewer**: Added a new API documentation page at `/redoc.html`, which uses Redoc to render the `openapi.yml` specification, providing a clear and interactive reference for developers.
+
+### Technical Notes
+*   **Backend Validation**: The backend successfully passes a "build test" (dependency installation and server initialization), confirming its runnability.
+*   **Git Ignore**: Corrected the Git index to properly ignore `__pycache__` directories as defined in the `.gitignore` file.
+*   **Full-Stack Connectivity**: This release marks the first time the frontend and backend are connected for a majority of the application's features, laying the groundwork for future development.
+
+---
+
 # Release v0.1.0: JB SQUARE Prototype
 
 ## Overview
