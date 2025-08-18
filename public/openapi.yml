@@ -1,0 +1,1488 @@
+openapi: 3.0.3
+info:
+  title: 전북바이오 웹 시스템 API
+  description: |
+    전북특별자치도 바이오산업 육성을 위한 디지털 통합 플랫폼 API
+    - 바이오 산업 관련 정보 통합 제공
+    - 지원사업, 기술, 인력, 공간, 인증 정보 관리
+    - 사용자 권한 기반 접근 제어
+  version: 1.0.0
+  contact:
+    name: 전북테크노파크
+    email: support@jeonbuk-bio.kr
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.jeonbuk-bio.kr/v1
+    description: Production server
+  - url: https://dev-api.jeonbuk-bio.kr/v1
+    description: Development server
+
+tags:
+  - name: auth
+    description: 인증 관련 API
+  - name: users
+    description: 사용자 관리 API
+  - name: support-programs
+    description: 기업지원사업 API
+  - name: incubation-centers
+    description: 창업보육센터 API
+  - name: tech-summary
+    description: 기술 및 특허 API
+  - name: education
+    description: 교육 프로그램 API
+  - name: mentors
+    description: 전문가 멘토링 API
+  - name: companies
+    description: 바이오 기업 DB API
+  - name: statistics
+    description: 성과관리 통계 API
+  - name: notices
+    description: 공고 및 알림 API
+  - name: search
+    description: 통합 검색 API
+  - name: admin
+    description: 관리자 기능 API
+
+paths:
+  # ===== 인증 관련 API =====
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: 사용자 로그인
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "password123"
+                rememberMe:
+                  type: boolean
+                  default: false
+      responses:
+        '200':
+          description: 로그인 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: 인증 실패
+        '403':
+          description: 계정 승인 대기 중
+
+  /auth/register:
+    post:
+      tags: [auth]
+      summary: 회원가입 요청
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, organization, agreedToTerms, agreedToPrivacy]
+              properties:
+                name:
+                  type: string
+                  example: "홍길동"
+                email:
+                  type: string
+                  format: email
+                  example: "hong@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "S3cureP@ss!"
+                organization:
+                  type: string
+                  example: "외부 파트너사"
+                phone:
+                  type: string
+                  example: "010-1234-5678"
+                agreedToTerms:
+                  type: boolean
+                agreedToPrivacy:
+                  type: boolean
+      responses:
+        '201':
+          description: 가입 요청 접수 완료
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "pending"
+                  message:
+                    type: string
+                    example: "가입 요청이 접수되었습니다. 관리자의 승인을 기다려주세요."
+
+  /auth/password-reset/request:
+    post:
+      tags: [auth]
+      summary: 비밀번호 재설정 요청
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: 인증 코드 발송 완료
+
+  /auth/password-reset/verify:
+    post:
+      tags: [auth]
+      summary: 비밀번호 재설정 인증
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token, newPassword]
+              properties:
+                token:
+                  type: string
+                newPassword:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: 비밀번호 재설정 완료
+
+  # ===== 사용자 관리 API =====
+  /users/me:
+    get:
+      tags: [users]
+      summary: 내 정보 조회
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 사용자 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+    patch:
+      tags: [users]
+      summary: 내 정보 수정
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                phone:
+                  type: string
+                organization:
+                  type: string
+      responses:
+        '200':
+          description: 정보 수정 완료
+
+  /users/me/password:
+    patch:
+      tags: [users]
+      summary: 비밀번호 변경
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [currentPassword, newPassword]
+              properties:
+                currentPassword:
+                  type: string
+                  format: password
+                newPassword:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: 비밀번호 변경 완료
+
+  /users/me/applications:
+    get:
+      tags: [users]
+      summary: 내 신청 내역 조회
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 신청 내역 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+
+  # ===== 기업지원사업 API =====
+  /support-programs:
+    get:
+      tags: [support-programs]
+      summary: 지원사업 목록 조회
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [ongoing, closed, upcoming]
+        - name: organization
+          in: query
+          schema:
+            type: string
+        - name: keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 지원사업 목록
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SupportProgram'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /support-programs/{id}:
+    get:
+      tags: [support-programs]
+      summary: 지원사업 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 지원사업 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportProgram'
+
+  # ===== 창업보육센터 API =====
+  /incubation-centers:
+    get:
+      tags: [incubation-centers]
+      summary: 창업보육센터 목록 조회
+      parameters:
+        - name: hasVacancy
+          in: query
+          schema:
+            type: boolean
+        - name: region
+          in: query
+          schema:
+            type: string
+        - name: keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 창업보육센터 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IncubationCenter'
+
+  /incubation-centers/{id}:
+    get:
+      tags: [incubation-centers]
+      summary: 창업보육센터 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 창업보육센터 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncubationCenter'
+
+  # ===== 기술 및 특허 API =====
+  /tech-summary/list:
+    get:
+      tags: [tech-summary]
+      summary: 기술 및 특허 목록 조회
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: keyword
+          in: query
+          schema:
+            type: string
+        - name: organization
+          in: query
+          schema:
+            type: string
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: transferable
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 기술 및 특허 목록
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Technology'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /tech-summary/detail/{id}:
+    get:
+      tags: [tech-summary]
+      summary: 기술 및 특허 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 기술 및 특허 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Technology'
+
+  # ===== 교육 프로그램 API =====
+  /programs:
+    get:
+      tags: [education]
+      summary: 교육 프로그램 목록 조회
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: organization
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [upcoming, ongoing, closed]
+        - name: month
+          in: query
+          schema:
+            type: string
+        - name: keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 교육 프로그램 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EducationProgram'
+
+  /programs/{id}:
+    get:
+      tags: [education]
+      summary: 교육 프로그램 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 교육 프로그램 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationProgram'
+
+  /education/contents:
+    get:
+      tags: [education]
+      summary: 교육 콘텐츠 목록 조회
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [video, pdf, document]
+        - name: keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 교육 콘텐츠 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EducationContent'
+
+  /education/contents/{id}:
+    get:
+      tags: [education]
+      summary: 교육 콘텐츠 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 교육 콘텐츠 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationContent'
+
+  # ===== 전문가 멘토링 API =====
+  /mentors:
+    get:
+      tags: [mentors]
+      summary: 전문가 목록 조회
+      parameters:
+        - name: field
+          in: query
+          schema:
+            type: string
+        - name: available
+          in: query
+          schema:
+            type: boolean
+        - name: keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 전문가 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mentor'
+
+  /mentors/{id}:
+    get:
+      tags: [mentors]
+      summary: 전문가 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 전문가 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mentor'
+
+  # ===== 바이오 기업 DB API =====
+  /companies:
+    get:
+      tags: [companies]
+      summary: 바이오 기업 목록 조회
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: industry
+          in: query
+          schema:
+            type: string
+        - name: location
+          in: query
+          schema:
+            type: string
+        - name: keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 바이오 기업 목록
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /companies/{id}:
+    get:
+      tags: [companies]
+      summary: 바이오 기업 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 바이오 기업 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+
+  # ===== 성과관리 통계 API =====
+  /statistics/kpis:
+    get:
+      tags: [statistics]
+      summary: 성과지표 통계 조회
+      parameters:
+        - name: year
+          in: query
+          schema:
+            type: integer
+        - name: field
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 성과지표 통계
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KPI'
+
+  # ===== 공고 및 알림 API =====
+  /notices:
+    get:
+      tags: [notices]
+      summary: 공고 목록 조회
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 공고 목록
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notice'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /notices/{id}:
+    get:
+      tags: [notices]
+      summary: 공고 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 공고 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notice'
+
+  /announcements:
+    get:
+      tags: [notices]
+      summary: 공지사항 목록 조회
+      responses:
+        '200':
+          description: 공지사항 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Announcement'
+
+  /announcements/{id}:
+    get:
+      tags: [notices]
+      summary: 공지사항 상세 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 공지사항 상세 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Announcement'
+
+  /notifications/user:
+    get:
+      tags: [notices]
+      summary: 사용자 알림 조회
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 사용자 알림 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+
+  /notifications/mark-as-read:
+    post:
+      tags: [notices]
+      summary: 알림 읽음 처리
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notificationIds:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: 읽음 처리 완료
+
+  # ===== 통합 검색 API =====
+  /search:
+    get:
+      tags: [search]
+      summary: 통합 검색
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [all, programs, centers, technologies, companies, notices]
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [relevance, date, popularity]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: 검색 결과
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SearchResult'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /sitemap:
+    get:
+      tags: [search]
+      summary: 사이트맵 조회
+      responses:
+        '200':
+          description: 사이트맵 구조
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SitemapNode'
+
+  # ===== 관리자 API =====
+  /admin/auth/login:
+    post:
+      tags: [admin]
+      summary: 관리자 로그인
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: 관리자 로그인 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+                  admin:
+                    $ref: '#/components/schemas/Admin'
+
+  /admin/dashboard/summary:
+    get:
+      tags: [admin]
+      summary: 관리자 대시보드 요약 정보
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 대시보드 요약 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+
+  /admin/users:
+    get:
+      tags: [admin]
+      summary: 사용자 목록 조회 (관리자)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, inactive, pending]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: 사용자 목록
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /admin/users/{id}/status:
+    patch:
+      tags: [admin]
+      summary: 사용자 상태 변경
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [active, inactive]
+      responses:
+        '200':
+          description: 상태 변경 완료
+
+  /admin/users/{id}/role:
+    patch:
+      tags: [admin]
+      summary: 사용자 권한 변경
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  enum: [user, admin, manager]
+      responses:
+        '200':
+          description: 권한 변경 완료
+
+  /admin/users/registration-requests:
+    get:
+      tags: [admin]
+      summary: 회원가입 요청 목록 조회
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 회원가입 요청 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RegistrationRequest'
+
+  /admin/users/registration-requests/approve:
+    post:
+      tags: [admin]
+      summary: 회원가입 승인
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIds:
+                  type: array
+                  items:
+                    type: string
+                approvedBy:
+                  type: string
+      responses:
+        '200':
+          description: 승인 처리 완료
+
+  /admin/users/registration-requests/reject:
+    post:
+      tags: [admin]
+      summary: 회원가입 거절
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: 거절 처리 완료
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum: [user, admin, manager]
+        status:
+          type: string
+          enum: [active, inactive, pending]
+        organization:
+          type: string
+        phone:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        lastLogin:
+          type: string
+          format: date-time
+
+    Admin:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        role:
+          type: string
+          enum: [admin, super_admin]
+        permissions:
+          type: array
+          items:
+            type: string
+
+    SupportProgram:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        organization:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [upcoming, ongoing, closed]
+        category:
+          type: string
+        supportType:
+          type: array
+          items:
+            type: string
+        targetCompany:
+          type: string
+        externalUrl:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    IncubationCenter:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        totalRooms:
+          type: integer
+        vacantRooms:
+          type: integer
+        occupancyRate:
+          type: number
+          format: float
+        address:
+          type: string
+        contact:
+          type: string
+        manager:
+          type: string
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+              format: float
+            longitude:
+              type: number
+              format: float
+
+    Technology:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        organization:
+          type: string
+        patentNumber:
+          type: string
+        applicationDate:
+          type: string
+          format: date
+        category:
+          type: string
+        transferable:
+          type: boolean
+        thumbnail:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    EducationProgram:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        organization:
+          type: string
+        category:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        location:
+          type: string
+        cost:
+          type: number
+        status:
+          type: string
+          enum: [upcoming, ongoing, closed]
+        targetAudience:
+          type: string
+        applicationUrl:
+          type: string
+
+    EducationContent:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        type:
+          type: string
+          enum: [video, pdf, document]
+        url:
+          type: string
+        thumbnail:
+          type: string
+        viewCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    Mentor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        organization:
+          type: string
+        field:
+          type: array
+          items:
+            type: string
+        expertise:
+          type: string
+        experience:
+          type: string
+        available:
+          type: boolean
+        contactEmail:
+          type: string
+          format: email
+        externalUrl:
+          type: string
+
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        industry:
+          type: string
+        establishedYear:
+          type: integer
+        ceo:
+          type: string
+        products:
+          type: string
+        location:
+          type: string
+        contact:
+          type: string
+        revenue:
+          type: number
+        employees:
+          type: integer
+        certification:
+          type: array
+          items:
+            type: string
+        exportStatus:
+          type: boolean
+
+    KPI:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        value:
+          type: number
+        unit:
+          type: string
+        year:
+          type: integer
+        field:
+          type: string
+        changeRate:
+          type: number
+          format: float
+
+    Notice:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        organization:
+          type: string
+        category:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        attachments:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    Announcement:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        category:
+          type: string
+          enum: [system, operation, general]
+        author:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [info, warning, error, success]
+        title:
+          type: string
+        message:
+          type: string
+        link:
+          type: string
+        isRead:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        programId:
+          type: string
+        programTitle:
+          type: string
+        status:
+          type: string
+          enum: [pending, approved, rejected, completed]
+        appliedAt:
+          type: string
+          format: date-time
+        reviewedAt:
+          type: string
+          format: date-time
+        reviewComment:
+          type: string
+
+    RegistrationRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        organization:
+          type: string
+        requestedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [pending, approved, rejected]
+
+    SearchResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+        relevanceScore:
+          type: number
+          format: float
+
+    SitemapNode:
+      type: object
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/SitemapNode'
+
+    DashboardSummary:
+      type: object
+      properties:
+        userCount:
+          type: integer
+        activeUsers:
+          type: integer
+        pendingApprovals:
+          type: integer
+        announcementCount:
+          type: integer
+        systemStats:
+          type: object
+          properties:
+            dailyLogins:
+              type: integer
+            monthlyTraffic:
+              type: integer
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        hasNext:
+          type: boolean
+        hasPrev:
+          type: boolean
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
