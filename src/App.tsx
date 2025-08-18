@@ -10,7 +10,7 @@ import HomePageSample6 from './components/pages/HomePageSample6';
 import AnnouncementsPage from './components/pages/AnnouncementsPage';
 import IncubationPage from './components/pages/IncubationPage';
 import CompaniesPage from './components/pages/CompaniesPage';
-import TechPatentsPage from './components/pages/TechPatentsPage';
+import TechnologiesListPage from './components/pages/TechnologiesListPage';
 import AnnouncementDetailPage from './components/pages/AnnouncementDetailPage';
 import ClusterDashboardPage from './components/pages/ClusterDashboardPage';
 import ClusterHubPage from './components/pages/ClusterHubPage';
@@ -64,7 +64,7 @@ function App() {
       <Route path="/tech" element={<TechDashboardPage />} />
       <Route path="/tech/outcomes" element={<TechOutcomesPage />} />
       <Route path="/tech/transfer" element={<TechTransferPage />} />
-      <Route path="/tech-patents" element={<TechPatentsPage />} />
+      <Route path="/tech/patents" element={<TechnologiesListPage />} />
       <Route path="/tech/collaboration" element={<TechCollaborationPage />} />
       <Route path="/tech/:type/:id" element={<TechDetailPage />} />
 

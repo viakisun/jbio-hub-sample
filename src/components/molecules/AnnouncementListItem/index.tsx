@@ -2,20 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import Icon from '../../atoms/Icon';
 import { DESIGN_SYSTEM } from '../../../styles/tokens';
+import { SupportProgram, SupportProgramStatus } from '../../../hooks/useSupportPrograms'; // Import the correct type
 
 // --- DATA MODELS ---
-interface Announcement {
-  id: number;
-  title: string;
-  organization: string;
-  deadline: string;
-  budget: string;
-  status: 'active' | 'urgent';
-  daysLeft: number;
-}
-
 interface AnnouncementListItemProps {
-  announcement: Announcement;
+  program: SupportProgram; // Renamed for clarity
   style?: React.CSSProperties;
 }
 
@@ -41,11 +32,16 @@ const ItemHeader = styled.div`
   margin-bottom: 0.75rem;
 `;
 
-const StatusBadge = styled.span<{ status: 'active' | 'urgent' }>`
+const StatusBadge = styled.span<{ status: 'active' | 'urgent' | 'upcoming' | 'closed' }>`
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
-  background-color: ${props => props.status === 'active' ? '#10b981' : '#f59e0b'};
+  background-color: ${props => {
+    if (props.status === 'urgent') return '#f59e0b';
+    if (props.status === 'active') return '#10b981';
+    if (props.status === 'upcoming') return '#3b82f6';
+    return '#6b7280';
+  }};
   color: white;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -56,7 +52,7 @@ const DaysLeft = styled.div<{ days: number }>`
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  color: ${props => props.days <= 7 ? '#f59e0b' : '#4f46e5'};
+  color: ${props => props.days <= 7 && props.days >= 0 ? '#f59e0b' : '#4f46e5'};
   font-size: 0.875rem;
   font-weight: 700;
 `;
@@ -84,30 +80,64 @@ const ItemFooter = styled.div`
 `;
 
 const Organization = styled.span``;
-const Budget = styled.span`
+const TargetCompany = styled.span`
   font-weight: 600;
   color: #111827;
 `;
 
 
+// --- HELPER FUNCTION ---
+const calculateDaysLeft = (endDateStr: string): number => {
+    const end = new Date(endDateStr);
+    const now = new Date();
+    end.setHours(0, 0, 0, 0);
+    now.setHours(0, 0, 0, 0);
+    const diffTime = end.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+};
+
+const getStatusInfo = (program: SupportProgram): { text: string, type: 'active' | 'urgent' | 'upcoming' | 'closed' } => {
+    const daysLeft = calculateDaysLeft(program.endDate);
+    if (program.status === 'closed' || daysLeft < 0) {
+        return { text: '마감', type: 'closed' };
+    }
+    if (program.status === 'upcoming') {
+        return { text: '예정', type: 'upcoming' };
+    }
+    if (program.status === 'ongoing') {
+        if (daysLeft <= 7) {
+            return { text: '마감임박', type: 'urgent' };
+        }
+        return { text: '진행중', type: 'active' };
+    }
+    return { text: '정보없음', type: 'closed' };
+};
+
+
 // --- COMPONENT ---
 
-const AnnouncementListItem: React.FC<AnnouncementListItemProps> = ({ announcement, style }) => {
+const AnnouncementListItem: React.FC<AnnouncementListItemProps> = ({ program, style }) => {
+  const daysLeft = calculateDaysLeft(program.endDate);
+  const statusInfo = getStatusInfo(program);
+
   return (
     <ItemWrapper style={style}>
       <ItemHeader>
-        <StatusBadge status={announcement.status}>
-          {announcement.status === 'active' ? '진행중' : '마감임박'}
+        <StatusBadge status={statusInfo.type}>
+          {statusInfo.text}
         </StatusBadge>
-        <DaysLeft days={announcement.daysLeft}>
-          <Icon name="clock" size={14} />
-          D-{announcement.daysLeft}
-        </DaysLeft>
+        {statusInfo.type !== 'closed' && statusInfo.type !== 'upcoming' &&
+            <DaysLeft days={daysLeft}>
+                <Icon name="clock" size={14} />
+                D-{daysLeft}
+            </DaysLeft>
+        }
       </ItemHeader>
-      <ItemTitle>{announcement.title}</ItemTitle>
+      <ItemTitle>{program.title}</ItemTitle>
       <ItemFooter>
-        <Organization>{announcement.organization}</Organization>
-        <Budget>{announcement.budget}</Budget>
+        <Organization>{program.organization}</Organization>
+        <TargetCompany>대상: {program.targetCompany}</TargetCompany>
       </ItemFooter>
     </ItemWrapper>
   );
