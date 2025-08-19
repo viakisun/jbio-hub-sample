@@ -14,6 +14,6 @@ class Pagination(BaseModel):
     hasPrev: bool
 
 
-class PaginatedResponse(Generic[T], BaseModel):
+class PaginatedResponse(BaseModel, Generic[T]):
     data: List[T]
     pagination: Pagination
