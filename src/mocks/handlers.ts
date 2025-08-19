@@ -227,6 +227,49 @@ const technologiesHandler = http.get('/api/tech-summary/list', ({ request }) => 
   });
 });
 
+const incubationCentersDb = [
+    {
+        id: "ic_001",
+        name: "전북대학교 창업보육센터",
+        totalRooms: 50,
+        vacantRooms: 5,
+        occupancyRate: 0.90,
+        address: "전라북도 전주시 덕진구 백제대로 567",
+        contact: "063-270-1234",
+        manager: "김철수 센터장",
+        location: { latitude: 35.8464, longitude: 127.1293 }
+    },
+    {
+        id: "ic_002",
+        name: "원광대학교 창업보육센터",
+        totalRooms: 40,
+        vacantRooms: 0,
+        occupancyRate: 1.0,
+        address: "전라북도 익산시 익산대로 460",
+        contact: "063-850-5678",
+        manager: "박영희 매니저",
+        location: { latitude: 35.9687, longitude: 126.9575 }
+    },
+    {
+        id: "ic_003",
+        name: "전주정보문화산업진흥원 (JICA)",
+        totalRooms: 30,
+        vacantRooms: 8,
+        occupancyRate: 0.73,
+        address: "전라북도 전주시 완산구 아중로 225",
+        contact: "063-281-4114",
+        manager: "이진아 팀장",
+        location: { latitude: 35.8227, longitude: 127.1643 }
+    },
+];
+
+const incubationCentersHandler = http.get('/api/incubation-centers', ({ request }) => {
+  const url = new URL(request.url);
+  const limit = Number(url.searchParams.get('limit'));
+  const data = limit ? incubationCentersDb.slice(0, limit) : incubationCentersDb;
+  return HttpResponse.json(data);
+});
+
 export const handlers = [
   dashboardHandler,
   organizationsHandler,
@@ -235,4 +278,5 @@ export const handlers = [
   eventsHandler,
   supportProgramsHandler,
   technologiesHandler,
+  incubationCentersHandler,
 ];
