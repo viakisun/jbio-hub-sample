@@ -167,6 +167,66 @@ const supportProgramsHandler = http.get('/api/support-programs', ({ request }) =
   });
 });
 
+const technologiesDb = [
+    {
+        id: "tech_001",
+        title: "고효율 미생물 연료전지 개발",
+        summary: "폐수를 활용하여 전기를 생산하는 친환경 고효율 미생물 연료전지 기술. 기존 기술 대비 전력 생산 효율 30% 향상.",
+        organization: "전북대학교 신재생에너지연구소",
+        patentNumber: "10-2024-0123456",
+        applicationDate: "2024-08-01",
+        category: "환경/에너지",
+        transferable: true,
+        thumbnail: "https://picsum.photos/seed/tech1/400/300",
+        createdAt: "2024-09-15T10:00:00Z"
+    },
+    {
+        id: "tech_002",
+        title: "AI 기반 암 진단 보조 소프트웨어",
+        summary: "의료 영상을 AI로 분석하여 초기 단계의 암을 95% 정확도로 판별하는 진단 보조 소프트웨어.",
+        organization: "(주)메디컬AI",
+        patentNumber: "10-2025-0011223",
+        applicationDate: "2025-01-20",
+        category: "의료/헬스케어",
+        transferable: true,
+        thumbnail: "https://picsum.photos/seed/tech2/400/300",
+        createdAt: "2025-02-28T14:30:00Z"
+    },
+    {
+        id: "tech_003",
+        title: "스마트팜용 복합 환경제어 시스템",
+        summary: "온도, 습도, CO2 농도, 광량 등을 통합 제어하여 작물 생산성을 극대화하는 IoT 기반 스마트팜 솔루션.",
+        organization: "농업기술실용화재단",
+        patentNumber: null,
+        applicationDate: null,
+        category: "농생명",
+        transferable: false,
+        thumbnail: "https://picsum.photos/seed/tech3/400/300",
+        createdAt: "2025-05-10T11:00:00Z"
+    },
+];
+
+const technologiesHandler = http.get('/api/tech-summary/list', ({ request }) => {
+  const url = new URL(request.url);
+  const page = Number(url.searchParams.get('page') || '1');
+  const limit = Number(url.searchParams.get('limit') || '10');
+  const start = (page - 1) * limit;
+  const end = start + limit;
+  const data = technologiesDb.slice(start, end);
+
+  return HttpResponse.json({
+    data: data,
+    pagination: {
+        page: page,
+        limit: limit,
+        total: technologiesDb.length,
+        totalPages: Math.ceil(technologiesDb.length / limit),
+        hasNext: end < technologiesDb.length,
+        hasPrev: page > 1,
+    }
+  });
+});
+
 export const handlers = [
   dashboardHandler,
   organizationsHandler,
@@ -174,4 +234,5 @@ export const handlers = [
   newsHandler,
   eventsHandler,
   supportProgramsHandler,
+  technologiesHandler,
 ];
