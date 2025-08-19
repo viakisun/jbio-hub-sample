@@ -44,13 +44,13 @@ const Thumbnail = styled.img`
   object-fit: cover;
 `;
 
-const CategoryBadge = styled.span<{ color: string, bgColor: string }>`
+const CategoryBadge = styled.span<{ $color: string, $bgColor: string }>`
   position: absolute;
   top: ${DESIGN_SYSTEM.spacing.md};
   left: ${DESIGN_SYSTEM.spacing.md};
   padding: ${DESIGN_SYSTEM.spacing.xs} ${DESIGN_SYSTEM.spacing.sm};
-  background-color: ${props => props.bgColor};
-  color: ${props => props.color};
+  background-color: ${props => props.$bgColor};
+  color: ${props => props.$color};
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
@@ -136,7 +136,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
       <CardWrapper>
         <ThumbnailWrapper>
           {news.thumbnailUrl && <Thumbnail src={news.thumbnailUrl} alt={news.title} loading="lazy" />}
-          <CategoryBadge color={categoryStyle.color} bgColor={categoryStyle.bgColor}>
+          <CategoryBadge $color={categoryStyle.color} $bgColor={categoryStyle.bgColor}>
             {categoryStyle.name}
           </CategoryBadge>
         </ThumbnailWrapper>

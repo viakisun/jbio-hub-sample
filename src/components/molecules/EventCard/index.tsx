@@ -45,13 +45,13 @@ const Thumbnail = styled.img`
   object-fit: cover;
 `;
 
-const CategoryBadge = styled.span<{ color: string, bgColor: string }>`
+const CategoryBadge = styled.span<{ $color: string, $bgColor: string }>`
   position: absolute;
   top: ${DESIGN_SYSTEM.spacing.md};
   left: ${DESIGN_SYSTEM.spacing.md};
   padding: ${DESIGN_SYSTEM.spacing.xs} ${DESIGN_SYSTEM.spacing.sm};
-  background-color: ${props => props.bgColor};
-  color: ${props => props.color};
+  background-color: ${props => props.$bgColor};
+  color: ${props => props.$color};
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
@@ -99,19 +99,19 @@ const Footer = styled.div`
   border-top: 1px solid ${DESIGN_SYSTEM.colors.gray[100]};
 `;
 
-const StatusBadge = styled.span<{ status: string }>`
+const StatusBadge = styled.span<{ $status: string }>`
   padding: 4px 10px;
   border-radius: 12px;
   font-weight: 600;
   font-size: 12px;
-  background-color: ${({ status, theme }) => {
-    if (status === '예정') return DESIGN_SYSTEM.colors.primary[100];
-    if (status === '진행중') return DESIGN_SYSTEM.colors.success[100];
+  background-color: ${({ $status, theme }) => {
+    if ($status === '예정') return DESIGN_SYSTEM.colors.primary[100];
+    if ($status === '진행중') return DESIGN_SYSTEM.colors.success[100];
     return DESIGN_SYSTEM.colors.gray[200];
   }};
-  color: ${({ status, theme }) => {
-    if (status === '예정') return DESIGN_SYSTEM.colors.primary[700];
-    if (status === '진행중') return DESIGN_SYSTEM.colors.success[700];
+  color: ${({ $status, theme }) => {
+    if ($status === '예정') return DESIGN_SYSTEM.colors.primary[700];
+    if ($status === '진행중') return DESIGN_SYSTEM.colors.success[700];
     return DESIGN_SYSTEM.colors.gray[600];
   }};
 `;
@@ -145,7 +145,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       <CardWrapper>
         <ThumbnailWrapper>
           {event.thumbnailUrl && <Thumbnail src={event.thumbnailUrl} alt={event.title} loading="lazy" />}
-          <CategoryBadge color="#FFFFFF" bgColor={DESIGN_SYSTEM.colors.success[600]}>
+          <CategoryBadge $color="#FFFFFF" $bgColor={DESIGN_SYSTEM.colors.success[600]}>
             행사
           </CategoryBadge>
         </ThumbnailWrapper>
@@ -154,7 +154,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
           {event.summary && <Summary>{event.summary}</Summary>}
           <Footer>
             <span>{event.host}</span>
-            <StatusBadge status={event.status}>{event.status}</StatusBadge>
+            <StatusBadge $status={event.status}>{event.status}</StatusBadge>
           </Footer>
         </ContentWrapper>
       </CardWrapper>

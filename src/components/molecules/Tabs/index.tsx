@@ -22,7 +22,7 @@ const TabList = styled.div`
   gap: 1rem;
 `;
 
-const TabButton = styled.button<{ isActive: boolean }>`
+const TabButton = styled.button<{ $isActive: boolean }>`
   padding: 0.75rem 0.25rem;
   margin: 0 0.75rem;
   white-space: nowrap; /* Prevent text wrapping */
@@ -31,8 +31,8 @@ const TabButton = styled.button<{ isActive: boolean }>`
   border: none;
   background: none;
   cursor: pointer;
-  color: ${props => (props.isActive ? '#111827' : '#6b7280')};
-  border-bottom: 3px solid ${props => (props.isActive ? '#4f46e5' : 'transparent')};
+  color: ${props => (props.$isActive ? '#111827' : '#6b7280')};
+  border-bottom: 3px solid ${props => (props.$isActive ? '#4f46e5' : 'transparent')};
   margin-bottom: -2px;
   transition: color 0.3s ease, border-color 0.3s ease;
 
@@ -61,7 +61,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabClick }) => {
         {tabs.map(tab => (
           <TabButton
             key={tab.id}
-            isActive={tab.id === activeTab}
+            $isActive={tab.id === activeTab}
             onClick={() => onTabClick(tab.id)}
           >
             {tab.label}
