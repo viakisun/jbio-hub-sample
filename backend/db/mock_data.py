@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from ..models.announcement import Announcement, FileLink, RelatedLink
-from ..models.company import Company
+from ..models.company import Company, CompanyContact, SizeCategory
+from ..models.article import Article
 from ..models.infra import Infra
 from ..models.content import News, Event, Tech
 from ..models.consultation import Consultation
@@ -121,38 +122,59 @@ CREATE TABLE companies (
 );
 """
 
-companies_db: list[Company] = [
-    Company(
-        id=1,
-        name='(주)바이오노트',
-        type='기업',
-        description='동물용 진단제품 개발 및 제조를 선도하는 기업입니다.',
-        address='전라북도 익산시 왕궁면 국가식품로 100',
-        contact_person='김담당',
-        contact_email='contact@bionote.co.kr',
-        contact_phone='063-123-4567'
+companies_db: dict[str, Company] = {
+    "comp-001": Company(
+        id="comp-001",
+        name="전북 바이오텍",
+        logoUrl="https://picsum.photos/seed/comp1/200/200",
+        industry="레드 바이오",
+        region="전주시",
+        foundedYear=2020,
+        sizeCategory=SizeCategory.STARTUP,
+        employees=15,
+        description="AI 기반 신약 개발 스타트업입니다. 혁신적인 기술로 난치병 치료에 도전합니다.",
+        products=["JB-Drug-01", "JB-Drug-02"],
+        achievements=["2023년 기술혁신상 수상", "시리즈 A 투자 유치 (100억)"],
+        patents=["KR-10-2023-0012345", "US-11-2024-0054321"],
+        contact=CompanyContact(name="김담당", email="contact@jb-biotech.com", phone="063-111-2222"),
+        websiteUrl="https://jb-biotech.com",
+        relatedArticles=["article-001"]
     ),
-    Company(
-        id=2,
-        name='한국생명공학연구원 전북분원',
-        type='기관',
-        description='생명공학 분야의 국가 거점 연구기관입니다.',
-        address='전라북도 정읍시 입암면 첨단과기로 241',
-        contact_person='이연구원',
-        contact_email='info@kribb.re.kr',
-        contact_phone='063-570-5600'
+    "comp-002": Company(
+        id="comp-002",
+        name="그린 애그리",
+        logoUrl="https://picsum.photos/seed/comp2/200/200",
+        industry="그린 바이오",
+        region="김제시",
+        foundedYear=2015,
+        sizeCategory=SizeCategory.SME,
+        employees=55,
+        description="친환경 농업 솔루션을 제공하는 중견기업입니다. 스마트팜과 미생물 비료가 주력입니다.",
+        products=["스마트팜 제어 시스템 v2", "유기농 미생물 비료"],
+        achievements=["2022년 농림축산식품부 장관상 수상"],
+        patents=["KR-10-2021-0098765"],
+        contact=CompanyContact(name="박팀장", email="sales@greenagri.co.kr", phone="063-333-4444"),
+        websiteUrl="https://greenagri.co.kr",
+        relatedArticles=["article-002"]
     ),
-    Company(
-        id=3,
-        name='전북대학교 병원',
-        type='기관',
-        description='지역 거점 국립대학교 병원. 임상 연구 및 시험 진행.',
-        address='전라북도 전주시 덕진구 건지로 20',
-        contact_person='최교수',
-        contact_email='med@jbnu.ac.kr',
-        contact_phone='063-250-1114'
+    "comp-003": Company(
+        id="comp-003",
+        name="화이트 산업",
+        logoUrl="https://picsum.photos/seed/comp3/200/200",
+        industry="화이트 바이오",
+        region="군산시",
+        foundedYear=2008,
+        sizeCategory=SizeCategory.LARGE,
+        employees=320,
+        description="바이오 플라스틱 및 친환경 소재를 개발, 생산하는 대기업입니다.",
+        products=["생분해성 플라스틱 (PLA)", "바이오에탄올"],
+        achievements=[],
+        patents=["KR-10-2018-0055555", "KR-10-2020-0077777"],
+        contact=CompanyContact(name="이부장", email="info@white-industry.com", phone="063-555-6666"),
+        websiteUrl="https://white-industry.com",
+        relatedArticles=[]
     )
-]
+}
 
 # SQL Schema for Infrastructure
 """
@@ -799,3 +821,34 @@ registration_requests_db: list[RegistrationRequest] = [
         status="pending"
     )
 ]
+
+# ===== New Mock Data for Company/Article Features =====
+
+articles_db: dict[str, Article] = {
+    "article-001": Article(
+        id="article-001",
+        title="전북 바이오텍, AI로 신약 개발 기간 2년 단축",
+        author="이코노미 저널",
+        publishDate=date(2024, 7, 22),
+        tags=["AI", "신약개발", "스타트업"],
+        contentHTML="<h1>AI, 신약 개발의 새로운 희망</h1><p>전북 바이오텍이 자체 개발한 AI 플랫폼 'JB-Discovery'를 통해 신약 후보물질 발굴 기간을 평균 4년에서 2년으로 단축하는 데 성공했다고 밝혔다...</p>",
+        images=["https://picsum.photos/seed/article1/800/400"],
+        relatedCompanies=["comp-001"]
+    ),
+    "article-002": Article(
+        id="article-002",
+        title="[인터뷰] 그린 애그리의 박팀장, '지속가능한 농업이 미래입니다'",
+        author="농업과 미래",
+        publishDate=date(2024, 6, 15),
+        tags=["그린바이오", "스마트팜", "친환경"],
+        contentHTML="<h1>지속가능한 농업을 향한 열정</h1><p>김제시에 위치한 그린 애그리는 최근 유기농 미생물 비료로 업계의 주목을 받고 있다. 그린 애그리의 박팀장을 만나 이야기를 들어보았다...</p>",
+        images=["https://picsum.photos/seed/article2/800/400"],
+        relatedCompanies=["comp-002"]
+    ),
+}
+
+bookmarks_db = {
+    # user_id: { "companies": set(), "articles": set() }
+    1: {"companies": {"comp-001", "comp-003"}, "articles": {"article-002"}},
+    2: {"companies": set(), "articles": {"article-001"}},
+}

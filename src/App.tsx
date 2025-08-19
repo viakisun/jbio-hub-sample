@@ -29,6 +29,10 @@ import TechOutcomesPage from './components/pages/TechOutcomesPage';
 import TechTransferPage from './components/pages/TechTransferPage';
 import TechCollaborationPage from './components/pages/TechCollaborationPage';
 import TechDetailPage from './components/pages/TechDetailPage';
+import CompanyDashboardPage from './components/pages/CompanyDashboardPage';
+import CompanyDetailPage from './components/pages/CompanyDetailPage';
+import ArticleListPage from './components/pages/ArticleListPage';
+import ArticleDetailPage from './components/pages/ArticleDetailPage';
 
 function App() {
   return (
@@ -68,7 +72,12 @@ function App() {
       <Route path="/tech/collaboration" element={<TechCollaborationPage />} />
       <Route path="/tech/:type/:id" element={<TechDetailPage />} />
 
+      {/* Company & Article Routes */}
+      <Route path="/company" element={<CompanyDashboardPage />} />
       <Route path="/companies" element={<CompaniesPage />} />
+      <Route path="/companies/:id" element={<CompanyDetailPage />} />
+      <Route path="/articles" element={<ArticleListPage />} />
+      <Route path="/articles/:id" element={<ArticleDetailPage />} />
     </Routes>
   );
 }

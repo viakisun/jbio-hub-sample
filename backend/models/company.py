@@ -1,12 +1,39 @@
-from pydantic import BaseModel, EmailStr
-from typing import Optional
+from pydantic import BaseModel, EmailStr, HttpUrl
+from typing import List, Optional, Dict
+from enum import Enum
+
+
+class CompanyContact(BaseModel):
+    name: str
+    email: EmailStr
+    phone: str
+
+
+class SizeCategory(str, Enum):
+    STARTUP = "Startup"
+    SME = "SME"
+    LARGE = "Large"
+
 
 class Company(BaseModel):
-    id: int
+    id: str
     name: str
-    type: str  # '기업' or '기관'
-    description: Optional[str] = None
-    address: Optional[str] = None
-    contact_person: Optional[str] = None
-    contact_email: Optional[EmailStr] = None
-    contact_phone: Optional[str] = None
+    logoUrl: Optional[str] = None # Using str for now, as HttpUrl can be strict
+    industry: str
+    region: str
+    foundedYear: int
+    sizeCategory: SizeCategory
+    employees: int
+    description: str
+    products: List[str] = []
+    achievements: List[str] = []
+    patents: List[str] = []
+    contact: CompanyContact
+    websiteUrl: Optional[str] = None # Using str for now
+    relatedArticles: List[str] = []
+
+
+class CompanyStats(BaseModel):
+    totalCount: int
+    regionDistribution: Dict[str, int]
+    sizeDistribution: Dict[str, int]
