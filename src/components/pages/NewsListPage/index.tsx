@@ -7,9 +7,11 @@ import Pagination from '../../molecules/Pagination';
 import Grid from '../../atoms/Grid';
 import NewsCard from '../../molecules/NewsCard';
 import { News } from '../../../types/api';
+import NewsHero from '../../organisms/NewsHero';
 
 // --- MOCK DATA ---
 const mockNewsList: News[] = [
+  // (mock data is the same as before)
   {
     id: 1,
     title: '혁신적인 암 치료법, CAR-T 세포 치료의 최신 동향',
@@ -45,40 +47,20 @@ const mockNewsList: News[] = [
   { id: 6, title: '뇌-컴퓨터 인터페이스(BCI), 상용화 어디까지 왔나', summary: '일론 머스크의 뉴럴링크를 비롯한 BCI 기술의 발전 현황과 윤리적 과제를 짚어본다.', content: '상세 내용...', thumbnailUrl: 'https://picsum.photos/seed/news6/400/225', sourceName: '테크월드', created_at: '2024-08-09', category: 'news' },
 ];
 
-
 // --- STYLED COMPONENTS ---
 
-const PageWrapper = styled.div`
+const ContentWrapper = styled.div`
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem 2rem;
 
   @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    padding: 1.5rem 1rem;
+    padding: 0 1rem 1.5rem;
   }
 `;
 
-const PageHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const SearchBarContainer = styled.div`
   margin-bottom: 2.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-
-  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    flex-direction: column;
-    align-items: stretch;
-  }
-`;
-
-const PageTitle = styled.h1`
-  font-size: 2rem;
-  font-weight: 700;
-
-  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    font-size: 1.75rem;
-  }
 `;
 
 // --- COMPONENT ---
@@ -86,11 +68,11 @@ const PageTitle = styled.h1`
 const NewsListPage = () => {
   return (
     <MainLayout>
-      <PageWrapper>
-        <PageHeader>
-          <PageTitle>최신 뉴스</PageTitle>
+      <NewsHero />
+      <ContentWrapper>
+        <SearchBarContainer>
           <SearchBar />
-        </PageHeader>
+        </SearchBarContainer>
 
         <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
           {mockNewsList.map((news) => (
@@ -99,7 +81,7 @@ const NewsListPage = () => {
         </Grid>
 
         <Pagination currentPage={1} totalPages={10} />
-      </PageWrapper>
+      </ContentWrapper>
     </MainLayout>
   );
 };
