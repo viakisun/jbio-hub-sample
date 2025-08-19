@@ -28,7 +28,7 @@ def get_cluster_dashboard():
             "date": "2025-08-15", # Using a fixed date for consistency
             "status": "NEW"
         }
-        for org in companies_db[:4] # Take first 4
+        for org in list(companies_db.values())[:4] # Take first 4
     ]
 
     # 3. Prepare Latest Policies data
