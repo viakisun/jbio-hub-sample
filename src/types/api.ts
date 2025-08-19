@@ -114,3 +114,20 @@ export interface PaginatedResponse<T> {
   data: T[];
   pagination: Pagination;
 }
+
+export type SupportProgramStatus = "ONGOING" | "UPCOMING" | "CLOSED";
+
+export interface SupportProgram {
+  id: string;
+  title: string;
+  organization: string;
+  description: string;
+  startDate: string; // ISO Date
+  endDate: string; // ISO Date
+  status: SupportProgramStatus;
+  category: string;
+  supportType: string[];
+  targetCompany: string;
+  externalUrl: string;
+  createdAt: string; // ISO DateTime
+}

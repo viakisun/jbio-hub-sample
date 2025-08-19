@@ -33,6 +33,7 @@ import CompanyDashboardPage from './components/pages/CompanyDashboardPage';
 import CompanyDetailPage from './components/pages/CompanyDetailPage';
 import ArticleListPage from './components/pages/ArticleListPage';
 import ArticleDetailPage from './components/pages/ArticleDetailPage';
+import SupportProgramDetailPage from './components/pages/SupportProgramDetailPage';
 
 function App() {
   return (
@@ -51,7 +52,7 @@ function App() {
       <Route path="/cluster/policy" element={<ClusterPolicyPage />} />
       <Route path="/cluster/policy/:policyId" element={<PolicyDetailPage />} />
       <Route path="/announcements" element={<AnnouncementsPage />} />
-      <Route path="/support/:category/:announcementId" element={<AnnouncementDetailPage />} />
+      <Route path="/support-programs/:id" element={<SupportProgramDetailPage />} />
 
       {/* Incubation Routes */}
       <Route path="/incubation" element={<IncubationPage />} />
