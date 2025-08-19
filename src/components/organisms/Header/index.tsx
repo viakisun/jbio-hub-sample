@@ -236,7 +236,7 @@ const Header = () => {
     { text: 'JB 창업보육센터', path: '/incubation' },
     { text: '바이오 뉴스/행사', path: '/news' },
     { text: 'JB 기업정보', path: '/companies' },
-    { text: 'JB 기술/특허', path: '/tech-patents' },
+    { text: 'JB 기술/특허', path: '/tech/patents' },
   ];
   const trendingTags = ['AI신약', 'K뷰티', '스마트팜'];
 
