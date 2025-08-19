@@ -270,6 +270,16 @@ const incubationCentersHandler = http.get('/api/incubation-centers', ({ request 
   return HttpResponse.json(data);
 });
 
+const supportProgramDetailHandler = http.get('/api/support-programs/:id', ({ params }) => {
+  const { id } = params;
+  const program = supportProgramsDb.find(p => p.id === id);
+  if (program) {
+    return HttpResponse.json(program);
+  } else {
+    return new HttpResponse(null, { status: 404 });
+  }
+});
+
 export const handlers = [
   dashboardHandler,
   organizationsHandler,
@@ -279,4 +289,5 @@ export const handlers = [
   supportProgramsHandler,
   technologiesHandler,
   incubationCentersHandler,
+  supportProgramDetailHandler,
 ];
