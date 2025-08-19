@@ -119,10 +119,59 @@ const eventsHandler = http.get('/api/events', ({ request }) => {
 });
 
 
+const supportProgramsDb = [
+    {
+        id: "sp_001",
+        title: "2025년 중소기업 기술혁신 개발사업",
+        organization: "중소벤처기업부",
+        description: "중소기업의 기술 경쟁력 강화를 위한 R&D 자금 지원.",
+        startDate: "2025-03-01",
+        endDate: "2025-09-30",
+        status: "ONGOING",
+        category: "R&D",
+        supportType: ["자금지원", "기술개발"],
+        targetCompany: "창업 7년 이하, 매출 20억 미만 중소기업",
+        externalUrl: "https://example.com/support/program1",
+        createdAt: "2025-02-01T09:00:00Z"
+    },
+    {
+        id: "sp_002",
+        title: "바이오 분야 창업기업 육성 프로그램",
+        organization: "한국생명공학연구원",
+        description: "예비 창업자 및 초기 창업기업 대상 맞춤형 보육 및 멘토링 제공.",
+        startDate: "2025-04-15",
+        endDate: "2025-10-15",
+        status: "ONGOING",
+        category: "창업지원",
+        supportType: ["멘토링", "공간지원", "네트워킹"],
+        targetCompany: "예비 창업자 또는 3년 미만 창업기업",
+        externalUrl: "https://example.com/support/program2",
+        createdAt: "2025-03-10T10:00:00Z"
+    },
+];
+
+const supportProgramsHandler = http.get('/api/support-programs', ({ request }) => {
+  const url = new URL(request.url);
+  const limit = url.searchParams.get('limit');
+  const data = limit ? supportProgramsDb.slice(0, Number(limit)) : supportProgramsDb;
+  return HttpResponse.json({
+    data: data,
+    pagination: {
+        page: 1,
+        limit: limit ? Number(limit) : 20,
+        total: data.length,
+        totalPages: 1,
+        hasNext: false,
+        hasPrev: false,
+    }
+  });
+});
+
 export const handlers = [
   dashboardHandler,
   organizationsHandler,
   organizationDetailHandler,
   newsHandler,
   eventsHandler,
+  supportProgramsHandler,
 ];
