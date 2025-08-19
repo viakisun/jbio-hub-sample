@@ -1,3 +1,47 @@
+# Release v0.2.1: Company Information & Stability Update
+
+## Overview
+
+This release introduces the comprehensive "Company Information" feature, a major new section of the JB SQUARE platform. It provides a full-stack implementation allowing users to explore, search, and view detailed information about companies in the Jeonbuk Bio ecosystem.
+
+This version also includes a significant number of stability improvements, bug fixes, and design tweaks that enhance the overall quality and robustness of the application.
+
+---
+
+### Key Features & Enhancements
+
+#### ✨ New Feature: Company & Article Information
+*   **Full-Stack Implementation**: Created a complete, end-to-end feature for company and article information.
+*   **Backend API**:
+    *   Developed new FastAPI endpoints for companies and articles.
+    *   Supports full CRUD operations, pagination, filtering, sorting, comparison, and bookmarking.
+    *   Added new Pydantic models and comprehensive mock data.
+*   **Frontend Pages**:
+    *   **Company Dashboard (`/company`)**: A new landing page displaying key statistics about registered companies.
+    *   **Company List (`/companies`)**: A redesigned, full-featured page with advanced filters, sorting, and both card and table views.
+    *   **Company Detail (`/companies/:id`)**: A detailed view for individual companies, showing products, achievements, patents, and contact information.
+    *   **Article List & Detail (`/articles`, `/articles/:id`)**: New pages for browsing and reading articles and interviews related to the companies.
+*   **Data-Driven UI**: Implemented a full suite of custom React hooks (`useCompanies`, `useArticles`, `useBookmarks`, etc.) to connect the new pages to the backend API.
+*   **New UI Components**: Created new `CompanyCard` and `ArticleCard` components for a consistent and professional look.
+
+#### 🎨 Design & UI/UX Improvements
+*   **Companies Page Redesign**: Overhauled the `/companies` page for better visual consistency with the rest of the application.
+*   **Polished Filter Bar**: Implemented a styled, user-friendly filter bar on the Companies page.
+*   **Layout Adjustments**: Fine-tuned component spacing and layout on the Companies page based on user feedback to prevent overlapping elements.
+
+#### 🛠️ Bug Fixes & Stability
+*   **Frontend Build & Runtime Errors**:
+    *   Fixed numerous TypeScript type errors.
+    *   Resolved all React warnings related to invalid props being passed to DOM elements by converting them to transient props (`$prop`).
+    *   Corrected broken navigation links in the main header.
+*   **Backend Runtime Errors**:
+    *   Fixed a server crash on startup caused by an incorrect Pydantic model definition.
+    *   Resolved a `NameError` by correcting a missing import in the mock data file.
+*   **Mock API (MSW) Fixes**:
+    *   Added missing mock handlers for `/api/support-programs`, `/api/tech-summary/list`, and `/api/incubation-centers` to prevent frontend runtime errors in development.
+
+---
+
 # Release v0.2.0: Full-Stack API Implementation
 
 ## Overview
