@@ -51,3 +51,66 @@ export interface Event {
 }
 
 export type ContentItem = News | Event;
+
+// ===== Types for Company & Article Features =====
+
+export interface CompanyContact {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export type SizeCategory = "Startup" | "SME" | "Large";
+
+export interface Company {
+  id: string;
+  name: string;
+  logoUrl?: string;
+  industry: string;
+  region: string;
+  foundedYear: number;
+  sizeCategory: SizeCategory;
+  employees: number;
+  description: string;
+  products: string[];
+  achievements: string[];
+  patents: string[];
+  contact: CompanyContact;
+  websiteUrl?: string;
+  relatedArticles: string[];
+}
+
+export interface Article {
+  id: string;
+  title: string;
+  author: string;
+  publishDate: string; // ISO 8601 date string
+  tags: string[];
+  contentHTML: string;
+  images: string[];
+  relatedCompanies: string[];
+}
+
+export interface CompanyStats {
+  totalCount: number;
+  regionDistribution: Record<string, number>;
+  sizeDistribution: {
+    startup: number;
+    sme: number;
+    large: number;
+  };
+}
+
+export interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: Pagination;
+}

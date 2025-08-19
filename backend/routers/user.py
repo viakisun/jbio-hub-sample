@@ -4,7 +4,9 @@ from typing import Annotated, List
 
 from ..models.user import User
 from ..models.application import Application
-from ..db.mock_data import users_db, applications_db
+from ..models.company import Company
+from ..models.article import Article
+from ..db.mock_data import users_db, applications_db, companies_db, articles_db, bookmarks_db
 
 router = APIRouter(
     tags=["Users"]
@@ -109,3 +111,66 @@ def get_my_applications(current_user: Annotated[User, Depends(get_current_user)]
         return [app for app in applications_db if app.id == "app_002"]
 
     return []
+
+
+# ===== Bookmarking Endpoints =====
+
+@router.get("/users/me/bookmarks/companies", response_model=List[Company])
+def get_bookmarked_companies(current_user: Annotated[User, Depends(get_current_user)]):
+    user_bookmarks = bookmarks_db.get(current_user.id, {"companies": set()})
+    company_ids = user_bookmarks.get("companies", set())
+    return [companies_db[cid] for cid in company_ids if cid in companies_db]
+
+@router.post("/users/me/bookmarks/companies", status_code=status.HTTP_201_CREATED)
+def add_company_bookmark(
+    payload: dict = Body(..., example={"companyId": "comp-001"}),
+    current_user: Annotated[User, Depends(get_current_user)] = None
+):
+    company_id = payload.get("companyId")
+    if not company_id or company_id not in companies_db:
+        raise HTTPException(status_code=404, detail="Company not found")
+
+    user_bookmarks = bookmarks_db.setdefault(current_user.id, {"companies": set(), "articles": set()})
+    user_bookmarks["companies"].add(company_id)
+    return {"status": "created"}
+
+@router.delete("/users/me/bookmarks/companies/{companyId}", status_code=status.HTTP_204_NO_CONTENT)
+def remove_company_bookmark(
+    companyId: str,
+    current_user: Annotated[User, Depends(get_current_user)] = None
+):
+    user_bookmarks = bookmarks_db.get(current_user.id)
+    if user_bookmarks and companyId in user_bookmarks.get("companies", set()):
+        user_bookmarks["companies"].remove(companyId)
+        return
+    raise HTTPException(status_code=404, detail="Bookmark not found")
+
+@router.get("/users/me/bookmarks/articles", response_model=List[Article])
+def get_bookmarked_articles(current_user: Annotated[User, Depends(get_current_user)]):
+    user_bookmarks = bookmarks_db.get(current_user.id, {"articles": set()})
+    article_ids = user_bookmarks.get("articles", set())
+    return [articles_db[aid] for aid in article_ids if aid in articles_db]
+
+@router.post("/users/me/bookmarks/articles", status_code=status.HTTP_201_CREATED)
+def add_article_bookmark(
+    payload: dict = Body(..., example={"articleId": "article-001"}),
+    current_user: Annotated[User, Depends(get_current_user)] = None
+):
+    article_id = payload.get("articleId")
+    if not article_id or article_id not in articles_db:
+        raise HTTPException(status_code=404, detail="Article not found")
+
+    user_bookmarks = bookmarks_db.setdefault(current_user.id, {"companies": set(), "articles": set()})
+    user_bookmarks["articles"].add(article_id)
+    return {"status": "created"}
+
+@router.delete("/users/me/bookmarks/articles/{articleId}", status_code=status.HTTP_204_NO_CONTENT)
+def remove_article_bookmark(
+    articleId: str,
+    current_user: Annotated[User, Depends(get_current_user)] = None
+):
+    user_bookmarks = bookmarks_db.get(current_user.id)
+    if user_bookmarks and articleId in user_bookmarks.get("articles", set()):
+        user_bookmarks["articles"].remove(articleId)
+        return
+    raise HTTPException(status_code=404, detail="Bookmark not found")
