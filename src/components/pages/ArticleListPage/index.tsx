@@ -4,8 +4,8 @@ import useArticles from '../../../hooks/useArticles';
 import ArticleCard from '../../molecules/ArticleCard';
 import Pagination from '../../molecules/Pagination';
 import { LoadingSkeleton } from '../../molecules/StateDisplay/LoadingSkeleton';
-import { ErrorState } from '../../molecules/StateDisplay/ErrorState';
-import { EmptyState } from '../../molecules/StateDisplay/EmptyState';
+import ErrorState from '../../molecules/StateDisplay/ErrorState';
+import EmptyState from '../../molecules/StateDisplay/EmptyState';
 
 const ArticleListPage: React.FC = () => {
   const [filters, setFilters] = useState({

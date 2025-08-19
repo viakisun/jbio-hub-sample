@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useCompany from '../../../hooks/useCompany';
 import MainLayout from '../../templates/MainLayout';
 import { LoadingSkeleton } from '../../molecules/StateDisplay/LoadingSkeleton';
-import { ErrorState } from '../../molecules/StateDisplay/ErrorState';
+import ErrorState from '../../molecules/StateDisplay/ErrorState';
 import Badge from '../../atoms/Badge';
 
 const DetailLayout = styled.div`
@@ -84,7 +84,7 @@ const InfoItem = styled.li`
 
 const CompanyDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: company, loading, error } = useCompany(id);
+  const { data: company, loading, error } = useCompany(id || null);
 
   if (loading) return <MainLayout><LoadingSkeleton count={8} /></MainLayout>;
   if (error) return <MainLayout><ErrorState message={error.message} /></MainLayout>;
@@ -100,7 +100,7 @@ const CompanyDetailPage: React.FC = () => {
               <CompanyName>{company.name}</CompanyName>
               <div className="flex gap-2 mt-2">
                 <Badge>{company.industry}</Badge>
-                <Badge variant="secondary">{company.region}</Badge>
+                <Badge $variant="secondary">{company.region}</Badge>
               </div>
             </TitleGroup>
           </CompanyHeader>

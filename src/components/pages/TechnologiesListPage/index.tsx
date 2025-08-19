@@ -61,10 +61,9 @@ const TechnologiesListPage = () => {
       tech.category,
       <Badge
         key={`badge-${tech.id}`}
-        backgroundColor={tech.transferable ? '#dcfce7' : '#fee2e2'}
-        color={tech.transferable ? '#166534' : '#991b1b'}
+        $variant={tech.transferable ? 'success' : 'danger'}
       >
-        {tech.transferable ? '가능' : '불가'}
+        {tech.transferable ? '기술이전 가능' : '기술이전 불가'}
       </Badge>,
       tech.patentNumber || '-',
       tech.applicationDate || '-'

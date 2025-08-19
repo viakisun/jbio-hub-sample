@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useCompanyStats from '../../../hooks/useCompanyStats';
 import KPIGroup from '../../organisms/KPIGroup';
 import { LoadingSkeleton } from '../../molecules/StateDisplay/LoadingSkeleton';
-import { ErrorState } from '../../molecules/StateDisplay/ErrorState';
+import ErrorState from '../../molecules/StateDisplay/ErrorState';
 import MainLayout from '../../templates/MainLayout';
 
 const CompanyDashboardPage: React.FC = () => {

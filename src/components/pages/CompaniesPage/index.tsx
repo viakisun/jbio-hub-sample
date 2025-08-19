@@ -7,20 +7,28 @@ import CompanyCard from '../../molecules/CompanyCard';
 import TableList from '../../molecules/TableList';
 import Pagination from '../../molecules/Pagination';
 import { LoadingSkeleton } from '../../molecules/StateDisplay/LoadingSkeleton';
-import { ErrorState } from '../../molecules/StateDisplay/ErrorState';
-import { EmptyState } from '../../molecules/StateDisplay/EmptyState';
+import ErrorState from '../../molecules/StateDisplay/ErrorState';
+import EmptyState from '../../molecules/StateDisplay/EmptyState';
 
 const CompaniesPage: React.FC = () => {
   const navigate = useNavigate();
   const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
 
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<{
+    page: number;
+    limit: number;
+    keyword: string;
+    region: string;
+    industry: string;
+    sizeCategory?: SizeCategory;
+    sort: 'latest' | 'name' | 'investmentSize';
+  }>({
     page: 1,
     limit: 12,
     keyword: '',
     region: '',
     industry: '',
-    sizeCategory: '' as SizeCategory | '',
+    sizeCategory: undefined,
     sort: 'latest',
   });
 
@@ -75,11 +83,16 @@ const CompaniesPage: React.FC = () => {
           <option value="그린 바이오">그린 바이오</option>
           <option value="화이트 바이오">화이트 바이오</option>
         </select>
-        <select name="sizeCategory" value={filters.sizeCategory} onChange={handleFilterChange} className="p-2 border border-gray-300 rounded-md">
+        <select name="sizeCategory" value={filters.sizeCategory || ''} onChange={handleFilterChange} className="p-2 border border-gray-300 rounded-md">
           <option value="">전체 규모</option>
           <option value="Startup">스타트업</option>
           <option value="SME">중견기업</option>
           <option value="Large">대기업</option>
+        </select>
+        <select name="sort" value={filters.sort} onChange={handleFilterChange} className="p-2 border border-gray-300 rounded-md">
+          <option value="latest">최신 등록순</option>
+          <option value="name">이름순</option>
+          <option value="investmentSize">투자규모순</option>
         </select>
       </div>
 
@@ -113,7 +126,11 @@ const CompaniesPage: React.FC = () => {
                 <TableList
                   headers={tableData.headers}
                   rows={tableData.rows}
-                  onRowClick={(rowIndex) => navigate(`/companies/${data.data[rowIndex].id}`)}
+                  onRowClick={(rowIndex) => {
+                    if (data?.data[rowIndex]) {
+                      navigate(`/companies/${data.data[rowIndex].id}`);
+                    }
+                  }}
                 />
               )}
               {data && data.pagination.totalPages > 1 && (

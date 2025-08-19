@@ -1,75 +1,46 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-// --- CONFIG ---
+interface BadgeProps {
+  children: React.ReactNode;
+  $variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+}
 
-const variants = {
-  default: css`
-    color: #1f2937; /* gray-800 */
-    background-color: #e5e7eb; /* gray-200 */
+const badgeVariants = {
+  primary: css`
+    background-color: #e0e7ff;
+    color: #4338ca;
   `,
-  new: css`
-    color: #1d4ed8; /* blue-700 */
-    background-color: #dbeafe; /* blue-100 */
+  secondary: css`
+    background-color: #f3f4f6;
+    color: #4b5563;
   `,
-  updated: css`
-    color: #15803d; /* green-700 */
-    background-color: #dcfce7; /* green-100 */
+  success: css`
+    background-color: #d1fae5;
+    color: #065f46;
+  `,
+  warning: css`
+    background-color: #fef3c7;
+    color: #92400e;
+  `,
+  danger: css`
+    background-color: #fee2e2;
+    color: #991b1b;
   `,
 };
 
-type BadgeVariant = keyof typeof variants;
-
-// --- STYLED COMPONENTS ---
-
-const BadgeWrapper = styled.span<{
-  $variant: BadgeVariant;
-  backgroundColor?: string;
-  color?: string;
-}>`
+const StyledBadge = styled.span<BadgeProps>`
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
   border-radius: 9999px;
-  text-transform: uppercase;
-  ${({ $variant }) => variants[$variant]};
-  ${({ backgroundColor, color }) =>
-    backgroundColor &&
-    color &&
-    css`
-      background-color: ${backgroundColor};
-      color: ${color};
-    `}
+  white-space: nowrap;
+  ${({ $variant }) => badgeVariants[$variant || 'primary']}
 `;
 
-// --- COMPONENT ---
-
-interface BadgeProps {
-  children: React.ReactNode;
-  $variant?: BadgeVariant;
-  className?: string;
-  backgroundColor?: string;
-  color?: string;
-}
-
-const Badge: React.FC<BadgeProps> = ({
-  children,
-  $variant = 'default',
-  className,
-  backgroundColor,
-  color,
-}) => {
-  return (
-    <BadgeWrapper
-      $variant={$variant}
-      className={className}
-      backgroundColor={backgroundColor}
-      color={color}
-    >
-      {children}
-    </BadgeWrapper>
-  );
+const Badge: React.FC<BadgeProps> = ({ children, $variant = 'primary' }) => {
+  return <StyledBadge $variant={$variant}>{children}</StyledBadge>;
 };
 
 export default Badge;
