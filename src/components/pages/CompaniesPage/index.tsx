@@ -44,7 +44,7 @@ const FilterContainer = styled.div`
   border: 1px solid #e5e7eb;
   margin-bottom: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 1rem;
   align-items: end;
 `;
@@ -86,9 +86,9 @@ const StyledInput = styled.input`
 `;
 
 const SearchInputWrapper = styled(FilterGroup)`
-  grid-column: 1 / -1;
+  grid-column: span 6; // Full width on mobile
   @media (min-width: 1024px) {
-    grid-column: span 2 / span 2;
+    grid-column: span 2; // 2 columns on desktop
   }
 `;
 
@@ -255,7 +255,7 @@ const CompaniesPage: React.FC = () => {
             ) : (
               <>
                 {viewMode === 'card' ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {data?.data.map((company) => (
                       <CompanyCard key={company.id} company={company} onClick={() => navigate(`/companies/${company.id}`)} />
                     ))}
