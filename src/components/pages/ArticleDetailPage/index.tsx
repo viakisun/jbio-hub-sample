@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useArticle from '../../../hooks/useArticle';
 import MainLayout from '../../templates/MainLayout';
 import { LoadingSkeleton } from '../../molecules/StateDisplay/LoadingSkeleton';
-import { ErrorState } from '../../molecules/StateDisplay/ErrorState';
+import ErrorState from '../../molecules/StateDisplay/ErrorState';
 import Badge from '../../atoms/Badge';
 
 const ArticleWrapper = styled.article`
@@ -64,7 +64,7 @@ const Content = styled.div`
 
 const ArticleDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: article, loading, error } = useArticle(id);
+  const { data: article, loading, error } = useArticle(id || null);
 
   const renderContent = () => {
     if (loading) {
@@ -100,7 +100,7 @@ const ArticleDetailPage: React.FC = () => {
               {article.relatedCompanies.map(companyId => (
                 // In a real app, you'd fetch company name for the badge
                 <Link key={companyId} to={`/companies/${companyId}`}>
-                  <Badge variant="primary">{companyId}</Badge>
+                  <Badge $variant="primary">{companyId}</Badge>
                 </Link>
               ))}
             </div>

@@ -148,7 +148,7 @@ const ClusterDashboardPage = () => {
                                 <UpdateName>{org.name}</UpdateName>
                                 <UpdateDate>{org.date}</UpdateDate>
                               </UpdateInfo>
-                              <Badge $variant={org.status === 'NEW' ? 'new' : 'updated'}>{org.status}</Badge>
+                              <Badge $variant={org.status === 'NEW' ? 'success' : 'primary'}>{org.status}</Badge>
                             </UpdateListItem>
                           ))}
                       </UpdateList>
@@ -162,7 +162,7 @@ const ClusterDashboardPage = () => {
                                 <UpdateName>{pol.name}</UpdateName>
                                 <UpdateDate>{pol.date}</UpdateDate>
                               </UpdateInfo>
-                              <Badge $variant={pol.status === 'NEW' ? 'new' : 'updated'}>{pol.status}</Badge>
+                              <Badge $variant={pol.status === 'NEW' ? 'success' : 'primary'}>{pol.status}</Badge>
                             </UpdateListItem>
                           ))}
                       </UpdateList>

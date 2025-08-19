@@ -100,7 +100,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
           <Title>{article.title}</Title>
           <TagList>
             {article.tags.slice(0, 3).map(tag => (
-              <Badge key={tag} variant="secondary">{tag}</Badge>
+      <Badge key={tag} $variant="secondary">{tag}</Badge>
             ))}
           </TagList>
           <Footer>

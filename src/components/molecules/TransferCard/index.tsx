@@ -78,11 +78,13 @@ interface TransferCardProps {
 const getStatusBadge = (status: TransferCardData['status']) => {
     switch(status) {
         case 'open':
-            return <Badge backgroundColor="#dcfce7" color="#166534">모집중</Badge>;
+            return <Badge $variant="success">모집중</Badge>;
         case 'closing-soon':
-            return <Badge backgroundColor="#fef3c7" color="#92400e">마감임박</Badge>;
+            return <Badge $variant="warning">마감임박</Badge>;
         case 'closed':
-            return <Badge backgroundColor="#e5e7eb" color="#4b5563">마감</Badge>;
+            return <Badge $variant="secondary">마감</Badge>;
+        default:
+            return null;
     }
 }
 
