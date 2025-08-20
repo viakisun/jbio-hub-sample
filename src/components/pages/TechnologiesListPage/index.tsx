@@ -40,9 +40,22 @@ const ControlsWrapper = styled.div`
 
 // --- COMPONENT ---
 
+const categoryMap: Record<string, string[]> = {
+  '레드바이오': ['의약품', '세포치료', '진단기기', '백신'],
+  '그린바이오': ['종자/육종', '미생물비료', '기능성식품', '스마트팜'],
+  '화이트바이오': ['바이오플라스틱', '산업용효소', '바이오연료', '환경정화'],
+};
+
 const TechnologiesListPage = () => {
   const navigate = useNavigate();
-  const [filters, setFilters] = useState({ page: 1, limit: 20, keyword: '', category: '', date_range: '' });
+  const [filters, setFilters] = useState({
+    page: 1,
+    limit: 20,
+    keyword: '',
+    category: '',
+    subCategory: '',
+    date_range: '',
+  });
   const { data, loading, error } = useTechnologies(filters);
 
   const handleSearch = (keyword: string) => {
@@ -50,7 +63,13 @@ const TechnologiesListPage = () => {
   };
 
   const handleFilterChange = (filterName: string, value: string) => {
-    setFilters(prev => ({ ...prev, [filterName]: value, page: 1 }));
+    setFilters(prev => {
+      const newFilters = { ...prev, [filterName]: value, page: 1 };
+      if (filterName === 'category') {
+        newFilters.subCategory = ''; // Reset subCategory when main category changes
+      }
+      return newFilters;
+    });
   };
 
   const handlePageChange = (newPage: number) => {
@@ -60,12 +79,21 @@ const TechnologiesListPage = () => {
   const filterDefinitions: Filter[] = [
     {
       name: 'category',
-      label: '카테고리',
+      label: '대분류',
       options: [
         { value: '', label: '전체' },
         { value: '레드바이오', label: '레드바이오' },
         { value: '그린바이오', label: '그린바이오' },
         { value: '화이트바이오', label: '화이트바이오' },
+      ],
+    },
+    {
+      name: 'subCategory',
+      label: '소분류',
+      disabled: !filters.category,
+      options: [
+        { value: '', label: '전체' },
+        ...(categoryMap[filters.category] || []).map(subCat => ({ value: subCat, label: subCat })),
       ],
     },
     {
