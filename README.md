@@ -1,4 +1,4 @@
-# JB SQUARE - v0.2.1
+# JB SQUARE - v0.2.2
 
 ## Overview
 
