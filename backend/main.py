@@ -2,6 +2,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from pathlib import Path
+
+# --- Path Configuration ---
+# This ensures that paths are correct regardless of the working directory.
+BASE_DIR = Path(__file__).resolve().parent.parent
+BUILD_DIR = BASE_DIR / "build"
+STATIC_DIR = BUILD_DIR / "static"
+INDEX_HTML = BUILD_DIR / "index.html"
 
 app = FastAPI(
     title="JB SQUARE API",
@@ -44,7 +52,7 @@ app.include_router(article.router, prefix="/api")
 
 # --- Static Files ---
 # Serve the static files from the React build directory
-app.mount("/static", StaticFiles(directory="../build/static"), name="static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 # --- SPA Fallback ---
@@ -52,4 +60,4 @@ app.mount("/static", StaticFiles(directory="../build/static"), name="static")
 # This should be the last route.
 @app.get("/{full_path:path}", include_in_schema=False)
 async def serve_react_app(full_path: str):
-    return FileResponse("../build/index.html")
+    return FileResponse(INDEX_HTML)
