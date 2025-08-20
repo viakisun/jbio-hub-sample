@@ -131,6 +131,162 @@ techs_db: List[Tech] = [
     ),
 ]
 
+consultations_db: List[Consultation] = []
+
+sitemap_db: List[SitemapNode] = [
+    SitemapNode(title="Home", url="/"),
+    SitemapNode(title="클러스터", url="/cluster", children=[
+        SitemapNode(title="클러스터 대시보드", url="/cluster/dashboard"),
+        SitemapNode(title="클러스터 허브", url="/cluster/hub"),
+    ]),
+    SitemapNode(title="기업", url="/companies"),
+    SitemapNode(title="기술", url="/technologies"),
+    SitemapNode(title="교육", url="/education"),
+]
+
+services_db: List[Service] = [
+    Service(title="기업 지원", description="성장 단계별 맞춤형 기업 지원 프로그램 안내", icon="briefcase", gradient="from-blue-400 to-blue-600"),
+    Service(title="기술 이전", description="우수 기술 매칭 및 기술 이전 상담", icon="share", gradient="from-green-400 to-green-600"),
+    Service(title="장비 예약", description="고가의 연구 장비 공동 활용 예약 시스템", icon="calendar", gradient="from-purple-400 to-purple-600"),
+    Service(title="전문가 매칭", description="분야별 전문가 멘토링 및 컨설팅 연결", icon="users", gradient="from-yellow-400 to-yellow-600"),
+]
+
+stats_db: List[Stat] = [
+    Stat(label="입주기업", value="128개", change="+5.2%", icon="building", color="blue"),
+    Stat(label="기술이전 건수", value="76건", change="+12%", icon="share", color="green"),
+    Stat(label="총 투자유치액", value="3,200억", change="+25%", icon="dollar-sign", color="purple"),
+    Stat(label="고용인원", value="1,500명", change="+8.7%", icon="users", color="yellow"),
+]
+
+support_programs_db: List[SupportProgram] = [
+    SupportProgram(
+        id="sp-001",
+        title="2024년 바이오 스타트업 인큐베이팅 프로그램",
+        organization="J-Bio-Hub",
+        description="초기 바이오 스타트업을 위한 사무공간, 멘토링, 시드 투자 지원.",
+        startDate=date(2024, 9, 1),
+        endDate=date(2025, 3, 1),
+        status=SupportProgramStatus.UPCOMING,
+        category="창업지원",
+        supportType=["자금", "멘토링", "인프라"],
+        targetCompany="예비창업자 및 3년 미만 스타트업",
+        externalUrl="https://jbiohub.or.kr/support/1",
+        createdAt=datetime(2024, 7, 15, 10, 0, 0)
+    ),
+    SupportProgram(
+        id="sp-002",
+        title="글로벌 진출 지원사업",
+        organization="전북테크노파크",
+        description="해외 전시회 참가, 바이어 매칭, 수출 컨설팅 지원.",
+        startDate=date(2024, 6, 1),
+        endDate=date(2024, 11, 30),
+        status=SupportProgramStatus.ONGOING,
+        category="수출지원",
+        supportType=["컨설팅", "마케팅"],
+        targetCompany="수출 유망 중소기업",
+        externalUrl="https://jbtp.or.kr/support/2",
+        createdAt=datetime(2024, 5, 20, 9, 0, 0)
+    ),
+]
+
+education_programs_db: List[EducationProgram] = [
+    EducationProgram(
+        id="ep-001",
+        title="GMP 기본과정",
+        organization="한국바이오협회",
+        category="제조/품질관리",
+        startDate=date(2024, 8, 19),
+        endDate=date(2024, 8, 23),
+        location="온라인",
+        cost=300000,
+        status=EducationProgramStatus.UPCOMING,
+        targetAudience="제약/바이오 기업 재직자",
+        applicationUrl="https://koreabio.org/education/1"
+    ),
+]
+
+education_contents_db: List[EducationContent] = [
+    EducationContent(
+        id="ec-001",
+        title="바이오 기술과 특허 전략",
+        description="특허 출원부터 권리 보호까지, 바이오 기업을 위한 필수 특허 전략을 다룹니다.",
+        category="특허/IP",
+        type=EducationContentType.VIDEO,
+        url="/videos/patent_strategy.mp4",
+        thumbnail="https://picsum.photos/seed/edu1/300/200",
+        viewCount=1204,
+        createdAt=datetime(2024, 6, 10, 11, 0, 0)
+    ),
+]
+
+mentors_db: List[Mentor] = [
+    Mentor(
+        id="mentor-001",
+        name="김박사",
+        organization="ABC 바이오",
+        field=["신약개발", "임상시험"],
+        expertise="항암제 개발 전문가",
+        experience="글로벌 제약사 20년 경력",
+        available=True,
+        contactEmail="dr.kim@example.com"
+    ),
+]
+
+technologies_db: List[Technology] = [
+    Technology(
+        id="tech-001",
+        title="AI 기반 신약 후보물질 발굴 플랫폼",
+        summary="딥러닝을 활용하여 신약 개발 기간과 비용을 획기적으로 단축시키는 플랫폼 기술",
+        organization="전북대학교 AI 연구센터",
+        patentNumber="KR-10-2023-0012345",
+        applicationDate=date(2023, 2, 1),
+        category="플랫폼 기술",
+        transferable=True,
+        thumbnail="https://picsum.photos/seed/tech1/300/200",
+        createdAt=datetime(2023, 10, 1, 10, 0, 0)
+    )
+]
+
+incubation_centers_db: List[IncubationCenter] = [
+    IncubationCenter(
+        id="ic-001",
+        name="J-Bio-Hub 창업보육센터",
+        totalRooms=50,
+        vacantRooms=5,
+        occupancyRate=90.0,
+        address="전주시 덕진구",
+        manager="홍길동",
+        contact="063-123-4567",
+        location=Location(latitude=35.8461, longitude=127.1292)
+    )
+]
+
+users_db: List[UserInDB] = [
+    UserInDB(id=1, username="admin", email="admin@example.com", full_name="관리자", role="admin", password="hashed_password_admin"),
+    UserInDB(id=2, username="user1", email="user1@example.com", full_name="김사용", role="user", interests=["레드바이오", "신약개발"], password="hashed_password_user1"),
+]
+
+registration_requests_db: List[RegistrationRequest] = [
+    RegistrationRequest(
+        userId="req-001",
+        name="박신청",
+        email="applicant@example.com",
+        organization="(주)미래바이오",
+        requestedAt=datetime(2024, 7, 21, 10, 30, 0),
+        status="pending"
+    )
+]
+
+applications_db: List[Application] = [
+    Application(
+        id="app-001",
+        programId="sp-001",
+        programTitle="2024년 바이오 스타트업 인큐베이팅 프로그램",
+        status=ApplicationStatus.PENDING,
+        appliedAt=datetime(2024, 7, 22, 15, 0, 0),
+    )
+]
+
 companies_db: dict[str, Company] = {
     "comp-001": Company(
         id='comp-001',
