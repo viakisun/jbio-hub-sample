@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI(
     title="JB SQUARE API",
@@ -40,10 +42,14 @@ app.include_router(auth.router, prefix="/api")
 app.include_router(article.router, prefix="/api")
 # ...
 
+# --- Static Files ---
+# Serve the static files from the React build directory
+app.mount("/static", StaticFiles(directory="../build/static"), name="static")
 
-@app.get("/", tags=["Root"])
-def read_root():
-    """
-    Root endpoint to check if the API is running.
-    """
-    return {"message": "Welcome to the JBio Hub API!"}
+
+# --- SPA Fallback ---
+# For any other path, serve the index.html file from the React build.
+# This should be the last route.
+@app.get("/{full_path:path}", include_in_schema=False)
+async def serve_react_app(full_path: str):
+    return FileResponse("../build/index.html")
