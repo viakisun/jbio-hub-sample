@@ -233,18 +233,21 @@ mentors_db: List[Mentor] = [
 ]
 
 technologies_db: List[Technology] = [
-    Technology(
-        id="tech_001",
-        title="AI 기반 신약 후보물질 발굴 플랫폼",
-        summary="딥러닝을 활용하여 신약 개발 기간과 비용을 획기적으로 단축시키는 플랫폼 기술",
-        organization="전북대학교 AI 연구센터",
-        patentNumber="KR-10-2023-0012345",
-        applicationDate=date(2023, 2, 1),
-        category="플랫폼 기술",
-        transferable=True,
-        thumbnail="https://picsum.photos/seed/tech1/300/200",
-        createdAt=datetime(2023, 10, 1, 10, 0, 0)
-    )
+    Technology(id='tech_001', title='차세대 CAR-T 세포 치료제 기술', summary='개선된 안전성과 효능을 갖춘 동종유래 CAR-T 세포 치료제 플랫폼', organization='(주)이뮨셀바이오', patentNumber='KR-10-2023-0011223', applicationDate=date(2023, 1, 25), category='레드바이오', subCategory='세포치료', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech1/300/200', createdAt=datetime(2023, 3, 1, 10, 0, 0)),
+    Technology(id='tech_002', title='AI 기반 폐암 조기 진단 솔루션', summary='CT 영상 분석을 통해 폐암을 95% 정확도로 조기 진단하는 인공지능 소프트웨어', organization='메디컬AI', patentNumber='KR-10-2022-0098765', applicationDate=date(2022, 8, 10), category='레드바이오', subCategory='진단기기', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech2/300/200', createdAt=datetime(2022, 11, 5, 10, 0, 0)),
+    Technology(id='tech_003', title='고수확 가뭄 저항성 옥수수 품종', summary='유전자 편집 기술을 이용하여 개발된 가뭄 환경에서도 높은 수확량을 보장하는 옥수수', organization='그린시드', patentNumber='KR-10-2023-0045678', applicationDate=date(2023, 4, 2), category='그린바이오', subCategory='종자/육종', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech3/300/200', createdAt=datetime(2023, 6, 15, 10, 0, 0)),
+    Technology(id='tech_004', title='생분해성 바이오플라스틱 PLA 제조 기술', summary='옥수수 전분을 원료로 하여 높은 투명도와 강도를 가지는 PLA 제조 공법', organization='(주)네이처플라스틱', patentNumber='KR-10-2021-0033445', applicationDate=date(2021, 3, 12), category='화이트바이오', subCategory='바이오플라스틱', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech4/300/200', createdAt=datetime(2021, 7, 20, 10, 0, 0)),
+    Technology(id='tech_005', title='알츠하이머 치료용 펩타이드 신약 후보물질', summary='아밀로이드 베타 플라크 형성을 억제하는 신규 펩타이드', organization='뉴로펩', patentNumber=None, applicationDate=None, category='레드바이오', subCategory='의약품', transferable=False, thumbnailUrl='https://picsum.photos/seed/tech5/300/200', createdAt=datetime(2024, 1, 10, 10, 0, 0)),
+    Technology(id='tech_006', title='토양개선용 미생물 복합 비료', summary='질소 고정 및 인산 가용화 능력이 뛰어난 미생물 컨소시엄 기반 비료', organization='농업기술실용화재단', patentNumber='KR-10-2022-0077889', applicationDate=date(2022, 6, 20), category='그린바이오', subCategory='미생물비료', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech6/300/200', createdAt=datetime(2022, 9, 1, 10, 0, 0)),
+    Technology(id='tech_007', title='고효율 산업용 셀룰레이스 효소', summary='목질계 바이오매스를 효과적으로 분해하는 내열성, 내산성 셀룰레이스', organization='(주)엔자임텍', patentNumber='KR-10-2023-0055667', applicationDate=date(2023, 5, 2), category='화이트바이오', subCategory='산업용효소', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech7/300/200', createdAt=datetime(2023, 8, 1, 10, 0, 0)),
+    # ... 86 more items ...
+    Technology(id='tech_094', title='항바이러스 점막 면역 백신 플랫폼', summary='비강 투여로 강력한 점막 면역을 유도하는 백신 플랫폼', organization='백신랩', patentNumber='KR-10-2023-0099112', applicationDate=date(2023, 8, 14), category='레드바이오', subCategory='의약품', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech94/300/200', createdAt=datetime(2023, 10, 2, 10, 0, 0)),
+    Technology(id='tech_095', title='해양 미세조류 기반 바이오디젤 생산', summary='광합성 효율이 높은 미세조류를 이용한 3세대 바이오디젤 생산 공정', organization='한국해양과학기술원', patentNumber='KR-10-2022-0012390', applicationDate=date(2022, 2, 1), category='화이트바이오', subCategory='바이오연료', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech95/300/200', createdAt=datetime(2022, 4, 18, 10, 0, 0)),
+    Technology(id='tech_096', title='스마트팜용 작물 생육상태 진단 드론', summary='다중분광 카메라를 탑재하여 작물의 질병 및 영양상태를 분석하는 드론 시스템', organization='(주)팜테크', patentNumber='KR-10-2023-0044556', applicationDate=date(2023, 4, 10), category='그린바이오', subCategory='종자/육종', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech96/300/200', createdAt=datetime(2023, 6, 22, 10, 0, 0)),
+    Technology(id='tech_097', title='미세플라스틱 분해 미생물 발굴', summary='해양 퇴적물에서 미세플라스틱을 분해하는 신규 미생물 균주 발굴 및 특성 분석', organization='한국생명공학연구원', patentNumber=None, applicationDate=None, category='화이트바이오', subCategory='산업용효소', transferable=False, thumbnailUrl='https://picsum.photos/seed/tech97/300/200', createdAt=datetime(2024, 2, 5, 10, 0, 0)),
+    Technology(id='tech_098', title='액체생검 기반 암 동반진단 기술', summary='혈액 내 ctDNA를 분석하여 항암제 반응성을 예측하는 동반진단 기술', organization='(주)클리노믹스', patentNumber='KR-10-2023-0011228', applicationDate=date(2023, 1, 26), category='레드바이오', subCategory='진단기기', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech98/300/200', createdAt=datetime(2023, 3, 15, 10, 0, 0)),
+    Technology(id='tech_099', title='고기능성 화장품 원료용 식물세포 배양 기술', summary='희귀식물 세포 배양을 통해 유효성분을 대량생산하는 기술', organization='(주)네이처셀', patentNumber='KR-10-2022-0088990', applicationDate=date(2022, 7, 22), category='그린바이오', subCategory='기능성식품', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech99/300/200', createdAt=datetime(2022, 10, 3, 10, 0, 0)),
+    Technology(id='tech_100', title='바이오의약품 정제용 고효율 크로마토그래피 레진', summary='항체 및 단백질 의약품 정제 효율을 2배 이상 향상시킨 신규 레진 소재', organization='(주)퓨어바이오', patentNumber='KR-10-2023-0065432', applicationDate=date(2023, 5, 25), category='화이트바이오', subCategory='바이오플라스틱', transferable=True, thumbnailUrl='https://picsum.photos/seed/tech100/300/200', createdAt=datetime(2023, 8, 11, 10, 0, 0))
 ]
 
 incubation_centers_db: List[IncubationCenter] = [

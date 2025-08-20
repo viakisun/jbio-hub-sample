@@ -13,6 +13,7 @@ class Technology(BaseModel):
     patentNumber: Optional[str] = None
     applicationDate: Optional[date] = None
     category: str
+    subCategory: str
     transferable: bool
     thumbnail: Optional[str] = None
     createdAt: datetime
