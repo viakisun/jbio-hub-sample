@@ -160,7 +160,7 @@ stats_db: List[Stat] = [
 
 support_programs_db: List[SupportProgram] = [
     SupportProgram(
-        id="sp-001",
+        id="sp_001",
         title="2024년 바이오 스타트업 인큐베이팅 프로그램",
         organization="J-Bio-Hub",
         description="초기 바이오 스타트업을 위한 사무공간, 멘토링, 시드 투자 지원.",
@@ -174,7 +174,7 @@ support_programs_db: List[SupportProgram] = [
         createdAt=datetime(2024, 7, 15, 10, 0, 0)
     ),
     SupportProgram(
-        id="sp-002",
+        id="sp_002",
         title="글로벌 진출 지원사업",
         organization="전북테크노파크",
         description="해외 전시회 참가, 바이어 매칭, 수출 컨설팅 지원.",
@@ -280,7 +280,7 @@ registration_requests_db: List[RegistrationRequest] = [
 applications_db: List[Application] = [
     Application(
         id="app-001",
-        programId="sp-001",
+        programId="sp_001",
         programTitle="2024년 바이오 스타트업 인큐베이팅 프로그램",
         status=ApplicationStatus.PENDING,
         appliedAt=datetime(2024, 7, 22, 15, 0, 0),
