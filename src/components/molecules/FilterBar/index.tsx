@@ -46,12 +46,25 @@ export interface Filter {
   options: FilterOption[];
 }
 
+const FilterPlaceholder = styled.div`
+  font-size: 0.875rem;
+  color: #6b7280;
+`;
+
 interface FilterBarProps {
-  filters: Filter[];
-  onFilterChange: (filterName: string, value: string) => void;
+  filters?: Filter[];
+  onFilterChange?: (filterName: string, value: string) => void;
 }
 
 const FilterBar: React.FC<FilterBarProps> = ({ filters, onFilterChange }) => {
+  if (!filters || filters.length === 0 || !onFilterChange) {
+    return (
+      <FilterBarWrapper>
+        <FilterPlaceholder>Filter controls will be displayed here.</FilterPlaceholder>
+      </FilterBarWrapper>
+    );
+  }
+
   return (
     <FilterBarWrapper>
       {filters.map((filter) => (
