@@ -71,7 +71,7 @@ function App() {
       <Route path="/tech/transfer" element={<TechTransferPage />} />
       <Route path="/tech/patents" element={<TechnologiesListPage />} />
       <Route path="/tech/collaboration" element={<TechCollaborationPage />} />
-      <Route path="/tech/:type/:id" element={<TechDetailPage />} />
+      <Route path="/tech-summary/detail/:id" element={<TechDetailPage />} />
 
       {/* Company & Article Routes */}
       <Route path="/company" element={<CompanyDashboardPage />} />

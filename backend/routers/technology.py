@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import Optional
 import math
+from datetime import datetime, timedelta
 
 from ..models.technology import Technology, PaginatedTechnologyResponse
 from ..models.support_program import Pagination  # Reuse Pagination model
@@ -19,6 +20,7 @@ def get_technologies(
     organization: Optional[str] = Query(None, description="Filter by organization name"),
     category: Optional[str] = Query(None, description="Filter by category"),
     transferable: Optional[bool] = Query(None, description="Filter by transferability"),
+    date_range: Optional[str] = Query(None, description="Filter by date range (e.g., 'year', 'month')"),
 ):
     """
     Get a list of technologies and patents with pagination and filtering.
@@ -34,6 +36,19 @@ def get_technologies(
         filtered_techs = [t for t in filtered_techs if category.lower() == t.category.lower()]
     if transferable is not None:
         filtered_techs = [t for t in filtered_techs if t.transferable == transferable]
+
+    if date_range:
+        now = datetime.now()
+        if date_range == 'year':
+            delta = timedelta(days=365)
+        elif date_range == 'month':
+            delta = timedelta(days=30)
+        else:
+            delta = None
+
+        if delta:
+            cutoff_date = now - delta
+            filtered_techs = [t for t in filtered_techs if t.createdAt >= cutoff_date]
 
     # Apply pagination
     total_items = len(filtered_techs)
