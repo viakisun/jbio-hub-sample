@@ -43,30 +43,22 @@ This method allows you to work on the UI without running the Python backend.
 
 #### Option 2: Full-Stack Development (Frontend + Backend)
 
-Use this method when you need to make changes to both the frontend and the backend API.
+Use this method when you need to make changes to both the frontend and the backend API. This workflow builds the frontend into a static bundle and serves it directly from the FastAPI backend, mirroring a production environment.
 
 1.  **Install Backend Dependencies:**
     ```bash
     pip install -r backend/requirements.txt
     ```
-2.  **Run the Backend Server:**
-    In a new terminal, start the FastAPI server:
+
+2.  **Build the Frontend:**
+    From the project root, run the build script. This will create an optimized static build of the React application in the `build/` directory.
+    ```bash
+    npm run build
+    ```
+
+3.  **Run the Backend Server:**
+    In a new terminal, start the FastAPI server from the project root:
     ```bash
     uvicorn backend.main:app --reload --port 8000
     ```
-    The API will be available at `http://localhost:8000`, with interactive documentation at `http://localhost:8000/docs`.
-
-3.  **Disable the Mock Service Worker:**
-    To allow the frontend to communicate with the live backend, you must disable the mock worker. Open `src/index.tsx` and comment out the `worker.start()` line:
-    ```typescript
-    // import { worker } from './mocks/browser'
-    // ...
-    // worker.start()
-    ```
-
-4.  **Start the Frontend Server:**
-    In another terminal, run the React application:
-    ```bash
-    npm start
-    ```
-    The application at `http://localhost:3000` will now make live requests to the backend server at `http://localhost:8000`.
+    The application will now be available at `http://localhost:8000`. The FastAPI backend will serve both the API and the React frontend.

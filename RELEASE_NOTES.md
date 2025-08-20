@@ -1,3 +1,26 @@
+# Release v0.2.2: Technology & Patents Page Overhaul
+
+## Overview
+
+This release focuses on a complete overhaul of the "Technology & Patents" page, introducing critical features like pagination and advanced filtering. It also includes a series of major bug fixes that significantly improve the stability and reliability of the entire application, particularly regarding the development and deployment workflow.
+
+---
+
+### Key Features & Enhancements
+
+#### ✨ Technology & Patents Page
+*   **Pagination Implemented**: The technology list now correctly paginates, showing 20 items per page by default, with a fully functional pagination component at the bottom.
+*   **Dependent Category Filters**: Implemented new, dependent filters for "대분류" (Main Category) and "소분류" (Sub-category). The sub-category options are now dynamically updated based on the selected main category, and the filter is disabled until a main category is chosen.
+*   **Standardized Mock Data**: The mock data for all 100 technology items has been corrected and standardized to use a consistent category structure, ensuring the filters and table data are accurate.
+
+#### 🛠️ Major Bug Fixes & Stability
+*   **Server Routing (404 Errors)**: Fixed a critical bug where accessing frontend pages directly (e.g., `/tech/patents`) would result in a 404 error. The backend is now correctly configured to handle Single-Page Application (SPA) routing.
+*   **Server Startup (RuntimeError)**: Resolved a `RuntimeError` that occurred on server startup if the frontend had not been built. The server now uses robust, absolute paths to locate frontend assets and will no longer crash if they are missing.
+*   **Data Integrity**: Fixed a bug where the `subCategory` filter was not being passed to the API. Also corrected several self-inflicted errors during development where the mock data was truncated or corrupted.
+*   **Backend Test Suite**: Added a new test suite for the backend API (`test_technology_api.py`) to verify the correctness of pagination, filtering, and data serialization. This will help prevent future regressions.
+
+---
+
 # Release v0.2.1: Company Information & Stability Update
 
 ## Overview
