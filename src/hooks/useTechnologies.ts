@@ -29,6 +29,7 @@ interface UseTechnologiesParams {
   keyword?: string;
   organization?: string;
   category?: string;
+  subCategory?: string;
   transferable?: boolean;
   date_range?: string;
 }
@@ -50,6 +51,7 @@ const useTechnologies = (params: UseTechnologiesParams = {}) => {
         if (params.keyword) queryParams.append('keyword', params.keyword);
         if (params.organization) queryParams.append('organization', params.organization);
         if (params.category) queryParams.append('category', params.category);
+        if (params.subCategory) queryParams.append('subCategory', params.subCategory);
         if (params.transferable !== undefined) queryParams.append('transferable', String(params.transferable));
         if (params.date_range) queryParams.append('date_range', params.date_range);
 
