@@ -1,4 +1,5 @@
 from datetime import datetime, date
+from typing import List
 from ..models.announcement import Announcement, FileLink, RelatedLink
 from ..models.company import Company, CompanyContact, SizeCategory
 from ..models.article import Article
@@ -18,6 +19,39 @@ from ..models.application import Application, ApplicationStatus
 from ..models.auth import RegistrationRequest
 
 # ... (keep all other existing mock data) ...
+
+announcements_db: List[Announcement] = [
+    Announcement(
+        id=1,
+        title="[공지] 2024년 제 3회 J-Bio-Hub 온라인 정기세미나 개최 안내",
+        content="2024년 제 3회 J-Bio-Hub 온라인 정기세미나를 개최합니다. 많은 참여 바랍니다.",
+        author="관리자",
+        created_at=datetime(2024, 7, 26, 10, 0, 0),
+        files=[FileLink(name="세미나 안내문.pdf", url="/files/seminar_notice_3.pdf")],
+        related_links=[RelatedLink(title="지난 세미나 보기", url="/seminars/2")]
+    ),
+    Announcement(
+        id=2,
+        title="[모집] 2024년 J-Bio-Hub 바이오 창업경진대회 참가자 모집",
+        content="혁신적인 바이오 기술과 아이디어를 가진 (예비)창업자를 발굴하고 지원하기 위해 2024년 J-Bio-Hub 바이오 창업경진대회를 개최합니다.",
+        author="관리자",
+        created_at=datetime(2024, 7, 25, 9, 0, 0),
+        files=[
+            FileLink(name="참가신청서 양식.hwp", url="/files/contest_form.hwp"),
+            FileLink(name="대회 포스터.jpg", url="/files/contest_poster.jpg"),
+        ],
+        related_links=[]
+    ),
+    Announcement(
+        id=3,
+        title="[안내] J-Bio-Hub 시설 이용 시간 변경 안내 (8월부터)",
+        content="2024년 8월 1일부터 J-Bio-Hub의 시설 이용 시간이 아래와 같이 변경됩니다. 이용에 참고하시기 바랍니다.",
+        author="관리자",
+        created_at=datetime(2024, 7, 24, 14, 30, 0),
+        files=[],
+        related_links=[]
+    ),
+]
 
 companies_db: dict[str, Company] = {
     "comp-001": Company(
