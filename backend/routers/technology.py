@@ -19,6 +19,7 @@ def get_technologies(
     keyword: Optional[str] = Query(None, description="Search keyword in title or summary"),
     organization: Optional[str] = Query(None, description="Filter by organization name"),
     category: Optional[str] = Query(None, description="Filter by category"),
+    subCategory: Optional[str] = Query(None, description="Filter by sub-category"),
     transferable: Optional[bool] = Query(None, description="Filter by transferability"),
     date_range: Optional[str] = Query(None, description="Filter by date range (e.g., 'year', 'month')"),
 ):
@@ -34,6 +35,8 @@ def get_technologies(
         filtered_techs = [t for t in filtered_techs if organization.lower() in t.organization.lower()]
     if category:
         filtered_techs = [t for t in filtered_techs if category.lower() == t.category.lower()]
+    if subCategory:
+        filtered_techs = [t for t in filtered_techs if subCategory.lower() == t.subCategory.lower()]
     if transferable is not None:
         filtered_techs = [t for t in filtered_techs if t.transferable == transferable]
 

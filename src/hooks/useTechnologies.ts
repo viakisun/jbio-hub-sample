@@ -12,6 +12,7 @@ export interface Technology {
     patentNumber: string | null;
     applicationDate: string | null; // ISO Date string
     category: string;
+    subCategory: string;
     transferable: boolean;
     thumbnail: string | null;
     createdAt: string; // ISO DateTime string

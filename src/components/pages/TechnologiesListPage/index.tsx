@@ -63,9 +63,9 @@ const TechnologiesListPage = () => {
       label: '카테고리',
       options: [
         { value: '', label: '전체' },
-        { value: '플랫폼 기술', label: '플랫폼 기술' },
         { value: '레드바이오', label: '레드바이오' },
         { value: '그린바이오', label: '그린바이오' },
+        { value: '화이트바이오', label: '화이트바이오' },
       ],
     },
     {
@@ -79,12 +79,13 @@ const TechnologiesListPage = () => {
     },
   ];
 
-  const headers = ['기술명', '개발기관', '카테고리', '이전가능', '특허번호', '출원일'];
+  const headers = ['기술명', '개발기관', '대분류', '소분류', '이전가능', '특허번호', '출원일'];
 
   const rows = data ? data.data.map(tech => [
       tech.title,
       tech.organization,
       tech.category,
+      tech.subCategory,
       <Badge
         key={`badge-${tech.id}`}
         $variant={tech.transferable ? 'success' : 'danger'}
