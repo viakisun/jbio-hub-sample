@@ -50,14 +50,14 @@ app.include_router(auth.router, prefix="/api")
 app.include_router(article.router, prefix="/api")
 # ...
 
-# --- Static Files ---
-# Serve the static files from the React build directory
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+# --- Static Files & SPA Fallback ---
+# This should only be active if the frontend has been built.
+if INDEX_HTML.exists():
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
-
-# --- SPA Fallback ---
-# For any other path, serve the index.html file from the React build.
-# This should be the last route.
-@app.get("/{full_path:path}", include_in_schema=False)
-async def serve_react_app(full_path: str):
-    return FileResponse(INDEX_HTML)
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_react_app(full_path: str):
+        return FileResponse(INDEX_HTML)
+else:
+    import logging
+    logging.warning("Frontend build not found at {}. Serving API only.".format(INDEX_HTML))
