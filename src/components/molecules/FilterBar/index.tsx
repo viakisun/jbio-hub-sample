@@ -33,6 +33,11 @@ const FilterSelect = styled.select`
     outline: 2px solid #3b82f6;
     border-color: #3b82f6;
   }
+  &:disabled {
+    background-color: #e5e7eb;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
 `;
 
 export interface FilterOption {
@@ -44,6 +49,7 @@ export interface Filter {
   name: string;
   label: string;
   options: FilterOption[];
+  disabled?: boolean;
 }
 
 const FilterPlaceholder = styled.div`
@@ -74,6 +80,7 @@ const FilterBar: React.FC<FilterBarProps> = ({ filters, onFilterChange }) => {
             id={filter.name}
             name={filter.name}
             onChange={(e) => onFilterChange(filter.name, e.target.value)}
+            disabled={filter.disabled}
           >
             {filter.options.map((option) => (
               <option key={option.value} value={option.value}>
