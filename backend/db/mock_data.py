@@ -60,6 +60,77 @@ infra_db: List[Infra] = [
     Infra(id=4, name="한국생명공학연구원 전북분원", category="연구기관", address="정읍시 입신길 181", latitude=35.5828, longitude=126.8711, description="생명공학 연구 중심 기관"),
 ]
 
+news_db: List[News] = [
+    News(
+        id=1,
+        title="전북바이오융합산업진흥원, 바이오 특화단지 유치 총력",
+        summary="전북특별자치도가 바이오 특화단지 유치를 위해 산학연관 협력체계를 구축하고 총력을 기울이고 있다.",
+        content="전북바이오융합산업진흥원은 최근 전북대, 원광대 등 도내 주요 대학 및 연구기관과 함께 바이오 특화단지 유치를 위한 업무협약을 체결했다고 밝혔다. 이번 협약은 레드바이오, 그린바이오, 화이트바이오 등 전 분야에 걸친 협력을 통해 전북을 대한민국 바이오 산업의 허브로 만들기 위한 초석이 될 것이다.",
+        category='news',
+        created_at=datetime(2024, 7, 20, 11, 0, 0),
+        sourceName="전북일보",
+        thumbnailUrl="https://picsum.photos/seed/news1/300/200"
+    ),
+    News(
+        id=2,
+        title="[채용공고] J-Bio-Hub 연구지원 인력 채용",
+        summary="J-Bio-Hub에서 함께 성장할 열정적인 연구지원 인재를 모집합니다.",
+        content="1. 모집분야: 연구기획, 장비관리, 행정지원\n2. 자격요건: 관련분야 학사 학위 이상 소지자\n3. 접수기간: 2024년 8월 1일 ~ 8월 15일\n자세한 내용은 홈페이지를 참고하세요.",
+        category='notice',
+        created_at=datetime(2024, 7, 18, 15, 0, 0),
+        sourceName="J-Bio-Hub",
+        thumbnailUrl="https://picsum.photos/seed/news2/300/200"
+    ),
+]
+
+events_db: List[Event] = [
+    Event(
+        id=1,
+        title="2024 국제 바이오 기술 컨퍼런스 (BioTech 2024)",
+        summary="전 세계 바이오 기술 전문가들이 모이는 네트워킹의 장!",
+        thumbnailUrl="https://picsum.photos/seed/event1/300/200",
+        eventStartAt=datetime(2024, 9, 5, 9, 0, 0),
+        eventEndAt=datetime(2024, 9, 7, 18, 0, 0),
+        locationType='offline',
+        locationName="전주 컨벤션센터",
+        host="한국바이오협회",
+        registerDeadline=datetime(2024, 8, 20, 18, 0, 0),
+        status='예정'
+    ),
+    Event(
+        id=2,
+        title="AI 신약개발 온라인 세미나",
+        summary="최신 AI 기술을 활용한 신약개발 트렌드와 성공사례를 공유합니다.",
+        thumbnailUrl="https://picsum.photos/seed/event2/300/200",
+        eventStartAt=datetime(2024, 8, 22, 14, 0, 0),
+        eventEndAt=datetime(2024, 8, 22, 16, 0, 0),
+        locationType='online',
+        locationName="Zoom 웨비나",
+        host="J-Bio-Hub",
+        registerDeadline=datetime(2024, 8, 21, 18, 0, 0),
+        status='예정'
+    ),
+]
+
+techs_db: List[Tech] = [
+    Tech(
+        id=1,
+        title="고효율 미생물 기반 친환경 비료 생산 기술",
+        field="그린바이오",
+        description="토양 환경을 개선하고 작물 생산성을 극대화하는 차세대 친환경 비료 생산 기술. 기존 화학 비료 대비 탄소 배출량을 30% 이상 절감.",
+        presenter="(주)그린애그리",
+        created_at=datetime(2024, 5, 30, 10, 0, 0)
+    ),
+    Tech(
+        id=2,
+        title="CRISPR-Cas9 유전자 가위 기술을 이용한 항암 치료제 개발",
+        field="레드바이오",
+        description="특정 암세포의 유전자를 정밀하게 타겟하여 부작용을 최소화하고 치료 효과를 높인 혁신적인 항암 치료제 파이프라인.",
+        presenter="전북대학교병원 암센터",
+        created_at=datetime(2024, 6, 15, 13, 0, 0)
+    ),
+]
+
 companies_db: dict[str, Company] = {
     "comp-001": Company(
         id='comp-001',
