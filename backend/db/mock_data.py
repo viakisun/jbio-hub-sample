@@ -234,7 +234,7 @@ mentors_db: List[Mentor] = [
 
 technologies_db: List[Technology] = [
     Technology(
-        id="tech-001",
+        id="tech_001",
         title="AI 기반 신약 후보물질 발굴 플랫폼",
         summary="딥러닝을 활용하여 신약 개발 기간과 비용을 획기적으로 단축시키는 플랫폼 기술",
         organization="전북대학교 AI 연구센터",
