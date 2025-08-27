@@ -146,7 +146,7 @@ const ContentGrid: React.FC<ContentGridProps> = ({
           </Grid>
           {showLoadMore && (
             <LoadMoreContainer>
-              <Button $variant="secondary">더보기</Button>
+              <Button variant="secondary">더보기</Button>
             </LoadMoreContainer>
           )}
         </>

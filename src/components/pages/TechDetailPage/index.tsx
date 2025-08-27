@@ -27,7 +27,7 @@ const TechDetailPage = () => {
     '특허번호': tech.patentNumber || '-',
     '출원일': tech.applicationDate,
     '카테고리': tech.category,
-    '이전가능': <Badge $variant={tech.transferable ? 'success' : 'danger'}>{tech.transferable ? '가능' : '불가'}</Badge>,
+    '이전가능': <Badge variant={tech.transferable ? 'success' : 'danger'}>{tech.transferable ? '가능' : '불가'}</Badge>,
   };
 
   return (

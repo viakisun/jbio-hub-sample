@@ -1,0 +1,12 @@
+@import '../design-tokens.scss';
+
+.hero {
+  position: relative; text-align: center;
+  padding-block: clamp(100px, 20vh, 220px);
+  color: #fff; background: $brand-primary;
+  display: grid; gap: $sp-4; justify-items: center;
+
+  &__title { font-size: $fs-display; font-weight: $fw-display; }
+  &__subtitle { max-width: 48ch; font-size: $fs-body; opacity: .9; }
+  &__actions { margin-top: $sp-6; display: flex; gap: $sp-4; flex-wrap: wrap; }
+}

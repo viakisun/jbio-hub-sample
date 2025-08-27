@@ -116,7 +116,7 @@ const TechnologiesListPage = () => {
       tech.subCategory,
       <Badge
         key={`badge-${tech.id}`}
-        $variant={tech.transferable ? 'success' : 'danger'}
+        variant={tech.transferable ? 'success' : 'danger'}
       >
         {tech.transferable ? '기술이전 가능' : '기술이전 불가'}
       </Badge>,

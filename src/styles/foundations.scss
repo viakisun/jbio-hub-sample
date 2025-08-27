@@ -1,0 +1,55 @@
+@import './design-tokens.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-sans;
+  background-color: $brand-bg;
+  color: $brand-text;
+  line-height: $lh-body;
+  font-size: $fs-body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 { font-size: $fs-h1; font-weight: $fw-h1; line-height: $lh-h1; }
+h2 { font-size: $fs-h2; font-weight: $fw-h2; line-height: $lh-h2; }
+
+
+a {
+  color: $brand-primary;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $gutter;
+}

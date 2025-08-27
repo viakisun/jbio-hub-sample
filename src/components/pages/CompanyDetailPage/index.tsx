@@ -100,7 +100,7 @@ const CompanyDetailPage: React.FC = () => {
               <CompanyName>{company.name}</CompanyName>
               <div className="flex gap-2 mt-2">
                 <Badge>{company.industry}</Badge>
-                <Badge $variant="secondary">{company.region}</Badge>
+                <Badge variant="secondary">{company.region}</Badge>
               </div>
             </TitleGroup>
           </CompanyHeader>

@@ -52,8 +52,8 @@ const ClusterOrgsPage = () => {
         <GlobalFilters />
 
         <ViewToggle>
-          <Button onClick={() => setView('card')} $variant={view === 'card' ? 'primary' : 'secondary'}>카드</Button>
-          <Button onClick={() => setView('table')} $variant={view === 'table' ? 'primary' : 'secondary'} style={{ marginLeft: '0.5rem' }}>테이블</Button>
+          <Button onClick={() => setView('card')} variant={view === 'card' ? 'primary' : 'secondary'}>카드</Button>
+          <Button onClick={() => setView('table')} variant={view === 'table' ? 'primary' : 'secondary'} style={{ marginLeft: '0.5rem' }}>테이블</Button>
         </ViewToggle>
 
         {loading && <p>로딩 중...</p>}

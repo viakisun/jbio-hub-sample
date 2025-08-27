@@ -84,7 +84,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company, onClick }) => {
       <TagList>
         <Badge>{company.sizeCategory}</Badge>
         {company.products.slice(0, 2).map(product => (
-          <Badge key={product} $variant="secondary">{product}</Badge>
+          <Badge key={product} variant="secondary">{product}</Badge>
         ))}
       </TagList>
     </CardWrapper>
