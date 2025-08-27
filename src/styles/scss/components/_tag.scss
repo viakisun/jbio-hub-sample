@@ -1,0 +1,11 @@
+@use "../design-tokens" as *;
+
+.tag {
+  display: inline-flex; align-items: center; gap: $space-2;
+  padding: 6px 12px; border-radius: $radius-md;
+  font-size: $fs-caption; font-weight: 600; color: #fff;
+
+  &--open    { background: $color-tag-open; }
+  &--planned { background: $color-tag-planned; }
+  &--closed  { background: $color-tag-closed; }
+}

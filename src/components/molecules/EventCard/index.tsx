@@ -1,164 +1,37 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import { Event } from '../../../types/api';
 
-// --- STYLED COMPONENTS (Shared with NewsCard) ---
-
-const CardLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  height: 100%;
-`;
-
-const CardWrapper = styled.div`
-  background-color: white;
-  border-radius: 12px;
-  border: 1px solid ${DESIGN_SYSTEM.colors.gray[200]};
-  box-shadow: ${DESIGN_SYSTEM.shadows.sm};
-  transition: all 0.3s ease;
-  min-width: 280px;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: ${DESIGN_SYSTEM.shadows.lg};
-  }
-`;
-
-const ThumbnailWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-color: ${DESIGN_SYSTEM.colors.gray[100]};
-`;
-
-const Thumbnail = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const CategoryBadge = styled.span<{ $color: string, $bgColor: string }>`
-  position: absolute;
-  top: ${DESIGN_SYSTEM.spacing.md};
-  left: ${DESIGN_SYSTEM.spacing.md};
-  padding: ${DESIGN_SYSTEM.spacing.xs} ${DESIGN_SYSTEM.spacing.sm};
-  background-color: ${props => props.$bgColor};
-  color: ${props => props.$color};
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-`;
-
-const ContentWrapper = styled.div`
-  padding: ${DESIGN_SYSTEM.spacing.md};
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
-
-const Title = styled.h3`
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.4;
-  margin: 0 0 ${DESIGN_SYSTEM.spacing.sm} 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`;
-
-const Summary = styled.p`
-  font-size: 14px;
-  color: ${DESIGN_SYSTEM.colors.gray[600]};
-  line-height: 1.6;
-  margin: 0 0 ${DESIGN_SYSTEM.spacing.md} 0;
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: ${DESIGN_SYSTEM.colors.gray[500]};
-  padding-top: ${DESIGN_SYSTEM.spacing.sm};
-  border-top: 1px solid ${DESIGN_SYSTEM.colors.gray[100]};
-`;
-
-const StatusBadge = styled.span<{ $status: string }>`
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 12px;
-  background-color: ${({ $status, theme }) => {
-    if ($status === '예정') return DESIGN_SYSTEM.colors.primary[100];
-    if ($status === '진행중') return DESIGN_SYSTEM.colors.success[100];
-    return DESIGN_SYSTEM.colors.gray[200];
-  }};
-  color: ${({ $status, theme }) => {
-    if ($status === '예정') return DESIGN_SYSTEM.colors.primary[700];
-    if ($status === '진행중') return DESIGN_SYSTEM.colors.success[700];
-    return DESIGN_SYSTEM.colors.gray[600];
-  }};
-`;
-
-
-// --- COMPONENT ---
-
-// For backwards compatibility with other pages
-export interface EventCardData {
-  id: string;
-  title: string;
-  summary?: string;
-  thumbnailUrl?: string;
-  eventStartAt: string;
-  eventEndAt: string;
-  locationType: 'online' | 'offline' | 'hybrid';
-  locationName?: string;
-  host: string;
-  registerDeadline?: string;
-}
+const STATUS_STYLES: { [key: string]: { className: string } } = {
+  '예정': { className: 'event-card__status-badge--planned' },
+  '진행중': { className: 'event-card__status-badge--in-progress' },
+  '마감': { className: 'event-card__status-badge--closed' },
+};
 
 interface EventCardProps {
   event: Event;
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
-  const formatDate = (dateStr: string) => new Date(dateStr).toLocaleDateString();
+  const statusStyle = STATUS_STYLES[event.status] || STATUS_STYLES['마감'];
 
   return (
-    <CardLink to={`/events/${event.id}`}>
-      <CardWrapper>
-        <ThumbnailWrapper>
-          {event.thumbnailUrl && <Thumbnail src={event.thumbnailUrl} alt={event.title} loading="lazy" />}
-          <CategoryBadge $color="#FFFFFF" $bgColor={DESIGN_SYSTEM.colors.success[600]}>
-            행사
-          </CategoryBadge>
-        </ThumbnailWrapper>
-        <ContentWrapper>
-          <Title>{event.title}</Title>
-          {event.summary && <Summary>{event.summary}</Summary>}
-          <Footer>
-            <span>{event.host}</span>
-            <StatusBadge $status={event.status}>{event.status}</StatusBadge>
-          </Footer>
-        </ContentWrapper>
-      </CardWrapper>
-    </CardLink>
+    <Link to={`/events/${event.id}`} className="event-card">
+      <div className="event-card__thumbnail-wrapper">
+        {event.thumbnailUrl && <img src={event.thumbnailUrl} alt={event.title} loading="lazy" className="event-card__thumbnail" />}
+        <span className="event-card__category-badge">
+          행사
+        </span>
+      </div>
+      <div className="event-card__content">
+        <h3 className="event-card__title">{event.title}</h3>
+        {event.summary && <p className="event-card__summary">{event.summary}</p>}
+        <div className="event-card__footer">
+          <span>{event.host}</span>
+          <span className={`event-card__status-badge ${statusStyle.className}`}>{event.status}</span>
+        </div>
+      </div>
+    </Link>
   );
 };
 
