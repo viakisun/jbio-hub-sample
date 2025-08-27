@@ -1,0 +1,22 @@
+@use "../design-tokens" as *;
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: $space-3; padding: 12px 24px; border-radius: $radius-md;
+  font-weight: 600; line-height: 1; border: 1px solid transparent;
+  transition: background-color .15s ease, color .15s ease, box-shadow .15s ease, transform .15s ease;
+
+  &--primary {
+    background: $color-primary; color: #fff;
+    &:hover { background: $color-primary-600; box-shadow: $shadow-sm; }
+    &:focus-visible { outline: 2px solid $color-primary-600; outline-offset: 2px; }
+    &:disabled { opacity: .5; cursor: not-allowed; }
+  }
+
+  &--secondary {
+    background: transparent; color: $color-primary; border-color: $color-primary;
+    &:hover { background: $color-primary-50; }
+  }
+
+  &--pill { border-radius: $radius-pill; }
+}

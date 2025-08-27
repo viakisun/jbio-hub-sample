@@ -1,0 +1,10 @@
+@use "../design-tokens" as *;
+
+.table {
+  width: 100%; border-collapse: collapse;
+  th, td { padding: $space-4; border-bottom: 1px solid $color-divider; }
+  th { text-align: left; font-weight: 600; color: $color-text; }
+}
+@media (max-width: $bp-md) {
+  .table { display: block; overflow-x: auto; }
+}

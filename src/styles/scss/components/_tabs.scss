@@ -1,0 +1,43 @@
+@use "../design-tokens" as *;
+
+.tabs {
+  border-bottom: 1px solid $color-divider;
+  margin-bottom: $space-8;
+  overflow-x: auto;
+
+  /* Hide scrollbar for cleaner look but keep functionality */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  &__list {
+    display: flex;
+    gap: $space-4;
+  }
+
+  &__button {
+    padding: $space-3 $space-1;
+    margin: 0 $space-3;
+    white-space: nowrap; /* Prevent text wrapping */
+    font-size: $fs-body;
+    font-weight: 600;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $color-text-muted;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+      color: $color-text;
+    }
+
+    &--active {
+      color: $color-text;
+      border-bottom-color: $color-primary;
+    }
+  }
+}

@@ -1,0 +1,84 @@
+@use "../design-tokens" as *;
+
+.table-list {
+  &__desktop {
+    display: none;
+    @media (min-width: $bp-md) {
+      display: block;
+    }
+  }
+
+  &__mobile {
+    display: none;
+    @media (max-width: $bp-md) {
+      display: block;
+    }
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  background-color: $color-elevated;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $fs-body;
+  white-space: nowrap;
+
+  th, td {
+    padding: $space-4 $space-6;
+    text-align: left;
+  }
+
+  thead {
+    background-color: $color-surface;
+  }
+
+  th {
+    font-weight: 600;
+    color: $color-text;
+  }
+
+  tr {
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-divider;
+    }
+  }
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.card-list-item {
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  background-color: $color-elevated;
+  padding: $space-6;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    padding: $space-2 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-divider;
+    }
+  }
+
+  &__label {
+    font-weight: 600;
+    color: $color-text-muted;
+  }
+
+  &__value {
+    color: $color-text;
+    text-align: right;
+  }
+}

@@ -1,0 +1,135 @@
+@use "../design-tokens" as *;
+
+.services-section {
+  margin-bottom: $space-16;
+
+  &__header {
+    text-align: center;
+    margin-bottom: $space-12;
+  }
+
+  &__title {
+    font-weight: 900;
+    color: $color-primary;
+    margin: 0 0 $space-6 0;
+
+    @media (max-width: $bp-md) {
+      font-size: $fs-h1;
+    }
+    @media (min-width: $bp-md) {
+      font-size: 48px;
+    }
+  }
+
+  &__subtitle {
+    color: $color-text-muted;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @media (max-width: $bp-md) {
+      font-size: $fs-body;
+    }
+    @media (min-width: $bp-md) {
+      font-size: 20px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: $space-8;
+
+    @media (min-width: $bp-md) {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+}
+
+.service-card {
+  border-radius: $radius-lg;
+  padding: $space-8;
+  color: white;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: $bp-sm) {
+    padding: $space-6;
+    min-height: 280px;
+  }
+  @media (min-width: $bp-sm) {
+    min-height: 320px;
+  }
+
+  &__icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: $radius-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $space-6;
+    backdrop-filter: blur(10px);
+
+    @media (max-width: $bp-sm) {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 800;
+    margin: 0 0 $space-2 0;
+
+    @media (max-width: $bp-sm) {
+      font-size: 20px;
+    }
+  }
+
+  &__description {
+    font-size: $fs-body;
+    opacity: 0.9;
+    margin: 0 0 $space-6 0;
+    line-height: 1.5;
+
+    @media (max-width: $bp-sm) {
+      font-size: $fs-caption;
+    }
+  }
+
+  &__features {
+    margin-top: auto;
+  }
+
+  &__feature-item {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-bottom: $space-2;
+    opacity: 0.8;
+
+    @media (max-width: $bp-sm) {
+      font-size: 12px;
+    }
+    @media (min-width: $bp-sm) {
+      font-size: $fs-caption;
+    }
+  }
+
+  &__learn-more {
+    margin-top: $space-6;
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: $space-3 $space-4;
+    border-radius: $radius-md;
+    font-size: $fs-caption;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+}

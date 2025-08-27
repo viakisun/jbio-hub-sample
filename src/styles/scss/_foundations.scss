@@ -1,0 +1,49 @@
+@use "design-tokens" as *;
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { font-size: 100%; }
+body {
+  margin: 0;
+  color: $color-text;
+  background: $color-bg;
+  font-family: $font-family;
+  font-size: $fs-body;
+  line-height: $lh-body;
+}
+
+img { max-width: 100%; display: block; }
+a { color: $color-primary; text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding-inline: $space-6;
+}
+
+.section {
+  padding-block: $space-16;
+}
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+
+.desktop-only {
+  display: none;
+  @media (min-width: $bp-md) {
+    display: block;
+  }
+}
+
+.mobile-only {
+  display: none;
+  @media (max-width: $bp-md) {
+    display: block;
+  }
+}

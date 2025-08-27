@@ -45,6 +45,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.91.0",
     "styled-components": "^6.1.19",
     "swr": "^2.3.6",
     "zustand": "^5.0.7"
