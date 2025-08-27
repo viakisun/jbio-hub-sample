@@ -1,0 +1,29 @@
+@import '../design-tokens.scss';
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; text-transform: uppercase;
+  border-radius: $radius-md; padding: 14px 28px;
+  transition: background-color .15s ease, transform .05s ease;
+  border: none;
+  cursor: pointer;
+
+  &--primary {
+    background: $brand-primary; color: #fff;
+    &:hover { background: darken($brand-primary, 8%); transform: translateY(-1px); }
+  }
+  &--accent {
+    background: $brand-accent; color: #000;
+    &:hover { background: darken($brand-accent, 8%); }
+  }
+  &--secondary {
+    background: $brand-surface; color: $brand-text;
+    border: 1px solid #e5e7eb;
+    &:hover { background: darken($brand-surface, 5%); }
+  }
+
+  &--ghost {
+    background: transparent; border: 2px solid $brand-primary; color: $brand-primary;
+    &:hover { background: $brand-primary; color: #fff; }
+  }
+}

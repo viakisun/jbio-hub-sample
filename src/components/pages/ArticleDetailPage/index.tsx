@@ -100,7 +100,7 @@ const ArticleDetailPage: React.FC = () => {
               {article.relatedCompanies.map(companyId => (
                 // In a real app, you'd fetch company name for the badge
                 <Link key={companyId} to={`/companies/${companyId}`}>
-                  <Badge $variant="primary">{companyId}</Badge>
+                  <Badge variant="primary">{companyId}</Badge>
                 </Link>
               ))}
             </div>

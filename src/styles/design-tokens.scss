@@ -1,0 +1,45 @@
+// Core Palette — bold, global
+$brand-primary:   #0026FF;   // deep international blue
+$brand-accent:    #FFCC00;   // FIFA-like golden accent
+$brand-bg:        #FFFFFF;
+$brand-surface:   #F5F6F7;
+$brand-text:      #111111;
+$brand-muted:     #666666;
+
+// States
+$state-success:   #2ECC71;
+$state-warning:   #F39C12;
+$state-danger:    #E74C3C;
+
+// Shadows & Radii (simpler, sport style = harder edges, less round)
+$shadow-sm:       0 2px 4px rgba(0,0,0,.06);
+$shadow-md:       0 6px 12px rgba(0,0,0,.1);
+$shadow-lg:       0 12px 24px rgba(0,0,0,.15);
+
+$radius-sm:       4px;
+$radius-md:       8px;    // default for cards/buttons
+$radius-lg:       12px;
+$radius-pill:     999px;
+
+// Spacing — bigger leaps, cleaner rhythm
+$sp-0:   0;
+$sp-2:   8px;
+$sp-4:   16px;
+$sp-6:   24px;
+$sp-8:   32px;
+$sp-12:  48px;
+$sp-16:  64px;
+$sp-20:  80px;
+
+// Typography — bold, sport-like
+$font-sans:  "Montserrat", "Inter", "Helvetica Neue", Arial, sans-serif;
+
+$fs-display: clamp(42px, 6vw, 72px); $fw-display: 800; $lh-display: 1.1;
+$fs-h1:      clamp(28px, 4vw, 40px); $fw-h1: 700; $lh-h1: 1.2;
+$fs-h2:      28px; $fw-h2: 600; $lh-h2: 1.25;
+$fs-body:    16px; $fw-body: 400; $lh-body: 1.55;
+$fs-meta:    14px; $fw-meta: 500; $lh-meta: 1.45;
+
+// Layout
+$container-max: 1280px;
+$gutter:        24px;

@@ -1,0 +1,14 @@
+@import '../design-tokens.scss';
+
+.card {
+  background: $brand-surface;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  padding: $sp-6;
+  transition: box-shadow .2s ease, transform .1s ease;
+
+  &:hover { box-shadow: $shadow-md; transform: translateY(-2px); }
+
+  &__title { font-size: $fs-h2; font-weight: $fw-h2; margin-bottom: $sp-2; }
+  &__meta { font-size: $fs-meta; color: $brand-muted; }
+}

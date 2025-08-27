@@ -1,0 +1,35 @@
+@import '../design-tokens.scss';
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: $fs-meta;
+  font-weight: 500;
+  border-radius: $radius-pill;
+  white-space: nowrap;
+
+  &--primary {
+    background-color: lighten($brand-primary, 40%);
+    color: $brand-primary;
+  }
+
+  &--secondary {
+    background-color: $brand-surface;
+    color: $brand-muted;
+  }
+
+  &--success {
+    background-color: lighten($state-success, 30%);
+    color: darken($state-success, 10%);
+  }
+
+  &--warning {
+    background-color: lighten($state-warning, 30%);
+    color: darken($state-warning, 10%);
+  }
+
+  &--danger {
+    background-color: lighten($state-danger, 30%);
+    color: darken($state-danger, 10%);
+  }
+}

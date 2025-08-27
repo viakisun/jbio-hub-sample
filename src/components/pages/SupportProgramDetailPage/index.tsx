@@ -80,7 +80,7 @@ const SupportProgramDetailPage: React.FC = () => {
           <Title>{program.title}</Title>
           <MetaInfo>
             <span>주관: {program.organization}</span>
-            <Badge $variant={program.status === 'ONGOING' ? 'success' : 'secondary'}>{program.status}</Badge>
+            <Badge variant={program.status === 'ONGOING' ? 'success' : 'secondary'}>{program.status}</Badge>
           </MetaInfo>
         </Header>
 

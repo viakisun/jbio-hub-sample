@@ -102,7 +102,7 @@ const ContentGridSample2 = () => {
             <div style={headerStyle}>
               <h2 style={titleStyle}>최신 공고</h2>
               <Link to="/announcements">
-                <Button $variant="primary">전체보기</Button>
+                <Button variant="primary">전체보기</Button>
               </Link>
             </div>
             <div style={{flexGrow: 1}}>
@@ -123,7 +123,7 @@ const ContentGridSample2 = () => {
             <div style={headerStyle}>
               <h2 style={titleStyle}>최신 뉴스</h2>
               <Link to="/news/latest">
-                <Button $variant="primary">전체보기</Button>
+                <Button variant="primary">전체보기</Button>
               </Link>
             </div>
             <div style={{flexGrow: 1}}>
