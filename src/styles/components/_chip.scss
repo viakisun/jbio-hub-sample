@@ -1,0 +1,11 @@
+@use "../design-tokens" as *;
+
+.chip {
+  display: inline-flex; align-items: center; gap: $sp-2;
+  padding: 6px 12px; border-radius: $radius-pill;
+  font-size: $fs-meta; font-weight: 600; color: #fff;
+
+  &--open    { background: $state-success; }
+  &--planned { background: $brand-primary; }
+  &--closed  { background: #9CA3AF; }
+}

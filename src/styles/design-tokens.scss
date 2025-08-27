@@ -1,0 +1,59 @@
+// Brand core
+$brand-primary:    #3163FF;   // vivid blue
+$brand-secondary:  #00C2A8;   // aqua accent
+$brand-ink:        #0F172A;   // near-black text
+$brand-muted:      #6B7280;   // muted text
+$brand-bg:         #FFFFFF;   // canvas
+$brand-surface:    #F7F8FA;   // cards/sections
+$brand-border:     #E5E7EB;
+
+// States
+$state-success:    #10B981;
+$state-warning:    #F59E0B;
+$state-danger:     #EF4444;
+$state-info:       #38BDF8;
+
+// Elevation
+$shadow-xs:        0 1px 2px rgba(0,0,0,.05);
+$shadow-sm:        0 2px 8px rgba(0,0,0,.08);
+$shadow-md:        0 8px 24px rgba(0,0,0,.10);
+$shadow-lg:        0 16px 40px rgba(0,0,0,.12);
+
+// Radii (youthful = softer corners)
+$radius-xxs:       6px;
+$radius-xs:        10px;
+$radius-sm:        12px;
+$radius-md:        16px;   // default for cards/buttons
+$radius-lg:        20px;
+$radius-pill:      999px;
+
+// Spacing (4/8 grid hybrid for crisp rhythm)
+$sp-0:   0;
+$sp-1:   4px;
+$sp-2:   8px;
+$sp-3:   12px;
+$sp-4:   16px;
+$sp-5:   20px;
+$sp-6:   24px;
+$sp-8:   32px;
+$sp-10:  40px;
+$sp-12:  48px;
+$sp-16:  64px;
+$sp-20:  80px;
+
+// Type (modern sans + generous line-height)
+$font-sans:  "Inter", "Pretendard", "Noto Sans KR", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+
+$fs-display: clamp(40px, 6vw, 72px); $fw-display: 800; $lh-display: 1.05;
+$fs-h1:      clamp(28px, 4vw, 40px); $fw-h1: 700;     $lh-h1: 1.15;
+$fs-h2:      28px;                    $fw-h2: 700;     $lh-h2: 1.2;
+$fs-h3:      22px;                    $fw-h3: 600;     $lh-h3: 1.25;
+$fs-body:    16px;                    $fw-body: 450;    $lh-body: 1.6;
+$fs-meta:    14px;                    $fw-meta: 450;    $lh-meta: 1.45;
+
+// Layout
+$container-max: 1320px;  // slightly narrower for editorial feel
+$gutter:        24px;
+
+// Breakpoints
+$bp-sm: 480px; $bp-md: 768px; $bp-lg: 1024px; $bp-xl: 1440px;

@@ -1,0 +1,48 @@
+@use "design-tokens" as *;
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { font-size: 100%; }
+
+body {
+  margin: 0;
+  color: $brand-ink;
+  background: $brand-bg;
+  font-family: $font-sans;
+  font-size: $fs-body;
+  line-height: $lh-body;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+
+a { color: $brand-primary; text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+.container {
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $gutter;
+}
+
+.section { padding-block: $sp-20; }
+.section--tight { padding-block: $sp-12; }
+
+.bg-surface { background-color: $brand-surface; }
+.text-center { text-align: center; }
+
+.section-title {
+  font-size: $fs-h2;
+  font-weight: $fw-h2;
+  margin-bottom: $sp-8;
+  text-align: center;
+}
+
+:focus-visible { outline: 2px solid $brand-primary; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

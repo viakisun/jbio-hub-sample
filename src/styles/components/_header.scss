@@ -1,0 +1,7 @@
+@use "../design-tokens" as *;
+
+.header {
+  position: sticky; top: 0; z-index: 40; backdrop-filter: saturate(1.2) blur(8px);
+  background: rgba(255,255,255,.8); border-bottom: 1px solid $brand-border;
+  .nav { display: flex; gap: $sp-6; align-items: center; height: 64px; }
+}

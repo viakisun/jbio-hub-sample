@@ -7,6 +7,7 @@ import HomePageSample3 from './components/pages/HomePageSample3';
 import HomePageSample4 from './components/pages/HomePageSample4';
 import HomePageSample5 from './components/pages/HomePageSample5';
 import HomePageSample6 from './components/pages/HomePageSample6';
+import BoldHomePage from './components/pages/BoldHomePage';
 import AnnouncementsPage from './components/pages/AnnouncementsPage';
 import IncubationPage from './components/pages/IncubationPage';
 import CompaniesPage from './components/pages/CompaniesPage';
@@ -45,6 +46,7 @@ function App() {
       <Route path="/home-sample4" element={<HomePageSample4 />} />
       <Route path="/home-sample5" element={<HomePageSample5 />} />
       <Route path="/home-sample6" element={<HomePageSample6 />} />
+      <Route path="/home-bold" element={<BoldHomePage />} />
       <Route path="/cluster" element={<ClusterDashboardPage />} />
       <Route path="/cluster/hub" element={<ClusterHubPage />} />
       <Route path="/cluster/organizations" element={<ClusterOrgsPage />} />
