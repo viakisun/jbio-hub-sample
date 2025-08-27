@@ -1,0 +1,17 @@
+@use "../design-tokens" as *;
+
+.hero {
+  padding-block: clamp(96px, 16vw, 176px);
+  display: grid; gap: $sp-6;
+  text-align: left;
+
+  &__title { font-size: $fs-display; line-height: $lh-display; font-weight: $fw-display; letter-spacing: -0.02em; }
+  &__subtitle { max-width: 56ch; color: $brand-muted; margin-top: $sp-4; }
+  &__actions { margin-top: $sp-8; display: flex; gap: $sp-4; flex-wrap: wrap; }
+  &--split { grid-template-columns: 1.1fr .9fr; align-items: center;
+    @media (max-width: $bp-lg) { grid-template-columns: 1fr; }
+  }
+  &__visual img {
+    border-radius: $radius-md;
+  }
+}

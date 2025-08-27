@@ -1,0 +1,6 @@
+@use "../design-tokens" as *;
+
+.footer {
+  padding-block: $sp-20; background: $brand-surface; border-top: 1px solid $brand-border;
+  .footer__meta { color: $brand-muted; font-size: $fs-meta; }
+}

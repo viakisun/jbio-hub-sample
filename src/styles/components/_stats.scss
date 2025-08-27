@@ -1,0 +1,11 @@
+@use "../design-tokens" as *;
+
+.stats-section {
+  &__subtitle {
+    margin: 0 auto $sp-8 auto;
+  }
+  &__value {
+    font-size: $fs-h1;
+    font-weight: $fw-h1;
+  }
+}

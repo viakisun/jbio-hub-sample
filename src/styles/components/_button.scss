@@ -1,0 +1,23 @@
+@use "../design-tokens" as *;
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: $sp-3; padding: 12px 20px; border-radius: $radius-md;
+  font-weight: 600; border: 1px solid transparent; line-height: 1;
+  transition: background-color .18s ease, box-shadow .18s ease, transform .06s ease;
+
+  &--primary {
+    background: $brand-primary; color: #fff;
+    box-shadow: $shadow-xs;
+    &:hover { box-shadow: $shadow-sm; }
+    &:active { transform: translateY(1px); }
+    &:disabled { opacity: .5; cursor: not-allowed; }
+  }
+
+  &--secondary {
+    background: transparent; color: $brand-primary; border-color: $brand-primary;
+    &:hover { background: rgba(49,99,255,.08); }
+  }
+
+  &--pill { border-radius: $radius-pill; padding-inline: 24px; }
+}

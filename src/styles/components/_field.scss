@@ -1,0 +1,14 @@
+@use "../design-tokens" as *;
+
+.field {
+  display: grid; gap: $sp-2;
+  &__label { font-size: $fs-meta; color: $brand-muted; }
+  &__control {
+    border: 1px solid $brand-border; border-radius: $radius-sm; background: #fff;
+    padding: 12px $sp-4; color: $brand-ink;
+    transition: border-color .15s ease, box-shadow .15s ease;
+    &:focus { border-color: $brand-primary; box-shadow: 0 0 0 3px rgba(49,99,255,.18); outline: 0; }
+    &::placeholder { color: $brand-muted; }
+  }
+  &--error .field__control { border-color: $state-danger; }
+}
