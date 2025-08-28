@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import MainLayout from '../../templates/MainLayout';
 import SearchBar from '../../molecules/SearchBar';
 import FilterBar, { Filter } from '../../molecules/FilterBar';
@@ -10,35 +8,6 @@ import TableList from '../../molecules/TableList';
 import Badge from '../../atoms/Badge';
 import useTechnologies from '../../../hooks/useTechnologies';
 import { LoadingMessage, ErrorMessage } from '../../organisms/IncubationTabs/shared/StateMessages';
-
-// --- STYLED COMPONENTS ---
-
-const PageWrapper = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const PageHeader = styled.header`
-  text-align: center;
-  margin-bottom: 2.5rem;
-`;
-
-const PageTitle = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 700;
-`;
-
-const ControlsWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
-
-// --- COMPONENT ---
 
 const categoryMap: Record<string, string[]> = {
   '레드바이오': ['의약품', '세포치료', '진단기기', '백신'],
@@ -66,7 +35,7 @@ const TechnologiesListPage = () => {
     setFilters(prev => {
       const newFilters = { ...prev, [filterName]: value, page: 1 };
       if (filterName === 'category') {
-        newFilters.subCategory = ''; // Reset subCategory when main category changes
+        newFilters.subCategory = '';
       }
       return newFilters;
     });
@@ -116,7 +85,7 @@ const TechnologiesListPage = () => {
       tech.subCategory,
       <Badge
         key={`badge-${tech.id}`}
-        $variant={tech.transferable ? 'success' : 'danger'}
+        variant={tech.transferable ? 'success' : 'danger'}
       >
         {tech.transferable ? '기술이전 가능' : '기술이전 불가'}
       </Badge>,
@@ -133,15 +102,15 @@ const TechnologiesListPage = () => {
 
   return (
     <MainLayout>
-      <PageWrapper>
-        <PageHeader>
-          <PageTitle>기술 및 특허 정보</PageTitle>
-        </PageHeader>
+      <div className="technologies-list-page__wrapper">
+        <header className="technologies-list-page__header">
+          <h1 className="technologies-list-page__title">기술 및 특허 정보</h1>
+        </header>
 
-        <ControlsWrapper>
+        <div className="technologies-list-page__controls">
           <FilterBar filters={filterDefinitions} onFilterChange={handleFilterChange} />
           <SearchBar onSearch={handleSearch} />
-        </ControlsWrapper>
+        </div>
 
         {loading && <LoadingMessage>기술 정보를 불러오는 중입니다...</LoadingMessage>}
         {error && <ErrorMessage>오류가 발생했습니다: {error.message}</ErrorMessage>}
@@ -159,7 +128,7 @@ const TechnologiesListPage = () => {
             />
           </>
         )}
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

@@ -1,20 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Grid from '../../atoms/Grid';
 import SearchBar from '../../molecules/SearchBar';
 import FilterBar from '../../molecules/FilterBar';
 import Pagination from '../../molecules/Pagination';
 import VacancyCard, { VacancyCardData } from '../../molecules/VacancyCard';
 
-// --- DATA MODELS ---
 interface CenterVacancyData {
   centerId: string;
   centerName: string;
   vacancies: VacancyCardData[];
 }
 
-// --- MOCK DATA ---
 const mockVacancyData: CenterVacancyData[] = [
   {
     centerId: 'center-1',
@@ -42,57 +38,23 @@ const mockVacancyData: CenterVacancyData[] = [
   }
 ];
 
-// --- STYLED COMPONENTS ---
-
-const ControlsWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-
-  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    flex-direction: column;
-    align-items: stretch;
-  }
-`;
-
-const CenterSection = styled.section`
-  margin-bottom: 3rem;
-`;
-
-const CenterTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-
-  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    font-size: 1.25rem;
-  }
-`;
-
-// --- COMPONENT ---
-
 const VacancyView = () => {
   return (
-    <div>
-      <ControlsWrapper>
+    <div className="incubation-tab-view vacancy-view">
+      <div className="tenants-view__controls">
         <FilterBar />
         <SearchBar />
-      </ControlsWrapper>
+      </div>
 
       {mockVacancyData.map(center => (
-        <CenterSection key={center.centerId}>
-          <CenterTitle>{center.centerName}</CenterTitle>
-          <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
+        <section key={center.centerId} className="center-section">
+          <h2 className="center-title">{center.centerName}</h2>
+          <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
             {center.vacancies.map(vacancy => (
               <VacancyCard key={vacancy.id} vacancy={vacancy} />
             ))}
           </Grid>
-        </CenterSection>
+        </section>
       ))}
 
       {/* Note: Pagination might need to be by center or by total vacancies, depending on final spec */}

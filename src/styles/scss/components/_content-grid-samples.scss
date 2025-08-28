@@ -1,0 +1,195 @@
+@use "../design-tokens" as *;
+
+.content-grid-sample-1 {
+  max-width: 1200px;
+  margin: 0 auto $space-16 auto;
+  padding: 0 $space-4;
+
+  &__list-item {
+    padding: $space-4 0;
+    border-bottom: 1px solid $color-divider;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: $fs-body;
+    color: $color-text;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  &__meta {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+    text-align: right;
+  }
+
+  &__section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-4;
+  }
+
+  &__section-title {
+    font-size: $fs-h2;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__view-all-link {
+    text-decoration: none;
+    color: $color-text-muted;
+    font-size: $fs-caption;
+  }
+}
+
+.content-grid-sample-2 {
+  margin-bottom: $space-16;
+  background-color: $color-primary-50;
+  padding: $space-16 0;
+
+  &__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $space-4;
+  }
+
+  &__card {
+    background-color: $color-surface;
+    border-radius: 20px;
+    padding: $space-8;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-6;
+  }
+
+  &__title {
+    font-size: $fs-h2;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__item {
+    background-color: $color-elevated;
+    border-radius: $radius-md;
+    padding: $space-4 $space-5;
+    margin-bottom: $space-4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: $color-text;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-sm;
+    }
+  }
+}
+
+.content-grid-sample-3 {
+  margin-bottom: $space-16;
+  max-width: 1200px;
+  margin: 0 auto $space-16 auto;
+  padding: 0 $space-4;
+
+  &__section {
+    padding: $space-8;
+    background-color: $color-surface;
+    border-radius: $radius-lg;
+    border: 1px solid $color-border;
+    height: 100%;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-6;
+    padding-bottom: $space-4;
+    border-bottom: 1px solid $color-divider;
+  }
+
+  &__title {
+    font-size: $fs-h2;
+    font-weight: 700;
+    color: #1d3557; // This is a new color, I will keep it for now
+    margin: 0;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $space-3 0;
+    border-bottom: 1px solid $color-divider;
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.content-grid-sample-4 {
+  margin-bottom: $space-16;
+  max-width: 1200px;
+  margin: 0 auto $space-16 auto;
+  padding: 0 $space-4;
+
+  &__panel {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: $space-8;
+    color: white;
+    height: 100%;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-6;
+  }
+
+  &__title {
+    font-size: $fs-h2;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-4;
+    border-radius: $radius-md;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+  }
+
+  &__category {
+    background-color: rgba(255,255,255,0.15);
+    padding: $space-1 $space-2;
+    border-radius: $radius-pill;
+    font-size: $fs-caption;
+    opacity: 0.8;
+  }
+}

@@ -1,0 +1,148 @@
+@use "../design-tokens" as *;
+
+.incubation-tab-view {
+  .section {
+    margin-bottom: $space-12;
+  }
+
+  .section-title {
+    font-size: $fs-h2;
+    font-weight: 600;
+    margin-bottom: $space-6;
+    padding-bottom: $space-4;
+    border-bottom: 1px solid $color-divider;
+
+    @media (max-width: $bp-sm) {
+      font-size: $fs-h3;
+    }
+  }
+}
+
+.vacancy-view {
+  .center-section {
+    margin-bottom: $space-12;
+  }
+
+  .center-title {
+    font-size: $fs-h2;
+    font-weight: 600;
+    margin-bottom: $space-6;
+    padding-bottom: $space-4;
+    border-bottom: 1px solid $color-divider;
+
+    @media (max-width: $bp-sm) {
+      font-size: $fs-h3;
+    }
+  }
+}
+
+.apply-view {
+  &__document-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+
+  &__document-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    text-decoration: none;
+    color: $color-text;
+    font-weight: 500;
+
+    &:hover {
+      color: $color-primary;
+      text-decoration: underline;
+    }
+  }
+
+  &__notice-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+}
+
+.dashboard-view {
+  .section {
+    background-color: $color-surface;
+    padding: $space-8;
+    border-radius: $radius-lg;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $color-border;
+
+    @media (max-width: $bp-sm) {
+      padding: $space-6;
+    }
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-6;
+  }
+
+  .view-all-link {
+    font-size: $fs-caption;
+    font-weight: 500;
+    color: $color-primary;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+
+  .vacancy-card-link {
+    display: block;
+    padding: $space-4;
+    border-radius: $radius-md;
+    text-decoration: none;
+    color: inherit;
+    background-color: $color-elevated;
+    border: 1px solid $color-border;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    &:hover {
+        border-color: $color-divider;
+        box-shadow: $shadow-md;
+    }
+  }
+
+  .vacancy-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: $space-2;
+  }
+
+  .vacancy-types {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+  }
+
+  .full-width-section {
+    grid-column: 1 / -1;
+  }
+}
+
+.tenants-view {
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-8;
+    flex-wrap: wrap;
+    gap: $space-4;
+
+    @media (max-width: $bp-sm) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}

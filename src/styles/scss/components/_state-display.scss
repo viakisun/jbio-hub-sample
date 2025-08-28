@@ -1,0 +1,57 @@
+@use "../design-tokens" as *;
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-16 $space-8;
+  text-align: center;
+  background-color: $color-surface;
+  border-radius: $radius-lg;
+  color: $color-text-muted;
+
+  &__icon {
+    margin-bottom: $space-6;
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 600;
+    color: $color-text;
+    margin-bottom: $space-2;
+  }
+
+  &__message {
+    font-size: $fs-body;
+    max-width: 400px;
+  }
+}
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-16 $space-8;
+  text-align: center;
+  background-color: rgba($color-error, 0.05);
+  border: 1px solid rgba($color-error, 0.2);
+  border-radius: $radius-lg;
+  color: $color-error;
+
+  &__icon {
+    margin-bottom: $space-6;
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 600;
+    margin-bottom: $space-2;
+  }
+
+  &__message {
+    font-size: $fs-body;
+    max-width: 400px;
+  }
+}

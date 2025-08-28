@@ -1,0 +1,8 @@
+@use "../design-tokens" as *;
+
+.cluster-policy-page {
+  &__wrapper {
+    padding: $space-8;
+    text-align: center;
+  }
+}

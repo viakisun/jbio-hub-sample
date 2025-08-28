@@ -1,0 +1,46 @@
+@use "../design-tokens" as *;
+
+.info-table {
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 600;
+    margin-bottom: $space-4;
+  }
+
+  &__container {
+    overflow-x: auto;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: $fs-body;
+  }
+
+  &__row {
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-border;
+    }
+  }
+
+  &__header {
+    background-color: $color-surface;
+    padding: $space-3 $space-6;
+    text-align: left;
+    font-weight: 600;
+    color: $color-text;
+    width: 180px;
+  }
+
+  &__data {
+    padding: $space-3 $space-6;
+    color: $color-text;
+
+    &--emphasized {
+      color: $color-error;
+      font-weight: 500;
+    }
+  }
+}

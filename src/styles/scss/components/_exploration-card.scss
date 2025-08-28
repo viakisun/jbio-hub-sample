@@ -1,0 +1,38 @@
+@use "../design-tokens" as *;
+
+.exploration-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+
+  &__wrapper {
+    background-color: $color-elevated;
+    border-radius: $radius-lg;
+    padding: $space-8;
+    height: 100%;
+    border: 1px solid $color-border;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 700;
+    margin: 0 0 $space-3 0;
+  }
+
+  &__description {
+    font-size: $fs-body;
+    color: $color-text-muted;
+    margin: 0 0 $space-6 0;
+    flex-grow: 1;
+  }
+}

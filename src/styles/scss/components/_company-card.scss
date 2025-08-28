@@ -1,0 +1,63 @@
+@use "../design-tokens" as *;
+
+.company-card {
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $space-6;
+  background-color: $color-elevated;
+  box-shadow: $shadow-sm;
+  transition: box-shadow 0.2s ease-in-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $space-4;
+  }
+
+  &__logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: $space-4;
+    object-fit: cover;
+    border: 1px solid $color-divider;
+  }
+
+  &__name-meta {
+    // No specific styles
+  }
+
+  &__name {
+    font-size: $fs-h3;
+    font-weight: 600;
+    margin: 0;
+    color: $color-text;
+  }
+
+  &__meta {
+    color: $color-text-muted;
+    font-size: $fs-caption;
+    margin: $space-1 0 0;
+  }
+
+  &__description {
+    color: $color-text;
+    font-size: $fs-body;
+    flex-grow: 1;
+    margin: 0 0 $space-6;
+    line-height: 1.5;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+  }
+}

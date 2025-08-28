@@ -1,44 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const FilterBarWrapper = styled.div`
-  display: flex;
-  gap: 1.5rem;
-  padding: 1rem;
-  background-color: #f9fafb;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  align-items: center;
-`;
-
-const FilterGroup = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const FilterLabel = styled.label`
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #374151;
-`;
-
-const FilterSelect = styled.select`
-  padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  background-color: white;
-  font-size: 0.875rem;
-  &:focus {
-    outline: 2px solid #3b82f6;
-    border-color: #3b82f6;
-  }
-  &:disabled {
-    background-color: #e5e7eb;
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-`;
 
 export interface FilterOption {
   value: string;
@@ -52,11 +12,6 @@ export interface Filter {
   disabled?: boolean;
 }
 
-const FilterPlaceholder = styled.div`
-  font-size: 0.875rem;
-  color: #6b7280;
-`;
-
 interface FilterBarProps {
   filters?: Filter[];
   onFilterChange?: (filterName: string, value: string) => void;
@@ -65,32 +20,33 @@ interface FilterBarProps {
 const FilterBar: React.FC<FilterBarProps> = ({ filters, onFilterChange }) => {
   if (!filters || filters.length === 0 || !onFilterChange) {
     return (
-      <FilterBarWrapper>
-        <FilterPlaceholder>Filter controls will be displayed here.</FilterPlaceholder>
-      </FilterBarWrapper>
+      <div className="filter-bar">
+        <div className="filter-bar__placeholder">Filter controls will be displayed here.</div>
+      </div>
     );
   }
 
   return (
-    <FilterBarWrapper>
+    <div className="filter-bar">
       {filters.map((filter) => (
-        <FilterGroup key={filter.name}>
-          <FilterLabel htmlFor={filter.name}>{filter.label}:</FilterLabel>
-          <FilterSelect
+        <div key={filter.name} className="filter-bar__group">
+          <label htmlFor={filter.name} className="filter-bar__label">{filter.label}:</label>
+          <select
             id={filter.name}
             name={filter.name}
             onChange={(e) => onFilterChange(filter.name, e.target.value)}
             disabled={filter.disabled}
+            className="filter-bar__select"
           >
             {filter.options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
-          </FilterSelect>
-        </FilterGroup>
+          </select>
+        </div>
       ))}
-    </FilterBarWrapper>
+    </div>
   );
 };
 

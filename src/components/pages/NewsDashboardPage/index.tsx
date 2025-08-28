@@ -1,14 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MainLayout from '../../templates/MainLayout';
 import Grid from '../../atoms/Grid';
 import NewsCard from '../../molecules/NewsCard';
 import EventCard from '../../molecules/EventCard';
 import { News, Event } from '../../../types/api';
-
-// --- MOCK DATA ---
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
 
 const mockNewsPreview: News[] = [
   { id: 1, title: '혁신적인 암 치료법, CAR-T 세포 치료의 최신 동향', summary: 'CAR-T 세포 치료가 혈액암을 넘어 고형암 정복에 나섰다.', content: '...', thumbnailUrl: 'https://picsum.photos/seed/news1/400/225', sourceName: '바이오타임즈', created_at: '2024-08-14', category: 'news' },
@@ -26,91 +22,37 @@ const mockEventsPreview: Event[] = [
   { id: 5, title: '의료기기 규제 및 인허가 과정 웨비나', summary: '의료기기 시장 진출을 위한 필수 전략', category: 'event', status: '마감', thumbnailUrl: 'https://picsum.photos/seed/event5/400/225', eventStartAt: '2024-09-25', eventEndAt: '2024-09-25', locationType: 'online', host: 'KMDIA', registerDeadline: '2024-09-23' },
 ];
 
-
-// --- STYLED COMPONENTS ---
-
-const PageWrapper = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const PageHeader = styled.header`
-  text-align: center;
-  margin-bottom: 3rem;
-`;
-
-const PageTitle = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 700;
-`;
-
-const Section = styled.section`
-  background-color: #f9fafb;
-  padding: 2rem;
-  border-radius: 16px;
-`;
-
-const SectionHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 600;
-`;
-
-const ViewAllLink = styled(Link)`
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #4f46e5;
-  text-decoration: none;
-  &:hover { text-decoration: underline; }
-`;
-
-const ItemGrid = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-
-// --- COMPONENT ---
-
 const NewsDashboardPage = () => {
   return (
     <MainLayout>
-      <PageWrapper>
-        <PageHeader>
-          <PageTitle>뉴스 & 행사</PageTitle>
-        </PageHeader>
+      <div className="news-dashboard-page__wrapper">
+        <header className="news-dashboard-page__header">
+          <h1 className="news-dashboard-page__title">뉴스 & 행사</h1>
+        </header>
 
-        <Grid $cols={2} $tabletCols={1} $mobileCols={1} $gap="2rem">
-          <Section>
-            <SectionHeader>
-              <SectionTitle>최신 뉴스</SectionTitle>
-              <ViewAllLink to="/news/latest">전체 보기</ViewAllLink>
-            </SectionHeader>
-            <ItemGrid>
+        <Grid cols={2} tabletCols={1} mobileCols={1} gap="2rem">
+          <section className="news-dashboard-page__section">
+            <div className="news-dashboard-page__section-header">
+              <h2 className="news-dashboard-page__section-title">최신 뉴스</h2>
+              <Link to="/news/latest" className="news-dashboard-page__view-all-link">전체 보기</Link>
+            </div>
+            <div className="news-dashboard-page__item-grid">
               {mockNewsPreview.map(news => <NewsCard key={news.id} news={news} />)}
-            </ItemGrid>
-          </Section>
+            </div>
+          </section>
 
-          <Section>
-            <SectionHeader>
-              <SectionTitle>바이오 행사</SectionTitle>
-              <ViewAllLink to="/events">전체 보기</ViewAllLink>
-            </SectionHeader>
-            <ItemGrid>
+          <section className="news-dashboard-page__section">
+            <div className="news-dashboard-page__section-header">
+              <h2 className="news-dashboard-page__section-title">바이오 행사</h2>
+              <Link to="/events" className="news-dashboard-page__view-all-link">전체 보기</Link>
+            </div>
+            <div className="news-dashboard-page__item-grid">
               {mockEventsPreview.map(event => <EventCard key={event.id} event={event} />)}
-            </ItemGrid>
-          </Section>
+            </div>
+          </section>
         </Grid>
 
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

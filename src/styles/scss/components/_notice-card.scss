@@ -1,0 +1,46 @@
+@use "../design-tokens" as *;
+
+.notice-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  &__wrapper {
+    background-color: $color-surface;
+    border-radius: $radius-lg;
+    padding: $space-6;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: $color-divider;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-3;
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__days-left {
+    background-color: rgba($color-error, 0.1);
+    color: $color-error;
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+    font-size: $fs-caption;
+    font-weight: 600;
+  }
+
+  &__info {
+    font-size: $fs-body;
+    color: $color-text-muted;
+    margin: 0;
+  }
+}

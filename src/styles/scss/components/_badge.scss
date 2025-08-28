@@ -1,0 +1,31 @@
+@use "../design-tokens" as *;
+
+.badge {
+  display: inline-block;
+  padding: $space-1 $space-3;
+  font-size: $fs-caption;
+  font-weight: 500;
+  border-radius: $radius-pill;
+  white-space: nowrap;
+
+  &--primary {
+    background-color: $color-primary-50;
+    color: $color-primary-600;
+  }
+  &--secondary {
+    background-color: $color-surface;
+    color: $color-text-muted;
+  }
+  &--success {
+    background-color: rgba($color-success, 0.1);
+    color: $color-success;
+  }
+  &--warning {
+    background-color: rgba($color-warning, 0.1);
+    color: $color-warning;
+  }
+  &--danger {
+    background-color: rgba($color-error, 0.1);
+    color: $color-error;
+  }
+}

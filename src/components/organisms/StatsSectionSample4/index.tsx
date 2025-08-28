@@ -7,7 +7,7 @@ interface Stat {
   value: string;
   change: string;
   icon: string;
-  color: string; // Will be used for glow effect
+  color: string;
 }
 
 const StatsSectionSample4 = () => {
@@ -30,35 +30,19 @@ const StatsSectionSample4 = () => {
     fetchStats();
   }, []);
 
-  const cardStyle: React.CSSProperties = {
-    background: 'rgba(0, 0, 0, 0.2)',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    borderRadius: '24px',
-    padding: '2rem',
-    textAlign: 'center',
-    color: 'white',
-    transition: 'background 0.3s',
-  };
-
   return (
-    <section style={{ marginBottom: '4rem' }}>
-      <Grid $cols={4} $tabletCols={2} $mobileCols={1}>
+    <section className="stats-section-sample-4">
+      <Grid cols={4} tabletCols={2} mobileCols={1}>
         {stats.map((stat, index) => (
-          <div key={index} style={cardStyle}>
-            <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.75rem' }}>
+          <div key={index} className="stats-section-sample-4__card">
+            <div className="stats-section-sample-4__header">
               <Icon name={stat.icon} size={18} color="#ffffff" />
-              <h3 style={{ fontSize: '1rem', fontWeight: '500', margin: 0, opacity: 0.8 }}>{stat.label}</h3>
+              <h3 className="stats-section-sample-4__label">{stat.label}</h3>
             </div>
-            <p style={{
-              fontSize: '2.5rem',
-              fontWeight: 'bold',
-              margin: '0 0 0.5rem 0',
-              textShadow: `0 0 10px ${stat.color}, 0 0 20px ${stat.color}`,
-            }}>
+            <p className="stats-section-sample-4__value" style={{ textShadow: `0 0 10px ${stat.color}, 0 0 20px ${stat.color}` }}>
               {stat.value}
             </p>
-            <p style={{ fontSize: '0.9rem', margin: 0, opacity: 0.7 }}>
+            <p className="stats-section-sample-4__change">
               {stat.change} vs last month
             </p>
           </div>

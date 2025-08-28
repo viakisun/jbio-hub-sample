@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import StatCard from '../../molecules/StatCard';
 import Grid from '../../atoms/Grid';
 import { ApiStat } from '../../../types/api';
 
@@ -22,10 +21,9 @@ const StatsSectionSample1 = () => {
           throw new Error('Network response was not ok');
         }
         const data: ApiStat[] = await response.json();
-        // For the minimalist design, we can simplify the data or presentation
         const simplifiedData = data.map((stat: ApiStat) => ({
           ...stat,
-          color: '#495057', // Use a neutral color
+          color: '#495057',
         }));
         setStats(simplifiedData);
       } catch (error) {
@@ -37,19 +35,13 @@ const StatsSectionSample1 = () => {
   }, []);
 
   return (
-    <section style={{ marginBottom: '4rem', padding: '2rem 0' }}>
-      <Grid $cols={4} $tabletCols={2} $mobileCols={1}>
+    <section className="stats-section-sample-1">
+      <Grid cols={4} tabletCols={2} mobileCols={1}>
         {stats.map((stat, index) => (
-          <div key={index} style={{
-            padding: '1.5rem',
-            border: '1px solid #e9ecef',
-            borderRadius: '12px',
-            textAlign: 'center',
-            backgroundColor: '#fff',
-          }}>
-            <h3 style={{ fontSize: '1rem', color: '#6c757d', marginBottom: '0.5rem', fontWeight: 'normal' }}>{stat.label}</h3>
-            <p style={{ fontSize: '2rem', fontWeight: 'bold', color: '#212529', margin: '0' }}>{stat.value}</p>
-            <p style={{ fontSize: '0.9rem', color: stat.change.startsWith('+') ? '#28a745' : '#dc3545', margin: '0.25rem 0 0 0' }}>{stat.change}</p>
+          <div key={index} className="stats-section-sample-1__card">
+            <h3 className="stats-section-sample-1__label">{stat.label}</h3>
+            <p className="stats-section-sample-1__value">{stat.value}</p>
+            <p className={`stats-section-sample-1__change ${stat.change.startsWith('+') ? 'stats-section-sample-1__change--positive' : 'stats-section-sample-1__change--negative'}`}>{stat.change}</p>
           </div>
         ))}
       </Grid>

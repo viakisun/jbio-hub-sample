@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MainLayout from '../../templates/MainLayout';
 import Grid from '../../atoms/Grid';
@@ -9,7 +8,6 @@ import TransferCard, { TransferCardData } from '../../molecules/TransferCard';
 import CollaborationCard, { CollaborationCardData } from '../../molecules/CollaborationCard';
 import Badge from '../../atoms/Badge';
 
-// --- MOCK DATA ---
 const kpiData = [
   { label: '신규 연구성과 (30일)', value: 12 },
   { label: '기술이전(모집중)', value: 8 },
@@ -33,56 +31,42 @@ const mockCollaborations: CollaborationCardData[] = [
   { id: 'collab-1', title: '산학협력: AI 기반 암 진단 솔루션 개발', summary: '', partners: [{ name: '전북대학교' }, { name: '바이오젠' }], year: 2023, fields: ['AI', '진단'] },
 ];
 
-
-// --- STYLED COMPONENTS ---
-const PageWrapper = styled.div` max-width: 1280px; margin: 0 auto; padding: 2rem; `;
-const PageHeader = styled.header` text-align: center; margin-bottom: 3rem; `;
-const PageTitle = styled.h1` font-size: 2.5rem; font-weight: 700; `;
-const Section = styled.section` background-color: #f9fafb; padding: 2rem; border-radius: 16px; display: flex; flex-direction: column; border: 1px solid #e5e7eb;`;
-const SectionHeader = styled.div` display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; `;
-const SectionTitle = styled.h2` font-size: 1.5rem; font-weight: 600; `;
-const ViewAllLink = styled(Link)` font-size: 0.875rem; font-weight: 500; color: #4f46e5; text-decoration: none; &:hover { text-decoration: underline; } `;
-const List = styled.div` display: flex; flex-direction: column; gap: 1rem; `;
-const PatentItem = styled(Link)` display: flex; justify-content: space-between; padding: 1rem; border-radius: 8px; text-decoration: none; color: inherit; &:hover { background-color: #eef2ff; }`;
-
-// --- COMPONENT ---
-
 const TechDashboardPage = () => {
   return (
     <MainLayout>
-      <PageWrapper>
-        <PageHeader>
-          <PageTitle>기술 및 특허</PageTitle>
-        </PageHeader>
-        <Grid $cols={1} $gap="3rem">
+      <div className="tech-dashboard-page__wrapper">
+        <header className="tech-dashboard-page__header">
+          <h1 className="tech-dashboard-page__title">기술 및 특허</h1>
+        </header>
+        <Grid cols={1} gap="3rem">
           <KPIGroup kpis={kpiData} />
-          <Grid $cols={4} $tabletCols={2} $mobileCols={1} $gap="2rem">
-            <Section>
-              <SectionHeader><SectionTitle>최신 연구성과</SectionTitle><ViewAllLink to="/tech/outcomes">전체보기</ViewAllLink></SectionHeader>
-              <List>{mockOutcomes.map(item => <OutcomeCard key={item.id} outcome={item} />)}</List>
-            </Section>
-            <Section>
-              <SectionHeader><SectionTitle>기술 이전</SectionTitle><ViewAllLink to="/tech/transfer">전체보기</ViewAllLink></SectionHeader>
-              <List>{mockTransfers.map(item => <TransferCard key={item.id} transfer={item} />)}</List>
-            </Section>
-            <Section>
-              <SectionHeader><SectionTitle>특허 현황</SectionTitle><ViewAllLink to="/tech/patents">전체보기</ViewAllLink></SectionHeader>
-              <List>
+          <Grid cols={4} tabletCols={2} mobileCols={1} gap="2rem">
+            <section className="tech-dashboard-page__section">
+              <div className="tech-dashboard-page__section-header"><h2 className="tech-dashboard-page__section-title">최신 연구성과</h2><Link to="/tech/outcomes" className="tech-dashboard-page__view-all-link">전체보기</Link></div>
+              <div className="tech-dashboard-page__list">{mockOutcomes.map(item => <OutcomeCard key={item.id} outcome={item} />)}</div>
+            </section>
+            <section className="tech-dashboard-page__section">
+              <div className="tech-dashboard-page__section-header"><h2 className="tech-dashboard-page__section-title">기술 이전</h2><Link to="/tech/transfer" className="tech-dashboard-page__view-all-link">전체보기</Link></div>
+              <div className="tech-dashboard-page__list">{mockTransfers.map(item => <TransferCard key={item.id} transfer={item} />)}</div>
+            </section>
+            <section className="tech-dashboard-page__section">
+              <div className="tech-dashboard-page__section-header"><h2 className="tech-dashboard-page__section-title">특허 현황</h2><Link to="/tech/patents" className="tech-dashboard-page__view-all-link">전체보기</Link></div>
+              <div className="tech-dashboard-page__list">
                 {mockPatents.map(item => (
-                  <PatentItem key={item.id} to={`/tech/patents/${item.id}`}>
+                  <Link key={item.id} to={`/tech/patents/${item.id}`} className="tech-dashboard-page__patent-item">
                     <span>{item.title}</span>
                     <Badge>{item.status}</Badge>
-                  </PatentItem>
+                  </Link>
                 ))}
-              </List>
-            </Section>
-            <Section>
-              <SectionHeader><SectionTitle>협력 사례</SectionTitle><ViewAllLink to="/tech/collaboration">전체보기</ViewAllLink></SectionHeader>
-              <List>{mockCollaborations.map(item => <CollaborationCard key={item.id} collaboration={item} />)}</List>
-            </Section>
+              </div>
+            </section>
+            <section className="tech-dashboard-page__section">
+              <div className="tech-dashboard-page__section-header"><h2 className="tech-dashboard-page__section-title">협력 사례</h2><Link to="/tech/collaboration" className="tech-dashboard-page__view-all-link">전체보기</Link></div>
+              <div className="tech-dashboard-page__list">{mockCollaborations.map(item => <CollaborationCard key={item.id} collaboration={item} />)}</div>
+            </section>
           </Grid>
         </Grid>
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

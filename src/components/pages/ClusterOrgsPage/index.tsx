@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import MainLayout from '../../templates/MainLayout';
 import useOrganizations from '../../../hooks/useOrganizations';
 import OrganizationCard from '../../molecules/OrganizationCard';
@@ -7,27 +6,6 @@ import TableList from '../../molecules/TableList';
 import Grid from '../../atoms/Grid';
 import Button from '../../atoms/Button';
 import GlobalFilters from '../../organisms/GlobalFilters';
-
-const PageWrapper = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const Header = styled.header`
-  margin-bottom: 2rem;
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 700;
-`;
-
-const ViewToggle = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1.5rem;
-`;
 
 const ClusterOrgsPage = () => {
   const { data, loading, error } = useOrganizations();
@@ -44,23 +22,23 @@ const ClusterOrgsPage = () => {
 
   return (
     <MainLayout>
-      <PageWrapper>
-        <Header>
-          <Title>JB 지원기관 현황</Title>
-        </Header>
+      <div className="cluster-orgs-page__wrapper">
+        <header className="cluster-orgs-page__header">
+          <h1 className="cluster-orgs-page__title">JB 지원기관 현황</h1>
+        </header>
 
         <GlobalFilters />
 
-        <ViewToggle>
-          <Button onClick={() => setView('card')} $variant={view === 'card' ? 'primary' : 'secondary'}>카드</Button>
-          <Button onClick={() => setView('table')} $variant={view === 'table' ? 'primary' : 'secondary'} style={{ marginLeft: '0.5rem' }}>테이블</Button>
-        </ViewToggle>
+        <div className="cluster-orgs-page__view-toggle">
+          <Button onClick={() => setView('card')} variant={view === 'card' ? 'primary' : 'secondary'}>카드</Button>
+          <Button onClick={() => setView('table')} variant={view === 'table' ? 'primary' : 'secondary'} style={{ marginLeft: '0.5rem' }}>테이블</Button>
+        </div>
 
         {loading && <p>로딩 중...</p>}
         {error && <p>에러: {error.message}</p>}
         {data && (
           view === 'card' ? (
-            <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
+            <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
               {data.organizations.map(org => (
                 <OrganizationCard key={org.id} organization={org} onClick={() => { /* TODO: implement navigation to organization detail page */ }} />
               ))}
@@ -69,7 +47,7 @@ const ClusterOrgsPage = () => {
             <TableList headers={tableHeaders} rows={tableRows} />
           )
         )}
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

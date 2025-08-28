@@ -1,0 +1,138 @@
+@use "../design-tokens" as *;
+
+.news-detail-page {
+  &__wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: $space-8;
+
+    @media (max-width: $bp-sm) {
+      padding: $space-6 $space-4;
+    }
+  }
+
+  &__header {
+    margin-bottom: $space-8;
+    padding: $space-8;
+    border-bottom: 1px solid $color-divider;
+    background-color: $color-surface;
+    border-radius: $radius-lg;
+
+    @media (max-width: $bp-sm) {
+      padding: $space-6;
+    }
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: $space-6;
+
+    @media (max-width: $bp-sm) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2 $space-6;
+    font-size: $fs-caption;
+    color: $color-text-muted;
+  }
+
+  &__body {
+    line-height: 1.7;
+    font-size: $fs-body;
+    color: $color-text;
+
+    h2 {
+      font-size: $fs-h2;
+      font-weight: 600;
+      margin: $space-8 0 $space-4;
+    }
+    h3 {
+      font-size: $fs-h3;
+      font-weight: 600;
+      margin: $space-6 0 $space-4;
+    }
+    p {
+      margin-bottom: $space-4;
+    }
+    a {
+      color: $color-primary;
+    }
+
+    @media (max-width: $bp-sm) {
+      h2 { font-size: 1.5rem; }
+      h3 { font-size: 1.125rem; }
+    }
+  }
+
+  &__tag-container {
+    display: flex;
+    gap: $space-2;
+    margin: $space-8 0;
+  }
+
+  &__tag {
+    background-color: $color-primary-50;
+    color: $color-primary-600;
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+    font-size: $fs-caption;
+    font-weight: 500;
+    text-decoration: none;
+    &:hover { background-color: darken($color-primary-50, 5%); }
+  }
+
+  &__share-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $space-4;
+    padding: $space-8 0;
+    border-top: 1px solid $color-divider;
+    border-bottom: 1px solid $color-divider;
+  }
+
+  &__share-button {
+    background: none;
+    border: 1px solid $color-border;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $color-text-muted;
+    &:hover { background-color: $color-surface; }
+  }
+
+  &__nav-container {
+    padding: $space-8 0;
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    padding: $space-4 0;
+    &:not(:last-child) { border-bottom: 1px solid $color-divider; }
+  }
+
+  &__nav-label {
+    font-weight: 600;
+    color: $color-primary;
+    min-width: 60px;
+  }
+
+  &__nav-link {
+    font-weight: 500;
+    color: $color-text;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+}

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '../../atoms/Grid';
-import Icon from '../../atoms/Icon'; // Assuming Icon component can be used
+import Icon from '../../atoms/Icon';
 
 interface Stat {
   label: string;
   value: string;
   change: string;
   icon: string;
-  color: string; // The API provides a color, which we can use
+  color: string;
 }
 
 const StatsSectionSample2 = () => {
@@ -31,33 +31,16 @@ const StatsSectionSample2 = () => {
   }, []);
 
   return (
-    <section style={{ marginBottom: '4rem' }}>
-      <Grid $cols={4} $tabletCols={2} $mobileCols={1}>
+    <section className="stats-section-sample-2">
+      <Grid cols={4} tabletCols={2} mobileCols={1}>
         {stats.map((stat, index) => (
-          <div key={index} style={{
-            background: stat.color,
-            color: 'white',
-            borderRadius: '20px',
-            padding: '2rem',
-            textAlign: 'left',
-            transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
-            cursor: 'pointer',
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = 'scale(1.05)';
-            e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = 'none';
-          }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: '1rem', fontWeight: 'bold', margin: 0, opacity: 0.9 }}>{stat.label}</h3>
+          <div key={index} className="stats-section-sample-2__card" style={{ background: stat.color }}>
+            <div className="stats-section-sample-2__header">
+              <h3 className="stats-section-sample-2__label">{stat.label}</h3>
               <Icon name={stat.icon} size={24} color="white" />
             </div>
-            <p style={{ fontSize: '2.5rem', fontWeight: 'bold', margin: '0 0 0.5rem 0' }}>{stat.value}</p>
-            <p style={{ fontSize: '0.9rem', margin: 0, opacity: 0.9 }}>{stat.change} vs last month</p>
+            <p className="stats-section-sample-2__value">{stat.value}</p>
+            <p className="stats-section-sample-2__change">{stat.change} vs last month</p>
           </div>
         ))}
       </Grid>

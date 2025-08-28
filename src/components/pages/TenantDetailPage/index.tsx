@@ -1,11 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MainLayout from '../../templates/MainLayout';
 import InfoTable from '../../molecules/InfoTable';
-import Icon from '../../atoms/Icon';
 
-// --- MOCK DATA ---
 const mockTenantDetail = {
   id: 'tenant-1',
   name: '바이오젠 테라퓨틱스',
@@ -23,73 +20,6 @@ const mockTenantDetail = {
   contactEmail: 'contact@biogen-thera.com',
   supportPrograms: ['R&D 지원', '사업화 컨설팅', '투자 연계'],
 };
-
-// --- STYLED COMPONENTS ---
-
-const PageWrapper = styled.div`
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const Header = styled.header`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  padding-bottom: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid #e5e7eb;
-`;
-
-const Logo = styled.img`
-  width: 96px;
-  height: 96px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-`;
-
-const HeaderContent = styled.div``;
-
-const Title = styled.h1`
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-`;
-
-const Summary = styled.p`
-  font-size: 1.125rem;
-  color: #4b5563;
-  margin: 0;
-`;
-
-const Section = styled.section`
-  margin-bottom: 3rem;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid #f3f4f6;
-`;
-
-const TagContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-`;
-
-const Tag = styled.span`
-  background-color: #eef2ff;
-  color: #4338ca;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 500;
-`;
-
-// --- COMPONENT ---
 
 const TenantDetailPage = () => {
   const { orgId } = useParams();
@@ -110,33 +40,33 @@ const TenantDetailPage = () => {
 
   return (
     <MainLayout>
-      <PageWrapper>
-        <Header>
-          <Logo src={mockTenantDetail.logoUrl} alt={`${mockTenantDetail.name} Logo`} />
-          <HeaderContent>
-            <Title>{mockTenantDetail.name}</Title>
-            <Summary>{mockTenantDetail.summary}</Summary>
-          </HeaderContent>
-        </Header>
+      <div className="tenant-detail-page__wrapper">
+        <header className="tenant-detail-page__header">
+          <img src={mockTenantDetail.logoUrl} alt={`${mockTenantDetail.name} Logo`} className="tenant-detail-page__logo" />
+          <div className="tenant-detail-page__header-content">
+            <h1 className="tenant-detail-page__title">{mockTenantDetail.name}</h1>
+            <p className="tenant-detail-page__summary">{mockTenantDetail.summary}</p>
+          </div>
+        </header>
 
-        <Section>
-          <SectionTitle>기업 정보</SectionTitle>
+        <section className="tenant-detail-page__section">
+          <h2 className="tenant-detail-page__section-title">기업 정보</h2>
           <InfoTable title="" data={tenantInfo} />
-        </Section>
+        </section>
 
-        <Section>
-          <SectionTitle>주요 분야</SectionTitle>
-          <TagContainer>
-            {mockTenantDetail.fieldTags.map(tag => <Tag key={tag}>{tag}</Tag>)}
-          </TagContainer>
-        </Section>
+        <section className="tenant-detail-page__section">
+          <h2 className="tenant-detail-page__section-title">주요 분야</h2>
+          <div className="tenant-detail-page__tag-container">
+            {mockTenantDetail.fieldTags.map(tag => <span key={tag} className="tenant-detail-page__tag">{tag}</span>)}
+          </div>
+        </section>
 
-        <Section>
-          <SectionTitle>연락처 정보</SectionTitle>
+        <section className="tenant-detail-page__section">
+          <h2 className="tenant-detail-page__section-title">연락처 정보</h2>
           <InfoTable title="" data={contactInfo} />
-        </Section>
+        </section>
 
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

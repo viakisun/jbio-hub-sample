@@ -1,86 +1,10 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import styled from 'styled-components';
 import useCompany from '../../../hooks/useCompany';
 import MainLayout from '../../templates/MainLayout';
 import { LoadingSkeleton } from '../../molecules/StateDisplay/LoadingSkeleton';
 import ErrorState from '../../molecules/StateDisplay/ErrorState';
 import Badge from '../../atoms/Badge';
-
-const DetailLayout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  padding: 2rem 0;
-  @media (min-width: 1024px) {
-    grid-template-columns: 2fr 1fr;
-  }
-`;
-
-const MainContent = styled.main``;
-const Sidebar = styled.aside``;
-
-const CompanyHeader = styled.header`
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-`;
-
-const Logo = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  object-fit: cover;
-`;
-
-const TitleGroup = styled.div`
-  flex-grow: 1;
-`;
-
-const CompanyName = styled.h1`
-  font-size: 2.25rem;
-  font-weight: 800;
-  margin: 0;
-`;
-
-const Section = styled.section`
-  margin-bottom: 3rem;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid #f3f4f6;
-`;
-
-const InfoCard = styled.div`
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 1.5rem;
-  position: sticky;
-  top: 2rem;
-`;
-
-const InfoList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const InfoItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 0;
-  font-size: 0.9rem;
-  &:not(:last-child) {
-    border-bottom: 1px solid #e5e7eb;
-  }
-`;
 
 const CompanyDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -92,76 +16,76 @@ const CompanyDetailPage: React.FC = () => {
 
   return (
     <MainLayout>
-      <DetailLayout>
-        <MainContent>
-          <CompanyHeader>
-            <Logo src={company.logoUrl || `https://ui-avatars.com/api/?name=${company.name}&background=random`} alt={`${company.name} logo`} />
-            <TitleGroup>
-              <CompanyName>{company.name}</CompanyName>
+      <div className="company-detail-page__layout">
+        <main className="company-detail-page__main-content">
+          <header className="company-detail-page__header">
+            <img src={company.logoUrl || `https://ui-avatars.com/api/?name=${company.name}&background=random`} alt={`${company.name} logo`} className="company-detail-page__logo" />
+            <div className="company-detail-page__title-group">
+              <h1 className="company-detail-page__name">{company.name}</h1>
               <div className="flex gap-2 mt-2">
                 <Badge>{company.industry}</Badge>
-                <Badge $variant="secondary">{company.region}</Badge>
+                <Badge variant="secondary">{company.region}</Badge>
               </div>
-            </TitleGroup>
-          </CompanyHeader>
+            </div>
+          </header>
 
-          <Section>
-            <SectionTitle>기업 소개</SectionTitle>
+          <section className="company-detail-page__section">
+            <h2 className="company-detail-page__section-title">기업 소개</h2>
             <p className="text-gray-700 leading-relaxed">{company.description}</p>
-          </Section>
+          </section>
 
           {company.products.length > 0 && (
-            <Section>
-              <SectionTitle>주요 제품</SectionTitle>
+            <section className="company-detail-page__section">
+              <h2 className="company-detail-page__section-title">주요 제품</h2>
               <ul className="list-disc list-inside space-y-2">
                 {company.products.map(p => <li key={p}>{p}</li>)}
               </ul>
-            </Section>
+            </section>
           )}
 
           {company.achievements.length > 0 && (
-            <Section>
-              <SectionTitle>주요 활동</SectionTitle>
+            <section className="company-detail-page__section">
+              <h2 className="company-detail-page__section-title">주요 활동</h2>
               <ul className="list-disc list-inside space-y-2">
                 {company.achievements.map(a => <li key={a}>{a}</li>)}
               </ul>
-            </Section>
+            </section>
           )}
 
           {company.patents.length > 0 && (
-            <Section>
-              <SectionTitle>보유 특허</SectionTitle>
+            <section className="company-detail-page__section">
+              <h2 className="company-detail-page__section-title">보유 특허</h2>
               <ul className="list-disc list-inside space-y-2">
                 {company.patents.map(p => <li key={p}>{p}</li>)}
               </ul>
-            </Section>
+            </section>
           )}
-        </MainContent>
+        </main>
 
-        <Sidebar>
-          <InfoCard>
-            <SectionTitle>기본 정보</SectionTitle>
-            <InfoList>
-              <InfoItem><span>설립년도</span> <strong>{company.foundedYear}</strong></InfoItem>
-              <InfoItem><span>기업규모</span> <strong>{company.sizeCategory}</strong></InfoItem>
-              <InfoItem><span>직원 수</span> <strong>{company.employees}명</strong></InfoItem>
-            </InfoList>
+        <aside className="company-detail-page__sidebar">
+          <div className="company-detail-page__info-card">
+            <h2 className="company-detail-page__section-title">기본 정보</h2>
+            <ul className="company-detail-page__info-list">
+              <li className="company-detail-page__info-item"><span>설립년도</span> <strong>{company.foundedYear}</strong></li>
+              <li className="company-detail-page__info-item"><span>기업규모</span> <strong>{company.sizeCategory}</strong></li>
+              <li className="company-detail-page__info-item"><span>직원 수</span> <strong>{company.employees}명</strong></li>
+            </ul>
 
-            <SectionTitle className="mt-6">담당자 정보</SectionTitle>
-            <InfoList>
-              <InfoItem><span>이름</span> <strong>{company.contact.name}</strong></InfoItem>
-              <InfoItem><span>이메일</span> <a href={`mailto:${company.contact.email}`} className="text-indigo-600 hover:underline">{company.contact.email}</a></InfoItem>
-              <InfoItem><span>연락처</span> <strong>{company.contact.phone}</strong></InfoItem>
-            </InfoList>
+            <h2 className="company-detail-page__section-title mt-6">담당자 정보</h2>
+            <ul className="company-detail-page__info-list">
+              <li className="company-detail-page__info-item"><span>이름</span> <strong>{company.contact.name}</strong></li>
+              <li className="company-detail-page__info-item"><span>이메일</span> <a href={`mailto:${company.contact.email}`} className="text-indigo-600 hover:underline">{company.contact.email}</a></li>
+              <li className="company-detail-page__info-item"><span>연락처</span> <strong>{company.contact.phone}</strong></li>
+            </ul>
 
             {company.websiteUrl && (
               <a href={company.websiteUrl} target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg mt-6 hover:bg-indigo-700">
                 웹사이트 방문
               </a>
             )}
-          </InfoCard>
-        </Sidebar>
-      </DetailLayout>
+          </div>
+        </aside>
+      </div>
     </MainLayout>
   );
 };

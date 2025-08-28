@@ -1,36 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-
-// --- STYLED COMPONENTS ---
-
-const CardWrapper = styled.div`
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 16px;
-  border: 1px solid #e5e7eb;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const Value = styled.div`
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #4f46e5;
-  margin-bottom: 0.5rem;
-`;
-
-const Label = styled.div`
-  font-size: 1rem;
-  font-weight: 500;
-  color: #4b5563;
-`;
-
-// --- COMPONENT ---
 
 interface KPICardProps {
   label: string;
@@ -39,10 +7,10 @@ interface KPICardProps {
 
 const KPICard: React.FC<KPICardProps> = ({ label, value }) => {
   return (
-    <CardWrapper>
-      <Value>{value}</Value>
-      <Label>{label}</Label>
-    </CardWrapper>
+    <div className="kpi-card">
+      <div className="kpi-card__value">{value}</div>
+      <div className="kpi-card__label">{label}</div>
+    </div>
   );
 };
 

@@ -1,0 +1,41 @@
+@use "../design-tokens" as *;
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background-color: $color-elevated;
+
+  &__input {
+    flex-grow: 1;
+    border: none;
+    padding: $space-3 $space-4;
+    font-size: $fs-body;
+    color: $color-text;
+
+    &:focus {
+      outline: none;
+      ring: 0;
+    }
+  }
+
+  &__button {
+    background-color: $color-primary;
+    color: white;
+    padding: $space-3;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: $color-primary-600;
+    }
+  }
+}

@@ -6,7 +6,7 @@ interface Service {
   title: string;
   description: string;
   icon: string;
-  gradient: string; // We won't use this, but it's in the data
+  gradient: string;
 }
 
 const ServicesSectionSample1 = () => {
@@ -30,54 +30,19 @@ const ServicesSectionSample1 = () => {
   }, []);
 
   return (
-    <section style={{ marginBottom: '4rem', backgroundColor: '#f8f9fa', padding: '4rem 0' }}>
-      <h2 style={{
-        fontSize: '1.75rem',
-        fontWeight: 'bold',
-        color: '#212529',
-        margin: '0 0 2.5rem 0',
-        textAlign: 'center',
-        letterSpacing: '-0.025em'
-      }}>
+    <section className="services-section-sample-1">
+      <h2 className="services-section-sample-1__title">
         핵심 서비스
       </h2>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
-        <Grid $cols={4} $tabletCols={2} $mobileCols={1}>
+      <div className="services-section-sample-1__wrapper">
+        <Grid cols={4} tabletCols={2} mobileCols={1}>
           {services.map((item, index) => (
-            <div key={index} style={{
-              background: '#ffffff',
-              borderRadius: '16px',
-              padding: '2rem',
-              textAlign: 'center',
-              border: '1px solid #e9ecef',
-              transition: 'border-color 0.2s ease-in-out, transform 0.2s ease-in-out',
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.borderColor = '#adb5bd';
-              e.currentTarget.style.transform = 'translateY(-3px)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.borderColor = '#e9ecef';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
-            >
-              <div style={{
-                marginBottom: '1.25rem',
-              }}>
-                <Icon name={item.icon} size={32} color="#495057" />
+            <div key={index} className="services-section-sample-1__card">
+              <div className="services-section-sample-1__icon-wrapper">
+                <Icon name={item.icon} size={32} />
               </div>
-              <h3 style={{
-                fontSize: '1.125rem',
-                fontWeight: 'bold',
-                color: '#212529',
-                margin: '0 0 0.75rem 0',
-              }}>{item.title}</h3>
-              <p style={{
-                fontSize: '0.9rem',
-                color: '#6c757d',
-                margin: 0,
-                lineHeight: 1.6,
-              }}>{item.description}</p>
+              <h3 className="services-section-sample-1__card-title">{item.title}</h3>
+              <p className="services-section-sample-1__card-description">{item.description}</p>
             </div>
           ))}
         </Grid>

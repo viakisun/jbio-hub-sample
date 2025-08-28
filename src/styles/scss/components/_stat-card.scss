@@ -1,0 +1,81 @@
+@use "../design-tokens" as *;
+
+.stat-card-molecule { // Renaming to avoid conflict with the one in stats-section
+  background: $color-elevated;
+  border-radius: $radius-lg;
+  padding: $space-8;
+  box-shadow: $shadow-lg;
+  border: 1px solid $color-divider;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $bp-md) {
+    padding: $space-6;
+  }
+
+  &__background-accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    transform: translate(25%, -25%);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: $space-4;
+  }
+
+  &__icon-container {
+    padding: $space-3;
+    border-radius: $radius-md;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__change-indicator {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    font-size: $fs-caption;
+    font-weight: 600;
+    color: $color-success;
+
+    @media (max-width: $bp-md) {
+      font-size: 12px;
+    }
+  }
+
+  &__value {
+    font-size: $fs-h1;
+    font-weight: 900;
+    color: $color-text;
+    margin-bottom: $space-2;
+    font-family: monospace;
+    line-height: 1;
+
+    @media (max-width: $bp-md) {
+      font-size: $fs-h2;
+    }
+  }
+
+  &__label {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+    font-weight: 500;
+
+    @media (max-width: $bp-md) {
+      font-size: 12px;
+    }
+  }
+}

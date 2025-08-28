@@ -4,7 +4,6 @@ import Icon from '../../atoms/Icon';
 import Grid from '../../atoms/Grid';
 import { ApiAnnouncement, ApiNews } from '../../../types/api';
 
-// Simplified data models for this component
 interface Announcement {
   id: number;
   title: string;
@@ -42,7 +41,7 @@ const ContentGridSample1 = () => {
           id: item.id,
           title: item.title,
           organization: item.author,
-          daysLeft: 30, // Mock data
+          daysLeft: 30,
         })));
         setNews(newsData.map((item: ApiNews) => ({
           id: item.id,
@@ -58,44 +57,22 @@ const ContentGridSample1 = () => {
     fetchData();
   }, []);
 
-  const listItemStyle: React.CSSProperties = {
-    padding: '1rem 0',
-    borderBottom: '1px solid #e9ecef',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  };
-
-  const titleStyle: React.CSSProperties = {
-    fontSize: '1rem',
-    color: '#212529',
-    fontWeight: '500',
-    textDecoration: 'none',
-  };
-
-  const metaStyle: React.CSSProperties = {
-    fontSize: '0.875rem',
-    color: '#6c757d',
-    textAlign: 'right',
-  };
-
   return (
-    <section style={{ maxWidth: '1200px', margin: '0 auto 4rem auto', padding: '0 1rem' }}>
-      <Grid $cols={2} $tabletCols={1} $mobileCols={1} $gap="3rem">
-        {/* 최신 공고 */}
+    <section className="content-grid-sample-1">
+      <Grid cols={2} tabletCols={1} mobileCols={1} gap="3rem">
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0 }}>최신 공고</h2>
-            <Link to="/announcements" style={{ textDecoration: 'none', color: '#495057', fontSize: '0.9rem' }}>
+          <div className="content-grid-sample-1__section-header">
+            <h2 className="content-grid-sample-1__section-title">최신 공고</h2>
+            <Link to="/announcements" className="content-grid-sample-1__view-all-link">
               전체보기 <Icon name="arrowRight" size={14} />
             </Link>
           </div>
           <div>
             {announcements.map((item, index) => (
-              <Link to={`/support/all/${item.id}`} key={index} style={{ textDecoration: 'none' }}>
-                <div style={listItemStyle}>
-                  <span style={titleStyle}>{item.title}</span>
-                  <div style={metaStyle}>
+              <Link to={`/support/all/${item.id}`} key={index} className="content-grid-sample-1__item-link">
+                <div className="content-grid-sample-1__list-item">
+                  <span className="content-grid-sample-1__title">{item.title}</span>
+                  <div className="content-grid-sample-1__meta">
                     {item.organization}<br/>
                     D-{item.daysLeft}
                   </div>
@@ -105,23 +82,22 @@ const ContentGridSample1 = () => {
           </div>
         </div>
 
-        {/* 최신 뉴스 */}
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0 }}>최신 뉴스</h2>
-            <Link to="/news/latest" style={{ textDecoration: 'none', color: '#495057', fontSize: '0.9rem' }}>
+          <div className="content-grid-sample-1__section-header">
+            <h2 className="content-grid-sample-1__section-title">최신 뉴스</h2>
+            <Link to="/news/latest" className="content-grid-sample-1__view-all-link">
               전체보기 <Icon name="arrowRight" size={14} />
             </Link>
           </div>
           <div>
             {news.map((item, index) => (
-              <Link to={`/news/latest/${item.id}`} key={index} style={{ textDecoration: 'none' }}>
-                <div style={listItemStyle}>
+              <Link to={`/news/latest/${item.id}`} key={index} className="content-grid-sample-1__item-link">
+                <div className="content-grid-sample-1__list-item">
                   <div>
-                    <span style={{...titleStyle, display: 'block', marginBottom: '0.25rem'}}>{item.title}</span>
-                    <span style={{...metaStyle, fontSize: '0.8rem', textAlign: 'left'}}>{item.category}</span>
+                    <span className="content-grid-sample-1__title" style={{ display: 'block', marginBottom: '0.25rem'}}>{item.title}</span>
+                    <span className="content-grid-sample-1__meta" style={{ fontSize: '0.8rem', textAlign: 'left'}}>{item.category}</span>
                   </div>
-                  <span style={metaStyle}>{item.date}</span>
+                  <span className="content-grid-sample-1__meta">{item.date}</span>
                 </div>
               </Link>
             ))}

@@ -1,0 +1,51 @@
+@use "../design-tokens" as *;
+
+.news-dashboard-page {
+  &__wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: $space-8;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $space-12;
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 700;
+  }
+
+  &__section {
+    background-color: $color-surface;
+    padding: $space-8;
+    border-radius: $radius-lg;
+  }
+
+  &__section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-6;
+  }
+
+  &__section-title {
+    font-size: $fs-h2;
+    font-weight: 600;
+  }
+
+  &__view-all-link {
+    font-size: $fs-caption;
+    font-weight: 500;
+    color: $color-primary;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+
+  &__item-grid {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+}

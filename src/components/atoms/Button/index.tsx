@@ -1,10 +1,10 @@
 import React from 'react';
 
-type ButtonVariant = 'primary' | 'secondary';
+type ButtonVariant = 'primary' | 'secondary' | 'danger';
 
 interface ButtonProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: ButtonVariant;
   fullWidth?: boolean;
   style?: React.CSSProperties;
