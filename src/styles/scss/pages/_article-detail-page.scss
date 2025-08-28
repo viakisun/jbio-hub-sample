@@ -1,0 +1,75 @@
+@use "../design-tokens" as *;
+
+.article-detail-page {
+  &__wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: $space-8 0;
+  }
+
+  &__header {
+    margin-bottom: $space-8;
+    padding-bottom: $space-8;
+    border-bottom: 1px solid $color-divider;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 800;
+    line-height: 1.2;
+    color: $color-text;
+    margin-bottom: $space-4;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: center;
+    gap: $space-6;
+    color: $color-text-muted;
+    font-size: $fs-caption;
+  }
+
+  &__content {
+    font-size: 1.125rem;
+    color: $color-text;
+    line-height: 1.8;
+
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-top: 2em;
+      margin-bottom: 1em;
+      line-height: 1.3;
+    }
+    p {
+      margin-bottom: 1.5em;
+    }
+    img {
+      max-width: 100%;
+      border-radius: $radius-md;
+      margin: 2em 0;
+      box-shadow: $shadow-md;
+    }
+    a {
+      color: $color-primary;
+      text-decoration: underline;
+    }
+  }
+
+  &__related-section {
+    margin-top: $space-12;
+    padding-top: $space-8;
+    border-top: 1px solid $color-divider;
+  }
+
+  &__related-title {
+    font-size: $fs-h3;
+    font-weight: 700;
+    margin-bottom: $space-4;
+  }
+
+  &__related-list {
+    display: flex;
+    gap: $space-2;
+  }
+}

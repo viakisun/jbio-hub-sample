@@ -1,0 +1,68 @@
+@use "../design-tokens" as *;
+
+.tenant-detail-page {
+  &__wrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: $space-8;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $space-8;
+    padding-bottom: $space-8;
+    margin-bottom: $space-8;
+    border-bottom: 1px solid $color-divider;
+  }
+
+  &__logo {
+    width: 96px;
+    height: 96px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+  }
+
+  &__header-content {
+    // no specific styles
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 700;
+    margin: 0 0 $space-2 0;
+  }
+
+  &__summary {
+    font-size: $fs-h3;
+    color: $color-text-muted;
+    margin: 0;
+  }
+
+  &__section {
+    margin-bottom: $space-12;
+  }
+
+  &__section-title {
+    font-size: $fs-h2;
+    font-weight: 600;
+    margin-bottom: $space-6;
+    padding-bottom: $space-3;
+    border-bottom: 2px solid $color-surface;
+  }
+
+  &__tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+  }
+
+  &__tag {
+    background-color: $color-primary-50;
+    color: $color-primary-600;
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+    font-size: $fs-caption;
+    font-weight: 500;
+  }
+}

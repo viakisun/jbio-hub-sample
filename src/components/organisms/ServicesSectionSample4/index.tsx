@@ -29,55 +29,19 @@ const ServicesSectionSample4 = () => {
     fetchServices();
   }, []);
 
-  const cardStyle: React.CSSProperties = {
-    position: 'relative',
-    background: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: '24px',
-    padding: '2.5rem 2rem',
-    color: 'white',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    overflow: 'hidden',
-    textAlign: 'center',
-    transition: 'transform 0.3s ease',
-  };
-
-  const glowIconStyle: React.CSSProperties = {
-    filter: 'drop-shadow(0 0 8px rgba(100, 200, 255, 0.7))',
-  };
-
   return (
-    <section style={{ marginBottom: '4rem' }}>
-       <h2 style={{
-        fontSize: '2.5rem',
-        fontWeight: 'bold',
-        color: 'white',
-        margin: '0 0 3rem 0',
-        textAlign: 'center',
-        letterSpacing: '0.02em',
-        textShadow: '0 0 8px rgba(255, 255, 255, 0.3)'
-      }}>
+    <section className="services-section-sample-4">
+      <h2 className="services-section-sample-4__title">
         SERVICES
       </h2>
-      <Grid $cols={4} $tabletCols={2} $mobileCols={1}>
+      <Grid cols={4} tabletCols={2} mobileCols={1}>
         {services.map((item, index) => (
-          <div key={index} style={cardStyle}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0px)'}
-          >
-            <div style={{...glowIconStyle, marginBottom: '1.5rem'}}>
+          <div key={index} className="services-section-sample-4__card">
+            <div className="services-section-sample-4__icon-wrapper">
               <Icon name={item.icon} size={40} color="#90d8ff" />
             </div>
-            <h3 style={{
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              margin: '0 0 0.75rem 0',
-            }}>{item.title}</h3>
-            <p style={{
-              fontSize: '1rem',
-              margin: 0,
-              lineHeight: 1.6,
-              opacity: 0.8,
-            }}>{item.description}</p>
+            <h3 className="services-section-sample-4__card-title">{item.title}</h3>
+            <p className="services-section-sample-4__card-description">{item.description}</p>
           </div>
         ))}
       </Grid>

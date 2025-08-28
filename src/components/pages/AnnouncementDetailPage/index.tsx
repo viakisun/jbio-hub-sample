@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import MainLayout from '../../templates/MainLayout';
 import InfoTable from '../../molecules/InfoTable';
@@ -7,7 +6,6 @@ import AttachmentList from '../../molecules/AttachmentList';
 import Icon from '../../atoms/Icon';
 import Button from '../../atoms/Button';
 
-// --- MOCK DATA ---
 const mockAnnouncement = {
   announcementTitle: '[JB-Bio] 2024년 바이오 스타트업 성장 지원 프로그램 참여기업 모집',
   industryField: '바이오/헬스케어',
@@ -41,109 +39,6 @@ const mockAnnouncement = {
   ],
 };
 
-// --- STYLED COMPONENTS ---
-
-const PageWrapper = styled.div`
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const Breadcrumb = styled.nav`
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-bottom: 1rem;
-
-  a {
-    color: #4f46e5;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  span {
-    margin: 0 0.5rem;
-  }
-`;
-
-const PageTitle = styled.h1`
-  font-size: 2rem;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #111827;
-  padding-bottom: 1.5rem;
-`;
-
-const SectionWrapper = styled.div`
-  margin-bottom: 2.5rem;
-`;
-
-const HtmlContent = styled.div`
-  padding: 1.5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  line-height: 1.6;
-
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 1rem 0;
-  }
-  p {
-    margin-bottom: 1rem;
-  }
-  a {
-    color: #4f46e5;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
-const InfoText = styled.div`
-  background-color: #f9fafb;
-  padding: 1.5rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  color: #4b5563;
-  line-height: 1.5;
-  margin-top: 2.5rem;
-
-  p {
-    margin: 0;
-    &:not(:last-child) {
-      margin-bottom: 0.5rem;
-    }
-  }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 3rem;
-`;
-
-const BackButton = styled(Button)`
-  background-color: #4b5563;
-  color: white;
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #374151;
-  }
-`;
-
-// --- COMPONENT ---
-
 const AnnouncementDetailPage = () => {
   const { category, announcementId } = useParams();
   const navigate = useNavigate();
@@ -166,46 +61,46 @@ const AnnouncementDetailPage = () => {
 
   return (
     <MainLayout>
-      <PageWrapper>
-        <Breadcrumb>
+      <div className="announcement-detail-page">
+        <nav className="announcement-detail-page__breadcrumb">
           <Link to="/">Home</Link>
           <span>&gt;</span>
           <Link to="/announcements">{category}</Link>
           <span>&gt;</span>
           <span>{mockAnnouncement.announcementTitle}</span>
-        </Breadcrumb>
+        </nav>
 
-        <PageTitle>{mockAnnouncement.announcementTitle}</PageTitle>
+        <h1 className="announcement-detail-page__title">{mockAnnouncement.announcementTitle}</h1>
 
-        <SectionWrapper>
+        <section className="announcement-detail-page__section">
           <InfoTable title="공고 정보" data={announcementInfo} />
-        </SectionWrapper>
+        </section>
 
-        <SectionWrapper>
+        <section className="announcement-detail-page__section">
           <InfoTable title="전담기관 정보" data={organizationInfo} />
-        </SectionWrapper>
+        </section>
 
-        <SectionWrapper>
+        <section className="announcement-detail-page__section">
           <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>상세 정보</h3>
-          <HtmlContent dangerouslySetInnerHTML={{ __html: mockAnnouncement.descriptionHTML }} />
-        </SectionWrapper>
+          <div className="announcement-detail-page__html-content" dangerouslySetInnerHTML={{ __html: mockAnnouncement.descriptionHTML }} />
+        </section>
 
-        <SectionWrapper>
+        <section className="announcement-detail-page__section">
           <AttachmentList title="첨부문서" attachments={mockAnnouncement.attachments} />
-        </SectionWrapper>
+        </section>
 
-        <InfoText>
+        <div className="announcement-detail-page__info-text">
           <p>※ 사업안내 내용을 반드시 숙지하시고 사업 신청을 하시기 바랍니다.</p>
           <p>※ 본 사업은 기업 회원만 신청 가능합니다. 로그인 후 신청해주세요.</p>
-        </InfoText>
+        </div>
 
-        <ButtonContainer>
-          <BackButton onClick={() => navigate(-1)}>
-            <Icon name="arrowLeft" size={16} color="white" />
+        <div className="announcement-detail-page__button-container">
+          <Button onClick={() => navigate(-1)} variant="secondary">
+            <Icon name="arrowLeft" size={16} />
             <span style={{ marginLeft: '0.5rem' }}>뒤로가기</span>
-          </BackButton>
-        </ButtonContainer>
-      </PageWrapper>
+          </Button>
+        </div>
+      </div>
     </MainLayout>
   );
 };

@@ -6,7 +6,7 @@ interface Service {
   title: string;
   description: string;
   icon: string;
-  gradient: string; // Not used, but in the data model
+  gradient: string;
 }
 
 const ServicesSectionSample3 = () => {
@@ -29,70 +29,18 @@ const ServicesSectionSample3 = () => {
     fetchServices();
   }, []);
 
-  const sectionStyle: React.CSSProperties = {
-    marginBottom: '4rem',
-    padding: '0 1rem'
-  };
-
-  const titleStyle: React.CSSProperties = {
-    textAlign: 'center',
-    fontSize: '1.75rem',
-    fontWeight: 'bold',
-    color: '#1d3557',
-    marginBottom: '2.5rem'
-  };
-
-  const cardStyle: React.CSSProperties = {
-    background: '#ffffff',
-    borderRadius: '16px',
-    padding: '2rem',
-    border: '1px solid #dee2e6',
-    textAlign: 'left',
-    height: '100%',
-    transition: 'border-color 0.2s, box-shadow 0.2s',
-  };
-
-  const iconContainerStyle: React.CSSProperties = {
-    width: '56px',
-    height: '56px',
-    borderRadius: '12px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#eef2ff', // Light blue background
-    marginBottom: '1.5rem',
-  };
-
   return (
-    <section style={sectionStyle}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <h2 style={titleStyle}>핵심 서비스</h2>
-        <Grid $cols={4} $tabletCols={2} $mobileCols={1}>
+    <section className="services-section-sample-3">
+      <div className="services-section-sample-3__wrapper">
+        <h2 className="services-section-sample-3__title">핵심 서비스</h2>
+        <Grid cols={4} tabletCols={2} mobileCols={1}>
           {services.map((item, index) => (
-            <div key={index} style={cardStyle}
-              onMouseOver={(e) => {
-                e.currentTarget.style.borderColor = '#457b9d';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.borderColor = '#dee2e6';
-                e.currentTarget.style.boxShadow = 'none';
-              }}>
-              <div style={iconContainerStyle}>
+            <div key={index} className="services-section-sample-3__card">
+              <div className="services-section-sample-3__icon-wrapper">
                 <Icon name={item.icon} size={28} color="#1d3557" />
               </div>
-              <h3 style={{
-                fontSize: '1.25rem',
-                fontWeight: 'bold',
-                color: '#1d3557',
-                margin: '0 0 0.75rem 0',
-              }}>{item.title}</h3>
-              <p style={{
-                fontSize: '0.9rem',
-                color: '#495057',
-                margin: 0,
-                lineHeight: 1.6,
-              }}>{item.description}</p>
+              <h3 className="services-section-sample-3__card-title">{item.title}</h3>
+              <p className="services-section-sample-3__card-description">{item.description}</p>
             </div>
           ))}
         </Grid>

@@ -1,0 +1,17 @@
+@use "../design-tokens" as *;
+
+.news-list-page {
+  &__content-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 $space-8 $space-8;
+
+    @media (max-width: $bp-sm) {
+      padding: 0 $space-4 $space-6;
+    }
+  }
+
+  &__search-bar-container {
+    margin-bottom: $space-10;
+  }
+}

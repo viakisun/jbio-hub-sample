@@ -1,0 +1,74 @@
+@use "../design-tokens" as *;
+
+.events-detail-page {
+  &__wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: $space-8;
+  }
+
+  &__header {
+    margin-bottom: $space-4;
+    padding: $space-8;
+    border-radius: $radius-lg;
+    background-color: $color-surface;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 700;
+    margin-bottom: $space-2;
+  }
+
+  &__subtitle {
+    font-size: $fs-h3;
+    color: $color-text-muted;
+    margin-bottom: $space-4;
+  }
+
+  &__badge-container {
+    display: flex;
+    gap: $space-3;
+    justify-content: center;
+  }
+
+  &__badge {
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+    font-weight: 500;
+    font-size: $fs-caption;
+    background-color: $color-primary-50;
+    color: $color-primary-600;
+  }
+
+  &__poster {
+    width: 100%;
+    border-radius: $radius-lg;
+    margin: $space-8 0;
+  }
+
+  &__section {
+    margin: $space-12 0;
+  }
+
+  &__html-content {
+    line-height: 1.7;
+    font-size: $fs-body;
+    h2 { font-size: $fs-h2; font-weight: 600; margin-bottom: $space-4; }
+    ul { list-style-position: inside; padding-left: $space-4; margin-bottom: $space-4; }
+    li { margin-bottom: $space-2; }
+  }
+
+  &__action-buttons {
+    display: flex;
+    gap: $space-4;
+    margin: $space-8 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__action-button {
+    // Using the .btn class
+  }
+}

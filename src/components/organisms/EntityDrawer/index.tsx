@@ -1,36 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import Drawer from '../../molecules/Drawer';
 import useOrganizationById from '../../../hooks/useOrganizationById';
 import Badge from '../../atoms/Badge';
-
-const DetailSection = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const SectionTitle = styled.h4`
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`;
-
-const OrgName = styled.h2`
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-`;
-
-const OrgMeta = styled.p`
-  color: #6b7280;
-  margin-top: 0;
-`;
-
-const FieldList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-`;
-
 
 interface EntityDrawerProps {
   organizationId: string | null;
@@ -45,33 +16,33 @@ const EntityDrawer: React.FC<EntityDrawerProps> = ({ organizationId, onClose }) 
       {loading && <p>로딩 중...</p>}
       {error && <p>에러: {error.message}</p>}
       {organization && (
-        <div>
-          <DetailSection>
-            <OrgName>{organization.name}</OrgName>
-            <OrgMeta>{organization.type} &middot; {organization.region}</OrgMeta>
-          </DetailSection>
+        <div className="entity-drawer">
+          <div className="entity-drawer__section">
+            <h2 className="entity-drawer__org-name">{organization.name}</h2>
+            <p className="entity-drawer__org-meta">{organization.type} &middot; {organization.region}</p>
+          </div>
 
-          <DetailSection>
+          <div className="entity-drawer__section">
             <p>{organization.summary}</p>
-          </DetailSection>
+          </div>
 
-          <DetailSection>
-            <SectionTitle>분야</SectionTitle>
-            <FieldList>
+          <div className="entity-drawer__section">
+            <h4 className="entity-drawer__section-title">분야</h4>
+            <div className="entity-drawer__field-list">
               {organization.fields.map(field => (
                 <Badge key={field}>{field}</Badge>
               ))}
-            </FieldList>
-          </DetailSection>
+            </div>
+          </div>
 
-          <DetailSection>
-            <SectionTitle>주요 서비스</SectionTitle>
+          <div className="entity-drawer__section">
+            <h4 className="entity-drawer__section-title">주요 서비스</h4>
             <ul>
               {organization.services.map(service => (
                 <li key={service}>{service}</li>
               ))}
             </ul>
-          </DetailSection>
+          </div>
         </div>
       )}
     </Drawer>

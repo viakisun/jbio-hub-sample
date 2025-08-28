@@ -1,0 +1,46 @@
+@use "../design-tokens" as *;
+
+.shortcut-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+
+  &__wrapper {
+    background-color: $color-elevated;
+    border-radius: $radius-lg;
+    padding: $space-8;
+    height: 100%;
+    border: 1px solid $color-border;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &__icon-wrapper {
+    margin-bottom: $space-4;
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-primary-50;
+    color: $color-primary;
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 600;
+    margin: 0 0 $space-2 0;
+  }
+
+  &__description {
+    font-size: $fs-body;
+    color: $color-text-muted;
+    margin: 0;
+  }
+}

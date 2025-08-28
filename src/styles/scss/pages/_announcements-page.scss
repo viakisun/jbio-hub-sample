@@ -1,0 +1,25 @@
+@use "../design-tokens" as *;
+
+.announcements-page {
+  &__content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $space-8 $space-8;
+
+    @media (max-width: $bp-sm) {
+      padding: 0 $space-4 $space-6;
+    }
+  }
+
+  &__loading-message {
+    text-align: center;
+    padding: $space-8;
+    font-size: $fs-h3;
+    color: $color-text-muted;
+  }
+
+  &__error-message {
+    @extend .announcements-page__loading-message;
+    color: $color-error;
+  }
+}

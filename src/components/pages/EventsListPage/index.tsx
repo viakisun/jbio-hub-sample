@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import MainLayout from '../../templates/MainLayout';
 import SearchBar from '../../molecules/SearchBar';
 import FilterBar from '../../molecules/FilterBar';
@@ -8,7 +7,6 @@ import Grid from '../../atoms/Grid';
 import EventCard from '../../molecules/EventCard';
 import { Event } from '../../../types/api';
 
-// --- MOCK DATA ---
 const mockEventsList: Event[] = [
   {
     id: 1,
@@ -51,60 +49,29 @@ const mockEventsList: Event[] = [
     registerDeadline: '2024-09-12',
     status: '마감',
   },
-  // Add more mock events as needed
 ];
-
-// --- STYLED COMPONENTS ---
-
-const PageWrapper = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const PageHeader = styled.header`
-  text-align: center;
-  margin-bottom: 2.5rem;
-`;
-
-const PageTitle = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 700;
-`;
-
-const ControlsWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
-
-
-// --- COMPONENT ---
 
 const EventsListPage = () => {
   return (
     <MainLayout>
-      <PageWrapper>
-        <PageHeader>
-          <PageTitle>바이오 행사</PageTitle>
-        </PageHeader>
+      <div className="events-list-page__wrapper">
+        <header className="events-list-page__header">
+          <h1 className="events-list-page__title">바이오 행사</h1>
+        </header>
 
-        <ControlsWrapper>
+        <div className="events-list-page__controls">
           <FilterBar />
           <SearchBar />
-        </ControlsWrapper>
+        </div>
 
-        <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
+        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
           {mockEventsList.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
         </Grid>
 
         <Pagination currentPage={1} totalPages={5} />
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

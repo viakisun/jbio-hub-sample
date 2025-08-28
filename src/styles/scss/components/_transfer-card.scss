@@ -1,0 +1,61 @@
+@use "../design-tokens" as *;
+
+.transfer-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+
+  &__wrapper {
+    background-color: $color-elevated;
+    border-radius: $radius-lg;
+    border: 1px solid $color-border;
+    padding: $space-6;
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    height: 100%;
+    transition: box-shadow 0.2s, border-color 0.2s;
+
+    &:hover {
+      border-color: $color-divider;
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  &__summary {
+    font-size: $fs-body;
+    color: $color-text-muted;
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  &__footer {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+    padding-top: $space-3;
+    border-top: 1px solid $color-divider;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    strong {
+      font-weight: 700;
+      color: $color-error;
+    }
+  }
+}

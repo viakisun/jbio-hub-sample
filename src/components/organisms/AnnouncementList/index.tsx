@@ -1,28 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import AnnouncementListItem from '../../molecules/AnnouncementListItem';
-import { SupportProgram } from '../../../hooks/useSupportPrograms'; // Import the correct type
+import { SupportProgram } from '../../../hooks/useSupportPrograms';
 
-// --- DATA MODELS ---
 interface AnnouncementListProps {
-  programs: SupportProgram[]; // Use the new type and name
+  programs: SupportProgram[];
   style?: React.CSSProperties;
 }
-
-// --- STYLED COMPONENTS ---
-const ListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const ItemLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;
-
-// --- COMPONENT ---
 
 const AnnouncementList: React.FC<AnnouncementListProps> = ({ programs, style }) => {
   if (!programs || programs.length === 0) {
@@ -30,13 +14,13 @@ const AnnouncementList: React.FC<AnnouncementListProps> = ({ programs, style }) 
   }
 
   return (
-    <ListWrapper style={style}>
+    <div className="announcement-list" style={style}>
       {programs.map((program) => (
-        <ItemLink key={program.id} to={`/support-programs/${program.id}`}>
+        <Link key={program.id} to={`/support-programs/${program.id}`} className="announcement-list__item-link">
           <AnnouncementListItem program={program} />
-        </ItemLink>
+        </Link>
       ))}
-    </ListWrapper>
+    </div>
   );
 };
 

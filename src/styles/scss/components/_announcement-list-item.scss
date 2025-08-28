@@ -1,0 +1,90 @@
+@use "../design-tokens" as *;
+
+.announcement-list-item {
+  padding: $space-5;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    border-color: $color-divider;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: $space-3;
+  }
+
+  &__status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: $space-1 $space-3;
+    color: #fff;
+    border-radius: $radius-pill;
+    font-size: $fs-caption;
+    font-weight: 600;
+
+    &--urgent {
+      background-color: $color-warning;
+    }
+    &--active {
+      background-color: $color-success;
+    }
+    &--upcoming {
+      background-color: $color-info;
+    }
+    &--closed {
+      background-color: $color-text-muted;
+    }
+  }
+
+  &__days-left {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    font-size: $fs-body;
+    font-weight: 700;
+
+    &--urgent {
+      color: $color-warning;
+    }
+    &--normal {
+      color: $color-primary;
+    }
+  }
+
+  &__title {
+    font-size: $fs-body;
+    font-weight: 600;
+    color: $color-text;
+    margin: 0 0 $space-3 0;
+    line-height: 1.4;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $fs-caption;
+    color: $color-text-muted;
+
+    @media (max-width: $bp-sm) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $space-2;
+    }
+  }
+
+  &__organization {
+    // No specific styles
+  }
+
+  &__target-company {
+    font-weight: 600;
+    color: $color-text;
+  }
+}

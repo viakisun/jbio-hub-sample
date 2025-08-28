@@ -1,0 +1,57 @@
+@use "../design-tokens" as *;
+
+.content-grid {
+  padding: $space-16 $space-6;
+  background-color: $color-surface;
+
+  &__header {
+    text-align: center;
+    margin-bottom: $space-12;
+  }
+
+  &__title {
+    font-size: 48px;
+    font-weight: 900;
+    color: $color-primary;
+    margin: 0 0 $space-6 0;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    color: $color-text-muted;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__tabs {
+    margin-bottom: $space-8;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-6;
+
+    @media (min-width: $bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $space-8;
+    }
+
+    @media (min-width: $bp-lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__load-more {
+    text-align: center;
+    margin-top: $space-12;
+  }
+
+  &__empty-state {
+    text-align: center;
+    padding: $space-16 0;
+    color: $color-text-muted;
+  }
+}

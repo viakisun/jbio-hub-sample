@@ -57,54 +57,19 @@ const ContentGridSample3 = () => {
     fetchData();
   }, []);
 
-  const sectionStyle: React.CSSProperties = {
-    padding: '2rem',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '16px',
-    border: '1px solid #dee2e6',
-    height: '100%',
-  };
-
-  const headerStyle: React.CSSProperties = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '1.5rem',
-    paddingBottom: '1rem',
-    borderBottom: '1px solid #dee2e6'
-  };
-
-  const titleStyle: React.CSSProperties = {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    color: '#1d3557',
-    margin: 0,
-  };
-
-  const itemStyle: React.CSSProperties = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '0.75rem 0',
-    borderBottom: '1px solid #e9ecef',
-    textDecoration: 'none',
-    color: 'inherit',
-  };
-
   return (
-    <section style={{ marginBottom: '4rem', maxWidth: '1200px', margin: '0 auto 4rem auto', padding: '0 1rem' }}>
-      <Grid $cols={2} $tabletCols={1} $mobileCols={1} $gap="2rem">
-        {/* 최신 공고 */}
-        <div style={sectionStyle}>
-          <div style={headerStyle}>
-            <h2 style={titleStyle}>최신 공고</h2>
-            <Link to="/announcements" style={{ textDecoration: 'none', color: '#1d3557', fontWeight: 500 }}>
+    <section className="content-grid-sample-3">
+      <Grid cols={2} tabletCols={1} mobileCols={1} gap="2rem">
+        <div className="content-grid-sample-3__section">
+          <div className="content-grid-sample-3__header">
+            <h2 className="content-grid-sample-3__title">최신 공고</h2>
+            <Link to="/announcements" className="content-grid-sample-1__view-all-link">
               전체보기 <Icon name="arrowRight" size={16} />
             </Link>
           </div>
           <div>
             {announcements.map((item) => (
-              <Link to={`/support/all/${item.id}`} key={item.id} style={itemStyle}>
+              <Link to={`/support/all/${item.id}`} key={item.id} className="content-grid-sample-3__item">
                 <span style={{ fontWeight: 500, color: '#212529' }}>{item.title}</span>
                 <span style={{ fontSize: '0.875rem', color: '#6c757d' }}>{item.deadline}</span>
               </Link>
@@ -112,17 +77,16 @@ const ContentGridSample3 = () => {
           </div>
         </div>
 
-        {/* 최신 뉴스 */}
-        <div style={sectionStyle}>
-          <div style={headerStyle}>
-            <h2 style={titleStyle}>최신 뉴스</h2>
-            <Link to="/news/latest" style={{ textDecoration: 'none', color: '#1d3557', fontWeight: 500 }}>
+        <div className="content-grid-sample-3__section">
+          <div className="content-grid-sample-3__header">
+            <h2 className="content-grid-sample-3__title">최신 뉴스</h2>
+            <Link to="/news/latest" className="content-grid-sample-1__view-all-link">
               전체보기 <Icon name="arrowRight" size={16} />
             </Link>
           </div>
           <div>
             {news.map((item) => (
-               <Link to={`/news/latest/${item.id}`} key={item.id} style={itemStyle}>
+               <Link to={`/news/latest/${item.id}`} key={item.id} className="content-grid-sample-3__item">
                 <span style={{ fontWeight: 500, color: '#212529' }}>{item.title}</span>
                 <span style={{ fontSize: '0.875rem', color: '#6c757d' }}>{item.date}</span>
               </Link>

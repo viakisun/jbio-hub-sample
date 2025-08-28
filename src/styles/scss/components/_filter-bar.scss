@@ -1,0 +1,45 @@
+@use "../design-tokens" as *;
+
+.filter-bar {
+  display: flex;
+  gap: $space-6;
+  padding: $space-4;
+  background-color: $color-surface;
+  border-radius: $radius-lg;
+  margin-bottom: $space-6;
+  align-items: center;
+
+  &__placeholder {
+    font-size: $fs-body;
+    color: $color-text-muted;
+  }
+
+  &__group {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+
+  &__label {
+    font-size: $fs-body;
+    font-weight: 500;
+    color: $color-text;
+  }
+
+  &__select {
+    padding: $space-2 $space-4;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    background-color: $color-elevated;
+    font-size: $fs-body;
+    &:focus {
+      outline: 2px solid $color-primary;
+      border-color: $color-primary;
+    }
+    &:disabled {
+      background-color: $color-surface;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+}

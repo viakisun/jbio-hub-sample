@@ -1,0 +1,50 @@
+@use "../design-tokens" as *;
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    display: flex;
+    position: relative;
+    padding-bottom: $space-8;
+  }
+
+  &__connector {
+    position: absolute;
+    top: 12px;
+    left: 11px;
+    width: 2px;
+    height: 100%;
+    background-color: $color-divider;
+  }
+
+  &__icon-wrapper {
+    z-index: 1;
+    background-color: $color-primary;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: $space-4;
+  }
+
+  &__content {
+    padding-top: 2px;
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: 600;
+    margin: 0 0 $space-1 0;
+  }
+
+  &__description {
+    font-size: $fs-body;
+    color: $color-text-muted;
+    margin: 0;
+  }
+}

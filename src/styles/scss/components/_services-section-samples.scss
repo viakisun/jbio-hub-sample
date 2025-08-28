@@ -1,0 +1,207 @@
+@use "../design-tokens" as *;
+
+.services-section-sample-1 {
+  margin-bottom: $space-16;
+  background-color: $color-surface;
+  padding: $space-16 0;
+
+  &__title {
+    font-size: $fs-h2;
+    font-weight: 700;
+    color: $color-text;
+    margin: 0 0 $space-10 0;
+    text-align: center;
+    letter-spacing: -0.025em;
+  }
+
+  &__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $space-4;
+  }
+
+  &__card {
+    background: $color-elevated;
+    border-radius: $radius-lg;
+    padding: $space-8;
+    text-align: center;
+    border: 1px solid $color-divider;
+    transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+    &:hover {
+      border-color: $color-border;
+      transform: translateY(-3px);
+    }
+  }
+
+  &__icon-wrapper {
+    margin-bottom: $space-5;
+  }
+
+  &__card-title {
+    font-size: $fs-h3;
+    font-weight: 700;
+    color: $color-text;
+    margin: 0 0 $space-3 0;
+  }
+
+  &__card-description {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+    margin: 0;
+    line-height: 1.6;
+  }
+}
+
+.services-section-sample-4 {
+  margin-bottom: $space-16;
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 $space-12 0;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  }
+
+  &__card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: $space-10 $space-8;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+    }
+  }
+
+  &__icon-wrapper {
+    filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.7));
+    margin-bottom: $space-6;
+  }
+
+  &__card-title {
+    font-size: $fs-h3;
+    font-weight: 700;
+    margin: 0 0 $space-3 0;
+  }
+
+  &__card-description {
+    font-size: $fs-body;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+}
+
+.services-section-sample-2 {
+  margin-bottom: $space-16;
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 700;
+    color: $color-text;
+    margin: 0 0 $space-12 0;
+    text-align: center;
+    letter-spacing: -0.025em;
+  }
+
+  &__card {
+    border-radius: 24px;
+    padding: $space-10 $space-8;
+    cursor: pointer;
+    position: relative;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+  }
+
+  &__icon-wrapper {
+    width: 72px;
+    height: 72px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $space-6;
+  }
+
+  &__card-title {
+    font-size: $fs-h3;
+    font-weight: 700;
+    margin: 0 0 $space-3 0;
+  }
+
+  &__card-description {
+    font-size: $fs-body;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+}
+
+.services-section-sample-3 {
+  margin-bottom: $space-16;
+  padding: 0 $space-4;
+
+  &__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: $fs-h2;
+    font-weight: 700;
+    color: #1d3557; // New color
+    margin-bottom: $space-10;
+  }
+
+  &__card {
+    background: $color-elevated;
+    border-radius: $radius-lg;
+    padding: $space-8;
+    border: 1px solid $color-border;
+    text-align: left;
+    height: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      border-color: #457b9d; // New color
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  &__icon-wrapper {
+    width: 56px;
+    height: 56px;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-primary-50;
+    margin-bottom: $space-6;
+  }
+
+  &__card-title {
+    font-size: $fs-h3;
+    font-weight: 700;
+    color: #1d3557; // New color
+    margin: 0 0 $space-3 0;
+  }
+
+  &__card-description {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+    margin: 0;
+    line-height: 1.6;
+  }
+}

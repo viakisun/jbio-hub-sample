@@ -1,0 +1,41 @@
+@use "../design-tokens" as *;
+
+.global-filters {
+  padding: $space-8;
+  background-color: $color-surface;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    font-size: $fs-body;
+    font-weight: 500;
+    margin-bottom: $space-2;
+    color: $color-text;
+  }
+
+  &__select {
+    padding: $space-3;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    background-color: $color-elevated;
+    &:focus {
+      outline: 2px solid $color-primary;
+      border-color: transparent;
+    }
+  }
+
+  &__input {
+    padding: $space-3;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    &:focus {
+      outline: 2px solid $color-primary;
+      border-color: transparent;
+    }
+  }
+}

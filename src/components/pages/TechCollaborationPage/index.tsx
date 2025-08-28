@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import MainLayout from '../../templates/MainLayout';
 import SearchBar from '../../molecules/SearchBar';
 import FilterBar from '../../molecules/FilterBar';
@@ -7,7 +6,6 @@ import Pagination from '../../molecules/Pagination';
 import Grid from '../../atoms/Grid';
 import CollaborationCard, { CollaborationCardData } from '../../molecules/CollaborationCard';
 
-// --- MOCK DATA ---
 const mockCollaborations: CollaborationCardData[] = [
   {
     id: 'collab-1',
@@ -31,60 +29,29 @@ const mockCollaborations: CollaborationCardData[] = [
     year: 2024,
     fields: ['백신', 'mRNA', '기업간협력'],
   },
-  // Add more mock data as needed
 ];
-
-
-// --- STYLED COMPONENTS ---
-
-const PageWrapper = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const PageHeader = styled.header`
-  text-align: center;
-  margin-bottom: 2.5rem;
-`;
-
-const PageTitle = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 700;
-`;
-
-const ControlsWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
-
-// --- COMPONENT ---
 
 const TechCollaborationPage = () => {
   return (
     <MainLayout>
-      <PageWrapper>
-        <PageHeader>
-          <PageTitle>기술 협력 사례</PageTitle>
-        </PageHeader>
+      <div className="tech-collaboration-page__wrapper">
+        <header className="tech-collaboration-page__header">
+          <h1 className="tech-collaboration-page__title">기술 협력 사례</h1>
+        </header>
 
-        <ControlsWrapper>
+        <div className="tech-collaboration-page__controls">
           <FilterBar />
           <SearchBar />
-        </ControlsWrapper>
+        </div>
 
-        <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
+        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
           {mockCollaborations.map((collab) => (
             <CollaborationCard key={collab.id} collaboration={collab} />
           ))}
         </Grid>
 
         <Pagination currentPage={1} totalPages={2} />
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

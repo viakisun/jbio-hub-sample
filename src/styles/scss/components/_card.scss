@@ -1,0 +1,17 @@
+@use "../design-tokens" as *;
+
+.card {
+  background: $color-elevated;
+  border-radius: $radius-lg; // 16px strict
+  box-shadow: $shadow-sm;
+  padding: $space-6;
+  border: 1px solid $color-border;
+  transition: box-shadow .15s ease, transform .15s ease;
+
+  &:hover { box-shadow: $shadow-md; }
+
+  &__title { font-size: $fs-h3; font-weight: $fw-h3; margin-bottom: $space-4; }
+  &__meta  { font-size: $fs-caption; color: $color-text-muted; }
+  &__body  { margin-top: $space-4; }
+  &__actions { margin-top: $space-6; display: flex; gap: $space-4; flex-wrap: wrap; }
+}

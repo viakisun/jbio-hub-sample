@@ -1,0 +1,43 @@
+@use "../design-tokens" as *;
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $space-2;
+  margin-top: $space-10;
+
+  &__button {
+    min-width: 40px;
+    padding: $space-2;
+    font-size: $fs-caption;
+    font-weight: 500;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+    background-color: $color-elevated;
+    color: $color-text;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    &:hover {
+      background-color: $color-surface;
+      border-color: $color-divider;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--active {
+      background-color: $color-primary;
+      color: white;
+      border-color: $color-primary;
+
+      &:hover {
+        background-color: $color-primary-600;
+        border-color: $color-primary-600;
+      }
+    }
+  }
+}

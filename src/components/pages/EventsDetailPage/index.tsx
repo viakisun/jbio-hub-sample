@@ -1,11 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MainLayout from '../../templates/MainLayout';
 import Icon from '../../atoms/Icon';
 import InfoTable from '../../molecules/InfoTable';
+import Button from '../../atoms/Button';
 
-// --- MOCK DATA ---
 const mockEventDetail = {
   id: 'event-1',
   title: '2024 글로벌 바이오 컨퍼런스 (GBC)',
@@ -40,105 +39,6 @@ const mockEventDetail = {
   `
 };
 
-// --- STYLED COMPONENTS ---
-
-const PageWrapper = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const ArticleHeader = styled.header`
-  margin-bottom: 1rem;
-  padding: 2rem;
-  border-radius: 16px;
-  background-color: #f9fafb;
-  text-align: center;
-`;
-
-const Title = styled.h1`
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.25rem;
-  color: #4b5563;
-  margin-bottom: 1rem;
-`;
-
-const BadgeContainer = styled.div`
-  display: flex;
-  gap: 0.75rem;
-`;
-
-const Badge = styled.span`
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-weight: 500;
-  font-size: 0.875rem;
-  background-color: #e0e7ff;
-  color: #3730a3;
-`;
-
-const Poster = styled.img`
-  width: 100%;
-  border-radius: 12px;
-  margin: 2rem 0;
-`;
-
-const SectionWrapper = styled.div`
-  margin: 3rem 0;
-`;
-
-const HtmlContent = styled.div`
-  line-height: 1.7;
-  font-size: 1rem;
-  h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
-  ul { list-style-position: inside; padding-left: 1rem; margin-bottom: 1rem; }
-  li { margin-bottom: 0.5rem; }
-`;
-
-const ActionButtons = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin: 2rem 0;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-const ActionButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-
-  &.primary {
-    background-color: #4f46e5;
-    color: white;
-    &:hover { background-color: #4338ca; }
-  }
-
-  &.secondary {
-    background-color: #e5e7eb;
-    color: #374151;
-    &:hover { background-color: #d1d5db; }
-  }
-
-  &.disabled {
-    background-color: #9ca3af;
-    color: #e5e7eb;
-    cursor: not-allowed;
-  }
-`;
-
-
-// --- COMPONENT ---
-
 const EventsDetailPage = () => {
   const { eventId } = useParams();
 
@@ -156,39 +56,39 @@ const EventsDetailPage = () => {
 
   return (
     <MainLayout>
-      <PageWrapper>
-        <ArticleHeader>
-          <Title>{mockEventDetail.title}</Title>
-          <Subtitle>{mockEventDetail.subtitle}</Subtitle>
-          <BadgeContainer>
-            <Badge>{mockEventDetail.locationType}</Badge>
-            <Badge>{mockEventDetail.status}</Badge>
-          </BadgeContainer>
-        </ArticleHeader>
+      <div className="events-detail-page__wrapper">
+        <header className="events-detail-page__header">
+          <h1 className="events-detail-page__title">{mockEventDetail.title}</h1>
+          <p className="events-detail-page__subtitle">{mockEventDetail.subtitle}</p>
+          <div className="events-detail-page__badge-container">
+            <span className="events-detail-page__badge">{mockEventDetail.locationType}</span>
+            <span className="events-detail-page__badge">{mockEventDetail.status}</span>
+          </div>
+        </header>
 
-        <ActionButtons>
-          <ActionButton
-            href={isRegistrationActive ? mockEventDetail.registerUrl : undefined}
-            className={isRegistrationActive ? 'primary' : 'disabled'}
-            onClick={(e) => !isRegistrationActive && e.preventDefault()}
+        <div className="events-detail-page__action-buttons">
+          <Button
+            onClick={(e) => { if (!isRegistrationActive) e.preventDefault(); }}
+            disabled={!isRegistrationActive}
+            variant={isRegistrationActive ? 'primary' : 'secondary'}
           >
             {isRegistrationActive ? '지금 신청하기' : '신청 마감'}
-          </ActionButton>
-          <ActionButton href="#" className="secondary"><Icon name="share2" size={16}/> 공유하기</ActionButton>
-          <ActionButton href="#" className="secondary"><Icon name="calendar" size={16}/> 캘린더에 추가</ActionButton>
-        </ActionButtons>
+          </Button>
+          <Button variant="secondary"><Icon name="share2" size={16}/> 공유하기</Button>
+          <Button variant="secondary"><Icon name="calendar" size={16}/> 캘린더에 추가</Button>
+        </div>
 
-        {mockEventDetail.posterUrl && <Poster src={mockEventDetail.posterUrl} alt={`${mockEventDetail.title} Poster`} />}
+        {mockEventDetail.posterUrl && <img src={mockEventDetail.posterUrl} alt={`${mockEventDetail.title} Poster`} className="events-detail-page__poster" />}
 
-        <SectionWrapper>
+        <section className="events-detail-page__section">
           <InfoTable title="행사 정보" data={eventInfo} />
-        </SectionWrapper>
+        </section>
 
-        <SectionWrapper>
-          <HtmlContent dangerouslySetInnerHTML={{ __html: mockEventDetail.descriptionHTML }} />
-        </SectionWrapper>
+        <section className="events-detail-page__section">
+          <div className="events-detail-page__html-content" dangerouslySetInnerHTML={{ __html: mockEventDetail.descriptionHTML }} />
+        </section>
 
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

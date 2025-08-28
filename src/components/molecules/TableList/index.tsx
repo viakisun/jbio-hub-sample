@@ -1,93 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
-
-// --- STYLED COMPONENTS ---
-
-const DesktopOnly = styled.div`
-  display: block;
-  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    display: none;
-  }
-`;
-
-const MobileOnly = styled.div`
-  display: none;
-  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    display: block;
-  }
-`;
-
-const TableContainer = styled.div`
-  overflow-x: auto;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  background-color: white;
-`;
-
-const StyledTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-  white-space: nowrap;
-`;
-
-const THead = styled.thead`
-  background-color: #f9fafb;
-`;
-
-const Tr = styled.tr`
-  &:not(:last-child) {
-    border-bottom: 1px solid #e5e7eb;
-  }
-`;
-
-const Th = styled.th`
-  padding: 0.75rem 1.5rem;
-  text-align: left;
-  font-weight: 600;
-  color: #374151;
-`;
-
-const Td = styled.td`
-  padding: 1rem 1.5rem;
-  color: #111827;
-`;
-
-const CardList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const Card = styled.div`
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  background-color: white;
-  padding: 1.5rem;
-`;
-
-const CardRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid #f3f4f6;
-  }
-`;
-
-const CardLabel = styled.span`
-  font-weight: 600;
-  color: #374151;
-`;
-
-const CardValue = styled.span`
-  color: #111827;
-  text-align: right;
-`;
-
-// --- COMPONENT ---
 
 interface TableListProps {
   headers: string[];
@@ -97,49 +8,49 @@ interface TableListProps {
 
 const TableList: React.FC<TableListProps> = ({ headers, rows, onRowClick }) => {
   return (
-    <>
-      <DesktopOnly>
-        <TableContainer>
-          <StyledTable>
-            <THead>
-              <Tr>
+    <div className="table-list">
+      <div className="table-list__desktop">
+        <div className="table-container">
+          <table className="table">
+            <thead>
+              <tr>
                 {headers.map((header, index) => (
-                  <Th key={index}>{header}</Th>
+                  <th key={index}>{header}</th>
                 ))}
-              </Tr>
-            </THead>
+              </tr>
+            </thead>
             <tbody>
               {rows.map((row, rowIndex) => (
-                <Tr
+                <tr
                   key={rowIndex}
                   onClick={() => onRowClick && onRowClick(rowIndex)}
                   style={{ cursor: onRowClick ? 'pointer' : 'default' }}
                 >
                   {row.map((cell, cellIndex) => (
-                    <Td key={cellIndex}>{cell}</Td>
+                    <td key={cellIndex}>{cell}</td>
                   ))}
-                </Tr>
+                </tr>
               ))}
             </tbody>
-          </StyledTable>
-        </TableContainer>
-      </DesktopOnly>
+          </table>
+        </div>
+      </div>
 
-      <MobileOnly>
-        <CardList>
+      <div className="table-list__mobile">
+        <div className="card-list">
           {rows.map((row, rowIndex) => (
-            <Card key={rowIndex} onClick={() => onRowClick && onRowClick(rowIndex)}>
+            <div key={rowIndex} className="card-list-item" onClick={() => onRowClick && onRowClick(rowIndex)}>
               {row.map((cell, cellIndex) => (
-                <CardRow key={cellIndex}>
-                  <CardLabel>{headers[cellIndex]}</CardLabel>
-                  <CardValue>{cell}</CardValue>
-                </CardRow>
+                <div key={cellIndex} className="card-list-item__row">
+                  <span className="card-list-item__label">{headers[cellIndex]}</span>
+                  <span className="card-list-item__value">{cell}</span>
+                </div>
               ))}
-            </Card>
+            </div>
           ))}
-        </CardList>
-      </MobileOnly>
-    </>
+        </div>
+      </div>
+    </div>
   );
 };
 

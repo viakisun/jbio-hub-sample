@@ -1,0 +1,30 @@
+@use "../design-tokens" as *;
+
+.entity-drawer {
+  &__section {
+    margin-bottom: $space-8;
+  }
+
+  &__section-title {
+    font-size: $fs-h3;
+    font-weight: 600;
+    margin-bottom: $space-4;
+  }
+
+  &__org-name {
+    font-size: $fs-h2;
+    font-weight: 700;
+    margin-bottom: $space-2;
+  }
+
+  &__org-meta {
+    color: $color-text-muted;
+    margin-top: 0;
+  }
+
+  &__field-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+  }
+}

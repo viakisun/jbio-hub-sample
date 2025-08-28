@@ -1,11 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import Timeline from '../../molecules/Timeline';
 import NoticeCard, { NoticeCardData } from '../../molecules/NoticeCard';
 import Icon from '../../atoms/Icon';
 
-// --- MOCK DATA ---
 const timelineSteps = [
   { icon: 'fileText', title: '온라인 신청/접수', description: '홈페이지를 통해 신청서와 사업계획서를 제출합니다.' },
   { icon: 'clipboard', title: '서류 심사', description: '제출된 서류를 바탕으로 자격 요건 및 사업성을 평가합니다.' },
@@ -25,81 +22,34 @@ const mockNotices: NoticeCardData[] = [
     { id: 'notice-2', title: '1인 창조기업 지원실 입주기업 모집', targetCriteria: '1인 창조기업 및 예비창업자', periodEnd: '2024-10-15', applyUrl: '#' },
 ];
 
-// --- STYLED COMPONENTS ---
-
-const Section = styled.section`
-  margin-bottom: 3rem;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-
-  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    font-size: 1.25rem;
-  }
-`;
-
-const DocumentList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const DocumentLink = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: #111827;
-  font-weight: 500;
-
-  &:hover {
-    color: #4f46e5;
-    text-decoration: underline;
-  }
-`;
-
-const NoticeList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-
-// --- COMPONENT ---
-
 const ApplyView = () => {
   return (
-    <div>
-      <Section>
-        <SectionTitle>입주 절차</SectionTitle>
+    <div className="incubation-tab-view apply-view">
+      <section className="section">
+        <h2 className="section-title">입주 절차</h2>
         <Timeline steps={timelineSteps} />
-      </Section>
+      </section>
 
-      <Section>
-        <SectionTitle>제출 서류</SectionTitle>
-        <DocumentList>
+      <section className="section">
+        <h2 className="section-title">제출 서류</h2>
+        <div className="apply-view__document-list">
             {requiredDocs.map(doc => (
-                <DocumentLink key={doc.fileName} href={doc.fileUrl} download>
+                <a key={doc.fileName} href={doc.fileUrl} download className="apply-view__document-link">
                     <Icon name="download" size={16} />
                     {doc.fileName} ({doc.fileSize})
-                </DocumentLink>
+                </a>
             ))}
-        </DocumentList>
-      </Section>
+        </div>
+      </section>
 
-      <Section>
-        <SectionTitle>모집 공고</SectionTitle>
-        <NoticeList>
+      <section className="section">
+        <h2 className="section-title">모집 공고</h2>
+        <div className="apply-view__notice-list">
             {mockNotices.map(notice => (
                 <NoticeCard key={notice.id} notice={notice} />
             ))}
-        </NoticeList>
-      </Section>
+        </div>
+      </section>
     </div>
   );
 };

@@ -1,0 +1,28 @@
+@use "../design-tokens" as *;
+
+.kpi-card {
+  background-color: $color-elevated;
+  padding: $space-6;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-md;
+  }
+
+  &__value {
+    font-size: $fs-h2;
+    font-weight: 700;
+    color: $color-primary;
+    margin-bottom: $space-2;
+  }
+
+  &__label {
+    font-size: $fs-body;
+    font-weight: 500;
+    color: $color-text-muted;
+  }
+}

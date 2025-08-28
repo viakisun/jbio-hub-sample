@@ -1,0 +1,176 @@
+@use "../design-tokens" as *;
+
+.hero-sample-1 {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  padding: $space-16 $space-12;
+  color: $color-text;
+  text-align: center;
+  margin-bottom: $space-16;
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: $fw-h1;
+    margin: 0 0 $space-4 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  &__subtitle {
+    font-size: $fs-h3;
+    margin: 0 0 $space-10 0;
+    opacity: 0.8;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hero-sample-4 {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 32px;
+  padding: $space-16 $space-12;
+  color: white;
+  text-align: center;
+  margin-bottom: $space-16;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+  &__glow-text {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 12px rgba(255, 255, 255, 0.3);
+  }
+
+  &__background {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(100, 100, 255, 0.3) 0%, rgba(255,255,255,0) 40%), radial-gradient(circle, rgba(255, 100, 100, 0.3) 50%, rgba(255,255,255,0) 80%);
+    animation: rotate 20s linear infinite;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 700;
+    margin: 0 0 $space-6 0;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+
+  &__subtitle {
+    font-size: $fs-h3;
+    margin: 0 0 $space-12 0;
+    opacity: 0.9;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.hero-sample-3 {
+  background: $color-elevated;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $space-16 $space-12;
+  color: $color-text;
+  text-align: center;
+  margin-bottom: $space-16;
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 800;
+    margin: 0 0 $space-4 0;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: #1d3557; // This is a new color, I will keep it for now
+  }
+
+  &__subtitle {
+    font-size: $fs-h3;
+    margin: 0 auto $space-10 auto;
+    opacity: 0.9;
+    max-width: 760px;
+    line-height: 1.7;
+    color: $color-text-muted;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.hero-sample-2 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: $radius-lg;
+  padding: $space-16 $space-12;
+  color: white;
+  text-align: center;
+  margin-bottom: $space-16;
+  position: relative;
+  overflow: hidden;
+
+  &__pattern {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+    opacity: 0.05;
+    background-size: auto;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 900;
+    margin: 0 0 $space-6 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  &__subtitle {
+    font-size: $fs-h3;
+    margin: 0 0 $space-12 0;
+    opacity: 0.95;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: center;
+  }
+}

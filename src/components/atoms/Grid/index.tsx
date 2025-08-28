@@ -1,25 +1,38 @@
-import styled from 'styled-components';
+import React from 'react';
 
 interface GridProps {
-  $cols?: number;
-  $gap?: string;
-  $tabletCols?: number;
-  $mobileCols?: number;
+  children: React.ReactNode;
+  cols?: number;
+  gap?: string;
+  tabletCols?: number;
+  mobileCols?: number;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-const Grid = styled.div<GridProps>`
-  display: grid;
-  align-items: stretch;
-  grid-template-columns: repeat(${props => props.$cols || 4}, 1fr);
-  gap: ${props => props.$gap || '2rem'};
+const Grid: React.FC<GridProps> = ({
+  children,
+  cols,
+  gap,
+  tabletCols,
+  mobileCols,
+  className,
+  style,
+}) => {
+  const cssVariables = {
+    '--grid-cols': cols,
+    '--grid-gap': gap,
+    '--grid-tablet-cols': tabletCols,
+    '--grid-mobile-cols': mobileCols,
+  } as React.CSSProperties;
 
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(${props => props.$tabletCols || 2}, 1fr);
-  }
+  const combinedClassName = ['grid', className].filter(Boolean).join(' ');
 
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(${props => props.$mobileCols || 1}, 1fr);
-  }
-`;
+  return (
+    <div className={combinedClassName} style={{ ...cssVariables, ...style }}>
+      {children}
+    </div>
+  );
+};
 
 export default Grid;

@@ -1,0 +1,12 @@
+@use "../design-tokens" as *;
+
+.announcement-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  &__item-link {
+    text-decoration: none;
+    color: inherit;
+  }
+}

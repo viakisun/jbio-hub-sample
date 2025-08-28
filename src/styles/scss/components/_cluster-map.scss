@@ -1,0 +1,50 @@
+@use "../design-tokens" as *;
+
+.cluster-map {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: $space-8 auto;
+  padding-top: 50%; /* Aspect Ratio */
+  background-color: $color-surface;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border;
+
+  &__label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $color-text-muted;
+    font-size: $fs-h2;
+    font-weight: 700;
+  }
+
+  &__pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    .pin-dot {
+      width: 20px;
+      height: 20px;
+      background-color: $color-primary;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: $shadow-md;
+    }
+
+    .pin-label {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      background-color: $color-elevated;
+      padding: $space-1 $space-3;
+      border-radius: $radius-sm;
+      font-size: $fs-caption;
+      font-weight: 600;
+      box-shadow: $shadow-md;
+    }
+  }
+}

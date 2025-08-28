@@ -1,0 +1,110 @@
+@use "../design-tokens" as *;
+
+.companies-page {
+  &__wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: $space-4;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $space-12;
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: 800;
+    margin-bottom: $space-2;
+  }
+
+  &__subtitle {
+    font-size: $fs-h3;
+    color: $color-text-muted;
+  }
+
+  &__filter-container {
+    background-color: $color-elevated;
+    padding: $space-6;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    border: 1px solid $color-border;
+    margin-bottom: $space-8;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: $space-4;
+    align-items: end;
+  }
+
+  &__filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+
+  &__filter-label {
+    font-weight: 600;
+    font-size: $fs-caption;
+    color: $color-text;
+  }
+
+  &__select, &__input {
+    padding: $space-3;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+    background-color: $color-surface;
+    width: 100%;
+    &:focus {
+      outline: 2px solid $color-primary;
+      border-color: $color-primary;
+    }
+  }
+
+  &__search-input-wrapper {
+    grid-column: span 6;
+    @media (min-width: $bp-lg) {
+      grid-column: span 2;
+    }
+  }
+
+  &__controls-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: $space-6;
+  }
+
+  &__view-toggle-button {
+    background-color: $color-elevated;
+    color: $color-text;
+    border: 1px solid $color-border;
+    padding: $space-2;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:first-of-type {
+      border-top-left-radius: $radius-md;
+      border-bottom-left-radius: $radius-md;
+    }
+
+    &:last-of-type {
+      border-top-right-radius: $radius-md;
+      border-bottom-right-radius: $radius-md;
+      border-left-width: 0;
+    }
+
+    &:hover {
+      background-color: $color-surface;
+    }
+
+    &--active {
+      background-color: $color-primary;
+      color: white;
+      &:hover {
+        background-color: $color-primary-600;
+      }
+    }
+  }
+}

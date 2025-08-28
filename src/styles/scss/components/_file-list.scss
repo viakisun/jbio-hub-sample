@@ -1,0 +1,44 @@
+@use "../design-tokens" as *;
+
+.file-list {
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-4 $space-6;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease-in-out;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-border;
+    }
+
+    &:hover {
+      background-color: $color-surface;
+
+      .file-list__file-name {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
+
+  &__file-name {
+    font-weight: 500;
+    color: $color-text;
+  }
+
+  &__file-size {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+  }
+}

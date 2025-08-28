@@ -1,50 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import Icon from '../../atoms/Icon';
 import Button from '../../atoms/Button';
-
-const ErrorStateWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  text-align: center;
-  background-color: #fef2f2; /* red-50 */
-  border-radius: 16px;
-  color: #991b1b; /* red-800 */
-  border: 1px solid #fecaca; /* red-200 */
-`;
-
-const ErrorStateIcon = styled.div`
-  margin-bottom: 1.5rem;
-`;
-
-const ErrorStateTitle = styled.h3`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #b91c1c; /* red-700 */
-  margin-bottom: 0.5rem;
-`;
-
-const ErrorStateMessage = styled.p`
-  font-size: 1rem;
-  max-width: 400px;
-  margin-bottom: 1.5rem;
-`;
-
-const RetryButton = styled(Button)`
-  background-color: #ef4444; /* red-500 */
-  color: white;
-  padding: 0.5rem 1.5rem;
-  font-weight: 500;
-  border: none;
-  border-radius: 8px;
-
-  &:hover {
-    background-color: #dc2626; /* red-600 */
-  }
-`;
 
 interface ErrorStateProps {
   title?: string;
@@ -58,18 +14,18 @@ const ErrorState: React.FC<ErrorStateProps> = ({
   onRetry
 }) => {
   return (
-    <ErrorStateWrapper>
-      <ErrorStateIcon>
-        <Icon name="alertTriangle" size={48} color="#ef4444" />
-      </ErrorStateIcon>
-      <ErrorStateTitle>{title}</ErrorStateTitle>
-      <ErrorStateMessage>{message}</ErrorStateMessage>
+    <div className="error-state">
+      <div className="error-state__icon">
+        <Icon name="alertTriangle" size={48} />
+      </div>
+      <h3 className="error-state__title">{title}</h3>
+      <p className="error-state__message">{message}</p>
       {onRetry && (
-        <RetryButton onClick={onRetry}>
+        <Button onClick={onRetry} variant="danger">
           재시도
-        </RetryButton>
+        </Button>
       )}
-    </ErrorStateWrapper>
+    </div>
   );
 };
 

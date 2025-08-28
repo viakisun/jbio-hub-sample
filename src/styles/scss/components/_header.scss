@@ -1,0 +1,235 @@
+@use "../design-tokens" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid $color-border;
+
+  &__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 $space-6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  &__logo-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+  }
+
+  &__logo-title {
+    font-size: 20px;
+    font-weight: 800;
+    // The gradient text is a special case, will be handled with a utility class or inline style if needed.
+    // For now, let's use the primary color.
+    color: $color-primary;
+  }
+
+  &__logo-subtitle {
+    font-size: 10px;
+    color: $color-text-muted;
+    font-weight: 500;
+  }
+
+  &__search {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 $space-8;
+    display: none;
+
+    @media (min-width: $bp-md) {
+      display: block;
+    }
+  }
+
+  &__search-wrapper {
+    display: flex;
+    align-items: center;
+    background: $color-surface;
+    border-radius: $radius-md;
+    border: 2px solid $color-border;
+    transition: all 0.3s ease;
+    &:focus-within {
+      border-color: $color-primary;
+    }
+  }
+
+  &__search-input {
+    flex: 1;
+    padding: $space-3 0;
+    border: none;
+    outline: none;
+    font-size: $fs-caption;
+    background-color: transparent;
+    color: $color-text;
+    font-weight: 500;
+    padding-left: $space-4;
+  }
+
+  &__search-button {
+    background: $color-primary;
+    color: #fff;
+    border: none;
+    padding: $space-2 $space-4;
+    margin: 4px;
+    border-radius: $radius-sm;
+    font-size: $fs-caption;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
+
+  &__nav-container {
+    border-top: 1px solid $color-divider;
+    background: rgba(255, 255, 255, 0.98);
+    display: none;
+
+    @media (min-width: $bp-md) {
+      display: block;
+    }
+  }
+
+  &__nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 $space-6;
+    display: flex;
+    align-items: center;
+    height: 50px;
+  }
+
+  &__nav {
+    display: flex;
+    gap: $space-8;
+  }
+
+  &__nav-link {
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: $fs-caption;
+    font-weight: 600;
+    color: $color-text-muted;
+    cursor: pointer;
+    padding: $space-2 $space-4;
+    border-radius: $radius-sm;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+      background: $color-primary-50;
+      color: $color-text;
+    }
+
+    &.active {
+      font-weight: 700;
+      color: $color-primary;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: $space-4;
+        right: $space-4;
+        height: 2px;
+        background-color: $color-primary;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  &__mobile-menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    cursor: pointer;
+
+    @media (min-width: $bp-md) {
+      display: none;
+    }
+  }
+
+  &__mobile-menu {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid $color-border;
+    padding: $space-6;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+
+    .header__nav {
+      flex-direction: column;
+      gap: $space-4;
+    }
+  }
+
+  &__notification-button {
+    position: relative;
+    background: none;
+    border: none;
+    padding: $space-2;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    &:hover {
+      background: $color-primary-50;
+    }
+  }
+
+  &__notification-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    background-color: $color-warning;
+    border-radius: 50%;
+  }
+
+  &__user-menu {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    cursor: pointer;
+    &:hover {
+      background: $color-primary-50;
+    }
+  }
+
+  &__user-name {
+    font-size: $fs-caption;
+    font-weight: 500;
+    color: $color-text;
+  }
+}

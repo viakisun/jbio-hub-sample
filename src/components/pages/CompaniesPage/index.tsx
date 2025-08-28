@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import MainLayout from '../../templates/MainLayout';
 import useCompanies from '../../../hooks/useCompanies';
 import { Company, SizeCategory } from '../../../types/api';
@@ -11,121 +10,6 @@ import { LoadingSkeleton } from '../../molecules/StateDisplay/LoadingSkeleton';
 import ErrorState from '../../molecules/StateDisplay/ErrorState';
 import EmptyState from '../../molecules/StateDisplay/EmptyState';
 import Icon from '../../atoms/Icon';
-
-// --- STYLED COMPONENTS ---
-
-const PageWrapper = styled.div`
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1rem;
-`;
-
-const PageHeader = styled.header`
-  text-align: center;
-  margin-bottom: 3rem;
-`;
-
-const Title = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.125rem;
-  color: #6b7280;
-`;
-
-const FilterContainer = styled.div`
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1);
-  border: 1px solid #e5e7eb;
-  margin-bottom: 2rem;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1rem;
-  align-items: end;
-`;
-
-const FilterGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const FilterLabel = styled.label`
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: #374151;
-`;
-
-const StyledSelect = styled.select`
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  background-color: #f9fafb;
-  width: 100%;
-  &:focus {
-    outline: 2px solid #4f46e5;
-    border-color: #4f46e5;
-  }
-`;
-
-const StyledInput = styled.input`
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  background-color: #f9fafb;
-  width: 100%;
-  &:focus {
-    outline: 2px solid #4f46e5;
-    border-color: #4f46e5;
-  }
-`;
-
-const SearchInputWrapper = styled(FilterGroup)`
-  grid-column: span 6; // Full width on mobile
-  @media (min-width: 1024px) {
-    grid-column: span 2; // 2 columns on desktop
-  }
-`;
-
-const ControlsContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1.5rem;
-`;
-
-const ViewToggleButton = styled.button<{ $isActive: boolean }>`
-  background-color: ${props => props.$isActive ? '#4f46e5' : 'white'};
-  color: ${props => props.$isActive ? 'white' : '#374151'};
-  border: 1px solid #d1d5db;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-  &:first-of-type {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
-
-  &:last-of-type {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-left-width: 0;
-  }
-
-  &:hover {
-    background-color: ${props => props.$isActive ? '#4338ca' : '#f9fafb'};
-  }
-`;
-
-// --- COMPONENT ---
 
 const CompaniesPage: React.FC = () => {
   const navigate = useNavigate();
@@ -178,72 +62,73 @@ const CompaniesPage: React.FC = () => {
 
   return (
     <MainLayout>
-      <PageWrapper>
-        <PageHeader>
-          <Title>기업 정보</Title>
-          <Subtitle>전북특별자치도의 유망한 바이오 기업들을 만나보세요.</Subtitle>
-        </PageHeader>
+      <div className="companies-page__wrapper">
+        <header className="companies-page__header">
+          <h1 className="companies-page__title">기업 정보</h1>
+          <p className="companies-page__subtitle">전북특별자치도의 유망한 바이오 기업들을 만나보세요.</p>
+        </header>
 
-        <FilterContainer>
-          <SearchInputWrapper>
-            <FilterLabel htmlFor="keyword-search">검색</FilterLabel>
-            <StyledInput
+        <div className="companies-page__filter-container">
+          <div className="companies-page__search-input-wrapper">
+            <label htmlFor="keyword-search" className="companies-page__filter-label">검색</label>
+            <input
               type="text"
               id="keyword-search"
               name="keyword"
               placeholder="기업명, 설명으로 검색..."
               value={filters.keyword}
               onChange={handleFilterChange}
+              className="companies-page__input"
             />
-          </SearchInputWrapper>
-          <FilterGroup>
-            <FilterLabel htmlFor="region-select">지역</FilterLabel>
-            <StyledSelect id="region-select" name="region" value={filters.region} onChange={handleFilterChange}>
+          </div>
+          <div className="companies-page__filter-group">
+            <label htmlFor="region-select" className="companies-page__filter-label">지역</label>
+            <select id="region-select" name="region" value={filters.region} onChange={handleFilterChange} className="companies-page__select">
               <option value="">전체</option>
               <option value="전주시">전주시</option>
               <option value="군산시">군산시</option>
               <option value="익산시">익산시</option>
               <option value="김제시">김제시</option>
-            </StyledSelect>
-          </FilterGroup>
-          <FilterGroup>
-            <FilterLabel htmlFor="industry-select">산업분야</FilterLabel>
-            <StyledSelect id="industry-select" name="industry" value={filters.industry} onChange={handleFilterChange}>
+            </select>
+          </div>
+          <div className="companies-page__filter-group">
+            <label htmlFor="industry-select" className="companies-page__filter-label">산업분야</label>
+            <select id="industry-select" name="industry" value={filters.industry} onChange={handleFilterChange} className="companies-page__select">
               <option value="">전체</option>
               <option value="레드 바이오">레드 바이오</option>
               <option value="그린 바이오">그린 바이오</option>
               <option value="화이트 바이오">화이트 바이오</option>
-            </StyledSelect>
-          </FilterGroup>
-          <FilterGroup>
-            <FilterLabel htmlFor="size-select">기업규모</FilterLabel>
-            <StyledSelect id="size-select" name="sizeCategory" value={filters.sizeCategory || ''} onChange={handleFilterChange}>
+            </select>
+          </div>
+          <div className="companies-page__filter-group">
+            <label htmlFor="size-select" className="companies-page__filter-label">기업규모</label>
+            <select id="size-select" name="sizeCategory" value={filters.sizeCategory || ''} onChange={handleFilterChange} className="companies-page__select">
               <option value="">전체</option>
               <option value="Startup">스타트업</option>
               <option value="SME">중견기업</option>
               <option value="Large">대기업</option>
-            </StyledSelect>
-          </FilterGroup>
-          <FilterGroup>
-            <FilterLabel htmlFor="sort-select">정렬</FilterLabel>
-            <StyledSelect id="sort-select" name="sort" value={filters.sort} onChange={handleFilterChange}>
+            </select>
+          </div>
+          <div className="companies-page__filter-group">
+            <label htmlFor="sort-select" className="companies-page__filter-label">정렬</label>
+            <select id="sort-select" name="sort" value={filters.sort} onChange={handleFilterChange} className="companies-page__select">
               <option value="latest">최신 등록순</option>
               <option value="name">이름순</option>
               <option value="investmentSize">투자규모순</option>
-            </StyledSelect>
-          </FilterGroup>
-        </FilterContainer>
+            </select>
+          </div>
+        </div>
 
-        <ControlsContainer>
-          <ViewToggleButton onClick={() => setViewMode('card')} $isActive={viewMode === 'card'}>
+        <div className="companies-page__controls-container">
+          <button onClick={() => setViewMode('card')} className={`companies-page__view-toggle-button ${viewMode === 'card' ? 'companies-page__view-toggle-button--active' : ''}`}>
             <Icon name="grid" size={16} />
             <span>카드</span>
-          </ViewToggleButton>
-          <ViewToggleButton onClick={() => setViewMode('table')} $isActive={viewMode === 'table'}>
+          </button>
+          <button onClick={() => setViewMode('table')} className={`companies-page__view-toggle-button ${viewMode === 'table' ? 'companies-page__view-toggle-button--active' : ''}`}>
             <Icon name="list" size={16} />
             <span>테이블</span>
-          </ViewToggleButton>
-        </ControlsContainer>
+          </button>
+        </div>
 
         {loading && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"><LoadingSkeleton count={filters.limit} className="h-[250px]" /></div>}
         {error && <ErrorState message={error.message} />}
@@ -282,7 +167,7 @@ const CompaniesPage: React.FC = () => {
             )}
           </>
         )}
-      </PageWrapper>
+      </div>
     </MainLayout>
   );
 };

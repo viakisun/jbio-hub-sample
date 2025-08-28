@@ -1,6 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import { DESIGN_SYSTEM } from '../../../styles/tokens';
 import MainLayout from '../../templates/MainLayout';
 import SearchBar from '../../molecules/SearchBar';
 import Pagination from '../../molecules/Pagination';
@@ -9,9 +7,7 @@ import NewsCard from '../../molecules/NewsCard';
 import { News } from '../../../types/api';
 import NewsHero from '../../organisms/NewsHero';
 
-// --- MOCK DATA ---
 const mockNewsList: News[] = [
-  // (mock data is the same as before)
   {
     id: 1,
     title: '혁신적인 암 치료법, CAR-T 세포 치료의 최신 동향',
@@ -47,41 +43,23 @@ const mockNewsList: News[] = [
   { id: 6, title: '뇌-컴퓨터 인터페이스(BCI), 상용화 어디까지 왔나', summary: '일론 머스크의 뉴럴링크를 비롯한 BCI 기술의 발전 현황과 윤리적 과제를 짚어본다.', content: '상세 내용...', thumbnailUrl: 'https://picsum.photos/seed/news6/400/225', sourceName: '테크월드', created_at: '2024-08-09', category: 'news' },
 ];
 
-// --- STYLED COMPONENTS ---
-
-const ContentWrapper = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem 2rem;
-
-  @media ${DESIGN_SYSTEM.mediaQueries.mobile} {
-    padding: 0 1rem 1.5rem;
-  }
-`;
-
-const SearchBarContainer = styled.div`
-  margin-bottom: 2.5rem;
-`;
-
-// --- COMPONENT ---
-
 const NewsListPage = () => {
   return (
     <MainLayout>
       <NewsHero />
-      <ContentWrapper>
-        <SearchBarContainer>
+      <div className="news-list-page__content-wrapper">
+        <div className="news-list-page__search-bar-container">
           <SearchBar />
-        </SearchBarContainer>
+        </div>
 
-        <Grid $cols={3} $tabletCols={2} $mobileCols={1} $gap="1.5rem">
+        <Grid cols={3} tabletCols={2} mobileCols={1} gap="1.5rem">
           {mockNewsList.map((news) => (
             <NewsCard key={news.id} news={news} />
           ))}
         </Grid>
 
         <Pagination currentPage={1} totalPages={10} />
-      </ContentWrapper>
+      </div>
     </MainLayout>
   );
 };

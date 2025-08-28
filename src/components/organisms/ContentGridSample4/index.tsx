@@ -43,84 +43,37 @@ const ContentGridSample4 = () => {
     fetchData();
   }, []);
 
-  const panelStyle: React.CSSProperties = {
-    background: 'rgba(0, 0, 0, 0.25)',
-    backdropFilter: 'blur(15px)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    borderRadius: '24px',
-    padding: '2rem',
-    color: 'white',
-    height: '100%',
-  };
-
-  const headerStyle: React.CSSProperties = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '1.5rem',
-  };
-
-  const titleStyle: React.CSSProperties = {
-    fontSize: '1.75rem',
-    fontWeight: 'bold',
-    margin: 0,
-    textShadow: '0 0 5px rgba(255, 255, 255, 0.2)',
-  };
-
-  const listItemStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '1rem',
-    borderRadius: '12px',
-    textDecoration: 'none',
-    color: 'rgba(255, 255, 255, 0.85)',
-    transition: 'background-color 0.2s, color 0.2s',
-  };
-
   return (
-    <section style={{ marginBottom: '4rem', maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
-      <Grid $cols={2} $tabletCols={1} $mobileCols={1} $gap="2rem">
-        <div style={panelStyle}>
-          <div style={headerStyle}>
-            <h2 style={titleStyle}>Latest Announcements</h2>
-            <Link to="/announcements" style={{color: '#90d8ff', textDecoration: 'none', fontWeight: 'bold'}}>
+    <section className="content-grid-sample-4">
+      <Grid cols={2} tabletCols={1} mobileCols={1} gap="2rem">
+        <div className="content-grid-sample-4__panel">
+          <div className="content-grid-sample-4__header">
+            <h2 className="content-grid-sample-4__title">Latest Announcements</h2>
+            <Link to="/announcements" className="content-grid-sample-1__view-all-link" style={{color: '#90d8ff'}}>
               View All
             </Link>
           </div>
           <div>
             {announcements.map((item) => (
-              <Link to={`/support/all/${item.id}`} key={item.id} style={listItemStyle}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'; e.currentTarget.style.color = '#ffffff'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)'; }}
-              >
+              <Link to={`/support/all/${item.id}`} key={item.id} className="content-grid-sample-4__item">
                 <span>{item.title}</span>
                 <Icon name="arrowRight" size={16} />
               </Link>
             ))}
           </div>
         </div>
-        <div style={panelStyle}>
-          <div style={headerStyle}>
-            <h2 style={titleStyle}>Latest News</h2>
-            <Link to="/news/latest" style={{color: '#90d8ff', textDecoration: 'none', fontWeight: 'bold'}}>
+        <div className="content-grid-sample-4__panel">
+          <div className="content-grid-sample-4__header">
+            <h2 className="content-grid-sample-4__title">Latest News</h2>
+            <Link to="/news/latest" className="content-grid-sample-1__view-all-link" style={{color: '#90d8ff'}}>
               View All
             </Link>
           </div>
           <div>
             {news.map((item) => (
-              <Link to={`/news/latest/${item.id}`} key={item.id} style={listItemStyle}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'; e.currentTarget.style.color = '#ffffff'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)'; }}
-              >
+              <Link to={`/news/latest/${item.id}`} key={item.id} className="content-grid-sample-4__item">
                 <span>{item.title}</span>
-                <span style={{
-                  backgroundColor: 'rgba(255,255,255,0.15)',
-                  padding: '0.2rem 0.6rem',
-                  borderRadius: '20px',
-                  fontSize: '0.75rem',
-                  opacity: 0.8
-                }}>{item.category}</span>
+                <span className="content-grid-sample-4__category">{item.category}</span>
               </Link>
             ))}
           </div>

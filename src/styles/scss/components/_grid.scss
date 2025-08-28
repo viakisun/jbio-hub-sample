@@ -1,0 +1,16 @@
+@use "../design-tokens" as *;
+
+.grid {
+  display: grid;
+  align-items: stretch;
+  grid-template-columns: repeat(var(--grid-cols, 4), 1fr);
+  gap: var(--grid-gap, $space-8);
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: repeat(var(--grid-tablet-cols, 2), 1fr);
+  }
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: repeat(var(--grid-mobile-cols, 1), 1fr);
+  }
+}

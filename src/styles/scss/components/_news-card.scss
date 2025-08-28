@@ -1,0 +1,93 @@
+@use "../design-tokens" as *;
+
+.news-card {
+  @extend .card; // This is not valid in standard SCSS, so I will copy the styles from .card
+  background: $color-elevated;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  border: 1px solid $color-border;
+  transition: box-shadow .15s ease, transform .15s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-4px);
+  }
+
+  &__thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: $color-surface;
+  }
+
+  &__thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__category-badge {
+    position: absolute;
+    top: $space-4;
+    left: $space-4;
+    padding: $space-1 $space-3;
+    border-radius: $radius-sm;
+    font-size: $fs-caption;
+    font-weight: 600;
+    color: #fff;
+
+    &--news {
+      background-color: $color-primary;
+    }
+    &--notice {
+      background-color: $color-text-muted;
+    }
+  }
+
+  &__content {
+    padding: $space-6;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: $fw-h3;
+    line-height: 1.4;
+    margin: 0 0 $space-2 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__summary {
+    font-size: $fs-body;
+    color: $color-text-muted;
+    line-height: 1.6;
+    margin: 0 0 $space-4 0;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $fs-caption;
+    color: $color-text-muted;
+    padding-top: $space-3;
+    border-top: 1px solid $color-divider;
+  }
+}

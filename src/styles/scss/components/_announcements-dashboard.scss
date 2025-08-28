@@ -1,0 +1,47 @@
+@use "../design-tokens" as *;
+
+.announcements-dashboard {
+  background-color: $color-surface;
+  border-radius: $radius-lg;
+  padding: $space-8;
+  margin-bottom: $space-10;
+  border: 1px solid $color-border;
+
+  &__title {
+    font-size: $fs-h2;
+    font-weight: 700;
+    color: $color-text;
+    margin: 0 0 $space-6 0;
+  }
+
+  &__stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: $space-6;
+
+    @media (max-width: $bp-sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__stat-card {
+    background-color: $color-elevated;
+    padding: $space-6;
+    border-radius: $radius-md;
+    text-align: center;
+    border: 1px solid $color-border;
+  }
+
+  &__stat-value {
+    font-size: $fs-h1;
+    font-weight: 800;
+    color: $color-primary;
+    margin: 0 0 $space-2 0;
+  }
+
+  &__stat-label {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+    margin: 0;
+  }
+}
