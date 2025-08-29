@@ -64,6 +64,23 @@
   }
 }
 
+.loading-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.125rem;
+  color: #4b5563;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message {
+  @extend .loading-message;
+  color: #ef4444;
+  font-weight: 500;
+}
+
 .dashboard-view {
   .section {
     background-color: $color-surface;
