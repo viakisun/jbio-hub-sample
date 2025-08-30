@@ -97,6 +97,7 @@ const StyleGuidePage = () => {
               id: 1,
               title: 'JB SQUARE Launches New AI-Powered Research Platform',
               summary: 'The new platform promises to accelerate drug discovery and development by leveraging cutting-edge AI.',
+              content: 'Full content of the news article would go here.',
               thumbnailUrl: 'https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=1974&auto=format&fit=crop',
               category: 'news',
               sourceName: 'BioTech Today',
@@ -106,6 +107,7 @@ const StyleGuidePage = () => {
               id: 2,
               title: 'Important Announcement: Annual Conference Postponed',
               summary: 'The annual conference has been postponed to a later date. More details to follow.',
+              content: 'Full content of the notice would go here.',
               thumbnailUrl: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop',
               category: 'notice',
               sourceName: 'JB SQUARE',
@@ -122,7 +124,11 @@ const StyleGuidePage = () => {
               title: 'JB SQUARE Bio Innovation Conference 2024',
               thumbnailUrl: 'https://images.unsplash.com/photo-1560439546-3965b62b5d89?q=80&w=1974&auto=format&fit=crop',
               eventStartAt: new Date('2024-10-26').toISOString(),
+              eventEndAt: new Date('2024-10-28').toISOString(),
+              locationType: 'offline',
               locationName: 'Seoul, South Korea',
+              host: 'JB SQUARE',
+              category: 'event',
               status: '예정',
             }} />
             <EventCard event={{
@@ -130,7 +136,11 @@ const StyleGuidePage = () => {
               title: 'AI in Medicine Symposium',
               thumbnailUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop',
               eventStartAt: new Date().toISOString(),
+              eventEndAt: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days from now
+              locationType: 'online',
               locationName: 'Online',
+              host: 'BioInnovate Inc.',
+              category: 'event',
               status: '진행중',
             }} />
           </div>
@@ -148,6 +158,12 @@ const StyleGuidePage = () => {
               description: 'Pioneering new frontiers in gene editing and personalized medicine.',
               sizeCategory: 'SME',
               products: ['Gene sequencing', 'CRISPR kits'],
+              region: 'Seoul',
+              employees: 250,
+              achievements: ['Won the "Bio-Innovation of the Year" award in 2023.'],
+              patents: ['Patent for novel gene-editing technique (KR-2023-001234)'],
+              contact: { name: 'Dr. Evelyn Reed', email: 'e.reed@bioinnovate.com', phone: '+82-2-1234-5678' },
+              relatedArticles: [],
             }} />
           </div>
         </section>
