@@ -94,7 +94,7 @@ const StyleGuidePage = () => {
           <h2>News Card</h2>
           <div className="component-showcase" style={{ maxWidth: '400px', display: 'flex', flexDirection: 'column' }}>
             <NewsCard news={{
-              id: '1',
+              id: 1,
               title: 'JB SQUARE Launches New AI-Powered Research Platform',
               summary: 'The new platform promises to accelerate drug discovery and development by leveraging cutting-edge AI.',
               thumbnailUrl: 'https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=1974&auto=format&fit=crop',
@@ -103,7 +103,7 @@ const StyleGuidePage = () => {
               created_at: new Date().toISOString(),
             }} />
             <NewsCard news={{
-              id: '2',
+              id: 2,
               title: 'Important Announcement: Annual Conference Postponed',
               summary: 'The annual conference has been postponed to a later date. More details to follow.',
               thumbnailUrl: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop',
@@ -118,7 +118,7 @@ const StyleGuidePage = () => {
           <h2>Event Card</h2>
           <div className="component-showcase" style={{ maxWidth: '400px', display: 'flex', flexDirection: 'column' }}>
             <EventCard event={{
-              id: '1',
+              id: 1,
               title: 'JB SQUARE Bio Innovation Conference 2024',
               thumbnailUrl: 'https://images.unsplash.com/photo-1560439546-3965b62b5d89?q=80&w=1974&auto=format&fit=crop',
               eventStartAt: new Date('2024-10-26').toISOString(),
@@ -126,7 +126,7 @@ const StyleGuidePage = () => {
               status: '예정',
             }} />
             <EventCard event={{
-              id: '2',
+              id: 2,
               title: 'AI in Medicine Symposium',
               thumbnailUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop',
               eventStartAt: new Date().toISOString(),
@@ -146,7 +146,7 @@ const StyleGuidePage = () => {
               industry: 'Biotechnology',
               foundedYear: 2015,
               description: 'Pioneering new frontiers in gene editing and personalized medicine.',
-              sizeCategory: '100-500 employees',
+              sizeCategory: 'SME',
               products: ['Gene sequencing', 'CRISPR kits'],
             }} />
           </div>
