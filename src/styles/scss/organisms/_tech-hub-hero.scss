@@ -1,0 +1,31 @@
+@use "../design-tokens" as *;
+
+.tech-hub-hero {
+  background: $gradient-hero;
+  color: $color-light-text;
+  padding: $space-16 $space-6;
+  text-align: center;
+
+  &__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: $fs-h1;
+    font-weight: $fw-h1;
+    margin-bottom: $space-4;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: $space-8;
+    opacity: 0.9;
+  }
+
+  &__search {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}

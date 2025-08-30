@@ -9,6 +9,7 @@ import SearchBar from '../../molecules/SearchBar';
 import Tabs from '../../molecules/Tabs';
 import Pagination from '../../molecules/Pagination';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * ## Style Guide Page
@@ -31,6 +32,9 @@ const StyleGuidePage = () => {
       <div className="style-guide-container">
         <h1>JB SQUARE Design System</h1>
         <p>This page displays the redesigned components for the JB SQUARE platform.</p>
+        <div style={{ marginBottom: '24px' }}>
+          <Link to="/tech-hub" className="btn btn--primary">Go to Tech Hub Sample Page</Link>
+        </div>
 
         <section className="style-guide-section">
           <h2>Buttons</h2>

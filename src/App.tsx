@@ -35,6 +35,7 @@ import ArticleListPage from './components/pages/ArticleListPage';
 import ArticleDetailPage from './components/pages/ArticleDetailPage';
 import SupportProgramDetailPage from './components/pages/SupportProgramDetailPage';
 import StyleGuidePage from './components/pages/StyleGuidePage';
+import TechHubPage from './components/pages/TechHubPage';
 
 function App() {
   return (
@@ -83,6 +84,7 @@ function App() {
 
       {/* Development Routes */}
       <Route path="/style-guide" element={<StyleGuidePage />} />
+      <Route path="/tech-hub" element={<TechHubPage />} />
     </Routes>
   );
 }

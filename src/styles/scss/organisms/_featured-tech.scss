@@ -1,0 +1,21 @@
+@use "../design-tokens" as *;
+
+.featured-tech {
+  padding: $space-12 $space-6;
+  background-color: $color-surface;
+
+  &__title {
+    font-size: $fs-h2;
+    font-weight: $fw-h2;
+    text-align: center;
+    margin-bottom: $space-8;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $space-8;
+    max-width: $container-max;
+    margin: 0 auto;
+  }
+}
