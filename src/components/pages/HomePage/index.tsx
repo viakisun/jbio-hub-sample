@@ -1,18 +1,14 @@
 import React from 'react';
 import MainLayout from '../../templates/MainLayout';
 import HeroSection from '../../organisms/HeroSection';
-import StatsSection from '../../organisms/StatsSection';
-import ServicesSection from '../../organisms/ServicesSection';
-import ContentGrid from '../../organisms/ContentGrid';
+import HighlightsSection from '../../organisms/HighlightsSection';
 
 /**
- * ## UI-01-01: Home Page
+ * ## UI-01-01: Home Page (Redesigned)
  * ### Atomic Structure
  * - Template: MainLayout
- * - Organism: HeroSection
- * - Organism: StatsSection
- * - Organism: ServicesSection
- * - Organism: ContentGrid
+ * - Organism: HeroSection (Redesigned)
+ * - Organism: HighlightsSection
  *
  * @returns {JSX.Element}
  */
@@ -20,9 +16,7 @@ const HomePage = () => {
   return (
     <MainLayout>
       <HeroSection />
-      <StatsSection />
-      <ServicesSection />
-      <ContentGrid limit={6} showTabs={false} showLoadMore={false} />
+      <HighlightsSection />
     </MainLayout>
   );
 };
