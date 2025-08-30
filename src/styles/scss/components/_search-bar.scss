@@ -4,38 +4,48 @@
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 400px;
-  border: 1px solid $color-border;
-  border-radius: $radius-md;
+  max-width: 500px; // A bit wider
+  border: 2px solid lighten($color-dark-bg, 15%);
+  border-radius: $radius-pill; // Pill shape
   overflow: hidden;
-  background-color: $color-elevated;
+  background-color: lighten($color-dark-bg, 5%);
+  transition: $transition-base;
+
+  &:focus-within {
+    border-color: $color-brand-purple;
+    box-shadow: $shadow-lg;
+  }
 
   &__input {
     flex-grow: 1;
     border: none;
-    padding: $space-3 $space-4;
+    padding: $space-4 $space-6;
     font-size: $fs-body;
-    color: $color-text;
+    background-color: transparent;
+    color: $color-light-text;
+
+    &::placeholder {
+      color: lighten($color-light-text, 30%);
+    }
 
     &:focus {
       outline: none;
-      ring: 0;
     }
   }
 
   &__button {
-    background-color: $color-primary;
-    color: white;
-    padding: $space-3;
+    background: $gradient-cta;
+    color: $color-dark-bg;
+    padding: $space-3 $space-6;
     border: none;
-    border-radius: 0;
     cursor: pointer;
     display: flex;
     align-items: center;
-    transition: background-color 0.2s;
+    transition: $transition-base;
+    height: 100%;
 
     &:hover {
-      background-color: $color-primary-600;
+      transform: scale(1.05);
     }
   }
 }

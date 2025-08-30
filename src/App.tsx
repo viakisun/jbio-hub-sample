@@ -34,6 +34,7 @@ import CompanyDetailPage from './components/pages/CompanyDetailPage';
 import ArticleListPage from './components/pages/ArticleListPage';
 import ArticleDetailPage from './components/pages/ArticleDetailPage';
 import SupportProgramDetailPage from './components/pages/SupportProgramDetailPage';
+import StyleGuidePage from './components/pages/StyleGuidePage';
 
 function App() {
   return (
@@ -79,6 +80,9 @@ function App() {
       <Route path="/companies/:id" element={<CompanyDetailPage />} />
       <Route path="/articles" element={<ArticleListPage />} />
       <Route path="/articles/:id" element={<ArticleDetailPage />} />
+
+      {/* Development Routes */}
+      <Route path="/style-guide" element={<StyleGuidePage />} />
     </Routes>
   );
 }

@@ -2,30 +2,32 @@
 
 .badge {
   display: inline-block;
-  padding: $space-1 $space-3;
-  font-size: $fs-caption;
-  font-weight: 500;
+  padding: $space-2 $space-4;
+  font-size: 13px; // Slightly smaller for a more modern look
+  font-weight: $fw-h3; // Bolder
   border-radius: $radius-pill;
   white-space: nowrap;
+  text-transform: uppercase; // Bolder feel
+  letter-spacing: 0.05em;
 
   &--primary {
-    background-color: $color-primary-50;
-    color: $color-primary-600;
+    background: $gradient-cta;
+    color: $color-dark-bg;
   }
   &--secondary {
-    background-color: $color-surface;
-    color: $color-text-muted;
+    background-color: lighten($color-dark-bg, 15%);
+    color: $color-light-text;
   }
   &--success {
-    background-color: rgba($color-success, 0.1);
-    color: $color-success;
+    background-color: $color-success;
+    color: white;
   }
   &--warning {
-    background-color: rgba($color-warning, 0.1);
-    color: $color-warning;
+    background-color: $color-warning;
+    color: $color-dark-bg;
   }
   &--danger {
-    background-color: rgba($color-error, 0.1);
-    color: $color-error;
+    background-color: $color-error;
+    color: white;
   }
 }

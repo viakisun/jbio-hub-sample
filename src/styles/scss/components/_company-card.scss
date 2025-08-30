@@ -1,19 +1,10 @@
 @use "../design-tokens" as *;
 
 .company-card {
-  border: 1px solid $color-border;
-  border-radius: $radius-lg;
-  padding: $space-6;
-  background-color: $color-elevated;
-  box-shadow: $shadow-sm;
-  transition: box-shadow 0.2s ease-in-out;
-  height: 100%;
+  @extend .card;
   display: flex;
   flex-direction: column;
-
-  &:hover {
-    box-shadow: $shadow-md;
-  }
+  height: 100%;
 
   &__header {
     display: flex;
@@ -26,8 +17,10 @@
     height: 50px;
     border-radius: 50%;
     margin-right: $space-4;
-    object-fit: cover;
-    border: 1px solid $color-divider;
+    object-fit: contain; // Use contain to avoid cropping logos
+    border: 2px solid $color-divider;
+    background-color: white; // Ensure logo has a background
+    padding: $space-1;
   }
 
   &__name-meta {
@@ -36,9 +29,8 @@
 
   &__name {
     font-size: $fs-h3;
-    font-weight: 600;
+    font-weight: $fw-h3;
     margin: 0;
-    color: $color-text;
   }
 
   &__meta {
@@ -48,11 +40,10 @@
   }
 
   &__description {
-    color: $color-text;
     font-size: $fs-body;
     flex-grow: 1;
     margin: 0 0 $space-6;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   &__tags {

@@ -1,17 +1,54 @@
 @use "../design-tokens" as *;
 
 .card {
-  background: $color-elevated;
-  border-radius: $radius-lg; // 16px strict
-  box-shadow: $shadow-sm;
+  background: $color-surface;
+  border-radius: $radius-xl; // Using the new, larger radius
+  box-shadow: $shadow-md;
   padding: $space-6;
-  border: 1px solid $color-border;
-  transition: box-shadow .15s ease, transform .15s ease;
+  border: 1px solid $color-divider;
+  transition: $transition-base;
 
-  &:hover { box-shadow: $shadow-md; }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+  }
 
-  &__title { font-size: $fs-h3; font-weight: $fw-h3; margin-bottom: $space-4; }
-  &__meta  { font-size: $fs-caption; color: $color-text-muted; }
-  &__body  { margin-top: $space-4; }
-  &__actions { margin-top: $space-6; display: flex; gap: $space-4; flex-wrap: wrap; }
+  // Dark theme variant
+  &--dark {
+    background: lighten($color-dark-bg, 5%);
+    border-color: lighten($color-dark-bg, 10%);
+    color: $color-light-text;
+
+    .card__title {
+      color: $color-light-text;
+    }
+
+    .card__meta {
+      color: lighten($color-light-text, 40%);
+    }
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    font-weight: $fw-h3;
+    margin-bottom: $space-2; // Tighter spacing
+    color: $color-text;
+  }
+
+  &__meta {
+    font-size: $fs-caption;
+    color: $color-text-muted;
+    margin-bottom: $space-4;
+  }
+
+  &__body {
+    margin-top: $space-4;
+  }
+
+  &__actions {
+    margin-top: $space-6;
+    display: flex;
+    gap: $space-4;
+    flex-wrap: wrap;
+  }
 }
