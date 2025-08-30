@@ -1,27 +1,86 @@
 @use "../design-tokens" as *;
 
 .btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  gap: $space-3; padding: 12px 24px; border-radius: $radius-md;
-  font-weight: 600; line-height: 1; border: 1px solid transparent;
-  transition: background-color .15s ease, color .15s ease, box-shadow .15s ease, transform .15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-3 $space-6;
+  border-radius: $radius-md;
+  font-family: $font-family;
+  font-weight: $fw-h2; // Bolder
+  line-height: 1;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: $transition-base;
+  text-decoration: none; // For when buttons are used as links
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $color-brand-cyan;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
 
   &--primary {
-    background: $color-primary; color: #fff;
-    &:hover { background: $color-primary-600; box-shadow: $shadow-sm; }
-    &:focus-visible { outline: 2px solid $color-primary-600; outline-offset: 2px; }
-    &:disabled { opacity: .5; cursor: not-allowed; }
+    background: $gradient-cta;
+    color: $color-dark-bg;
+    border: none;
+    padding: calc(#{$space-3} + 2px) calc(#{$space-6} + 2px); // Adjust padding to account for border
+
+    &:hover {
+      box-shadow: $shadow-xl;
+    }
   }
 
   &--secondary {
-    background: transparent; color: $color-primary; border-color: $color-primary;
-    &:hover { background: $color-primary-50; }
+    background: transparent;
+    color: $color-brand-purple;
+    border-color: $color-brand-purple;
+
+    &:hover {
+      background: rgba($color-brand-purple, 0.1);
+    }
   }
 
   &--danger {
-    background: $color-error; color: #fff;
-    &:hover { background: darken($color-error, 10%); }
+    background: $color-error;
+    color: white;
+    border: none;
+    padding: calc(#{$space-3} + 2px) calc(#{$space-6} + 2px);
+
+    &:hover {
+      background: darken($color-error, 10%);
+    }
   }
 
-  &--pill { border-radius: $radius-pill; }
+  &--ghost {
+    background: transparent;
+    color: $color-light-text;
+    border-color: transparent;
+
+    &:hover {
+      background: rgba($color-light-text, 0.1);
+      box-shadow: none;
+      transform: none;
+    }
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--pill {
+    border-radius: $radius-pill;
+  }
 }

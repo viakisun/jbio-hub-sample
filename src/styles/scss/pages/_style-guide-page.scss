@@ -1,0 +1,41 @@
+@use "../design-tokens" as *;
+
+.style-guide-container {
+  padding: $space-12 $space-6;
+  max-width: $container-max;
+  margin: 0 auto;
+
+  h1 {
+    font-size: $fs-h1;
+    font-weight: $fw-h1;
+    margin-bottom: $space-4;
+  }
+
+  p {
+    font-size: $fs-body;
+    color: $color-text-muted;
+    margin-bottom: $space-12;
+  }
+
+  .style-guide-section {
+    margin-bottom: $space-12;
+
+    h2 {
+      font-size: $fs-h2;
+      font-weight: $fw-h2;
+      margin-bottom: $space-6;
+      border-bottom: 1px solid $color-divider;
+      padding-bottom: $space-3;
+    }
+  }
+
+  .component-showcase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-4;
+    align-items: center;
+    background-color: $color-surface;
+    padding: $space-6;
+    border-radius: $radius-lg;
+  }
+}

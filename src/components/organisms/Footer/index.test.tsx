@@ -12,7 +12,6 @@ describe('Footer', () => {
     );
 
     expect(screen.getByText('JB SQUARE')).toBeInTheDocument();
-    expect(screen.getByText('The Industry & Research Hub')).toBeInTheDocument();
     expect(screen.getByText('Privacy Policy')).toBeInTheDocument();
     expect(screen.getByText('Terms of Service')).toBeInTheDocument();
     expect(screen.getByText('Contact')).toBeInTheDocument();

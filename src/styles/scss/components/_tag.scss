@@ -1,11 +1,23 @@
 @use "../design-tokens" as *;
 
 .tag {
-  display: inline-flex; align-items: center; gap: $space-2;
-  padding: 6px 12px; border-radius: $radius-md;
-  font-size: $fs-caption; font-weight: 600; color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  border-radius: $radius-sm; // A bit more square than badges
+  font-size: 13px;
+  font-weight: $fw-h3;
+  color: white;
+  white-space: nowrap;
 
-  &--open    { background: $color-tag-open; }
-  &--planned { background: $color-tag-planned; }
-  &--closed  { background: $color-tag-closed; }
+  &--open {
+    background: $color-success;
+  }
+  &--planned {
+    background: $color-info;
+  }
+  &--closed {
+    background: $color-text-muted;
+  }
 }
