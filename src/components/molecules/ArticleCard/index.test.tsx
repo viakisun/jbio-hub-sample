@@ -5,12 +5,14 @@ import ArticleCard from './index';
 import { Article } from '../../../types/api';
 
 const mockArticle: Article = {
-  id: 1,
+  id: '1',
   title: 'Test Article',
-  summary: 'This is a test article.',
-  thumbnailUrl: 'https://via.placeholder.com/150',
-  category: 'Test Category',
+  author: 'Test Author',
+  publishDate: '2025-01-01T00:00:00Z',
   tags: ['tag1', 'tag2', 'tag3'],
+  contentHTML: '<p>This is a test article.</p>',
+  images: ['https://via.placeholder.com/150'],
+  relatedCompanies: [],
 };
 
 describe('ArticleCard', () => {
@@ -22,18 +24,9 @@ describe('ArticleCard', () => {
     );
 
     expect(screen.getByText('Test Article')).toBeInTheDocument();
-    expect(screen.getByText('This is a test article.')).toBeInTheDocument();
-    expect(screen.getByText('Test Category')).toBeInTheDocument();
+    expect(screen.getByText('Test Author')).toBeInTheDocument();
+    expect(screen.getByText('2025년 1월 1일')).toBeInTheDocument();
     expect(screen.getByRole('img')).toHaveAttribute('src', 'https://via.placeholder.com/150');
-  });
-
-  it('renders the correct number of tags', () => {
-    render(
-      <MemoryRouter>
-        <ArticleCard article={mockArticle} />
-      </MemoryRouter>
-    );
-
     expect(screen.getAllByText(/tag/)).toHaveLength(3);
   });
 });

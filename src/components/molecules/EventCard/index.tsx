@@ -7,24 +7,18 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
-  const formattedDate = new Date(event.date).toLocaleDateString('ko-KR', {
+  const formattedDate = new Date(event.eventStartAt).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
 
-  const getStatus = () => {
-    const today = new Date();
-    const eventDate = new Date(event.date);
-    today.setHours(0, 0, 0, 0);
-    eventDate.setHours(0, 0, 0, 0);
-
-    if (eventDate < today) return { text: '종료', className: 'event-card__status-badge--closed' };
-    if (eventDate > today) return { text: '예정', className: 'event-card__status-badge--upcoming' };
-    return { text: '진행중', className: 'event-card__status-badge--active' };
+  const statusMap = {
+    '예정': 'upcoming',
+    '진행중': 'active',
+    '마감': 'closed',
   };
-
-  const status = getStatus();
+  const statusClass = statusMap[event.status] || 'closed';
 
   return (
     <Link to={`/events/${event.id}`} className="event-card">
@@ -36,8 +30,8 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         <h3 className="event-card__title">{event.title}</h3>
         <div className="event-card__footer">
           <span>{formattedDate}</span>
-          <span>{event.location}</span>
-          <span className={`event-card__status-badge ${status.className}`}>{status.text}</span>
+          <span>{event.locationName}</span>
+          <span className={`event-card__status-badge event-card__status-badge--${statusClass}`}>{event.status}</span>
         </div>
       </div>
     </Link>
