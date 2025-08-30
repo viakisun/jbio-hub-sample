@@ -1,0 +1,51 @@
+@use "../design-tokens" as *;
+
+.highlights-section {
+  padding: $space-16 $space-6;
+  background-color: $color-dark-bg;
+  color: $color-light-text;
+  text-align: center;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $space-8;
+    max-width: $container-max;
+    margin: 0 auto;
+  }
+
+  &__card {
+    background: lighten($color-dark-bg, 5%);
+    border: 1px solid lighten($color-dark-bg, 10%);
+    border-radius: $radius-lg;
+    padding: $space-8;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-8px);
+      border-color: $color-brand-lime;
+      box-shadow: 0 10px 30px rgba($color-brand-lime, 0.1);
+    }
+  }
+
+  &__card-icon {
+    margin-bottom: $space-4;
+    display: inline-block;
+    background-color: lighten($color-dark-bg, 10%);
+    padding: $space-3;
+    border-radius: 50%;
+  }
+
+  &__card-title {
+    font-size: $fs-h3;
+    font-weight: $fw-h2;
+    margin: 0 0 $space-2 0;
+    color: $color-light-text;
+  }
+
+  &__card-description {
+    font-size: $fs-body;
+    line-height: $lh-body;
+    color: lighten($color-light-text, 40%);
+  }
+}

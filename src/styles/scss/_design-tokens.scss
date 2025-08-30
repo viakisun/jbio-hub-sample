@@ -21,6 +21,17 @@ $color-tag-open:      $color-success;
 $color-tag-planned:   $color-primary;
 $color-tag-closed:    #9E9E9E;
 
+// New vibrant color palette for redesign
+$color-brand-purple:  #6a0dad;
+$color-brand-magenta: #d900ff;
+$color-brand-lime:    #aaff00;
+$color-brand-cyan:    #00d4ff;
+$color-dark-bg:       #121212;
+$color-light-text:    #ffffff;
+
+$gradient-hero: linear-gradient(135deg, $color-brand-purple, $color-brand-magenta);
+$gradient-cta: linear-gradient(90deg, $color-brand-lime, $color-brand-cyan);
+
 // Elevation & shadows
 $shadow-sm:           0 2px 6px rgba(0,0,0,0.08);
 $shadow-md:           0 6px 16px rgba(0,0,0,0.10);
