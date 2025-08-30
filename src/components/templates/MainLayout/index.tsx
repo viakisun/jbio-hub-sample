@@ -15,11 +15,14 @@ import Footer from '../../organisms/Footer';
  */
 interface MainLayoutProps {
   children: React.ReactNode;
+  theme?: 'light' | 'dark';
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ children, theme = 'light' }) => {
+  const layoutClassName = `main-layout main-layout--${theme}`;
+
   return (
-    <div className="main-layout">
+    <div className={layoutClassName}>
       <Header />
       <main className="main-layout__content container">
         {children}

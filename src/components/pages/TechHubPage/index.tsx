@@ -12,7 +12,7 @@ import TechList from '../../organisms/TechList';
  */
 const TechHubPage = () => {
   return (
-    <MainLayout>
+    <MainLayout theme="dark">
       <TechHubHero />
       <FeaturedTech />
       <TechList />
