@@ -4,12 +4,18 @@ import AnnouncementListItem from './index';
 import { SupportProgram } from '../../../hooks/useSupportPrograms';
 
 const mockProgram: SupportProgram = {
-  id: 1,
+  id: '1',
   title: 'Test Program',
   organization: 'Test Org',
-  targetCompany: 'Test Company',
+  description: 'This is a test program.',
+  startDate: '2025-01-01',
   endDate: '2025-12-31',
   status: 'ongoing',
+  category: 'Test Category',
+  supportType: ['financial'],
+  targetCompany: 'Test Company',
+  externalUrl: null,
+  createdAt: '2025-01-01T00:00:00Z',
 };
 
 describe('AnnouncementListItem', () => {

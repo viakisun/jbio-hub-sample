@@ -5,16 +5,21 @@ import CompanyCard from './index';
 import { Company } from '../../../types/api';
 
 const mockCompany: Company = {
-  id: 1,
+  id: '1',
   name: 'Test Company',
-  description: 'This is a test company.',
   logoUrl: 'https://via.placeholder.com/150',
   industry: 'Test Industry',
-  website: 'https://example.com',
+  region: 'Test Region',
   foundedYear: 2022,
-  employees: 100,
   sizeCategory: 'SME',
-  products: ['Product 1', 'Product 2', 'Product 3'],
+  employees: 100,
+  description: 'This is a test company.',
+  products: ['Product 1', 'Product 2'],
+  achievements: [],
+  patents: [],
+  contact: { name: 'Test Contact', email: 'test@example.com', phone: '123-456-7890' },
+  websiteUrl: 'https://example.com',
+  relatedArticles: [],
 };
 
 describe('CompanyCard', () => {
